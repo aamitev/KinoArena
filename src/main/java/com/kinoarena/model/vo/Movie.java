@@ -1,4 +1,4 @@
-package com.kinoarena.model;
+package com.kinoarena.model.vo;
 
 import java.time.LocalDate;
 
