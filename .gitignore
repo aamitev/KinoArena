@@ -27,3 +27,4 @@ target
 .springBeans
 .settings
 .mvn
+/.metadata/
