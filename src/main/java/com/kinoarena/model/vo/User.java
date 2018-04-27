@@ -9,9 +9,6 @@ public class User {
 	private static final String INVALID_JOB = "Invalid job entered";
 	private static final String INVALID_EDUCATION = "Invalid education entered.";
 	private static final String INVALID_GSM = "Invalid GSM entered.";
-	private static final String INVALID_GSM_LENGTH = "Invalid GSM length";
-	private static final int GSM_WITHOUT_COUNTRY_CODE = 10;
-	private static final int GSM_WITH_COUNTRY_CODE = 13;
 	private static final String INVALID_ADDRESS = "Invalid address.";
 	private static final String INVALID_INPUT = "Invalid input.";
 	private static final String INVALID_EMAIL_PATTERN = "Invalid email pattern.";
@@ -52,11 +49,9 @@ public class User {
 		
 	}
 	private void setGSM(String gsm) throws ModelException {
-		if(Utils.checkString(gsm)) {
-			if(gsm.length() >= GSM_WITHOUT_COUNTRY_CODE || gsm.length() <= GSM_WITH_COUNTRY_CODE) {
+			if(Utils.gsmValidator(gsm)) {
 				this.gsm = gsm;
-			}else throw new ModelException(INVALID_GSM_LENGTH);
-		}else throw new ModelException(INVALID_GSM);
+			}else throw new ModelException(INVALID_GSM);
 	}
 
 	private void setAddress(Address address) throws ModelException {
