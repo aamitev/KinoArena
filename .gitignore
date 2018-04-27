@@ -28,3 +28,4 @@ target
 .settings
 .mvn
 /.metadata/
+/src/main/resources/application.properties

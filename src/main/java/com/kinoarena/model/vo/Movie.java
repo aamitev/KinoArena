@@ -5,14 +5,16 @@ import java.time.LocalDate;
 import com.kinoarena.exceptions.MovieException;
 
 public class Movie {
+	private Integer id;
 	private String title;
 	private String coverURL;
 	private String description;
 	private String director;
 	private int duration;
-	private int pgAge;
-	private String genre;
 	private LocalDate primiere;
+	private int pgAge;
+	private Genre genre;
+	
 
 	public Movie(String title, String director, int duration, LocalDate primiere) throws MovieException {
 		this.setTitle(title);
@@ -22,7 +24,7 @@ public class Movie {
 	}
 
 	public Movie(String title, String coverURL, String description, String director, int duration, int pgAge,
-			String genre, LocalDate primiere) throws MovieException {
+			Genre genre, LocalDate primiere) throws MovieException {
 		this(title, director, duration, primiere);
 		this.setCoverURL(coverURL);
 		this.setDescription(description);
@@ -30,80 +32,91 @@ public class Movie {
 		this.setGenre(genre);
 	}
 
-	String getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	void setTitle(String title) throws MovieException {
-		if(title == null) {
+	public void setTitle(String title) throws MovieException {
+		if (title == null) {
 			throw new MovieException("Invalid title");
 		}
 		this.title = title;
 	}
 
-	String getCoverURL() {
+	public String getCoverURL() {
 		return coverURL;
 	}
 
-	void setCoverURL(String coverURL) {
+	public void setCoverURL(String coverURL) {
 		this.coverURL = coverURL;
 	}
 
-	String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	void setDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	String getDirector() {
+	public String getDirector() {
 		return director;
 	}
 
-	void setDirector(String director) throws MovieException {
-		if(director == null) {
+	public void setDirector(String director) throws MovieException {
+		if (director == null) {
 			throw new MovieException("Invalid director");
 		}
 		this.director = director;
 	}
 
-	int getDuration() {
+	public int getDuration() {
 		return duration;
 	}
 
-	void setDuration(int duration) throws MovieException {
-		if(duration <= 0) {
+	public void setDuration(int duration) throws MovieException {
+		if (duration <= 0) {
 			throw new MovieException("Invalid duration");
 		}
 		this.duration = duration;
 	}
 
-	int getPgAge() {
+	public int getPgAge() {
 		return pgAge;
 	}
 
-	void setPgAge(int pgAge) {
+	public void setPgAge(int pgAge) {
 		this.pgAge = pgAge;
 	}
 
-	String getGenre() {
+	public Genre getGenre() {
 		return genre;
 	}
 
-	void setGenre(String genre) {
+	public void setGenre(Genre genre) throws MovieException {
+		if(genre == null) {
+			throw new MovieException();
+		}
 		this.genre = genre;
 	}
 
-	LocalDate getPrimiere() {
+	public LocalDate getPrimiere() {
 		return primiere;
 	}
 
-	void setPrimiere(LocalDate primiere) throws MovieException {
-		if(primiere == null) {
+	public void setPrimiere(LocalDate primiere) throws MovieException {
+		if (primiere == null) {
 			throw new MovieException("Invalid primiere");
 		}
 		this.primiere = primiere;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }
