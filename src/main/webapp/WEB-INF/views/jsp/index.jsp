@@ -10,8 +10,9 @@
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
 	<div id="global_wrapper" class="globalWrapper">
+		<jsp:include page="header.jsp"></jsp:include>
+
 		<main id="main">
 		<div class="wrapper">
 			<div id="filter_bar" class="twoSidesBar filterBar">
@@ -219,7 +220,7 @@
 		</main>
 	</div>
 	<script src="./js/filterContent.js"></script>
-	
+
 	<!-- end of #main -->
 </body>
 </html>
