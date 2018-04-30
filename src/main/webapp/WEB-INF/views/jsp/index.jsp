@@ -214,10 +214,11 @@
 			<!-- end .stenikFilter -->
 
 			<div class="clearH"></div>
+		</div>
 		</main>
 	</div>
 	<script src="./js/filterContent.js"></script>
-
+	
 	<!-- end of #main -->
 </body>
 </html>
