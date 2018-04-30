@@ -10,16 +10,16 @@ public class Address {
 	private static final int MAX_POSTCODE_LENGTH = 4;
 	private String address;
 	private String postcode;
-	private String city;
+	private City city;
 
-	public Address(String address, String postcode, String city) throws ModelException {
+	public Address(String address, String postcode, City city) throws ModelException {
 		setAddress(address);
 		setPostcode(postcode);
 		setCity(city);
 	}
 
-	private void setCity(String city) throws ModelException {
-		if (Utils.checkString(city)) {
+	private void setCity(City city) throws ModelException {
+		if (city != null) {
 			this.city = city;
 		} else
 			throw new ModelException("Invalid city");
@@ -49,9 +49,14 @@ public class Address {
 	public String getPostcode() {
 		return this.postcode;
 	}
-	
-	public String getCity() {
+
+	public City getCity() {
 		return this.city;
+	}
+
+	@Override
+	public String toString() {
+		return "Address [address=" + address + ", postcode=" + postcode + ", city=" + city + "]";
 	}
 
 }

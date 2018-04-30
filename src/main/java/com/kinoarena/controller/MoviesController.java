@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kinoarena.model.dao.AddressDao;
 import com.kinoarena.model.dao.MovieDao;
+import com.kinoarena.model.vo.Address;
 import com.kinoarena.model.vo.Genre;
 import com.kinoarena.model.vo.Movie;
 
@@ -16,12 +18,14 @@ import com.kinoarena.model.vo.Movie;
 public class MoviesController {
 	@Autowired
 	private MovieDao movieDao;
+	@Autowired
+	private AddressDao addressDao;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/movies")
 	public String getAllMovies(Model model) throws Exception {
-		
-		List<Movie> movies = movieDao.getAllMovies();
-		model.addAttribute("movies", movies);
+		List<Address> addresses = addressDao.getAllAddresses();
+		// List<Address> movies = movieDao.getAllMovies();
+		model.addAttribute("addresses", addresses);
 
 		return "movies";
 	}

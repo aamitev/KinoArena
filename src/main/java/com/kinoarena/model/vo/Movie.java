@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import com.kinoarena.exceptions.MovieException;
 
 public class Movie {
-	private Integer id;
+	private int id;
 	private String title;
 	private String coverURL;
 	private String description;
@@ -16,16 +16,17 @@ public class Movie {
 	private Genre genre;
 	
 
-	public Movie(String title, String director, int duration, LocalDate primiere) throws MovieException {
+	public Movie(int id,String title, String director, int duration, LocalDate primiere) throws MovieException {
+		this.setId(id);
 		this.setTitle(title);
 		this.setDirector(director);
 		this.setDuration(duration);
 		this.setPrimiere(primiere);
 	}
 
-	public Movie(String title, String coverURL, String description, String director, int duration, int pgAge,
+	public Movie(int id,String title, String coverURL, String description, String director, int duration, int pgAge,
 			Genre genre, LocalDate primiere) throws MovieException {
-		this(title, director, duration, primiere);
+		this(id ,title, director, duration, primiere);
 		this.setCoverURL(coverURL);
 		this.setDescription(description);
 		this.setPgAge(pgAge);
@@ -111,11 +112,11 @@ public class Movie {
 		this.primiere = primiere;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -3,6 +3,7 @@ package com.kinoarena.model.dao;
 
 import java.util.List;
 
+import com.kinoarena.model.vo.Address;
 import com.kinoarena.model.vo.Genre;
 import com.kinoarena.model.vo.Movie;
 

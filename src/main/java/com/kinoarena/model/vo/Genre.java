@@ -9,6 +9,7 @@ public class Genre {
 	}
 
 	public Genre(int id, String genre) {
+		this.setId(id);
 		this.setGenre(genre);
 	}
 

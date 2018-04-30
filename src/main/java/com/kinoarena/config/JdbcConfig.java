@@ -1,4 +1,4 @@
-package com.kinoarena.config;
+ package com.kinoarena.config;
 
 import javax.sql.DataSource;
 
