@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kinoarena.model.dao.AddressDao;
 import com.kinoarena.model.dao.MovieDao;
 import com.kinoarena.model.vo.Address;
-import com.kinoarena.model.vo.Genre;
-import com.kinoarena.model.vo.Movie;
 
 @Controller
 public class MoviesController {
@@ -25,7 +23,7 @@ public class MoviesController {
 	public String getAllMovies(Model model) throws Exception {
 		List<Address> addresses = addressDao.getAllAddresses();
 		// List<Address> movies = movieDao.getAllMovies();
-		model.addAttribute("addresses", addresses);
+		model.addAttribute("addresses", addresses.toString());
 
 		return "movies";
 	}
