@@ -10,8 +10,9 @@
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
 	<div id="global_wrapper" class="globalWrapper">
+		<jsp:include page="header.jsp"></jsp:include>
+
 		<main id="main">
 		<div class="wrapper">
 			<div id="filter_bar" class="twoSidesBar filterBar">
@@ -131,11 +132,13 @@
 							<div class="owl-stage"
 								style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 1120px;">
 								<div class="owl-item active"
-									style="width: 140px; margin-right: 0px;" value = "">
-									<div class="tabItem filter" data-filter-anchor="tab-1">
-										<div class="row">Всички филми</div>
-										<div class="row">в продажба</div>
-									</div>
+									style="width: 140px; margin-right: 0px;">
+									<a onclick="getScreening('action')">
+										<div class="tabItem filter" data-filter-anchor="tab-1">
+											<div class="row">Всички филми</div>
+											<div class="row">в продажба</div>
+										</div>
+									</a>
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
@@ -209,16 +212,15 @@
 					</div>
 				</header>
 
-				<div class="filterContent"></div>
+				<div id="filterContent"></div>
 			</div>
 			<!-- end .stenikFilter -->
-
 			<div class="clearH"></div>
 		</div>
 		</main>
 	</div>
 	<script src="./js/filterContent.js"></script>
-	
+
 	<!-- end of #main -->
 </body>
 </html>

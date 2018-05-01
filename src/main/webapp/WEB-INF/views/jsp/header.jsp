@@ -45,12 +45,9 @@
 							<div class="hoverImgToggle">
 
 								<img title="header-imax.png" alt="Кино Арена IMAX®"
-									class="defaultImg"
-									src="./images/frontend/imax.png">
-
-								<img title="header-imax-hover.png" alt="Кино Арена IMAX®"
-									class="hoverImg"
-									src="./images/frontend/imax-hover.png">
+									class="defaultImg" src="./images/frontend/imax.png"> <img
+									title="header-imax-hover.png" alt="Кино Арена IMAX®"
+									class="hoverImg" src="./images/frontend/imax-hover.png">
 							</div>
 					</a></li>
 					<li><a href="/bg/brand/PREMIUM/movies-premium"
@@ -58,12 +55,9 @@
 							<div class="hoverImgToggle">
 
 								<img title="header-premium.png" alt="Kино Арена PREMIUM"
-									class="defaultImg"
-									src="./images/frontend/premium.png">
-
-								<img title="header-premium-hover.png" alt="Kино Арена PREMIUM"
-									class="hoverImg"
-									src="./images/frontend/premium-hover.png">
+									class="defaultImg" src="./images/frontend/premium.png"> <img
+									title="header-premium-hover.png" alt="Kино Арена PREMIUM"
+									class="hoverImg" src="./images/frontend/premium-hover.png">
 							</div>
 					</a></li>
 					<li><a href="/bg/brand/LUXE/movies-luxe-bg"
@@ -71,24 +65,18 @@
 							<div class="hoverImgToggle">
 
 								<img title="header-luxe.png" alt="Кино Арена LUXE"
-									class="defaultImg"
-									src="./images/frontend/luxe.png">
-
-								<img title="header-luxe-hover.png" alt="Кино Арена LUXE"
-									class="hoverImg"
-									src="./images/frontend/luxe-hover.png">
+									class="defaultImg" src="./images/frontend/luxe.png"> <img
+									title="header-luxe-hover.png" alt="Кино Арена LUXE"
+									class="hoverImg" src="./images/frontend/luxe-hover.png">
 							</div>
 					</a></li>
 					<li><a href="/bg/brand/VIP/movies-vip" title="Кино Арена VIP">
 							<div class="hoverImgToggle">
 
 								<img title="header-vip.png" alt="Кино Арена VIP"
-									class="defaultImg"
-									src="./images/frontend/vip.png">
-
-								<img title="header-vip-hover.png" alt="Кино Арена VIP"
-									class="hoverImg"
-									src="./images/frontend/vip-hover.png">
+									class="defaultImg" src="./images/frontend/vip.png"> <img
+									title="header-vip-hover.png" alt="Кино Арена VIP"
+									class="hoverImg" src="./images/frontend/vip-hover.png">
 							</div>
 					</a></li>
 					<li><a href="#">Кина</a></li>
@@ -100,3 +88,4 @@
 
 </body>
 </html>
+

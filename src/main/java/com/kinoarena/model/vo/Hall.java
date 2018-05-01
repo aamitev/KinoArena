@@ -1,21 +1,22 @@
 package com.kinoarena.model.vo;
 
+import java.util.Set;
+
 import com.kinoarena.exceptions.ModelException;
 
 public class Hall {
-	private static final String INVALID_NUMBER_OF_SEATS = "Invalid number of seats.";
+	//private static final String INVALID_NUMBER_OF_SEATS = "Invalid number of seats.";
 	private static final String INVALID_CINEMA = "Invalid cinema.";
 	private static final String INVALID_ID = "Invalid id.";
 	private static final String INVALID_NAME = "Invalid name.";
 	private int id;
 	private String name;
-	private int seats;
+	private Set<Seat> seats;
 	private Cinema cinema;
 
-	public Hall(int id, String name, int seats, Cinema cinema) throws ModelException {
+	public Hall(int id, String name, Cinema cinema) throws ModelException {
 		setId(id);
 		setName(name);
-		setSeats(seats);
 		setCinema(cinema);
 	}
 
@@ -40,13 +41,6 @@ public class Hall {
 			throw new ModelException(INVALID_CINEMA);
 	}
 
-	private void setSeats(int seats) throws ModelException {
-		if (seats > 0) {
-			this.seats = seats;
-		} else
-			throw new ModelException(INVALID_NUMBER_OF_SEATS);
-	}
-
 	public int getId() {
 		return this.id;
 	}
@@ -57,9 +51,5 @@ public class Hall {
 
 	public Cinema getCinema() {
 		return this.cinema;
-	}
-
-	public int getSeats() {
-		return this.seats;
 	}
 }

@@ -17,8 +17,7 @@ public class HallRowMapper implements RowMapper<Hall> {
 	public Hall mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Hall hall = null;
 		try {
-			hall = new Hall(rs.getInt("id"), rs.getString("name"), rs.getInt("numer_of_seats"),
-					cinemaRowMapper.mapRow(rs, rowNum));
+			hall = new Hall(rs.getInt("id"), rs.getString("name"), cinemaRowMapper.mapRow(rs, rowNum));
 
 		} catch (Exception e) {
 			throw new SQLException(e);
