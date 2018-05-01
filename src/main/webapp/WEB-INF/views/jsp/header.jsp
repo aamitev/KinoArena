@@ -24,10 +24,10 @@
 				<ul class="hideOnResponsive">
 					<li class="txtItem"><a href="/bg/cinemas">Кина</a></li>
 					<li class="txtItem"><a href="/bg/program">Програма</a></li>
-					<li class="txtItem"><a href="#" class="loginPopupLink">Вход</a></li>
+					<li class="txtItem"><a href="./login" class="loginPopupLink">Вход</a></li>
 				</ul>
 				<ul>
-					<li class="langSelected txtItem"><a href="/bg/">BG</a></li>
+					<li class="langSelected txtItem"><a href="./">BG</a></li>
 					<li class="txtItem"><a href="/en/">EN</a></li>
 				</ul>
 				<ul class="hideOnDesktop">

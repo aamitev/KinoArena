@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
 <link rel="stylesheet" type="text/css" href="./css/profile.css">
+<link rel="stylesheet" type="text/css" href="./css/6d0ffb9.css">
 </head>
 <body>
 	<div class="page_bg"
@@ -45,19 +46,18 @@
 										class="profile"></i></span> <span class="txt">Персонална
 										информация</span>
 							</a></li>
-							<li class="selected">
-									<span class="icon"><i class="password"></i></span> <span
-									class="txt">Промяна на парола</span>
-							</li>
+							<li><a href="./changePassword"> <span class="icon"><i
+										class="password"></i></span> <span class="txt">Промяна на
+										парола</span>
+							</a></li>
 							<li><a href="./interests"> <span class="icon"><i
 										class="popcornPack"></i></span> <span class="txt">Интереси</span>
 							</a></li>
-							<li><a href="./favorites"> <span class="icon"><i
-										class="heart"></i></span> <span class="txt">Моите филми</span>
-							</a></li>
-							<li><a href="./newsletter"> <span
-									class="icon"><i class="email"></i></span> <span class="txt">Абонирай
-										се за нашия е-бюлетин</span>
+							<li class="selected"><span class="icon"><i
+									class="heart"></i></span> <span class="txt">Моите филми</span></li>
+							<li><a href="./newsletter"> <span class="icon"><i
+										class="email"></i></span> <span class="txt">Абонирай се за
+										нашия е-бюлетин</span>
 							</a></li>
 							<li><a href="./orders"> <span class="icon"><i
 										class="clock"></i></span> <span class="txt">История на
@@ -69,53 +69,18 @@
 						</ul>
 					</nav>
 				</aside>
-				<div class="contentWrapper">
-
-					<h5 class="title">Промяна на парола</h5>
-					<img src="./images/frontend/profile-pass.png"
-						alt="bg image" class="bgImage">
-					<p class="requiredInfo">
-						<span class="red">*</span> Всички полета са задължителни за
-						попълване!
-					</p>
-					<p>
-						<em>При <strong>КОРЕКТНО ПОПЪЛВАНЕ</strong> на полетата
-							получаваш - 1. Бърза регистрация в томболи и промоции, 2.
-							По-добро обслужване, 3. Предпочитана информация
-						</em>
-					</p>
-					<hr class="red">
-					<form name="stenik_user_password_change" method="post"
-						action="/bg/profile/password-change" novalidate="novalidate"
-						class="stdForm">
-						<div class="formItem col2 left">
-							<input type="password"
-								id="stenik_user_password_change_oldPassword"
-								name="stenik_user_password_change[oldPassword]"
-								required="required" placeholder="Стара парола" />
+				<div class="contentWrapper stenikFilter">
+					<h5 class="title">Моите филми</h5>
+					<img src="./images/frontend/profile-favourites.png" alt="bg image"
+						class="bgImage">
+					<header class="stenikTabsHeader filterHeader" data-rows="1">
+						<div class="sliderWrapper">
+							<div class="tabItem filter" data-filter-anchor="tab-onScreen">На
+								екран</div>
+							<div class="tabItem filter" data-filter-anchor="tab-futured">Предстоящи</div>
 						</div>
-						<div class="clear"></div>
-						<div class="formItem col2 left">
-							<input type="password"
-								id="stenik_user_password_change_plainPassword_first"
-								name="stenik_user_password_change[plainPassword][first]"
-								required="required" placeholder="Парола *" />
-						</div>
-						<div class="clear"></div>
-						<div class="formItem col2 left">
-							<input type="password"
-								id="stenik_user_password_change_plainPassword_second"
-								name="stenik_user_password_change[plainPassword][second]"
-								required="required" placeholder="Повторете паролата *" />
-						</div>
-						<div class="clearH"></div>
-						<div>
-							<button class="button big red fixedWidth">Запиши</button>
-						</div>
-						<input type="hidden" id="stenik_user_password_change__token"
-							name="stenik_user_password_change[_token]"
-							value="n93ihEbUEmjshJu2i2A-PIuW9Tv5Ft4gd2T_yRq7VZk" />
-					</form>
+					</header>
+					<div class="filterContent small"></div>
 				</div>
 				<!-- end of .contentWrapper -->
 			</div>
@@ -609,6 +574,19 @@
 					.val(addZero(date.getDate()) + '.'
 							+ addZero((date.getMonth() + 1)) + '.'
 							+ date.getFullYear());
+		});
+	</script>
+
+	<script>
+		jQuery(function($) {
+			/* Filter init
+			----------------------------------------------------------- */
+			$('.stenikFilter').stenikFilter(
+					{
+						// defaultFilter: 'all'
+						defaultFilter : $('.stenikFilter').find('.filter')
+								.eq(0).data('filter-anchor')
+					});
 		});
 	</script>
 

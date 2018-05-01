@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
 <link rel="stylesheet" type="text/css" href="./css/profile.css">
+<link rel="stylesheet" type="text/css" href="./css/6d0ffb9.css">
+
 </head>
-<body>
+<body class="loaded">
 	<div class="page_bg"
 		style="background-image: url('/images/frontend/bg-items/bg-15years.jpg');"></div>
 
@@ -45,10 +46,10 @@
 										class="profile"></i></span> <span class="txt">Персонална
 										информация</span>
 							</a></li>
-							<li class="selected">
-									<span class="icon"><i class="password"></i></span> <span
-									class="txt">Промяна на парола</span>
-							</li>
+							<li><a href="./changePassword"> <span
+									class="icon"><i class="password"></i></span> <span class="txt">Промяна
+										на парола</span>
+							</a></li>
 							<li><a href="./interests"> <span class="icon"><i
 										class="popcornPack"></i></span> <span class="txt">Интереси</span>
 							</a></li>
@@ -59,10 +60,10 @@
 									class="icon"><i class="email"></i></span> <span class="txt">Абонирай
 										се за нашия е-бюлетин</span>
 							</a></li>
-							<li><a href="./orders"> <span class="icon"><i
-										class="clock"></i></span> <span class="txt">История на
-										резервациите и закупените билети</span>
-							</a></li>
+							<li class="selected"> <span
+									class="icon"><i class="clock"></i></span> <span class="txt">История
+										на резервациите и закупените билети</span>
+							</li>
 							<li><a href="./"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>
@@ -70,52 +71,32 @@
 					</nav>
 				</aside>
 				<div class="contentWrapper">
-
-					<h5 class="title">Промяна на парола</h5>
-					<img src="./images/frontend/profile-pass.png"
+					<h5 class="title">История на резервациите и закупените билети</h5>
+					<img src="./images/frontend/profile-history.png"
 						alt="bg image" class="bgImage">
-					<p class="requiredInfo">
-						<span class="red">*</span> Всички полета са задължителни за
-						попълване!
-					</p>
-					<p>
-						<em>При <strong>КОРЕКТНО ПОПЪЛВАНЕ</strong> на полетата
-							получаваш - 1. Бърза регистрация в томболи и промоции, 2.
-							По-добро обслужване, 3. Предпочитана информация
-						</em>
-					</p>
-					<hr class="red">
-					<form name="stenik_user_password_change" method="post"
-						action="/bg/profile/password-change" novalidate="novalidate"
-						class="stdForm">
-						<div class="formItem col2 left">
-							<input type="password"
-								id="stenik_user_password_change_oldPassword"
-								name="stenik_user_password_change[oldPassword]"
-								required="required" placeholder="Стара парола" />
+					<div class="stenikFilter bookingHistory">
+						<header class="stenikTabsHeader filterHeader" data-rows="1">
+							<div class="sliderWrapper">
+								<div class="tabItem filter selected" data-filter-anchor="tab-0">Направени
+									резервации</div>
+								<div class="tabItem filter" data-filter-anchor="tab-1">Закупени
+									билети</div>
+								<div class="tabItem filter" data-filter-anchor="tab-2">Отказани
+									резервации</div>
+							</div>
+						</header>
+						<div class="filterContent small">
+							<div class="filterItem" data-filter="tab-0">
+								<p>Нямате направени резервации.</p>
+							</div>
+							<div class="filterItem" data-filter="tab-1">
+								<p>Нямате закупени билети.</p>
+							</div>
+							<div class="filterItem" data-filter="tab-2">
+								<p>Нямате отказани резервации.</p>
+							</div>
 						</div>
-						<div class="clear"></div>
-						<div class="formItem col2 left">
-							<input type="password"
-								id="stenik_user_password_change_plainPassword_first"
-								name="stenik_user_password_change[plainPassword][first]"
-								required="required" placeholder="Парола *" />
-						</div>
-						<div class="clear"></div>
-						<div class="formItem col2 left">
-							<input type="password"
-								id="stenik_user_password_change_plainPassword_second"
-								name="stenik_user_password_change[plainPassword][second]"
-								required="required" placeholder="Повторете паролата *" />
-						</div>
-						<div class="clearH"></div>
-						<div>
-							<button class="button big red fixedWidth">Запиши</button>
-						</div>
-						<input type="hidden" id="stenik_user_password_change__token"
-							name="stenik_user_password_change[_token]"
-							value="n93ihEbUEmjshJu2i2A-PIuW9Tv5Ft4gd2T_yRq7VZk" />
-					</form>
+					</div>
 				</div>
 				<!-- end of .contentWrapper -->
 			</div>
@@ -201,7 +182,7 @@
 					</div>
 					<div class="terms">© 2018 Kino Arena | Всички права запазени</div>
 					<div class="credits">
-						<img src="/images/frontend/stenik-logo.png" alt="Stenik logo">Уеб
+						<img src="./images/frontend/stenik-logo.png" alt="Stenik logo">Уеб
 						дизайн от <a
 							href="http://www.stenikgroup.com/bg/services/webdesign"
 							target="_blank"
@@ -609,6 +590,57 @@
 					.val(addZero(date.getDate()) + '.'
 							+ addZero((date.getMonth() + 1)) + '.'
 							+ date.getFullYear());
+		});
+	</script>
+
+	<script>
+		jQuery(function($) {
+			var $orderRemoveRequest;
+			$('.removeItem')
+					.on(
+							'click',
+							function(e) {
+								e.preventDefault();
+								if ($orderRemoveRequest
+										&& $orderRemoveRequest.readyState != 4) {
+									$orderRemoveRequest.abort();
+								}
+								$orderRemoveRequest = $
+										.ajax({
+											url : $(this).attr('href'),
+											method : 'POST',
+											dataType : 'json'
+										})
+										.done(
+												function(data) {
+													if (data.success == true) {
+														$
+																.colorbox({
+																	fixed : true,
+																	top : true,
+																	transition : null,
+																	stenikAnimations : true,
+																	html : "<div class=\"popup\"><p><strong>Резервацията отказана успешно!</strong></p></div>",
+																	onClosed : function() {
+																		window.location
+																				.reload();
+																	}
+																});
+													} else {
+														$
+																.colorbox({
+																	fixed : true,
+																	top : true,
+																	transition : null,
+																	stenikAnimations : true,
+																	html : "<div class=\"popup\"><p class=\"red\"><strong>Резервацията не е отказана!</strong></p></div>"
+																});
+													}
+												});
+							});
+			$('.stenikFilter').stenikFilter({
+				defaultFilter : 'tab-1'
+			});
 		});
 	</script>
 
