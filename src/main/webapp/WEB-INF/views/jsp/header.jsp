@@ -11,7 +11,7 @@
 	<header id="header">
 		<div class="wrapper">
 			<figure class="item logoWrapper center">
-				<a href="/bg/" class="logo bg"> <img
+				<a href="./" class="logo bg"> <img
 					src="./images/frontend/kino-arena-logo.png" alt="Kino Arena logo">
 				</a>
 				<span class="bottomBar"></span>
@@ -24,10 +24,10 @@
 				<ul class="hideOnResponsive">
 					<li class="txtItem"><a href="/bg/cinemas">Кина</a></li>
 					<li class="txtItem"><a href="/bg/program">Програма</a></li>
-					<li class="txtItem"><a href="#" class="loginPopupLink">Вход</a></li>
+					<li class="txtItem"><a href="./login" class="loginPopupLink">Вход</a></li>
 				</ul>
 				<ul>
-					<li class="langSelected txtItem"><a href="/bg/">BG</a></li>
+					<li class="langSelected txtItem"><a href="./">BG</a></li>
 					<li class="txtItem"><a href="/en/">EN</a></li>
 				</ul>
 				<ul class="hideOnDesktop">

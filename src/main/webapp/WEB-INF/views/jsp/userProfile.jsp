@@ -46,7 +46,7 @@
 							<li class="selected"> <span
 									class="icon"><i class="profile"></i></span> <span class="txt">Персонална
 										информация</span>
-							</a></li>
+							</li>
 							<li><a href="./changePassword"> <span
 									class="icon"><i class="password"></i></span> <span class="txt">Промяна
 										на парола</span>
@@ -54,18 +54,18 @@
 							<li><a href="./interests"> <span class="icon"><i
 										class="popcornPack"></i></span> <span class="txt">Интереси</span>
 							</a></li>
-							<li><a href="/bg/profile/movies"> <span class="icon"><i
+							<li><a href="./favorites"> <span class="icon"><i
 										class="heart"></i></span> <span class="txt">Моите филми</span>
 							</a></li>
-							<li><a href="/bg/profile/newsletter"> <span class="icon"><i
+							<li><a href="./newsletter"> <span class="icon"><i
 										class="email"></i></span> <span class="txt">Абонирай се за
 										нашия е-бюлетин</span>
 							</a></li>
-							<li><a href="/bg/profile/orders"> <span class="icon"><i
+							<li><a href="./orders"> <span class="icon"><i
 										class="clock"></i></span> <span class="txt">История на
 										резервациите и закупените билети</span>
 							</a></li>
-							<li><a href="/logout"> <span class="icon"><i
+							<li><a href="./"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>
 						</ul>
@@ -548,7 +548,7 @@
 	</div>
 
 	<script type="text/javascript">
-		var item = "/images/frontend/bg-items/bg-assets-15years.json";
+		var item = "./images/frontend/bg-items/bg-assets-15years.json";
 		var haveDots = "";
 	</script>
 	<script type="text/javascript" src="/js/5d60927.js"></script>
@@ -569,7 +569,6 @@
 				});
 			});
 		}
-
 		/* PRINT ERRORS
 		--------------------------------------------------------------- */
 		function printErrors(errors, formName) {
@@ -584,7 +583,6 @@
 				}
 			}
 		}
-
 		jQuery(function($) {
 			/* Banner click handle
 			--------------------------------------------------- */
@@ -618,14 +616,12 @@
 				}
 				;
 			});
-
 			/* Banner click handle
 			--------------------------------------------------- */
 			$('a.disable').on('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
 			})
-
 			/* Add to (remove from) favourites
 			--------------------------------------------------- */
 			var favBtnSelector = '.favourites';
@@ -694,7 +690,6 @@
 									}
 								});
 			}
-
 			/* Login pop-ups
 			--------------------------------------------------- */
 			$document.on('click', '.loginPopupLink', function(e) {
@@ -713,7 +708,6 @@
 			})
 			$document.on('click', '.registerPopupLink', function(e) {
 				e.preventDefault();
-
 				$.colorbox({
 					top : false,
 					transition : null,
@@ -723,7 +717,6 @@
 					href : "/bg/register"
 				});
 			});
-
 			/* Movies rating
 			--------------------------------------------------- */
 			$('.rating')
@@ -759,7 +752,6 @@
 																			'setValue',
 																			data.rating);
 														}
-
 														$
 																.colorbox({
 																	fixed : true,
@@ -785,7 +777,6 @@
 													});
 								}
 							});
-
 			/* Newsletter signup ajax
 			--------------------------------------------------- */
 			var $newsletterInput = $('#newsletter_email'), $newsletterButton = $('#newsletter_button'), $newsletterRequest;
@@ -813,7 +804,6 @@
 								msg = '<div class="message error noMarginB">'
 										+ msg + '</div>';
 							}
-
 							$.colorbox({
 								fixed : true,
 								top : true,
@@ -840,9 +830,7 @@
 			var $videoBox = jQuery('#video_box'), $playerHolder = jQuery('#player_holder'), $videoWrapper = $playerHolder
 					.find('.videoWrapper'), $videoClose = $playerHolder
 					.find('.videoClose'), $videoHandles = jQuery('[data-video-id]');
-
 			var $videoHandle, $myPlayer, myVideoId, videoClass = null;
-
 			// Show
 			$videoHandles.click(function(e) {
 				e.preventDefault();
@@ -853,7 +841,6 @@
 					videoClass = $videoHandle.data('videoClass');
 					$videoBox.addClass(videoClass);
 				}
-
 				$body.addClass('videoActive').trigger('stenikPlayerActive');
 				TweenLite.fromTo($playerHolder, 0.3, {
 					y : -100,
@@ -867,7 +854,6 @@
 					}
 				});
 			});
-
 			// Hide
 			$videoClose.on('click', function() {
 				TweenLite.to($playerHolder, 0.3, {
@@ -889,7 +875,6 @@
 				// Clear the previous player and add a new placeholder for the iframe
 				$videoWrapper.empty().append(
 						'<div class="player" id="youtube_player"></div>');
-
 				$myPlayer = new YT.Player('youtube_player', {
 					videoId : myVideoId,
 					playerVars : {
@@ -927,11 +912,9 @@
 			maxDate : '12.12.2015',
 			scrollInput : false
 		});
-
 		function addZero(date) {
 			return date < 9 ? '0' + date : date;
 		}
-
 		jQuery(function($) {
 			var date = new Date($dateOfBirth.val());
 			$dateOfBirth
@@ -945,13 +928,9 @@
 
 	<script type="text/javascript">
 		/* <![CDATA[ */
-
 		var google_conversion_id = 855321203;
-
 		var google_custom_params = window.google_tag_params;
-
 		var google_remarketing_only = true;
-
 		/* ]]> */
 	</script>
 
