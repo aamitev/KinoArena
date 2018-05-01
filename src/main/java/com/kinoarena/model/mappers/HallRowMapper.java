@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import com.kinoarena.model.enums.HallType;
 import com.kinoarena.model.vo.Hall;
 
 @Component
@@ -18,6 +19,8 @@ public class HallRowMapper implements RowMapper<Hall> {
 		Hall hall = null;
 		try {
 			hall = new Hall(rs.getInt("id"), rs.getString("name"), cinemaRowMapper.mapRow(rs, rowNum));
+
+			hall.setHalltype(HallType.valueOf(rs.getString("movieType").toUpperCase()));
 
 		} catch (Exception e) {
 			throw new SQLException(e);

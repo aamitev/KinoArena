@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kinoarena.model.dao.AddressDao;
 import com.kinoarena.model.dao.ScreeningDao;
+import com.kinoarena.model.enums.HallType;
 import com.kinoarena.model.vo.Screening;
 
 @Controller

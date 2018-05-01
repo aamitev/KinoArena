@@ -1,8 +1,10 @@
 package com.kinoarena.model.vo;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 import com.kinoarena.exceptions.MovieException;
+import com.kinoarena.model.enums.MovieType;
 
 public class Movie {
 	private int id;
@@ -12,26 +14,24 @@ public class Movie {
 	private String director;
 	private int duration;
 	private LocalDate primiere;
-	private int pgAge;
+	private int ageLimitation;
+	private MovieType movieType;
 	private Genre genre;
 	
 
-	public Movie(int id,String title, String director, int duration, LocalDate primiere) throws MovieException {
+	public Movie(int id,String title, int duration) throws MovieException {
 		this.setId(id);
 		this.setTitle(title);
 		this.setDirector(director);
 		this.setDuration(duration);
-		this.setPrimiere(primiere);
 	}
 
-	public Movie(int id,String title, String coverURL, String description, String director, int duration, int pgAge,
-			Genre genre, LocalDate primiere) throws MovieException {
-		this(id ,title, director, duration, primiere);
+	public Movie(int id,String title, String coverURL, int duration) throws MovieException {
+		this(id ,title, duration);
 		this.setCoverURL(coverURL);
-		this.setDescription(description);
-		this.setPgAge(pgAge);
-		this.setGenre(genre);
 	}
+	
+	
 
 	public String getTitle() {
 		return title;
@@ -64,11 +64,11 @@ public class Movie {
 		return director;
 	}
 
-	public void setDirector(String director) throws MovieException {
-		if (director == null) {
-			throw new MovieException("Invalid director");
+	public void setDirector(String director) {
+		if (director != null) {
+			this.director = director;
 		}
-		this.director = director;
+		
 	}
 
 	public int getDuration() {
@@ -82,12 +82,12 @@ public class Movie {
 		this.duration = duration;
 	}
 
-	public int getPgAge() {
-		return pgAge;
+	public int getAgeLimitation() {
+		return ageLimitation;
 	}
 
-	public void setPgAge(int pgAge) {
-		this.pgAge = pgAge;
+	public void setAgeLimitation(int pgAge) {
+		this.ageLimitation = pgAge;
 	}
 
 	public Genre getGenre() {
@@ -95,21 +95,24 @@ public class Movie {
 	}
 
 	public void setGenre(Genre genre) throws MovieException {
-		if(genre == null) {
-			throw new MovieException();
+		if(genre != null) {
+			this.genre = genre;
 		}
-		this.genre = genre;
+
 	}
 
 	public LocalDate getPrimiere() {
 		return primiere;
 	}
-
-	public void setPrimiere(LocalDate primiere) throws MovieException {
-		if (primiere == null) {
-			throw new MovieException("Invalid primiere");
+	public void setPrimiere(Date primiere) throws MovieException {
+		if (primiere != null) {
+			this.primiere = primiere.toLocalDate();
 		}
-		this.primiere = primiere;
+	}
+	public void setPrimiere(LocalDate primiere) throws MovieException {
+		if (primiere != null) {
+			this.primiere = primiere;
+		}
 	}
 
 	public int getId() {
@@ -118,6 +121,17 @@ public class Movie {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public MovieType getMovieType() {
+		return movieType;
+	}
+
+	public void setMovieType(MovieType movieType) throws MovieException {
+		if (movieType == null) {
+			throw new MovieException("Invalid movieType");
+		}
+		this.movieType = movieType;
 	}
 
 }

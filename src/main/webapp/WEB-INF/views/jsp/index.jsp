@@ -133,7 +133,7 @@
 								style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 1120px;">
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<a onclick="getScreening('action')">
+									<a onclick="getActiveMovies()">
 										<div class="tabItem filter" data-filter-anchor="tab-1">
 											<div class="row">Всички филми</div>
 											<div class="row">в продажба</div>
@@ -142,63 +142,75 @@
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<div class="tabItem filter selected" data-filter-anchor="tab-3">
-										<div class="row">Детски</div>
-										<div class="row">филми</div>
-									</div>
+									<a onclick="getActiveByGenre('animation')">
+										<div class="tabItem filter selected"
+											data-filter-anchor="tab-3">
+											<div class="row">Детски</div>
+											<div class="row">филми</div>
+										</div>
+									</a>
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<div class="tabItem filter hasIMGIcons"
-										data-filter-anchor="tab-4">
-										<div class="hoverImgToggle">
+									<a onclick="getActiveMoviesByHallType('imax')">
 
-											<img title="header-imax.png" alt="imax" class="defaultImg"
-												src="./images/frontend/imax.png"> <img
-												title="header-imax-hover.png" alt="imax" class="hoverImg"
-												src="./images/frontend/imax-hover.png">
+										<div class="tabItem filter hasIMGIcons"
+											data-filter-anchor="tab-4">
+											<div class="hoverImgToggle">
+
+												<img title="header-imax.png" alt="imax" class="defaultImg"
+													src="./images/frontend/imax.png"> <img
+													title="header-imax-hover.png" alt="imax" class="hoverImg"
+													src="./images/frontend/imax-hover.png">
+											</div>
 										</div>
-									</div>
+									</a>
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<div class="tabItem filter hasIMGIcons"
-										data-filter-anchor="tab-5">
-										<div class="hoverImgToggle">
+									<a onclick="getActiveMoviesByHallType('luxe')">
+										<div class="tabItem filter hasIMGIcons"
+											data-filter-anchor="tab-5">
+											<div class="hoverImgToggle">
 
-											<img title="header-luxe.png" alt="Luxe" class="defaultImg"
-												src="./images/frontend/luxe.png"> <img
-												title="header-luxe-hover.png" alt="Luxe" class="hoverImg"
-												src="./images/frontend/luxe-hover.png">
+												<img title="header-luxe.png" alt="Luxe" class="defaultImg"
+													src="./images/frontend/luxe.png"> <img
+													title="header-luxe-hover.png" alt="Luxe" class="hoverImg"
+													src="./images/frontend/luxe-hover.png">
+											</div>
 										</div>
-									</div>
+									</a>
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<div class="tabItem filter hasIMGIcons"
-										data-filter-anchor="tab-6">
-										<div class="hoverImgToggle">
+									<a onclick="getActiveMoviesByHallType('vip')">
+										<div class="tabItem filter hasIMGIcons"
+											data-filter-anchor="tab-6">
+											<div class="hoverImgToggle">
 
-											<img title="header-vip.png" alt="VIP" class="defaultImg"
-												src="./images/frontend/vip.png"> <img
-												title="header-vip-hover.png" alt="VIP" class="hoverImg"
-												src="./images/frontend/vip-hover.png">
+												<img title="header-vip.png" alt="VIP" class="defaultImg"
+													src="./images/frontend/vip.png"> <img
+													title="header-vip-hover.png" alt="VIP" class="hoverImg"
+													src="./images/frontend/vip-hover.png">
+											</div>
 										</div>
-									</div>
+									</a>
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<div class="tabItem filter hasIMGIcons"
-										data-filter-anchor="tab-7">
-										<div class="hoverImgToggle">
+									<a onclick="getActiveMoviesByHallType('premium')">
+										<div class="tabItem filter hasIMGIcons"
+											data-filter-anchor="tab-7">
+											<div class="hoverImgToggle">
 
-											<img title="header-premium.png" alt="Premium"
-												class="defaultImg" src="./images/frontend/premium.png">
+												<img title="header-premium.png" alt="Premium"
+													class="defaultImg" src="./images/frontend/premium.png">
 
-											<img title="header-premium-hover.png" alt="Premium"
-												class="hoverImg" src="./images/frontend/premium-hover.png">
+												<img title="header-premium-hover.png" alt="Premium"
+													class="hoverImg" src="./images/frontend/premium-hover.png">
+											</div>
 										</div>
-									</div>
+									</a>
 								</div>
 							</div>
 						</div>

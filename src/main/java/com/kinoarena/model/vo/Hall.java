@@ -3,6 +3,8 @@ package com.kinoarena.model.vo;
 import java.util.Set;
 
 import com.kinoarena.exceptions.ModelException;
+import com.kinoarena.exceptions.MovieException;
+import com.kinoarena.model.enums.HallType;
 
 public class Hall {
 	//private static final String INVALID_NUMBER_OF_SEATS = "Invalid number of seats.";
@@ -11,6 +13,7 @@ public class Hall {
 	private static final String INVALID_NAME = "Invalid name.";
 	private int id;
 	private String name;
+	private HallType halltype;
 	private Set<Seat> seats;
 	private Cinema cinema;
 
@@ -52,4 +55,16 @@ public class Hall {
 	public Cinema getCinema() {
 		return this.cinema;
 	}
+
+	public HallType getHalltype() {
+		return halltype;
+	}
+
+	public void setHalltype(HallType halltype) throws MovieException {
+		if (halltype == null) {
+			throw new MovieException("Invalid hallType");
+		}
+		this.halltype = halltype;
+	}
+	
 }

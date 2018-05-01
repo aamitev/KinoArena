@@ -10,15 +10,15 @@ public class Address {
 	private static final int MAX_POSTCODE_LENGTH = 4;
 	private String address;
 	private String postcode;
-	private City city;
+	private String city;
 
-	public Address(String address, String postcode, City city) throws ModelException {
+	public Address(String address, String postcode, String city) throws ModelException {
 		setAddress(address);
 		setPostcode(postcode);
 		setCity(city);
 	}
 
-	private void setCity(City city) throws ModelException {
+	private void setCity(String city) throws ModelException {
 		if (city != null) {
 			this.city = city;
 		} else
@@ -50,7 +50,7 @@ public class Address {
 		return this.postcode;
 	}
 
-	public City getCity() {
+	public String getCity() {
 		return this.city;
 	}
 

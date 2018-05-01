@@ -12,14 +12,11 @@ import com.kinoarena.model.vo.Address;
 @Component
 public class AddressRowMapper implements RowMapper<Address> {
 
-	@Autowired
-	private CityRowMapper cityMapper;
-
 	@Override
 	public Address mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Address address = null;
 		try {
-			address = new Address(rs.getString("address"), rs.getString("postCode"), cityMapper.mapRow(rs, rowNum));
+			address = new Address(rs.getString("address"), rs.getString("postCode"), rs.getString("city"));
 
 		} catch (Exception e) {
 			throw new SQLException(e);

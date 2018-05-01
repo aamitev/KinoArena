@@ -13,6 +13,7 @@ public class Cinema {
 	private String name;
 	private String email;
 	private String gsm;
+
 	private Address address;
 
 	public Cinema(String name, String email, String gsm, Address address) throws ModelException {
