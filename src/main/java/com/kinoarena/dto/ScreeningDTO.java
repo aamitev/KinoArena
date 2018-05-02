@@ -1,51 +1,46 @@
-package com.kinoarena.model.vo;
+package com.kinoarena.dto;
 
 import java.time.LocalDateTime;
 
-public class Screening {
+import com.kinoarena.model.vo.Movie;
+
+public class ScreeningDTO {
 	private int id;
 	private LocalDateTime startTime;
 	private Movie movie;
-	private Hall hall;
+	private int hallId;
 
 
-	public Screening(int id, LocalDateTime startTime, Movie movie, Hall hall) {
-		this.setId(id);
+	public ScreeningDTO(int id, LocalDateTime startTime, Movie movie, int hallId) {
+		this.setId( id);
 		this.setStartTime(startTime);
-		this.setMovie(movie);
-		this.setHall(hall);
+		this.setMovie( movie) ;
+		this.setHallId( hallId);
 	}
-
 	int getId() {
 		return id;
 	}
-
 	void setId(int id) {
 		this.id = id;
 	}
-
 	LocalDateTime getStartTime() {
 		return startTime;
 	}
-
 	void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
-
 	Movie getMovie() {
 		return movie;
 	}
-
 	void setMovie(Movie movie) {
 		this.movie = movie;
 	}
-
-	Hall getHall() {
-		return hall;
+	int getHallId() {
+		return hallId;
 	}
-
-	void setHall(Hall hall) {
-		this.hall = hall;
+	void setHallId(int hallId) {
+		this.hallId = hallId;
 	}
-
+	
+	
 }

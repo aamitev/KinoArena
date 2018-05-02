@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
+<link rel="stylesheet" type="text/css" href="/KinoArena/css/kinoarena.css">
 </head>
 <body
 	class="loaded homepage hasTopSlider menuLoaded afterLoaded scrolling">
@@ -11,8 +11,9 @@
 	<header id="header">
 		<div class="wrapper">
 			<figure class="item logoWrapper center">
-				<a href="./" class="logo bg"> <img
-					src="./images/frontend/kino-arena-logo.png" alt="Kino Arena logo">
+				<a href="/KinoArena/" class="logo bg"> <img
+					src="/KinoArena/images/kino-arena-logo.png"
+					alt="Kino Arena logo">
 				</a>
 				<span class="bottomBar"></span>
 			</figure>

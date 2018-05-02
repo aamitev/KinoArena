@@ -38,32 +38,20 @@ function movieBoxGenerator(response){
 				data-filter="tab-1 tab-6  ">
 				 <figure class="featured lazyLoad imgLoaded"
 					data-img-width="224" data-img-height="336">
+					<a href="./movie/` +movies[index].id+`">
 					<img
-						src=".` + movies[index].coverURL + `"
+						src="/KinoArena/` + movies[index].coverURL + `"
 						alt="`+ movies[index].title+ `" width="224" height="336"
 						class="poster">
+						</a>
 				</figure>
 				<h3 class="title">
-					<a href="#">` + movies[index].title+ 
+					<a href="./movie/`+ movies[index].id+ `">` + movies[index].title+ 
 					`</a>
 				</h3>
-				<div class="rating">
-					<div class="stenikRating">
-						<div class="inputWrapper">
-							<input type="text" name="" value="" data-rating="3.37"
-								data-movie="708" readonly="readonly">
-						</div>
-						<div class="handlesWrapper">
-							<span class="ratingHandle rating-1" data-rating="1"></span><span
-								class="ratingHandle rating-2" data-rating="2"></span><span
-								class="ratingHandle rating-3" data-rating="3"></span><span
-								class="ratingHandle rating-4" data-rating="4"></span><span
-								class="ratingHandle rating-5" data-rating="5"></span>
-						</div>
-					</div>
-				</div>
+
 				<div class="attr highlight">
-					<div class="item tooltip_26"">
+					<div class="item tooltip_26" data-tooltip="Не се препоръчва за деца&amp;nbsp;под ` + movies[index].ageLimitation + `">>
 
 						<p> `+ movies[index].ageLimitation +`</p>
 					</div>

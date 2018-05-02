@@ -18,10 +18,10 @@ public class MovieDao implements IMovieDao {
 	private static final String GET_ACTIVE_MOVIES = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.id) LEFT OUTER jOIN genres g ON(m.genres_id=g.id) WHERE(s.startTime > ? );";
 	private static final String GET_ACTIVE_MOVIES_BY_GENRE = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.id) LEFT OUTER jOIN genres g ON(m.genres_id=g.id) WHERE(g.genre = ? ) "
 			+ "AND (s.startTime > ?);";
-	private static final String GET_ACTIVE_MOVIES_BY_HALL = "SELECT m.*,g.* FROM movies m " + 
-			"JOIN screening s ON(s.movie_id=m.id) LEFT OUTER jOIN " + 
-			" genres g ON(m.genres_id=g.id) " + 
-			" JOIN halls h ON(s.halls_id=h.id) WHERE(h.hallType = ?) AND (s.startTime > ?);";
+	private static final String GET_ACTIVE_MOVIES_BY_HALL = "SELECT m.*,g.* FROM movies m "
+			+ "JOIN screening s ON(s.movie_id=m.id) LEFT OUTER jOIN " + " genres g ON(m.genres_id=g.id) "
+			+ " JOIN halls h ON(s.halls_id=h.id) WHERE(h.hallType = ?) AND (s.startTime > ?);";
+	private static final String GET_ACTIVE_MOVIES_BY_ID = "SELECT m.*,g.* FROM movies m LEFT OUTER jOIN genres g ON(m.genres_id=g.id) WHERE (m.id = ? );";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -54,18 +54,18 @@ public class MovieDao implements IMovieDao {
 
 	@Override
 	public Movie getMovieById(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Movie movie = jdbcTemplate.queryForObject(GET_ACTIVE_MOVIES_BY_ID, new Object[] { id },
+				movieRowMapper);
+		return movie;
 	}
-	public List<Movie> getActiveMoviesByHallType(String hall) {
 
+	public List<Movie> getActiveMoviesByHallType(String hall) {
 		List<Movie> movies = jdbcTemplate.query(GET_ACTIVE_MOVIES_BY_HALL,
 				new Object[] { hall, Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
 		return movies;
 	}
 
 	public List<Movie> getActiveMoviesByGenre(String genre) {
-		System.out.println(genre);
 		System.out.println(Timestamp.valueOf(LocalDateTime.now()));
 		List<Movie> movies = jdbcTemplate.query(GET_ACTIVE_MOVIES_BY_GENRE,
 				new Object[] { genre, Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
