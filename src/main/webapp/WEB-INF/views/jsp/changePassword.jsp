@@ -62,7 +62,7 @@
 										class="clock"></i></span> <span class="txt">История на
 										резервациите и закупените билети</span>
 							</a></li>
-							<li><a href="/logout"> <span class="icon"><i
+							<li><a href="/KinoArena/logout"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>
 						</ul>
@@ -71,7 +71,7 @@
 				<div class="contentWrapper">
 
 					<h5 class="title">Промяна на парола</h5>
-					<img src="./images/frontend/profile-pass.png" alt="bg image"
+					<img src="/KinoArena/images/profile-pass.png" alt="bg image"
 						class="bgImage">
 					<p class="requiredInfo">
 						<span class="red">*</span> Всички полета са задължителни за

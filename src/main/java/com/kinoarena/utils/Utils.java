@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public abstract class Utils {
 	private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+	private static final String BIRTHDATE_REGEX = "\\d{4}-\\d{2}-\\d{2}";
+	private static final Pattern VALID_BIRTHDATE = Pattern.compile(BIRTHDATE_REGEX);
 	private static final int MIN_PASS_LENGTH = 5;
 	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
 	private static final int GSM_WITHOUT_COUNTRY_CODE = 10;
@@ -45,5 +47,11 @@ public abstract class Utils {
 			return true;
 		}
 		return false;
+	}
+
+	public static boolean dateValidator(String birthdate) {
+		Matcher matcher = VALID_BIRTHDATE.matcher(birthdate);
+		
+		return matcher.find();
 	}
 }

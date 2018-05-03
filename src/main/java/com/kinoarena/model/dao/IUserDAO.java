@@ -3,6 +3,7 @@ package com.kinoarena.model.dao;
 import java.time.LocalDate;
 
 import com.kinoarena.exceptions.WebProfileException;
+import com.kinoarena.model.vo.Address;
 import com.kinoarena.model.vo.User;
 
 public interface IUserDAO {
@@ -10,10 +11,9 @@ public interface IUserDAO {
 	public User login(String email, String password) throws WebProfileException;
 	
 	public void register(String fisrtName, String secondName, String lastName,
-						 String email, String password, String repass,
-						 boolean isMale, LocalDate dateOfBirth);
+						 String email, String password,
+						 boolean isMale, LocalDate dateOfBirth, Address address);
 	
-	public User changePassword(User user, String email, String reNewPass);
+	public void changePassword(User user, String reNewPass);
 	
-	public User searchForUserWithPass(String email, String password) throws WebProfileException;
 }
