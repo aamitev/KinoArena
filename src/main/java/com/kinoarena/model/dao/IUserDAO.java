@@ -13,5 +13,7 @@ public interface IUserDAO {
 						 String email, String password, String repass,
 						 boolean isMale, LocalDate dateOfBirth);
 	
-	public void changePassword(User user, String oldPass, String newPass, String reNewPass);
+	public User changePassword(User user, String email, String reNewPass);
+	
+	public User searchForUserWithPass(String email, String password) throws WebProfileException;
 }

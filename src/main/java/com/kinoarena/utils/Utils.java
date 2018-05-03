@@ -39,4 +39,11 @@ public abstract class Utils {
 		}
 		return false;
 	}
+	
+	public static boolean comparePasswords(String pass, String rePass) {
+		if(pass.equals(rePass)) {
+			return true;
+		}
+		return false;
+	}
 }

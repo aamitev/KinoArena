@@ -40,11 +40,7 @@ function movieBoxGenerator(response){
 					data-img-width="224" data-img-height="336">
 					<a href="./movie/` +movies[index].id+`">
 					<img
-<<<<<<< HEAD
-						src="` + movies[index].coverURL + `"
-=======
 						src="/KinoArena/` + movies[index].coverURL + `"
->>>>>>> 1e215166ca8f4328173567de658b2dbc18e11720
 						alt="`+ movies[index].title+ `" width="224" height="336"
 						class="poster">
 						</a>

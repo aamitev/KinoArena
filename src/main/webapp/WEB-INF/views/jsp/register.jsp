@@ -9,11 +9,13 @@
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
 </head>
 <body>
-	<div align = "center">
+	<div>
 		<div id="register_popup" class="popup big">
 			<h4 class="title">Нова регистрация</h4>
 			<div class="col2 left padding formCol">
-				<div class="socialLogin">
+
+				<!-- SOCIAL LOGIN -->
+				<!-- <div class="socialLogin">
 					<a href="https://www.kinoarena.com/connect/twitter" class="item"><i
 						class="twitter big"></i></a> <a
 						href="https://www.kinoarena.com/connect/facebook" class="item"><i
@@ -23,7 +25,9 @@
 				</div>
 				<div class="txtSeparator">
 					<span class="txt">или</span>
-				</div>
+				</div> -->
+				<!-- SOCIAL LOGIN -->
+				
 				<p>
 					<em>При <strong>КОРЕКТНО ПОПЪЛВАНЕ</strong> на полетата
 						получаваш - 1. Бърза регистрация в томболи и промоции, 2. По-добро
@@ -762,19 +766,19 @@
 						<br> <br> <br>
 					</p>
 					<p style="text-align: right;">
-						<img src="./images/frontend/register_pros1.png" alt="">
+						<img src="/KinoArena/images/register_pros1.png" alt="">
 					</p>
 					<p>
 						<br> <br> <br>
 					</p>
 					<p style="text-align: right;">
-						<img src="./images/frontend/register_pros2.png" alt="">
+						<img src="/KinoArena/images/register_pros2.png" alt="">
 					</p>
 					<p>
 						<br> <br> <br>
 					</p>
 					<p style="text-align: right;">
-						<img src="./images/frontend/register_pros3.png" alt="">
+						<img src="/KinoArena/images/register_pros3.png" alt="">
 					</p>
 				</article>
 			</div>

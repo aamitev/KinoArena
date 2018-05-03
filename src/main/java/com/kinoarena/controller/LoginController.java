@@ -24,12 +24,13 @@ public class LoginController {
 		return "login";
 	}
 
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String verifyLogin(HttpServletRequest request, HttpSession session, Model model) {
 		String userEmail = request.getParameter("email").toString();
 		String userPass = request.getParameter("password").toString();
-		
-		 User loggedUser;
+
+		User loggedUser;
 		 try {
 			if(user.login(userEmail, userPass) != null) {
 				 loggedUser = user.login(userEmail, userPass);
@@ -50,13 +51,18 @@ public class LoginController {
 	
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
 	public String verifyChangeOfPassword(HttpServletRequest request, HttpSession session, Model model) {
+		
 		String oldPass = request.getParameter("oldPassword").toString();
 		String newPass = request.getParameter("newPass").toString();
 		String reenterNewPass = request.getParameter("reenterNewPass").toString();
+
 		
 		System.out.println(oldPass);
 		System.out.println(newPass);
 		System.out.println(reenterNewPass);
+		User user = (User) session.getAttribute("loggedUser");
+		System.out.println(user.getEmail());
+//		user.changePassword(, oldPass, newPass, reenterNewPass);
 		
 		return "changePassword";
 	}

@@ -6,6 +6,7 @@ import com.kinoarena.exceptions.ModelException;
 import com.kinoarena.utils.Utils;
 
 public class User {
+	private static final String INVALID_USER_ID = "Invalid user id.";
 	private static final String INVALID_JOB = "Invalid job entered";
 	private static final String INVALID_EDUCATION = "Invalid education entered.";
 	private static final String INVALID_GSM = "Invalid GSM entered.";
@@ -17,6 +18,7 @@ public class User {
 	private static final String INVALID_SECOND_NAME = "Invalid second name of user.";
 	private static final String INVALID_LAST_NAME = "Invalid last name of user.";
 	
+	private int id;
 	private String email;
 	private String password;
 	private String firstName;
@@ -33,9 +35,10 @@ public class User {
 		
 	}
 	
-	public User(String email, String password, String firstName, String secondName, String lastName, boolean isMale,
+	public User(int id, String email, String password, String firstName, String secondName, String lastName, boolean isMale,
 			LocalDate birthday, String gsm, String education, String job, Address address) throws ModelException {
 		this();
+		setId(id);
 		setEmail(email);
 		setPassword(password);
 		setFirstName(firstName);
@@ -48,13 +51,19 @@ public class User {
 		setAddress(address);
 		
 	}
-	private void setGSM(String gsm) throws ModelException {
+	public void setId(int id) throws ModelException {
+		if(id > 0) {
+			this.id = id;
+		}else throw new ModelException(INVALID_USER_ID);
+	}
+
+	public void setGSM(String gsm) throws ModelException {
 			if(Utils.gsmValidator(gsm)) {
 				this.gsm = gsm;
 			}else throw new ModelException(INVALID_GSM);
 	}
 
-	private void setAddress(Address address) throws ModelException {
+	public void setAddress(Address address) throws ModelException {
 		if(address != null) {
 			this.address = address;
 		}else throw new ModelException(INVALID_ADDRESS);
@@ -63,40 +72,40 @@ public class User {
 		return this.address;
 	}
 
-	private void setSex(boolean isMale) {
+	public void setSex(boolean isMale) {
 		this.isMale = isMale;
 	}
 
 
-	private void setLastName(String lastName) throws ModelException{
+	public void setLastName(String lastName) throws ModelException{
 		if(Utils.checkString(lastName)) {
 			this.lastName = lastName;
 		}else throw new ModelException(INVALID_LAST_NAME);
 	}
 
 
-	private void setSecondName(String secondName) throws ModelException {
+	public void setSecondName(String secondName) throws ModelException {
 		if(Utils.checkString(secondName)) {
 			this.secondName = secondName;
 		}else throw new ModelException(INVALID_SECOND_NAME);		
 	}
 
 
-	private void setFirstName(String firstName) throws ModelException {
+	public void setFirstName(String firstName) throws ModelException {
 		if(Utils.checkString(firstName)) {
 			this.firstName = firstName;
 		}else throw new ModelException(INVALID_FIRST_NAME);		
 	}
 
 
-	private void setPassword(String password) throws ModelException {
+	public void setPassword(String password) throws ModelException {
 		if(Utils.validatePassword(password)) {
 			this.password = password;
 		}else throw new ModelException(INVALID_PASSWORD);		
 	}
 
 
-	private void setEmail(String email) throws ModelException {
+	public void setEmail(String email) throws ModelException {
 		if(Utils.checkString(email)) {
 			if(Utils.emailValidator(email)) {
 				this.email = email;
@@ -114,7 +123,11 @@ public class User {
 			this.education = education;
 		}else throw new ModelException(INVALID_EDUCATION);
 	}
-
+	
+	
+	public int getId() {
+		return this.id;
+	}
 	public String getEmail() {
 		return this.email;
 	}

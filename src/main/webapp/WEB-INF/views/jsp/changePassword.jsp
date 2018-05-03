@@ -87,8 +87,8 @@
 					<form name="stenik_user_password_change" method="post"
 						action="./changePassword" novalidate="novalidate" class="stdForm">
 						<div class="formItem col2 left">
-							<input type="password" id="oldPassword" name="oldPassowrd"
-								required="required" placeholder="Стара парола" />
+							<input type="password" id="oldPassword" name="oldPassword"
+								required="required" placeholder="Стара парола *" />
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 left">
