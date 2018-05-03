@@ -62,7 +62,7 @@
 										class="clock"></i></span> <span class="txt">История на
 										резервациите и закупените билети</span>
 							</a></li>
-							<li><a href="./"> <span class="icon"><i
+							<li><a href="./logout"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>
 						</ul>

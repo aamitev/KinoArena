@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 
 <html>
@@ -24,7 +25,14 @@
 				<ul class="hideOnResponsive">
 					<li class="txtItem"><a href="/bg/cinemas">Кина</a></li>
 					<li class="txtItem"><a href="/bg/program">Програма</a></li>
-					<li class="txtItem"><a href="./login" class="loginPopupLink">Вход</a></li>
+					
+					<c:if test = "${empty sessionScope.loggedUser}" >
+						<li class="txtItem"><a href="./login" class="loginPopupLink">Вход</a></li>
+					</c:if>
+					
+					<c:if test = "${not empty sessionScope.loggedUser }">
+						<li class="txtItem"><a href="./userProfile" class="loginPopupLink">Профил</a></li>
+					</c:if>
 				</ul>
 				<ul>
 					<li class="langSelected txtItem"><a href="./">BG</a></li>

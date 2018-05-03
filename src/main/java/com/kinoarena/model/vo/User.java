@@ -144,8 +144,8 @@ public class User {
 		return this.isMale;
 	}
 	
-	public LocalDate getBirthday() {
-		return birthday;
+	public String getBirthday() {
+		return birthday.toString();
 	}
 	
 	

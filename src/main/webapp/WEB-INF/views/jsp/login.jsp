@@ -22,18 +22,19 @@
 						style="width: 455px; overflow: auto; height: 643px;">
 						<div id="login_popup" class="popup">
 							<h4 class="title">Влез</h4>
-							
+
 							<div class="loginForm">
 								<div id="login_message"></div>
-								<form method="POST" class="stdForm" id="login_form">
+								<form method="POST" class="stdForm" id="login_form"
+									action="./login">
 									<input type="hidden" name="_csrf_token"
 										value="d4MYDQPOhxvjLSe0WFQCXoodUvYc0VRrkSgiT__jbvE">
 									<div class="formItem">
-										<input type="email" id="username" name="_username" value=""
+										<input type="email" id="email" name="email" value=""
 											required="required" placeholder="E-mail">
 									</div>
 									<div class="formItem">
-										<input type="password" id="password" name="_password"
+										<input type="password" id="password" name="password"
 											required="required" placeholder="Парола">
 									</div>
 									<a href="/bg/resetting/reset"
@@ -59,7 +60,7 @@
 									<div class="clearH2"></div>
 									<input type="hidden" name="next_url"
 										value="https://www.kinoarena.com/bg/"> <a
-										href="/bg/register" class="registerPopupLink button small">Нова
+										href="./register" class="registerPopupLink button small">Нова
 										регистрация</a>
 								</form>
 							</div>

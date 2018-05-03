@@ -39,7 +39,7 @@ function movieBoxGenerator(response){
 				 <figure class="featured lazyLoad imgLoaded"
 					data-img-width="224" data-img-height="336">
 					<img
-						src=".` + movies[index].coverURL + `"
+						src="` + movies[index].coverURL + `"
 						alt="`+ movies[index].title+ `" width="224" height="336"
 						class="poster">
 				</figure>
