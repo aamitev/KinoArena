@@ -16,98 +16,6 @@
 		<main id="main">
 		<div class="wrapper">
 			<div id="filter_bar" class="twoSidesBar filterBar">
-				<div class="leftSide steps">
-					<div class="step">
-						<div class="number" data-triangles="1">
-							<span class="txt">1</span><span class="triangle-set item-1"></span>
-						</div>
-						<div class="formItem white">
-							<div class="stenikSelect select_1">
-								<div class="selectedHolder">Избери кино</div>
-								<div class="dropdown">
-									<span class="option selected disabled" data-option="option_1_0">Избери
-										кино</span><span class="option  " data-option="option_1_1">Кино
-										Арена Запад</span><span class="option  " data-option="option_1_2">Кино
-										Арена Младост</span><span class="option  " data-option="option_1_3">Кино
-										Арена The MALL</span><span class="option  " data-option="option_1_4">Кино
-										Арена Делукс Bulgaria Mall</span><span class="option  "
-										data-option="option_1_5">Кино Арена Мол Варна</span><span
-										class="option  " data-option="option_1_6">Кино Арена
-										Grand Mall Варна</span><span class="option  "
-										data-option="option_1_7">Кино Арена Мол Марково Тепе
-										Пловдив</span><span class="option  " data-option="option_1_8">Кино
-										Арена Парк Мол Стара Загора</span><span class="option  "
-										data-option="option_1_9">Кино Арена Панорама Мол Плевен</span><span
-										class="option  " data-option="option_1_10">Кино Арена
-										Смолян</span>
-								</div>
-							</div>
-							<div class="stenikHiddenSelect" style="display: none;">
-								<select name="" id="cinemaSelect">
-									<option value="" disabled="disabled" selected="selected"
-										class="defaultOption" data-option="option_1_0">Избери
-										кино</option>
-									<option value="A1" data-option="option_1_1">Кино Арена
-										Запад</option>
-									<option value="A2" data-option="option_1_2">Кино Арена
-										Младост</option>
-									<option value="A3" data-option="option_1_3">Кино Арена
-										The MALL</option>
-									<option value="A5" data-option="option_1_4">Кино Арена
-										Делукс Bulgaria Mall</option>
-									<option value="VN" data-option="option_1_5">Кино Арена
-										Мол Варна</option>
-									<option value="VN2" data-option="option_1_6">Кино
-										Арена Grand Mall Варна</option>
-									<option value="MMT" data-option="option_1_7">Кино
-										Арена Мол Марково Тепе Пловдив</option>
-									<option value="A4" data-option="option_1_8">Кино Арена
-										Парк Мол Стара Загора</option>
-									<option value="PLN2" data-option="option_1_9">Кино
-										Арена Панорама Мол Плевен</option>
-									<option value="ASMO" data-option="option_1_10">Кино
-										Арена Смолян</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="step">
-						<div class="number" data-triangles="2">
-							<span class="txt">2</span><span class="triangle-set item-1"></span><span
-								class="triangle-set item-2"></span>
-						</div>
-						<div class="formItem white">
-							<div class="stenikSelect select_1 disabled">
-								<div class="selectedHolder">Изберете филм</div>
-								<div class="dropdown">
-									<span class="option selected disabled" data-option="option_1_0">Изберете
-										филм</span>
-								</div>
-							</div>
-							<div class="stenikHiddenSelect" style="display: none;">
-								<select name="" id="movieSelect" disabled="disabled">
-									<option value="#" disabled="disabled" selected="selected"
-										class="defaultOption" data-option="option_1_0">Изберете
-										филм</option>
-
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="step">
-						<div class="number" data-triangles="3">
-							<span class="txt">3</span><span class="triangle-set item-1"></span><span
-								class="triangle-set item-2"></span><span
-								class="triangle-set item-3"></span>
-						</div>
-						<div class="formItem white datepicker">
-							<input type="text" id="projection_time" disabled="disabled"
-								readonly="readonly" value="" placeholder="Изберете ден">
-						</div>
-					</div>
-				</div>
-				<!-- end of .steps -->
-				<div class="barSeparator">или</div>
 				<div class="rightSide">
 					<div class="searchForm">
 						<div class="formItem">
@@ -232,6 +140,7 @@
 		</main>
 	</div>
 	<script onload="getActiveMovies()" src="./js/filterContent.js"></script>
+	<script src="./js/searchbar.js"></script>
 
 	<!-- end of #main -->
 </body>

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +20,8 @@ import com.google.gson.GsonBuilder;
 import com.kinoarena.dto.ScreeningDTO;
 import com.kinoarena.model.dao.AddressDao;
 import com.kinoarena.model.dao.ScreeningDao;
+import com.kinoarena.model.vo.Cinema;
+import com.kinoarena.model.vo.Hall;
 import com.kinoarena.model.vo.Screening;
 
 @Controller
@@ -32,7 +35,7 @@ public class ScreeningsController {
 	public void getScreeningsDtoByMovieId(@RequestParam("movieId") int movieId, HttpServletResponse response)
 			throws Exception {
 		List<ScreeningDTO> screenings = screeningDao.getScreeningsDTO(movieId);
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(screenings);
 		response.setContentType("application/json");
 		response.getWriter().println(json);
@@ -41,7 +44,7 @@ public class ScreeningsController {
 	@RequestMapping(method = RequestMethod.GET, value = "/screenings", params = { "movieId", "date" })
 	public void getScreeningsByMovieIdAndDate(@RequestParam("movieId") int movieId, @RequestParam("date") String date,
 			HttpServletResponse response) throws Exception {
-		List<Screening> screenings = screeningDao.getScreeningsByMovieIdAndDate(movieId, date);
+		Map<String, Map<String, List<Screening>>> screenings = screeningDao.getScreeningsByMovieIdAndDate(movieId, date);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(screenings);
 		System.out.println(json);

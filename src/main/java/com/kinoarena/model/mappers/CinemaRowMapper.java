@@ -18,7 +18,7 @@ public class CinemaRowMapper implements RowMapper<Cinema> {
 	public Cinema mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Cinema cinema = null;
 		try {
-			cinema = new Cinema(rs.getString("name"), rs.getString("email"), rs.getString("gsm"),
+			cinema = new Cinema(rs.getInt("cinema_id"),rs.getString("name"), rs.getString("email"), rs.getString("gsm"),
 					addressMapper.mapRow(rs, rowNum));
 
 		} catch (Exception e) {

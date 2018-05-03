@@ -13,8 +13,6 @@ function getActiveMoviesByHallType(sufix){
 }
 
 function homeMovieBoxRequest(link) {
-
-	console.log(link);
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", link, true);
 	xhr.send(null);
@@ -31,7 +29,6 @@ function movieBoxGenerator(response){
 
 	var movies = JSON.parse(response);
 	var html = "";
-	console.log(response);
 	for (var index=0; index < movies.length; index++){
 		html +=`
 			<div class="filterItem movieBox filterSelected"
@@ -45,15 +42,14 @@ function movieBoxGenerator(response){
 						class="poster">
 						</a>
 				</figure>
-				<h3 class="title">
+				<h5 class="title">
 					<a href="./movie/`+ movies[index].id+ `">` + movies[index].title+ 
 					`</a>
-				</h3>
+				</h5>
 
 				<div class="attr highlight">
-					<div class="item tooltip_26" data-tooltip="Не се препоръчва за деца&amp;nbsp;под ` + movies[index].ageLimitation + `">>
-
-						<p> `+ movies[index].ageLimitation +`</p>
+					<div class="item tooltip_26">
+						<p> minimal age - `+ movies[index].ageLimitation +`</p>
 					</div>
 				</div>
 			</div>`

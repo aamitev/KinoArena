@@ -16,35 +16,35 @@ public class Screening {
 		this.setHall(hall);
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	LocalDateTime getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
 
-	void setStartTime(LocalDateTime startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 
-	Movie getMovie() {
+	public Movie getMovie() {
 		return movie;
 	}
 
-	void setMovie(Movie movie) {
+	public void setMovie(Movie movie) {
 		this.movie = movie;
 	}
 
-	Hall getHall() {
+	public Hall getHall() {
 		return hall;
 	}
 
-	void setHall(Hall hall) {
+	public void setHall(Hall hall) {
 		this.hall = hall;
 	}
 

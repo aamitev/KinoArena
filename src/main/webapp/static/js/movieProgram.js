@@ -8,8 +8,6 @@ function getProgramDates(id){
 	xhr.onreadystatechange = function() {
 		 if (this.readyState == 4 && this.status == 200) {
 			 var screenings = JSON.parse(this.responseText);
-				console.log(screenings);
-				var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 				var html =`<div class="clear"></div><h4 class="projectionDaysTitle">Програма</h4> 
 				<div class="clearH"></div>
 			<div class="wrapper">
@@ -19,10 +17,10 @@ function getProgramDates(id){
 						<div class="owl-stage-outer">
 							<div class="owl-stage"
 								style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 980px;">`
-
+					var dateStr = "";
 				for (var index=0; index < screenings.length; index++){
 					var date = screenings[index].startTime.date;
-					var dateStr = date.year+`-`+date.month+`-`+date.day;
+					dateStr = date.year+`-`+date.month+`-`+date.day;
 					
 					html += `<div class="owl-item active" style="width: 122.5px; margin-right: 0px;">
 					<a onclick ="getAllCinemaProgram(`+screenings[index].movie.id+`,'`+dateStr+ `')" class="tabItem ">
@@ -31,6 +29,12 @@ function getProgramDates(id){
 					</div>`
 
 				}
+				 html += `						</div>
+					</div>
+				</header>
+				<div class="clearH2"></div>
+
+				<div id="block" class="block"></div>`
 				document.getElementById('block_projectionDays').innerHTML = html;
 	    }
 	}
@@ -50,69 +54,60 @@ var link = "/KinoArena/screenings?movieId="+id + "&date=" + date;
 			 var screenings = JSON.parse(this.responseText);
 			 
 				console.log(screenings);
-				var html = "" 
-				
-				for (var index=0; index < screenings.length; index++){
-					
-				html += `<div class="scheduleRow">
-						<aside class="sideInfo">
-							<article class="cinemaContacts">
-								<h6 class="title">Кино Арена The MALL</h6>
-								<p>гр. София, Бул. Цариградско шосе 115, The MALL</p>
-								<p>0898 460 557</p>
-							</article>
-						</aside>
-						<div class="contentWrapper">
-							<div class="timeTable">
-								<div class="row">
-									<div class="attr secondary">
-										<div class="item">
-
-											<img title="Digital" alt="Digital"
-												src="/uploads/media/stenik_attributes/0001/02/a0839dc0242ea51919868600b9761b49ee8946df.png">
-										</div>
-										<div class="item">
-
-											<img title="Dolby N" alt="Dolby N"
-												src="/uploads/media/stenik_attributes/0001/02/a43d6fd169b0e86650088265e7c0aa7503cf1be6.png">
-										</div>
-									</div>
-									<div class="timelineSet">
-										<div
-											class="scrollWrapper owl-carousel owl-theme owl-loaded first-slide hide-nav">
-
-											<div class="owl-stage-outer">
-												<div class="owl-stage"
-													style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 68px;">
-													<div class="owl-item active"
-														style="width: auto; margin-right: 0px;">
-														<a href="/bg/booking/155269_7"
-															class="item booking tooltip_5"
-															data-tooltip="9 лв. / 11 лв." data-tooltip-class="wide">
-															<span class="time">20:50</span>
-														</a>
-													</div>
-												</div>
-											</div>
-											<div class="owl-controls">
-												<div class="owl-nav">
-													<div class="owl-prev" style=""></div>
-													<div class="owl-next" style=""></div>
-												</div>
-												<div class="owl-dots" style="display: none;"></div>
-											</div>
-										</div>
-									</div>
-								</div>
+				var html = "" ;
+				var firsttime = true;
+				for (var cinema in screenings){
+					firsttime = true;
+				for (var hall in screenings[cinema]){
+					var objCinema = screenings[cinema][hall][0].hall.cinema;
+					if(firsttime){
+						html += `<div class="scheduleRow">
+							<aside class="sideInfo">
+								<article class="cinemaContacts">
+									<h6 class="title">`+objCinema.name+`</h6>
+									<p>`+objCinema.address.city+","+objCinema.address.address+`</p>
+									<p>`+objCinema.gsm+`</p>
+								</article>
+							</aside>
+							
+									<div class="contentWrapper">
+					<div class="timeTable">`
+					firsttime = false;
+					}
+							html += `<div class="row">
+						<div class="attr secondary">
+							<div class="item"><h3>`+screenings[cinema][hall][0].hall.halltype+`				
 							</div>
-							<!-- end of .timeTable -->
+						</div>
+						
+						<div class="timelineSet">
+							<div class="scrollWrapper owl-carousel owl-theme owl-loaded first-slide hide-nav">
+							<div class="owl-stage-outer">
+								<div class="owl-stage"
+									style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 340px;">`
+						
+
+						for (var screeningIndex in screenings[cinema][hall]){
+							var screeningObj= screenings[cinema][hall][screeningIndex];
+							html += ` <div class="owl-item active"
+											style="width: auto; margin-right: 0px;">
+											<a href="#" class="item booking tooltip_1"
+												data-tooltip="11 лв. / 13 лв." data-tooltip-class="wide"> <span
+												class="time">`+screeningObj.startTime.time.hour+":"+screeningObj.startTime.time.minute+`</span>
+											</a>
+										</div>`						
+						}
+						html += `</div>
+							</div>
+
 						</div>
 					</div>
-					<!-- end of .scheduleRow -->
-					`
-					}
+					</div>`
+				}
+				html += `</div>
+					</div>`
+				}
+				
 				document.getElementById("block").innerHTML = html;
-
-		 }
-		 }
+}}
 }

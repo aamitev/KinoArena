@@ -15,12 +15,14 @@ import com.kinoarena.model.vo.Movie;
 public class MovieDao implements IMovieDao {
 
 	private static final String GET_MOVIES = "SELECT * FROM movies;";
-	private static final String GET_ACTIVE_MOVIES = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(s.startTime > ? );";
+	private static final String GET_ACTIVE_MOVIES = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(s.startTime > DATE(?)) GROUP BY (m.movie_id);";
 	private static final String GET_ACTIVE_MOVIES_BY_GENRE = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(g.genre = ? ) "
-			+ "AND (s.startTime > ?);";
+			+ "AND (s.startTime > DATE(?)) GROUP BY (m.movie_id);";
+	private static final String GET_ACTIVE_MOVIES_BY_TITLE = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(m.title LIKE(?) ) "
+			+ "AND (s.startTime > DATE(?)) GROUP BY (m.movie_id);";
 	private static final String GET_ACTIVE_MOVIES_BY_HALL = "SELECT m.*,g.* FROM movies m "
 			+ "JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN " + " genres g ON(m.genres_id=g.genre_id) "
-			+ " JOIN halls h ON(s.halls_id=h.hall_id) WHERE(h.hallType = ?) AND (s.startTime > ?);";
+			+ " JOIN halls h ON(s.halls_id=h.hall_id) WHERE(h.hallType = ?) AND (s.startTime > DATE(?)) GROUP BY (m.movie_id);";
 	private static final String GET_ACTIVE_MOVIES_BY_ID = "SELECT m.*,g.* FROM movies m LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE (m.movie_id = ? );";
 
 	@Autowired
@@ -58,6 +60,12 @@ public class MovieDao implements IMovieDao {
 				movieRowMapper);
 		return movie;
 	}
+	
+	public List<Movie> getActiveMoviesByTitle(String title) {
+		List<Movie> movies = jdbcTemplate.query(GET_ACTIVE_MOVIES_BY_TITLE,
+				new Object[] { title +"%", Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
+		return movies;
+	}
 
 	public List<Movie> getActiveMoviesByHallType(String hall) {
 		List<Movie> movies = jdbcTemplate.query(GET_ACTIVE_MOVIES_BY_HALL,
@@ -66,7 +74,6 @@ public class MovieDao implements IMovieDao {
 	}
 
 	public List<Movie> getActiveMoviesByGenre(String genre) {
-		System.out.println(Timestamp.valueOf(LocalDateTime.now()));
 		List<Movie> movies = jdbcTemplate.query(GET_ACTIVE_MOVIES_BY_GENRE,
 				new Object[] { genre, Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
 		return movies;

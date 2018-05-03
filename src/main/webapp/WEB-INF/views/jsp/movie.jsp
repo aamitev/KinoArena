@@ -111,8 +111,7 @@
 			</article>
 		</section>
 		<!-- end of .movieDesc -->
-		<div id ="block_projectionDays" class="block projectionDays">
-		</div>
+		<div id="block_projectionDays" class="block projectionDays"></div>
 
 		<script onload="getProgramDates(${movie.id})"
 			src="/KinoArena/js/movieProgram.js"></script>
