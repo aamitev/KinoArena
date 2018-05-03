@@ -134,4 +134,11 @@ public class Movie {
 		this.movieType = movieType;
 	}
 
+	@Override
+	public String toString() {
+		return "Movie [id=" + id + ", title=" + title + ", coverURL=" + coverURL + ", description=" + description
+				+ ", director=" + director + ", duration=" + duration + ", primiere=" + primiere + ", ageLimitation="
+				+ ageLimitation + ", movieType=" + movieType + ", genre=" + genre + "]";
+	}
+
 }

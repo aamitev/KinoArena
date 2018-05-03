@@ -8494,7 +8494,7 @@ body:not (.mobile ) .mapWrapper .map .gmnoprint .gm-style-mtc:last-child
 }
 
 .movieDesc.sliderStick {
-	margin-top: -110px;
+	margin-top: 110px;
 }
 
 .movieDesc .descHeader {

@@ -7,7 +7,7 @@
 <html>
 <head>
 
-<link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
+<link rel="stylesheet" type="text/css" href="/KinoArena/css/kinoarena.css">
 </head>
 <body>
 	<div id="global_wrapper" class="globalWrapper">
@@ -159,9 +159,9 @@
 											<div class="hoverImgToggle">
 
 												<img title="header-imax.png" alt="imax" class="defaultImg"
-													src="./images/frontend/imax.png"> <img
+													src="/KinoArena/images/imax.png"> <img
 													title="header-imax-hover.png" alt="imax" class="hoverImg"
-													src="./images/frontend/imax-hover.png">
+													src="/KinoArena/images/imax-hover.png">
 											</div>
 										</div>
 									</a>
@@ -174,24 +174,24 @@
 											<div class="hoverImgToggle">
 
 												<img title="header-luxe.png" alt="Luxe" class="defaultImg"
-													src="./images/frontend/luxe.png"> <img
+													src="/KinoArena/images/luxe.png"> <img
 													title="header-luxe-hover.png" alt="Luxe" class="hoverImg"
-													src="./images/frontend/luxe-hover.png">
+													src="/KinoArena/images/luxe-hover.png">
 											</div>
 										</div>
 									</a>
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<a onclick="getActiveMoviesByHallType('vip')">
+									<a onclick="getActiveMoviesByHallType('vip')">	
 										<div class="tabItem filter hasIMGIcons"
 											data-filter-anchor="tab-6">
 											<div class="hoverImgToggle">
 
 												<img title="header-vip.png" alt="VIP" class="defaultImg"
-													src="./images/frontend/vip.png"> <img
+													src="/KinoArena/images/vip.png"> <img
 													title="header-vip-hover.png" alt="VIP" class="hoverImg"
-													src="./images/frontend/vip-hover.png">
+													src="/KinoArena/images/vip-hover.png">
 											</div>
 										</div>
 									</a>
@@ -204,10 +204,10 @@
 											<div class="hoverImgToggle">
 
 												<img title="header-premium.png" alt="Premium"
-													class="defaultImg" src="./images/frontend/premium.png">
+													class="defaultImg" src="/KinoArena/images/premium.png">
 
 												<img title="header-premium-hover.png" alt="Premium"
-													class="hoverImg" src="./images/frontend/premium-hover.png">
+													class="hoverImg" src="/KinoArena/images/premium-hover.png">
 											</div>
 										</div>
 									</a>
@@ -231,7 +231,7 @@
 		</div>
 		</main>
 	</div>
-	<script src="./js/filterContent.js"></script>
+	<script onload="getActiveMovies()" src="./js/filterContent.js"></script>
 
 	<!-- end of #main -->
 </body>
