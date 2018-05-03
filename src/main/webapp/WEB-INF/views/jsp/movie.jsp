@@ -111,22 +111,10 @@
 			</article>
 		</section>
 		<!-- end of .movieDesc -->
-		<div class="clear"></div>
-		<header class="stenikTabsHeader" data-rows="2">
-			<div
-				class="sliderWrapper owl-carousel owl-theme owl-loaded owl-text-select-on first-slide hide-nav">
+		<div id ="block_projectionDays" class="block projectionDays">
+		</div>
 
-
-
-				<div class="owl-stage-outer">
-					<div id="owl-stage" class="owl-stage"
-						style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 980.001px;">
-					</div>
-				</div>
-			</div>
-		</header>
-	</div>
-	<script onload="getProgramDates(${movie.id})" src="/KinoArena/js/movieProgram.js"></script>
-
+		<script onload="getProgramDates(${movie.id})"
+			src="/KinoArena/js/movieProgram.js"></script>
 </body>
 </html>

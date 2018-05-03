@@ -15,13 +15,13 @@ import com.kinoarena.model.vo.Movie;
 public class MovieDao implements IMovieDao {
 
 	private static final String GET_MOVIES = "SELECT * FROM movies;";
-	private static final String GET_ACTIVE_MOVIES = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.id) LEFT OUTER jOIN genres g ON(m.genres_id=g.id) WHERE(s.startTime > ? );";
-	private static final String GET_ACTIVE_MOVIES_BY_GENRE = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.id) LEFT OUTER jOIN genres g ON(m.genres_id=g.id) WHERE(g.genre = ? ) "
+	private static final String GET_ACTIVE_MOVIES = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(s.startTime > ? );";
+	private static final String GET_ACTIVE_MOVIES_BY_GENRE = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(g.genre = ? ) "
 			+ "AND (s.startTime > ?);";
 	private static final String GET_ACTIVE_MOVIES_BY_HALL = "SELECT m.*,g.* FROM movies m "
-			+ "JOIN screening s ON(s.movie_id=m.id) LEFT OUTER jOIN " + " genres g ON(m.genres_id=g.id) "
-			+ " JOIN halls h ON(s.halls_id=h.id) WHERE(h.hallType = ?) AND (s.startTime > ?);";
-	private static final String GET_ACTIVE_MOVIES_BY_ID = "SELECT m.*,g.* FROM movies m LEFT OUTER jOIN genres g ON(m.genres_id=g.id) WHERE (m.id = ? );";
+			+ "JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN " + " genres g ON(m.genres_id=g.genre_id) "
+			+ " JOIN halls h ON(s.halls_id=h.hall_id) WHERE(h.hallType = ?) AND (s.startTime > ?);";
+	private static final String GET_ACTIVE_MOVIES_BY_ID = "SELECT m.*,g.* FROM movies m LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE (m.movie_id = ? );";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

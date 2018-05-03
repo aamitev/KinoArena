@@ -1,8 +1,9 @@
 package com.kinoarena.controller;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +44,7 @@ public class ScreeningsController {
 		List<Screening> screenings = screeningDao.getScreeningsByMovieIdAndDate(movieId, date);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(screenings);
+		System.out.println(json);
 		response.setContentType("application/json");
 		response.getWriter().println(json);
 	}
