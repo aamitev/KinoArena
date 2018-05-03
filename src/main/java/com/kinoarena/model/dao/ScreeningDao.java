@@ -1,6 +1,7 @@
 package com.kinoarena.model.dao;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,13 +16,18 @@ import com.kinoarena.model.vo.Screening;
 
 @Component
 public class ScreeningDao implements IScreeningDao {
-	private static final String GET_SCREENINGS_OF_MOVIE_BY_DATE = "SELECT * FROM screening s "
-			+ "JOIN movies m ON(s.movie_id=m.id) " + "JOIN genres g ON(m.genres_id = g.id) "
-			+ "JOIN halls h ON(s.halls_id =h.id) " + "JOIN cinema c ON(h.cinema_id=c.id) "
-			+ "JOIN address a ON(c.address_id=a.id) " + "WHERE(m.id = s.movie_id AND (s.startTime >= ?);";
+	private static final String GET_SCREENINGS_OF_MOVIE_BY_DATE = "SELECT * FROM screening s "+
+			"JOIN movies m ON(s.movie_id=m.movie_id) "+
+			"LEFT OUTER JOIN genres g ON(m.genres_id = g.genre_id) "+
+			"JOIN halls h ON(s.halls_id =h.hall_id) "+
+			"JOIN cinema c ON(h.cinema_id=c.cinema_id) "+
+			"JOIN address a ON(c.address_id=a.address_id)"+
+			"WHERE(m.movie_id = ?) AND (DATE(s.startTime) = DATE(?));";
 
 	private static final String GET_SCREENINGS_DTO_BY_MOVIE_ID = "SELECT * FROM screening s "
-			+ "JOIN movies m ON(s.movie_id=m.id) " + "LEFT OUTER JOIN genres g ON(m.genres_id = g.id) WHERE(m.id = ? AND s.startTime >= ? )";
+			+ "JOIN movies m ON(s.movie_id=m.movie_id) "
+			+ "LEFT OUTER JOIN genres g ON(m.genres_id = g.genre_id) WHERE(m.movie_id = ? AND DATE(s.startTime) >= DATE(?))"
+			+ "GROUP BY (DATE(s.startTime));";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -32,13 +38,17 @@ public class ScreeningDao implements IScreeningDao {
 
 	public List<ScreeningDTO> getScreeningsDTO(int id) {
 		List<ScreeningDTO> screenings = jdbcTemplate.query(GET_SCREENINGS_DTO_BY_MOVIE_ID,
-				new Object[] { id, Timestamp.valueOf(LocalDateTime.now()) }, screeningDtoRowMapper);
+				new Object[] { id, LocalDateTime.now() }, screeningDtoRowMapper);
 		return screenings;
 	}
 
 	public List<Screening> getScreeningsByMovieIdAndDate(int id, String date) {
-		List<Screening> screenings = jdbcTemplate.query(GET_SCREENINGS_OF_MOVIE_BY_DATE,
-				new Object[] { id, Timestamp.valueOf(date) }, screeningMapper);
+		System.out.println(date);
+		System.out.println(id);
+
+		List<Screening> screenings = jdbcTemplate.query(GET_SCREENINGS_OF_MOVIE_BY_DATE, new Object[] { id, date },
+				screeningMapper);
+		System.out.println(screenings);
 		return screenings;
 	}
 

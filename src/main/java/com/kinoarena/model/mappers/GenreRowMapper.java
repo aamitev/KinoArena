@@ -13,7 +13,7 @@ public class GenreRowMapper implements RowMapper<Genre> {
 	public Genre mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Genre genre = null;
 		try {
-			genre = new Genre(rs.getInt("id"), rs.getString("genre"));
+			genre = new Genre(rs.getInt("genre_id"), rs.getString("genre"));
 
 		} catch (Exception e) {
 			throw new SQLException(e);

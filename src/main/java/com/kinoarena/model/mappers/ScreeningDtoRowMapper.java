@@ -18,7 +18,7 @@ public class ScreeningDtoRowMapper implements RowMapper<ScreeningDTO> {
 	public ScreeningDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ScreeningDTO screening = null;
 		try {
-			screening = new ScreeningDTO(rs.getInt("id"), rs.getTimestamp("startTime").toLocalDateTime(),
+			screening = new ScreeningDTO(rs.getInt("screening_id"), rs.getTimestamp("startTime").toLocalDateTime(),
 					movieRowMapper.mapRow(rs, rowNum), rs.getInt("halls_id"));
 
 		} catch (Exception e) {

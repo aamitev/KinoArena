@@ -23,7 +23,7 @@ public class ScreeningRowMapper implements RowMapper<Screening> {
 	public Screening mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Screening screening = null;
 		try {
-			screening = new Screening(rs.getInt("id"), rs.getTimestamp("startTime").toLocalDateTime(),
+			screening = new Screening(rs.getInt("screening_id"), rs.getTimestamp("startTime").toLocalDateTime(),
 					movieRowMapper.mapRow(rs, rowNum), hallMapper.mapRow(rs, rowNum));
 
 		} catch (Exception e) {
