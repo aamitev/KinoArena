@@ -3216,7 +3216,7 @@ textarea {
 	transition: color 0.2s, -webkit-transform 0.2s, transform 0.2s;
 }
 
-.stenik-checkbox label:before, .stenik-radio label:before,
+.stenik-checkbox label::before, .stenik-radio label::before,
 	.stenik-checkbox label .before, .stenik-radio label .before {
 	content: "";
 	position: absolute;
@@ -3240,7 +3240,7 @@ textarea {
 		transform 0.2s;
 }
 
-.stenik-checkbox label:after, .stenik-radio label:after,
+.stenik-checkbox label::after, .stenik-radio label::after,
 	.stenik-checkbox label .after, .stenik-radio label .after {
 	content: "";
 	position: absolute;
@@ -3248,7 +3248,7 @@ textarea {
 	top: 0px;
 	width: 20px;
 	height: 15px;
-	background: url("/images/frontend/main-sprite.png") no-repeat -321px
+	background: url("/KinoArena/images/main-sprite.png") no-repeat -321px
 		-44px;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	-moz-opacity: 0;
@@ -3271,12 +3271,12 @@ textarea {
 	color: #fff;
 }
 
-.stenik-checkbox.selected label:before, .selected.stenik-radio label:before
+.stenik-checkbox.selected label::before, .selected.stenik-radio label::before
 	{
 	background: #0f7917;
 }
 
-.stenik-checkbox.selected label:after, .selected.stenik-radio label:after
+.stenik-checkbox.selected label::after, .selected.stenik-radio label::after
 	{
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	-moz-opacity: 1;

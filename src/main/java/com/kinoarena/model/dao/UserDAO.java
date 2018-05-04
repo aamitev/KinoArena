@@ -6,31 +6,52 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.kinoarena.exceptions.WebProfileException;
 import com.kinoarena.model.mappers.UserRowMapper;
+import com.kinoarena.model.vo.Address;
 import com.kinoarena.model.vo.User;
 
 @Component
-public class UserDAO implements IUserDAO{
-	
-	public static final String sqlStatement = "SELECT * FROM users WHERE username=? and password = sha1(?)";
-	
+public class UserDAO implements IUserDAO {
+
+	private static final String INVALID_OLD_PASSWORD = "Invalid old password.";
+	private static final String WRONG_PASSWORD = "Wrong password.";
+	public static final String SQL_LOGIN_STATEMENT = "SELECT * FROM users u JOIN address a ON(u.address_id = a.address_id) WHERE u.email = ? AND u.password = sha1(?);";
+	public static final String SQL_CHANGE_PASSWORD_STATEMENT = "UPDATE users SET password = sha1(?) WHERE email = ?;";
+	public static final String SQL_ADD_USER = "INSERT INTO users VALUES(null, ?, sha1(?), ?, ?, ?, ?, ?, ?, ?, ?, ?);"; 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Autowired
 	private UserRowMapper userMapper;
-	//TODO: to be developed...
+
+	// TODO: to be developed...
+
 	@Override
-	public User login(String email, String password) {
-		User user = (User) jdbcTemplate.queryForObject("SELECT email, password FROM users where email = ? AND password = sha1(?);",
-	            new Object[] { email, password }, userMapper);
-	 
-	        return user;
+	public User login(String email, String password) throws WebProfileException {
+		try {
+			User user = jdbcTemplate.queryForObject(SQL_LOGIN_STATEMENT, new Object[] { email, password }, userMapper);
+			System.out.println(user.getPassword());
+			return user;
+		} catch (Exception e) {
+			throw new WebProfileException(WRONG_PASSWORD, e);
+		}
+
 	}
 
 	@Override
-	public void register(String fisrtName, String secondName, String lastName, String email, String password,
-			String repass, boolean isMale, LocalDate dateOfBirth) {
-		
+	public void register(String firstName, String secondName, String lastName, String email, String password,
+			boolean isMale, LocalDate dateOfBirth, Address userAddress) {
+//		jdbcTemplate.update(SQL_ADD_USER, email, password, firstName, secondName, lastName, isMale, dateOfBirth.toString(), );
 	}
+
+	@Override
+	public void changePassword(User user, String reNewPass) {
+		jdbcTemplate.update("UPDATE users SET password = sha1(?) WHERE email = ?;",
+							reNewPass,
+							user.getEmail());
+		System.out.println(user.getEmail());
+		System.out.println("User password updated!");
+	}
+
 }

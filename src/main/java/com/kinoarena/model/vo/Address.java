@@ -18,14 +18,14 @@ public class Address {
 		setCity(city);
 	}
 
-	private void setCity(String city) throws ModelException {
+	public void setCity(String city) throws ModelException {
 		if (city != null) {
 			this.city = city;
 		} else
 			throw new ModelException("Invalid city");
 	}
 
-	private void setPostcode(String postcode) throws ModelException {
+	public void setPostcode(String postcode) throws ModelException {
 		if (Utils.checkString(postcode)) {
 			if (postcode.length() == MAX_POSTCODE_LENGTH) {
 				this.postcode = postcode;
@@ -35,7 +35,7 @@ public class Address {
 			throw new ModelException(INVALID_POSTCODE);
 	}
 
-	private void setAddress(String address) throws ModelException {
+	public void setAddress(String address) throws ModelException {
 		if (Utils.checkString(address)) {
 			this.address = address;
 		} else
@@ -58,5 +58,6 @@ public class Address {
 	public String toString() {
 		return "Address [address=" + address + ", postcode=" + postcode + ", city=" + city + "]";
 	}
+	
 
 }

@@ -3,7 +3,6 @@ package com.kinoarena.model.mappers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +16,7 @@ public class AddressRowMapper implements RowMapper<Address> {
 		Address address = null;
 		try {
 			address = new Address(rs.getString("address"), rs.getString("postCode"), rs.getString("city"));
-
+			
 		} catch (Exception e) {
 			throw new SQLException(e);
 		}

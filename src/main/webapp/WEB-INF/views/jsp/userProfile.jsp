@@ -65,7 +65,7 @@
 										class="clock"></i></span> <span class="txt">История на
 										резервациите и закупените билети</span>
 							</a></li>
-							<li><a href="./"> <span class="icon"><i
+							<li><a href="./logout"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>
 						</ul>
@@ -98,7 +98,8 @@
 									class="required">Мъж</label><input type="radio"
 									id="stenik_user_personal_information_gender_0"
 									name="stenik_user_personal_information[gender]"
-									required="required" value="m" checked="checked" />
+									required="required" value="m" 
+									checked="checked" />
 							</div>
 							<div class="formItem radio">
 								<label for="stenik_user_personal_information_gender_1"
@@ -114,30 +115,30 @@
 							<input type="text"
 								id="stenik_user_personal_information_firstname"
 								name="stenik_user_personal_information[firstname]"
-								required="required" placeholder="Име *" value="Янислав" />
+								required="required" placeholder="Име *" value=<c:out value="${sessionScope.loggedUser.getFirstName() }"/> />
 						</div>
 						<div class="formItem col2 left">
 							<input type="text"
 								id="stenik_user_personal_information_middleName"
 								name="stenik_user_personal_information[middleName]"
-								required="required" placeholder="Бащино име *" value="Живков" />
+								required="required" placeholder="Бащино име *" value=<c:out value="${sessionScope.loggedUser.getSecondName() }"/> />
 						</div>
 						<div class="formItem col2 right">
 							<input type="text" id="stenik_user_personal_information_lastname"
 								name="stenik_user_personal_information[lastname]"
-								required="required" placeholder="Фамилия *" value="Митев" />
+								required="required" placeholder="Фамилия *" value=<c:out value="${sessionScope.loggedUser.getLastName() }"/> />
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 left">
 							<input type="email" id="stenik_user_personal_information_email"
 								name="stenik_user_personal_information[email]"
 								readonly="readonly" disabled="disabled" required="required"
-								placeholder="form.email" value="akrobata9608@gmail.com" />
+								placeholder="form.email" value=<c:out value="${sessionScope.loggedUser.getEmail() }"/> />
 						</div>
 						<div class="formItem col2 right">
 							<input type="text" id="stenik_user_personal_information_phone"
 								name="stenik_user_personal_information[phone]"
-								required="required" placeholder="Телефон" />
+								required="required" placeholder=<c:out value="${sessionScope.loggedUser.getGsm() }"/> />
 						</div>
 						<div class="clear"></div>
 						<div class="formItem select col2 left">
@@ -145,7 +146,7 @@
 									name="stenik_user_personal_information[city]" 
 									placeholder="Град"><option
 									value=""></option>
-								<option value="София" selected="selected">София</option>
+								<option value="" selected="selected"><c:out value="${sessionScope.loggedUser.getAddress().getCity() }"/></option>
 								<option value="Айтос">Айтос</option>
 								<option value="Аксаково">Аксаково</option>
 								<option value="Алфатар">Алфатар</option>
@@ -406,13 +407,16 @@
 							<input type="text"
 								id="stenik_user_personal_information_post_code"
 								name="stenik_user_personal_information[post_code]"
-								placeholder="Пощенски код" />
+								placeholder="Пощенски код" 
+								value= <c:out value="${sessionScope.loggedUser.getAddress().getPostcode() }"/>
+								/>
 						</div>
 						<div class="clear"></div>
 						<div class="formItem">
 							<input type="text" id="stenik_user_personal_information_address"
 								name="stenik_user_personal_information[address]"
-								placeholder="Адрес" />
+								placeholder="Адрес" 
+								value= <c:out value="${sessionScope.loggedUser.getAddress().getAddress() }"/>/>
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 datepicker left">
@@ -420,20 +424,25 @@
 								id="stenik_user_personal_information_dateOfBirth"
 								name="stenik_user_personal_information[dateOfBirth]"
 								required="required" placeholder="Дата на раждане *"
-								value="1996-08-17T00:00:00+03:00" />
+								value="1996-08-17" />
 						</div>
 						<div class="formItem col2 right">
 							<input type="text"
 								id="stenik_user_personal_information_education"
 								name="stenik_user_personal_information[education]"
-								placeholder="Образование" />
+								placeholder="Образование" 
+								value= <c:out value="${sessionScope.loggedUser.getEducation()}" 
+										/>
+							/>
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 left">
 							<input type="text"
 								id="stenik_user_personal_information_workingPosition"
 								name="stenik_user_personal_information[workingPosition]"
-								placeholder="Работна позиция" />
+								placeholder="Работна позиция" 
+								value = <c:out value="${sessionScope.loggedUser.getJob() }"/>
+								/>
 						</div>
 						<div class="formItem col2 right">
 							<input type="text"

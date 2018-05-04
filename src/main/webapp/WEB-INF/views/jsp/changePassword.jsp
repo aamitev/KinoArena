@@ -45,25 +45,24 @@
 										class="profile"></i></span> <span class="txt">Персонална
 										информация</span>
 							</a></li>
-							<li class="selected">
-									<span class="icon"><i class="password"></i></span> <span
-									class="txt">Промяна на парола</span>
-							</li>
+							<li class="selected"><span class="icon"><i
+									class="password"></i></span> <span class="txt">Промяна на
+									парола</span></li>
 							<li><a href="./interests"> <span class="icon"><i
 										class="popcornPack"></i></span> <span class="txt">Интереси</span>
 							</a></li>
 							<li><a href="./favorites"> <span class="icon"><i
 										class="heart"></i></span> <span class="txt">Моите филми</span>
 							</a></li>
-							<li><a href="./newsletter"> <span
-									class="icon"><i class="email"></i></span> <span class="txt">Абонирай
-										се за нашия е-бюлетин</span>
+							<li><a href="./newsletter"> <span class="icon"><i
+										class="email"></i></span> <span class="txt">Абонирай се за
+										нашия е-бюлетин</span>
 							</a></li>
 							<li><a href="./orders"> <span class="icon"><i
 										class="clock"></i></span> <span class="txt">История на
 										резервациите и закупените билети</span>
 							</a></li>
-							<li><a href="./"> <span class="icon"><i
+							<li><a href="/KinoArena/logout"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>
 						</ul>
@@ -72,8 +71,8 @@
 				<div class="contentWrapper">
 
 					<h5 class="title">Промяна на парола</h5>
-					<img src="./images/frontend/profile-pass.png"
-						alt="bg image" class="bgImage">
+					<img src="/KinoArena/images/profile-pass.png" alt="bg image"
+						class="bgImage">
 					<p class="requiredInfo">
 						<span class="red">*</span> Всички полета са задължителни за
 						попълване!
@@ -86,34 +85,26 @@
 					</p>
 					<hr class="red">
 					<form name="stenik_user_password_change" method="post"
-						action="/bg/profile/password-change" novalidate="novalidate"
-						class="stdForm">
+						action="./changePassword" novalidate="novalidate" class="stdForm">
 						<div class="formItem col2 left">
-							<input type="password"
-								id="stenik_user_password_change_oldPassword"
-								name="stenik_user_password_change[oldPassword]"
-								required="required" placeholder="Стара парола" />
+							<input type="password" id="oldPassword" name="oldPassword"
+								required="required" placeholder="Стара парола *" />
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 left">
-							<input type="password"
-								id="stenik_user_password_change_plainPassword_first"
-								name="stenik_user_password_change[plainPassword][first]"
+							<input type="password" id="newPass" name="newPass"
 								required="required" placeholder="Парола *" />
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 left">
-							<input type="password"
-								id="stenik_user_password_change_plainPassword_second"
-								name="stenik_user_password_change[plainPassword][second]"
+							<input type="password" id="reenterNewPass" name="reenterNewPass"
 								required="required" placeholder="Повторете паролата *" />
 						</div>
 						<div class="clearH"></div>
 						<div>
-							<button class="button big red fixedWidth">Запиши</button>
+							<button class="button big red fixedWidth" href="./changePassword">Запиши</button>
 						</div>
-						<input type="hidden" id="stenik_user_password_change__token"
-							name="stenik_user_password_change[_token]"
+						<input type="hidden" id="saveChanges" name="saveChanges"
 							value="n93ihEbUEmjshJu2i2A-PIuW9Tv5Ft4gd2T_yRq7VZk" />
 					</form>
 				</div>

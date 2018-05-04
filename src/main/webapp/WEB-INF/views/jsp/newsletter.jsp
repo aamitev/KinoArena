@@ -73,7 +73,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="./">
+                            <a href="./logout">
                                 <span class="icon"><i class="exit"></i></span>
                                 <span class="txt">Изход</span>
                             </a>
