@@ -25,6 +25,7 @@ public class MovieDao implements IMovieDao {
 			+ " JOIN halls h ON(s.halls_id=h.hall_id) WHERE(h.hallType = ?) AND (s.startTime > DATE(?)) GROUP BY (m.movie_id);";
 	private static final String GET_ACTIVE_MOVIES_BY_ID = "SELECT m.*,g.* FROM movies m LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE (m.movie_id = ? );";
 
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
@@ -56,14 +57,13 @@ public class MovieDao implements IMovieDao {
 
 	@Override
 	public Movie getMovieById(int id) throws Exception {
-		Movie movie = jdbcTemplate.queryForObject(GET_ACTIVE_MOVIES_BY_ID, new Object[] { id },
-				movieRowMapper);
+		Movie movie = jdbcTemplate.queryForObject(GET_ACTIVE_MOVIES_BY_ID, new Object[] { id }, movieRowMapper);
 		return movie;
 	}
-	
+
 	public List<Movie> getActiveMoviesByTitle(String title) {
 		List<Movie> movies = jdbcTemplate.query(GET_ACTIVE_MOVIES_BY_TITLE,
-				new Object[] { title +"%", Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
+				new Object[] { title + "%", Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
 		return movies;
 	}
 
@@ -84,5 +84,4 @@ public class MovieDao implements IMovieDao {
 				new Object[] { Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
 		return movies;
 	}
-
 }

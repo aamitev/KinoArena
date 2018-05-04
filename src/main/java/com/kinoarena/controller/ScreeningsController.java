@@ -29,35 +29,41 @@ import com.kinoarena.model.vo.Screening;
 
 @Controller
 public class ScreeningsController {
+
+	private Gson gson = new GsonBuilder().create();
+
 	@Autowired
 	private ScreeningDao screeningDao;
-	@Autowired
-	private AddressDao addressDao;
 
+	// Used in movie details page, program dates.
 	@RequestMapping(method = RequestMethod.GET, value = "/screenings", params = "movieId")
-	public void getScreeningsDtoByMovieId(@RequestParam("movieId") int movieId, HttpServletResponse response)
-			throws Exception {
-		List<ScreeningDTO> screenings = screeningDao.getScreeningsDTO(movieId);
-		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(screenings);
-		response.setContentType("application/json");
-		response.getWriter().println(json);
+	public void getScreeningsDtoByMovieId(@RequestParam("movieId") int movieId, HttpServletResponse response) {
+		try {
+			List<ScreeningDTO> screenings = screeningDao.getScreeningsDTO(movieId);
+			String json = gson.toJson(screenings);
+			response.setContentType("application/json");
+			response.getWriter().println(json);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/screenings", params = { "movieId", "date" })
 	public void getScreeningsByMovieIdAndDate(@RequestParam("movieId") int movieId, @RequestParam("date") String date,
-			HttpServletResponse response) throws Exception {
-		Map<String, Map<String, List<Screening>>> screenings = screeningDao.getScreeningsByMovieIdAndDate(movieId, date);
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json = gson.toJson(screenings);
-		System.out.println(json);
-		response.setContentType("application/json");
-		response.getWriter().println(json);
+			HttpServletResponse response) {
+		try {
+			Map<String, Map<String, List<Screening>>> screenings = screeningDao.getScreeningsByMovieIdAndDate(movieId,
+					date);
+			String json = gson.toJson(screenings);
+			response.setContentType("application/json");
+			response.getWriter().println(json);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/program")
-	public String getScreeningProgram(Model model) throws Exception {
+	public String getScreeningProgram(Model model) {
 		try {
 			return "program";
 		} catch (Exception e) {

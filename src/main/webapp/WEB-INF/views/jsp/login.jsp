@@ -66,67 +66,6 @@
 							</div>
 						</div>
 
-						<script>
-							jQuery(function($) {
-								var $loginFormRequest;
-								$(document)
-										.on(
-												'submit',
-												'#login_form',
-												function(e) {
-													e.preventDefault();
-													if ($loginFormRequest
-															&& $loginFormRequest.readyState != 4) {
-														$loginFormRequest
-																.abort();
-													}
-													$loginFormRequest = $
-															.ajax(
-																	{
-																		url : "/login_check",
-																		type : 'POST',
-																		data : $(
-																				"#login_form")
-																				.serialize(),
-																		dataType : 'json'
-																	})
-															.done(
-																	function(
-																			data) {
-																		if (data.success == true) {
-																			window.location.href = data.nextUrl;
-																		} else {
-																			$(
-																					'#login_message')
-																					.addClass(
-																							'message error')
-																					.html(
-																							data.message);
-																			if (_stenikMain
-																					.isMobile()
-																					&& $(
-																							window)
-																							.width() <= _stenikMain.breakpoints.phone) {
-																				$(
-																						'#colorbox')
-																						.animate(
-																								{
-																									scrollTop : $(
-																											'#login_message')
-																											.position().top
-																								},
-																								300);
-																			}
-																		}
-
-																		$.fn.colorbox
-																				.resize({
-																					maxHeight : '100%'
-																				});
-																	});
-												});
-							});
-						</script>
 					</div>
 					<div id="cboxTitle" style="float: left; display: block;"></div>
 					<div id="cboxCurrent" style="float: left; display: none;"></div>

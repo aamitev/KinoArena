@@ -6328,9 +6328,6 @@ a:hover .timelineSet .item img, .timelineSet a:hover .item img, a:hover .schedul
 	transform: scale(0.8);
 }
 
-.movieBox.small .attr.highlight, .small .movieBox .attr.highlight {
-	max-width: 67px;
-}
 
 .movieBox.small .attr.highlight img, .small .movieBox .attr.highlight img
 	{

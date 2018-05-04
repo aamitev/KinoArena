@@ -9,7 +9,6 @@ document.getElementById("search_input").addEventListener("keyup", function() {
 
 	xhr.addEventListener('load', () => {
 		var movies = JSON.parse(xhr.responseText);
-		console.log(movies);
 		var html = '';
 		for (var index=0; index < movies.length; index++) {
 			html +=`<a href="./movie/`+movies[index].id+`" class="searchItem">

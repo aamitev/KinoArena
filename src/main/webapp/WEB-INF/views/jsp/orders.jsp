@@ -50,15 +50,8 @@
 									class="icon"><i class="password"></i></span> <span class="txt">Промяна
 										на парола</span>
 							</a></li>
-							<li><a href="./interests"> <span class="icon"><i
-										class="popcornPack"></i></span> <span class="txt">Интереси</span>
-							</a></li>
 							<li><a href="./favorites"> <span class="icon"><i
 										class="heart"></i></span> <span class="txt">Моите филми</span>
-							</a></li>
-							<li><a href="./newsletter"> <span
-									class="icon"><i class="email"></i></span> <span class="txt">Абонирай
-										се за нашия е-бюлетин</span>
 							</a></li>
 							<li class="selected"> <span
 									class="icon"><i class="clock"></i></span> <span class="txt">История
