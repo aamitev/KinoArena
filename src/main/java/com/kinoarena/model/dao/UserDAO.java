@@ -31,7 +31,6 @@ public class UserDAO implements IUserDAO {
 	public User login(String email, String password) throws WebProfileException {
 		try {
 			User user = jdbcTemplate.queryForObject(SQL_LOGIN_STATEMENT, new Object[] { email, password }, userMapper);
-			System.out.println(user.getPassword());
 			return user;
 		} catch (Exception e) {
 			throw new WebProfileException(WRONG_PASSWORD, e);

@@ -24,8 +24,8 @@
 					<span class="menuIcon inactive"></span>
 				</div>
 				<ul class="hideOnResponsive">
-					<li class="txtItem"><a href="/bg/cinemas">Кина</a></li>
-					<li class="txtItem"><a href="/bg/program">Програма</a></li>
+					<li class="txtItem"><a href="./cinemas">Кина</a></li>
+					<li class="txtItem"><a href="./program">Програма</a></li>
 					
 					<c:if test = "${empty sessionScope.loggedUser}" >
 						<li class="txtItem"><a href="./login" class="loginPopupLink">Вход</a></li>
@@ -45,7 +45,7 @@
 
 			<nav class="responsiveMenu">
 				<ul>
-					<li><a href="/bg/">Начало</a></li>
+					<li><a href="./index">Начало</a></li>
 					<li><a href="/bg/brand/IMAX/filmi" title="Кино Арена IMAX®">
 							<div class="hoverImgToggle">
 

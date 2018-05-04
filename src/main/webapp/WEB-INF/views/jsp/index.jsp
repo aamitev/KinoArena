@@ -41,7 +41,7 @@
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
 									<a onclick="getActiveMovies()">
-										<div id="allMovies" class="tabItem filter" data-filter-anchor="tab-1">
+										<div class="tabItem filter" data-filter-anchor="tab-1">
 											<div class="row">Всички филми</div>
 											<div class="row">в продажба</div>
 										</div>
@@ -50,7 +50,7 @@
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
 									<a onclick="getActiveByGenre('animation')">
-										<div class="tabItem filter selected" data-filter-anchor="tab-3">
+										<div class="tabItem filter" data-filter-anchor="tab-3">
 											<div class="row">Детски</div>
 											<div class="row">филми</div>
 										</div>
