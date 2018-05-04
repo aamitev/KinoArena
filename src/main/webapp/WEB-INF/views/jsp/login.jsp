@@ -4,6 +4,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
+<jsp:include page="header.jsp"></jsp:include>
 </head>
 <body>
 	<div id="colorbox" class="" role="dialog" tabindex="-1"

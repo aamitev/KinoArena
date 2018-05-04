@@ -46,9 +46,9 @@
 										class="profile"></i></span> <span class="txt">Персонална
 										информация</span>
 							</a></li>
-							<li><a href="./changePassword"> <span
-									class="icon"><i class="password"></i></span> <span class="txt">Промяна
-										на парола</span>
+							<li><a href="./changePassword"> <span class="icon"><i
+										class="password"></i></span> <span class="txt">Промяна на
+										парола</span>
 							</a></li>
 							<li><a href="./interests"> <span class="icon"><i
 										class="popcornPack"></i></span> <span class="txt">Интереси</span>
@@ -56,14 +56,13 @@
 							<li><a href="./favorites"> <span class="icon"><i
 										class="heart"></i></span> <span class="txt">Моите филми</span>
 							</a></li>
-							<li><a href="./newsletter"> <span
-									class="icon"><i class="email"></i></span> <span class="txt">Абонирай
-										се за нашия е-бюлетин</span>
+							<li><a href="./newsletter"> <span class="icon"><i
+										class="email"></i></span> <span class="txt">Абонирай се за
+										нашия е-бюлетин</span>
 							</a></li>
-							<li class="selected"> <span
-									class="icon"><i class="clock"></i></span> <span class="txt">История
-										на резервациите и закупените билети</span>
-							</li>
+							<li class="selected"><span class="icon"><i
+									class="clock"></i></span> <span class="txt">История на
+									резервациите и закупените билети</span></li>
 							<li><a href="./logout"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>
@@ -72,8 +71,8 @@
 				</aside>
 				<div class="contentWrapper">
 					<h5 class="title">История на резервациите и закупените билети</h5>
-					<img src="./images/frontend/profile-history.png"
-						alt="bg image" class="bgImage">
+					<img src="/KinoArena/images/profile-history.png" alt="bg image"
+						class="bgImage">
 					<div class="stenikFilter bookingHistory">
 						<header class="stenikTabsHeader filterHeader" data-rows="1">
 							<div class="sliderWrapper">
@@ -104,93 +103,6 @@
 		</div>
 		</main>
 		<!-- end of #main -->
-		<footer id="footer">
-			<div class="wrapper">
-				<div class="top">
-					<nav class="footerMenu">
-						<ul>
-
-
-							<li><a href="/bg/za-nas">За нас</a></li>
-
-
-							<li><a href="/bg/reklama">Реклама</a></li>
-
-
-							<li><a href="/bg/obshti-uslovia">Общи условия</a></li>
-
-
-							<li><a href="/bg/kontakti">Контакти</a></li>
-
-
-							<li><a href="/bg/career">Кариери</a></li>
-
-
-
-							<li><a href="/bg/sitemap">Карта на сайта</a></li>
-						</ul>
-
-					</nav>
-					<div class="payments">
-						<img src="./images/frontend/payments.png" alt="Начини на плащане">
-					</div>
-				</div>
-				<div class="middle">
-					<div class="newsLetter">
-						<h5 class="title">Абонирай се за нашия е-бюлетин</h5>
-						<div class="infoTooltips">
-							<div class="item white">
-								<p>Актуална информация за филми и събития</p>
-							</div>
-							<div class="item black">
-								<p>Промоции, игри, томболи, награди</p>
-							</div>
-							<div class="hideOnDesktop responsiveInfo">
-								<p>Актуална информация за филми и събития Промоции, игри,
-									томболи, награди</p>
-							</div>
-						</div>
-						<form action="" class="stdForm">
-							<div class="formItem transp small">
-								<input id="newsletter_email" type="text" value=""
-									placeholder="Вашият e-mail...">
-							</div>
-							<button id="newsletter_button"
-								class="button small red fixedWidth">Абонамент</button>
-						</form>
-					</div>
-					<div class="likeBox">
-						<div class="fb-page"
-							data-href="https://www.facebook.com/KinoArena" data-width="580"
-							data-height="224" data-hide-cover="false"
-							data-show-facepile="true" data-show-posts="false">
-							<div class="fb-xfbml-parse-ignore">
-								<blockquote cite="https://www.facebook.com/KinoArena">
-									<a href="https://www.facebook.com/KinoArena">Kino Arena</a>
-								</blockquote>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="bottom">
-					<div class="socialLinks">
-						<a href="http://facebook.com/KinoArena" class="item"><i
-							class="facebook"></i></a> <a
-							href="https://www.pinterest.com/kinoarena" class="item"><i
-							class="pinterest"></i></a> <a href="https://twitter.com/kinoarena"
-							class="item"><i class="twitter"></i></a>
-					</div>
-					<div class="terms">© 2018 Kino Arena | Всички права запазени</div>
-					<div class="credits">
-						<img src="./images/frontend/stenik-logo.png" alt="Stenik logo">Уеб
-						дизайн от <a
-							href="http://www.stenikgroup.com/bg/services/webdesign"
-							target="_blank"
-							title="Уеб дизайн, онлайн магазини, мобилни приложения от Stenik">Stenik</a>
-					</div>
-				</div>
-			</div>
-		</footer>
 		<!-- end of #footer -->
 		<div id="scroll_to_top" class="scrollToTop">
 			<i class="circleUp"></i>
@@ -198,7 +110,7 @@
 
 		<div id="fb-root"></div>
 	</div>
-
+	<!-- 
 	<script type="text/javascript">
 		var item = "/images/frontend/bg-items/bg-assets-15years.json";
 		var haveDots = "";
@@ -644,7 +556,6 @@
 		});
 	</script>
 
-	<!-- Google Code for Remarketing Tag -->
 
 	<script type="text/javascript">
 		/* <![CDATA[ */
@@ -662,7 +573,7 @@
 		src="//www.googleadservices.com/pagead/conversion.js">
 		
 	</script>
-
+ 	-->
 	<noscript>
 
 		<div style="display: inline;">
