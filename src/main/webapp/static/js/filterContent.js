@@ -5,6 +5,8 @@ function getActiveByGenre(sufix){
 function getActiveMovies(){
 	var link = "./movies";
 	var xhr = homeMovieBoxRequest(link);
+	console.log(document.getElementsByClassName("tabItem filter selected").className);
+	document.getElementById("allMovies").className = "tabItem filter selected";
 }
 function getActiveMoviesByHallType(sufix){
 	var link = "./movies?hall="+sufix;

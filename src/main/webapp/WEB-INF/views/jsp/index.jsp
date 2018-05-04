@@ -13,7 +13,6 @@
 	<div id="global_wrapper" class="globalWrapper">
 		<jsp:include page="header.jsp"></jsp:include>
 
-		<main id="main">
 		<div class="wrapper">
 			<div id="filter_bar" class="twoSidesBar filterBar">
 				<div class="rightSide">
@@ -42,7 +41,7 @@
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
 									<a onclick="getActiveMovies()">
-										<div class="tabItem filter" data-filter-anchor="tab-1">
+										<div id="allMovies" class="tabItem filter" data-filter-anchor="tab-1">
 											<div class="row">Всички филми</div>
 											<div class="row">в продажба</div>
 										</div>
@@ -51,8 +50,7 @@
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
 									<a onclick="getActiveByGenre('animation')">
-										<div class="tabItem filter selected"
-											data-filter-anchor="tab-3">
+										<div class="tabItem filter selected" data-filter-anchor="tab-3">
 											<div class="row">Детски</div>
 											<div class="row">филми</div>
 										</div>
@@ -137,7 +135,6 @@
 			<!-- end .stenikFilter -->
 			<div class="clearH"></div>
 		</div>
-		</main>
 	</div>
 	<script onload="getActiveMovies()" src="./js/filterContent.js"></script>
 	<script src="./js/searchbar.js"></script>

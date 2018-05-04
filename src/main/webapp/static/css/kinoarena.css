@@ -5094,7 +5094,7 @@ body .owl-carousel.last-slide .owl-controls .owl-nav .owl-next {
 ------------------------------------------------------------------- */
 /* ---- Default 2 sides bar ---- */
 .twoSidesBar {
-	padding-top: 100px; position : relative;
+	padding-top: 200px; position : relative;
 	z-index: 9;
 	height: 67px;
 	position: relative;

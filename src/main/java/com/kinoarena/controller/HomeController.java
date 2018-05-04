@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 
 	@RequestMapping(method = RequestMethod.GET, value = { "/", "/index" })
-	public String home(Model model) {
-
-		return "index";
+	public String home(Model model) {return "index";
 	}
 }
