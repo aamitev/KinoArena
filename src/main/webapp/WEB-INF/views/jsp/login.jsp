@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="colorbox" class="" role="dialog" tabindex="-1"
-		style="display: block; visibility: visible; top: 0px; left: 447px; position: fixed; width: 455px; height: 643px; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+		style="display: block; visibility: visible; top: 150px; left: 750px; position: fixed; width: 455px; height: 643px; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
 		<div id="cboxWrapper" style="height: 643px; width: 455px;">
 			<div>
 				<div id="cboxTopLeft" style="float: left;"></div>
@@ -48,8 +48,6 @@
 												<input type="checkbox" id="remember_me" name="_remember_me"
 													cheched="checked">
 											</div>
-											<label for="remember_me"><div class="labelContent">Запомни
-													ме</div></label>
 										</div>
 									</div>
 									<div class="clearH"></div>
