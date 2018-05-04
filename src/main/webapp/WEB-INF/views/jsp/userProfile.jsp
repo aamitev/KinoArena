@@ -77,7 +77,7 @@
 					<i class = "profile"></i>
 				</span>
 					<h5 class = "txt" >Персонална информация</h5>
-					<img src="./images/frontend/profile-info.png"
+					<img src="/KinoArena/images/profile-info.png"
 						alt="bg image" class="bgImage">
 					<p class="requiredInfo">
 						<span class="red">*</span> Задължителни полета
@@ -90,7 +90,7 @@
 					</p>
 					<hr class="red">
 					<form name="stenik_user_personal_information" method="post"
-						action="/bg/profile" novalidate="novalidate" class="stdForm">
+						 novalidate="novalidate" class="stdForm">
 						<div class="formGroup">
 							<span class="groupLabel">Пол *</span>
 							<div class="formItem radio">
@@ -451,9 +451,10 @@
 								placeholder="Фейсбук профил" />
 						</div>
 						<div class="clearH"></div>
-						<div>
-							<button class="button big red fixedWidth">Запиши</button>
+						<!-- <div>
+							<button class="button big red fixedWidth" >Запиши</button>
 						</div>
+						 -->
 						<input type="hidden" id="stenik_user_personal_information__token"
 							name="stenik_user_personal_information[_token]"
 							value="Vmb1CFR5Q8OgV9Yjow17KxaoyHodZDnHKoPmlEHt5vI" />
@@ -493,7 +494,7 @@
 
 					</nav>
 					<div class="payments">
-						<img src="./images/frontend/payments.png" alt="Начини на плащане">
+						<img src="/KinoArena/images/payments.png" alt="Начини на плащане">
 					</div>
 				</div>
 				<div class="middle">

@@ -47,6 +47,15 @@ public class LoginController {
 
 	}
 
+	@RequestMapping(value = "/forgottenPassword", method = RequestMethod.GET)
+	public String forgottenPassword(Model model) {
+		try {
+			return "forgottenPassword";
+		} catch (Exception e) {
+			return "error";
+		}
+	}
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
 
@@ -68,7 +77,7 @@ public class LoginController {
 
 		if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
 				&& !Utils.emailValidator(email) && !Utils.comparePasswords(password, rePassword)
-				&& !Utils.checkString(gender) && !Utils.dateValidator(birthdate) && !Utils.checkString(city)){
+				&& !Utils.checkString(gender) && !Utils.dateValidator(birthdate) && !Utils.checkString(city)) {
 			return "register";
 		}
 
