@@ -42,7 +42,7 @@ public class LoginController {
 			}
 		} catch (WebProfileException e) {
 			e.printStackTrace();
-			System.out.println(e.getMessage());
+			return "error";
 		}
 		return "login";
 
@@ -56,33 +56,36 @@ public class LoginController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String verifyRegistration(HttpServletRequest request, HttpSession session, Model model) {
+		try {
+			String firstName = request.getParameter("firstName").toString();
+			String secondName = request.getParameter("secondName").toString();
+			String lastName = request.getParameter("lastName").toString();
+			String email = request.getParameter("email").toString();
+			String password = request.getParameter("password").toString();
+			String rePassword = request.getParameter("rePassword").toString();
+			String gender = request.getParameter("gender").toString();
+			String birthdate = request.getParameter("dateOfBirth").toString();
 
-		String firstName = request.getParameter("firstName").toString();
-		String secondName = request.getParameter("secondName").toString();
-		String lastName = request.getParameter("lastName").toString();
-		String email = request.getParameter("email").toString();
-		String password = request.getParameter("password").toString();
-		String rePassword = request.getParameter("rePassword").toString();
-		String gender = request.getParameter("gender").toString();
-		String birthdate = request.getParameter("dateOfBirth").toString();
-		String city = request.getParameter("city").toString();
+			if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
+					&& !Utils.emailValidator(email) && !Utils.comparePasswords(password, rePassword)
+					&& !Utils.checkString(gender) && !Utils.dateValidator(birthdate)) {
+				return "register";
+			}
 
-		if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
-				&& !Utils.emailValidator(email) && !Utils.comparePasswords(password, rePassword)
-				&& !Utils.checkString(gender) && !Utils.dateValidator(birthdate) && !Utils.checkString(city)){
-			return "register";
+			boolean isMale = false;
+
+			if (gender.toLowerCase().startsWith("m") || gender.toLowerCase().startsWith("м")) {
+				isMale = true;
+			}
+
+			LocalDate dateOfBirth = LocalDate.parse(birthdate);
+			user.register(firstName, secondName, lastName, email, password, isMale, dateOfBirth);
+
+			return "index";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
 		}
-
-		boolean isMale = false;
-
-		if (gender.toLowerCase().startsWith("m") || gender.toLowerCase().startsWith("м")) {
-			isMale = true;
-		}
-
-		LocalDate dateOfBirth = LocalDate.parse(birthdate);
-		user.register(firstName, secondName, lastName, email, password, isMale, dateOfBirth);
-
-		return "index";
 	}
 
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
