@@ -24,15 +24,15 @@
 					<span class="menuIcon inactive"></span>
 				</div>
 				<ul class="hideOnResponsive">
-					<li class="txtItem"><a href="/bg/cinemas">Кина</a></li>
-					<li class="txtItem"><a href="/bg/program">Програма</a></li>
+					<li class="txtItem"><a href="/KinoArena/cinemas">Кина</a></li>
+					<li class="txtItem"><a href="/KinoArena/program">Програма</a></li>
 					
 					<c:if test = "${empty sessionScope.loggedUser}" >
-						<li class="txtItem"><a href="./login" class="loginPopupLink">Вход</a></li>
+						<li class="txtItem"><a href="/KinoArena/login" class="loginPopupLink">Вход</a></li>
 					</c:if>
 					
 					<c:if test = "${not empty sessionScope.loggedUser }">
-						<li class="txtItem"><a href="./userProfile" class="loginPopupLink">Профил</a></li>
+						<li class="txtItem"><a href="/KinoArena/userProfile" class="loginPopupLink">Профил</a></li>
 					</c:if>
 				</ul>
 				<ul class="hideOnDesktop">
@@ -45,7 +45,7 @@
 
 			<nav class="responsiveMenu">
 				<ul>
-					<li><a href="/bg/">Начало</a></li>
+					<li><a href="/KinoArena/index">Начало</a></li>
 					<li><a href="/bg/brand/IMAX/filmi" title="Кино Арена IMAX®">
 							<div class="hoverImgToggle">
 

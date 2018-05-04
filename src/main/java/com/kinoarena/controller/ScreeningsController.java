@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +24,7 @@ import com.kinoarena.model.dao.AddressDao;
 import com.kinoarena.model.dao.ScreeningDao;
 import com.kinoarena.model.vo.Cinema;
 import com.kinoarena.model.vo.Hall;
+import com.kinoarena.model.vo.Movie;
 import com.kinoarena.model.vo.Screening;
 
 @Controller
@@ -50,6 +53,17 @@ public class ScreeningsController {
 		System.out.println(json);
 		response.setContentType("application/json");
 		response.getWriter().println(json);
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/program")
+	public String getScreeningProgram(Model model) throws Exception {
+		try {
+			return "program";
+		} catch (Exception e) {
+			return "error";
+		}
+
 	}
 
 }
