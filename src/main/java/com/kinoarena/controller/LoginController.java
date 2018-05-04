@@ -19,7 +19,6 @@ import com.kinoarena.utils.Utils;
 @Controller
 public class LoginController {
 
-	private static final int POSTCODE_LENGTH = 4;
 	@Autowired
 	private UserDAO user;
 
@@ -41,10 +40,19 @@ public class LoginController {
 			}
 		} catch (WebProfileException e) {
 			e.printStackTrace();
+//			return "error";
+			return "login";
+		}
+		return "index";
+	}
+
+	@RequestMapping(value = "/forgottenPassword", method = RequestMethod.GET)
+	public String forgottenPassword(Model model) {
+		try {
+			return "forgottenPassword";
+		} catch (Exception e) {
 			return "error";
 		}
-		return "login";
-
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)

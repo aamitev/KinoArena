@@ -7,6 +7,8 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
+<jsp:include page="header.jsp"></jsp:include>
+
 </head>
 <body>
 	<div>
@@ -67,14 +69,16 @@
 							<input type="password" id="rePassword" name="rePassword"
 								required="required" placeholder="Повторете паролата *">
 						</div>
-						<div class="formItem">
-							<input type="text" id="gender" name="gender" required="required"
-								placeholder="Пол*">
+						<div >
+							<h6 align = "left" >Мъж</h6>
+							<input type="radio" name="gender" value="male" />
+
+							<h6 align = "left">Жена</h6>
+							<input type="radio" name="gender" value="female" />
 						</div>
 						<div class="formItem datepicker">
-							<input type="datetime" id="dateOfBirth"
-								name="dateOfBirth" required="required"
-								placeholder="ГГГГ-ММ-ДД*">
+							<input type="datetime" id="dateOfBirth" name="dateOfBirth"
+								required="required" placeholder="ГГГГ-ММ-ДД*">
 						</div>
 						<div class="formItem checkbox">
 							<div class="stenik-checkbox">

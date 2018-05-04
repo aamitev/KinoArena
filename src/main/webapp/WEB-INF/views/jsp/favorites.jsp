@@ -65,6 +65,8 @@
 
 				<div class="contentWrapper stenikFilter">
 					<h5 class="title">Моите филми</h5>
+					<img src="/KinoArena/images/profile-favourites.png" alt="bg image"
+						class="bgImage">
 					<header class="stenikTabsHeader filterHeader" data-rows="1">
 						<div
 							class="sliderWrapper owl-carousel owl-theme owl-loaded owl-text-select-on first-slide hide-nav">
@@ -85,9 +87,13 @@
 		</main>
 		<!-- end of #main -->
 	</div>
-	<script onload="getFavoriteMovies()" type="text/javascript"
-		src="./js/getFavorites.js"></script>
+		<div id="scroll_to_top" class="scrollToTop">
+			<i class="circleUp"></i>
+		</div>
 
+		<div id="fb-root"></div>
+	</div>
+	
 	<noscript>
 
 		<div style="display: inline;">
@@ -98,5 +104,7 @@
 		</div>
 
 	</noscript>
+		<script onload="getFavoriteMovies()" type="text/javascript"
+		src="./js/getFavorites.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
+<jsp:include page="header.jsp"></jsp:include>
 </head>
 <body>
 	<div id="colorbox" class="" role="dialog" tabindex="-1"
@@ -37,7 +38,7 @@
 										<input type="password" id="password" name="password"
 											required="required" placeholder="Парола">
 									</div>
-									<a href="/bg/resetting/reset"
+									<a href="/KinoArena/forgottenPassword"
 										class="forgottenPassword forgottenPasswordPopupLink"><i
 										class="questionMark"></i>Забравена парола</a>
 									<div class="clear hideOnDesktop hideOnTablet hideOnPhablet"></div>
