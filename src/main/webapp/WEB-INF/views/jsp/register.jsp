@@ -76,10 +76,6 @@
 								name="dateOfBirth" required="required"
 								placeholder="ГГГГ-ММ-ДД*">
 						</div>
-						<div class="formItem">
-							<input type="text" id="city" name="city" required="required"
-								placeholder="Град*">
-						</div>
 						<div class="formItem checkbox">
 							<div class="stenik-checkbox">
 								<input type="checkbox" name="gender" value="0" />
