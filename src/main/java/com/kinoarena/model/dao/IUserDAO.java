@@ -12,7 +12,7 @@ public interface IUserDAO {
 	
 	public void register(String fisrtName, String secondName, String lastName,
 						 String email, String password,
-						 boolean isMale, LocalDate dateOfBirth, Address address);
+						 boolean isMale, LocalDate dateOfBirth);
 	
 	public void changePassword(User user, String reNewPass);
 	

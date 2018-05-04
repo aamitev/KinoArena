@@ -35,6 +35,7 @@ public class User {
 		
 	}
 	
+	
 	public User(int id, String email, String password, String firstName, String secondName, String lastName, boolean isMale,
 			LocalDate birthday, String gsm, String education, String job, Address address) throws ModelException {
 		this();
@@ -51,6 +52,18 @@ public class User {
 		setAddress(address);
 		
 	}
+	
+	public User(String firstName, String secondName, String lastName, String email, String password, String sex,
+			LocalDate birthday) throws ModelException {
+		setFirstName(firstName);
+		setSecondName(secondName);
+		setLastName(lastName);
+		setEmail(email);
+		setPassword(password);
+		setSex(isMale);
+		setBirthday(birthday);
+	}
+	
 	public void setId(int id) throws ModelException {
 		if(id > 0) {
 			this.id = id;

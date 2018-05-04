@@ -14,11 +14,11 @@ import com.kinoarena.model.vo.User;
 @Component
 public class UserDAO implements IUserDAO {
 
-	private static final String INVALID_OLD_PASSWORD = "Invalid old password.";
+//	private static final String INVALID_OLD_PASSWORD = "Invalid old password.";
 	private static final String WRONG_PASSWORD = "Wrong password.";
 	public static final String SQL_LOGIN_STATEMENT = "SELECT * FROM users u JOIN address a ON(u.address_id = a.address_id) WHERE u.email = ? AND u.password = sha1(?);";
 	public static final String SQL_CHANGE_PASSWORD_STATEMENT = "UPDATE users SET password = sha1(?) WHERE email = ?;";
-	public static final String SQL_ADD_USER = "INSERT INTO users VALUES(null, ?, sha1(?), ?, ?, ?, ?, ?, ?, ?, ?, ?);"; 
+	public static final String SQL_ADD_USER = "INSERT INTO users(user_id, email, password, firstName, secondName, lastName, isMale, birthday, address_id) VALUES(null, ?, sha1(?), ?, ?, ?, ?, ?, null);"; 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -30,8 +30,8 @@ public class UserDAO implements IUserDAO {
 	@Override
 	public User login(String email, String password) throws WebProfileException {
 		try {
+			System.out.println(password);
 			User user = jdbcTemplate.queryForObject(SQL_LOGIN_STATEMENT, new Object[] { email, password }, userMapper);
-			System.out.println(user.getPassword());
 			return user;
 		} catch (Exception e) {
 			throw new WebProfileException(WRONG_PASSWORD, e);
@@ -41,8 +41,8 @@ public class UserDAO implements IUserDAO {
 
 	@Override
 	public void register(String firstName, String secondName, String lastName, String email, String password,
-			boolean isMale, LocalDate dateOfBirth, Address userAddress) {
-//		jdbcTemplate.update(SQL_ADD_USER, email, password, firstName, secondName, lastName, isMale, dateOfBirth.toString(), );
+			boolean isMale, LocalDate dateOfBirth) {
+		jdbcTemplate.update(SQL_ADD_USER, email, password, firstName, secondName, lastName, isMale, dateOfBirth.toString());
 	}
 
 	@Override

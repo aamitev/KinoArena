@@ -46,6 +46,7 @@ public class LoginController {
 				return "userProfile";
 			}
 		} catch (WebProfileException e) {
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 		return "login";
@@ -70,29 +71,21 @@ public class LoginController {
 		String gender = request.getParameter("gender").toString();
 		String birthdate = request.getParameter("dateOfBirth").toString();
 		String city = request.getParameter("city").toString();
-		String address = request.getParameter("address").toString();
-		String postcode = request.getParameter("postcode").toString();
 
 		if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
 				&& !Utils.emailValidator(email) && !Utils.comparePasswords(password, rePassword)
-				&& !Utils.checkString(gender) && !Utils.dateValidator(birthdate) && !Utils.checkString(city)
-				&& !Utils.checkString(address) && !Utils.checkString(postcode) && postcode.length() != POSTCODE_LENGTH) {
-
+				&& !Utils.checkString(gender) && !Utils.dateValidator(birthdate) && !Utils.checkString(city)){
 			return "register";
 		}
 
 		boolean isMale = false;
+
 		if (gender.toLowerCase().startsWith("m") || gender.toLowerCase().startsWith("м")) {
 			isMale = true;
 		}
+
 		LocalDate dateOfBirth = LocalDate.parse(birthdate);
-//		try {
-//			Address userAddress = new Address(address, postcode, city);
-//			user.register(firstName, secondName, lastName, email, password, isMale, dateOfBirth, userAddress);
-//		} catch (ModelException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		user.register(firstName, secondName, lastName, email, password, isMale, dateOfBirth);
 
 		return "index";
 	}
