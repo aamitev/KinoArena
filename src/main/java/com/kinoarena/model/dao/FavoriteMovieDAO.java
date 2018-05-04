@@ -3,6 +3,7 @@ package com.kinoarena.model.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class FavoriteMovieDAO {
 	private static final String GET_FAVORITE_MOVIE = "SELECT m.*,g.* FROM favoritemovies f "
 			+ "JOIN movies m ON(f.movie_id = m.movie_id) " + "LEFT OUTER JOIN genres g ON(m.genres_id = g.genre_id) "
 			+ "WHERE (f.users_id = ?) AND (f.movie_id = ?);";
+	private static final String DELETE_FAVORITE_MOVIE = "DELETE FROM favoritemovies WHERE(users_id = ?)AND(movie_id = ?);";;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
@@ -27,14 +29,24 @@ public class FavoriteMovieDAO {
 		jdbcTemplate.update(ADD_FAVORITE_MOVIE, userID, movieID);
 	}
 
+	public void removeFavoriteMovie(int userID, int movieID) {
+		jdbcTemplate.update(DELETE_FAVORITE_MOVIE, userID, movieID);
+	}
+
 	public List<Movie> getFavoriteMovies(int userID) {
 		List<Movie> movies = jdbcTemplate.query(GET_FAVORITE_MOVIES, new Object[] { userID }, movieRowMapper);
-		System.out.println(movies.toString());
 		return movies;
 	}
 
-	public Movie getFavoriteMovie(int userID, int movieID) throws Exception {
-		Movie movie = jdbcTemplate.queryForObject(GET_FAVORITE_MOVIE, new Object[] { userID, movieID }, movieRowMapper);
-		return movie;
+	public Movie getFavoriteMovie(int userID, int movieID) {
+		try {
+			Movie movie = jdbcTemplate.queryForObject(GET_FAVORITE_MOVIE, new Object[] { userID, movieID },
+					movieRowMapper);
+			return movie;
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 }

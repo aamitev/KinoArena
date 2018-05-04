@@ -3,6 +3,7 @@ package com.kinoarena.model.dao;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -32,10 +33,12 @@ public class UserDAO implements IUserDAO {
 		try {
 			User user = jdbcTemplate.queryForObject(SQL_LOGIN_STATEMENT, new Object[] { email, password }, userMapper);
 			return user;
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
 		} catch (Exception e) {
 			throw new WebProfileException(WRONG_PASSWORD, e);
 		}
-
 	}
 
 	@Override

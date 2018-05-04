@@ -59,6 +59,7 @@ public class UserController {
 			}
 			User user = (User) session.getAttribute("loggedUser");
 			List<Movie> movies = favoriteMovieDao.getFavoriteMovies(user.getId());
+			response.setContentType("application/json");
 			response.getWriter().println(gson.toJson(movies));
 
 		} catch (Exception e) {
@@ -74,11 +75,13 @@ public class UserController {
 				User user = (User) session.getAttribute("loggedUser");
 				Movie movie = favoriteMovieDao.getFavoriteMovie(user.getId(), id);
 				if (movie != null) {
-					response.getWriter().println(true);
+					response.setContentType("application/json");
+					response.getWriter().println("{\"success\": true}");
 					return;
 				}
 			}
-			response.getWriter().println(false);
+			response.setContentType("application/json");
+			response.getWriter().println("{\"succes\": false}");
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
@@ -86,6 +89,28 @@ public class UserController {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+		}
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/removeFavorite", params = "movieID")
+	public void removeFavoriteMovie(Model model, @RequestParam("movieID") int movieID, HttpServletResponse response,
+			HttpSession session) {
+		try {
+			if (session.getAttribute("loggedUser") == null) {
+				response.setStatus(302);
+				response.getWriter().println("/KinoArena/login");
+				return;
+			}
+			User user = (User) session.getAttribute("loggedUser");
+			favoriteMovieDao.removeFavoriteMovie(user.getId(), movieID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				response.getWriter().println("error");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
 		}
 	}
 }

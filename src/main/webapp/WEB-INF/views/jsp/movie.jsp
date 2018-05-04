@@ -19,14 +19,9 @@
 		<section class="movieDesc sliderStick ">
 			<header class="descHeader">
 				<h1 class="title">${movie.title}</h1>
-				<a id="favoriteButton" onclick="addToFavorites(${movie.id})"
-					class="button fixedPosition favourites rippleWrapper"><span
-					class="stenikRipple animate"
-					style="height: 290px; width: 290px; top: -121px; left: -29.6px;"></span><span
-					class="txt"><span
-						class="txt contentBefore" data-content-before="Добави в любими"
-						data-content-after="Премахни от любими"> </span>
-				</span><span class="buttonBg"></span></a>
+				<a id="favoriteButton" onclick="favoritesControler(${movie.id})"
+					class="button fixedPosition favourites rippleWrapper">
+				</a>
 			</header>
 			<article class="descContent mobileStyles">
 				<figure class="featured">

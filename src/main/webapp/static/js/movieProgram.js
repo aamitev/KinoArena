@@ -24,7 +24,7 @@ function getProgramDates(id){
 					
 					html += `<div class="owl-item active" style="width: 122.5px; margin-right: 0px;">
 					<a onclick ="getAllCinemaProgram(`+screenings[index].movie.id+`,'`+dateStr+ `')" class="tabItem ">
-					<div class="row">`+date.day+"/"+date.month+`<br>(dd/mm)</div>
+					<div class="row">`+date.day+"/"+date.month+`<br>(дд/мм)</div>
 					</a>
 					</div>`
 

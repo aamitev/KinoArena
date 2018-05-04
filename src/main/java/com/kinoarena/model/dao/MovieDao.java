@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,6 @@ public class MovieDao implements IMovieDao {
 			+ "JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN " + " genres g ON(m.genres_id=g.genre_id) "
 			+ " JOIN halls h ON(s.halls_id=h.hall_id) WHERE(h.hallType = ?) AND (s.startTime > DATE(?)) GROUP BY (m.movie_id);";
 	private static final String GET_ACTIVE_MOVIES_BY_ID = "SELECT m.*,g.* FROM movies m LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE (m.movie_id = ? );";
-
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -56,9 +56,15 @@ public class MovieDao implements IMovieDao {
 	}
 
 	@Override
-	public Movie getMovieById(int id) throws Exception {
-		Movie movie = jdbcTemplate.queryForObject(GET_ACTIVE_MOVIES_BY_ID, new Object[] { id }, movieRowMapper);
-		return movie;
+	public Movie getMovieById(int id) {
+		try {
+			Movie movie = jdbcTemplate.queryForObject(GET_ACTIVE_MOVIES_BY_ID, new Object[] { id }, movieRowMapper);
+			return movie;
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 	public List<Movie> getActiveMoviesByTitle(String title) {
