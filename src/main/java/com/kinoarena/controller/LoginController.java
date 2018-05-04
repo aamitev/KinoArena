@@ -24,7 +24,6 @@ import ch.qos.logback.classic.pattern.Util;
 @Controller
 public class LoginController {
 
-	private static final int POSTCODE_LENGTH = 4;
 	@Autowired
 	private UserDAO user;
 
