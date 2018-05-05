@@ -20,7 +20,10 @@ public class CinemaRowMapper implements RowMapper<Cinema> {
 		try {
 			cinema = new Cinema(rs.getInt("cinema_id"),rs.getString("name"), rs.getString("email"), rs.getString("gsm"),
 					addressMapper.mapRow(rs, rowNum));
-
+			
+			if(rs.getString("cinemaCoverURL") != null) {
+				cinema.setCinemaCoverURL(rs.getString("cinemaCoverURL"));
+			}
 		} catch (Exception e) {
 			throw new SQLException(e);
 		}

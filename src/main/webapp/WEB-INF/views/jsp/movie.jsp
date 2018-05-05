@@ -19,11 +19,9 @@
 		<section class="movieDesc sliderStick ">
 			<header class="descHeader">
 				<h1 class="title">${movie.title}</h1>
-				<a href="#" class="button fixedPosition favourites"><span
-					class="txt"> <i class="heart small"></i> <span
-						class="txt contentBefore" data-content-before="Добави в любими"
-						data-content-after="Премахни от любими"> </span>
-				</span><span class="buttonBg"></span></a>
+				<a id="favoriteButton" onclick="favoritesControler(${movie.id})"
+					class="button fixedPosition favourites rippleWrapper">
+				</a>
 			</header>
 			<article class="descContent mobileStyles">
 				<figure class="featured">
@@ -112,8 +110,11 @@
 		</section>
 		<!-- end of .movieDesc -->
 		<div id="block_projectionDays" class="block projectionDays"></div>
-
-		<script onload="getProgramDates(${movie.id})"
-			src="/KinoArena/js/movieProgram.js"></script>
+	</div>
+	<script onload="getProgramDates(${movie.id})"
+		src="/KinoArena/js/movieProgram.js"></script>
+	<script src="/KinoArena/js/favoriteMovie.js"></script>
+	<script onload="isFavorite(${movie.id})"
+		src="/KinoArena/js/favoriteMovieChecker.js"></script>
 </body>
 </html>

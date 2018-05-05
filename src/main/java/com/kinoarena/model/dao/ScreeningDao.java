@@ -43,6 +43,7 @@ public class ScreeningDao implements IScreeningDao {
 		return screenings;
 	}
 
+	@Override
 	public Map<String, Map<String, List<Screening>>> getScreeningsByMovieIdAndDate(int id, String date) {
 		List<Screening> screenings = jdbcTemplate.query(GET_SCREENINGS_OF_MOVIE_BY_DATE, new Object[] { id, date },
 				screeningMapper);

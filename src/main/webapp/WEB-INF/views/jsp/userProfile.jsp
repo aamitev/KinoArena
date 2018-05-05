@@ -43,20 +43,17 @@
 				<aside class="sidebar left">
 					<nav class="profileMenu">
 						<ul>
-							<li class="selected"><span class="icon"><i
-									class="profile"></i></span> <span class="txt">Персонална
-									информация</span></li>
-							<li><a href="./changePassword"> <span class="icon"><i
-										class="password"></i></span> <span class="txt">Промяна на
-										парола</span>
-							</a></li>
 
+							<li class="selected"> <span
+									class="icon"><i class="profile"></i></span> <span class="txt">Персонална
+										информация</span>
+							</li>
+							<li><a href="./changePassword"> <span
+									class="icon"><i class="password"></i></span> <span class="txt">Промяна
+										на парола</span>
+							</a></li>
 							<li><a href="./favorites"> <span class="icon"><i
 										class="heart"></i></span> <span class="txt">Моите филми</span>
-							</a></li>
-							<li><a href="./newsletter"> <span class="icon"><i
-										class="email"></i></span> <span class="txt">Абонирай се за
-										нашия е-бюлетин</span>
 							</a></li>
 							<li><a href="./orders"> <span class="icon"><i
 										class="clock"></i></span> <span class="txt">История на
@@ -115,20 +112,20 @@
 								id="stenik_user_personal_information_firstname"
 								name="stenik_user_personal_information[firstname]"
 								required="required" placeholder="Име *"
-								value=<c:out value="${sessionScope.loggedUser.getFirstName() }"/> />
+								value="${sessionScope.loggedUser.getFirstName() }"/>
 						</div>
 						<div class="formItem col2 left">
 							<input type="text"
 								id="stenik_user_personal_information_middleName"
 								name="stenik_user_personal_information[middleName]"
 								required="required" placeholder="Бащино име *"
-								value=<c:out value="${sessionScope.loggedUser.getSecondName() }"/> />
+								value="${sessionScope.loggedUser.getSecondName() }"/>
 						</div>
 						<div class="formItem col2 right">
 							<input type="text" id="stenik_user_personal_information_lastname"
 								name="stenik_user_personal_information[lastname]"
 								required="required" placeholder="Фамилия *"
-								value=<c:out value="${sessionScope.loggedUser.getLastName() }"/> />
+								value="${sessionScope.loggedUser.getLastName() }"/>
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 left">

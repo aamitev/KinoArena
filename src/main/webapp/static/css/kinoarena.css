@@ -6328,9 +6328,6 @@ a:hover .timelineSet .item img, .timelineSet a:hover .item img, a:hover .schedul
 	transform: scale(0.8);
 }
 
-.movieBox.small .attr.highlight, .small .movieBox .attr.highlight {
-	max-width: 67px;
-}
 
 .movieBox.small .attr.highlight img, .small .movieBox .attr.highlight img
 	{
@@ -7521,7 +7518,7 @@ a:hover .timelineSet .item img, .timelineSet a:hover .item img, a:hover .schedul
 	-webkit-transition: opacity 0.3s;
 	-o-transition: opacity 0.3s;
 	transition: opacity 0.3s;
-	background: url("/images/frontend/cinema-box.png") no-repeat center top;
+	background: url("/KinoArena/images/cinema-box.png") no-repeat center top;
 }
 
 .cinemaBox:after {
@@ -7832,6 +7829,7 @@ a:hover .timelineSet .item img, .timelineSet a:hover .item img, a:hover .schedul
 }
 
 .cinemasListing {
+	padding-top: 200px;
 	position: relative;
 	z-index: 1;
 }
@@ -7968,6 +7966,7 @@ body:not (.mobile ) .mapWrapper .map .gmnoprint .gm-style-mtc:last-child
 
 /* ---- Tabular menu ---- */
 .tabularMenu {
+	padding-top: 200px;
 	position: relative;
 	z-index: 1;
 	margin: 10px 0 20px;

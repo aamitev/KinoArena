@@ -3,6 +3,7 @@ package com.kinoarena.model.dao;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ public class UserDAO implements IUserDAO {
 	public static final String SQL_ADD_USER = "INSERT INTO users(user_id, email, password, firstName, secondName, lastName, isMale, birthday, isAdmin) VALUES(null, ?, sha1(?), ?, ?, ?, ?, ?, ?);"; 
 	public static final String SQL_MAKE_ADMIN = "UPDATE users SET isAdmin = ? WHERE email = ? ;";
 	public static final String SQL_GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email = ?;";
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -32,27 +34,25 @@ public class UserDAO implements IUserDAO {
 		try {
 			User user = jdbcTemplate.queryForObject(SQL_LOGIN_STATEMENT, new Object[] { email, password }, userMapper);
 			return user;
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
 		} catch (Exception e) {
 			throw new WebProfileException(WRONG_PASSWORD, e);
 		}
-
 	}
 
 	@Override
 	public void register(String firstName, String secondName, String lastName, String email, String password,
 			boolean isMale, LocalDate dateOfBirth) {
-		try {
-		jdbcTemplate.update(SQL_ADD_USER, email, password, firstName, secondName, lastName, isMale, dateOfBirth.toString(), false);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+
+		jdbcTemplate.update(SQL_ADD_USER, email, password, firstName, secondName, lastName, isMale,
+				dateOfBirth.toString());
 	}
 
 	@Override
 	public void changePassword(User user, String reNewPass) {
-		jdbcTemplate.update("UPDATE users SET password = sha1(?) WHERE email = ?;",
-							reNewPass,
-							user.getEmail());
+		jdbcTemplate.update("UPDATE users SET password = sha1(?) WHERE email = ?;", reNewPass, user.getEmail());
 		System.out.println(user.getEmail());
 		System.out.println("User password updated!");
 	}

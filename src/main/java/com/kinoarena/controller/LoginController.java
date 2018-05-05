@@ -31,7 +31,6 @@ public class LoginController {
 	public String verifyLogin(HttpServletRequest request, HttpSession session, Model model) {
 		String userEmail = request.getParameter("email").toString();
 		String userPass = request.getParameter("password").toString();
-
 		User loggedUser;
 		try {
 			if (user.login(userEmail, userPass) != null) {

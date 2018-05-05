@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="colorbox" class="" role="dialog" tabindex="-1"
-		style="display: block; visibility: visible; top: 0px; left: 447px; position: fixed; width: 455px; height: 643px; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+		style="display: block; visibility: visible; top: 150px; left: 750px; position: fixed; width: 455px; height: 643px; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
 		<div id="cboxWrapper" style="height: 643px; width: 455px;">
 			<div>
 				<div id="cboxTopLeft" style="float: left;"></div>
@@ -48,8 +48,6 @@
 												<input type="checkbox" id="remember_me" name="_remember_me"
 													cheched="checked">
 											</div>
-											<label for="remember_me"><div class="labelContent">Запомни
-													ме</div></label>
 										</div>
 									</div>
 									<div class="clearH"></div>
@@ -67,67 +65,6 @@
 							</div>
 						</div>
 
-						<script>
-							jQuery(function($) {
-								var $loginFormRequest;
-								$(document)
-										.on(
-												'submit',
-												'#login_form',
-												function(e) {
-													e.preventDefault();
-													if ($loginFormRequest
-															&& $loginFormRequest.readyState != 4) {
-														$loginFormRequest
-																.abort();
-													}
-													$loginFormRequest = $
-															.ajax(
-																	{
-																		url : "/login_check",
-																		type : 'POST',
-																		data : $(
-																				"#login_form")
-																				.serialize(),
-																		dataType : 'json'
-																	})
-															.done(
-																	function(
-																			data) {
-																		if (data.success == true) {
-																			window.location.href = data.nextUrl;
-																		} else {
-																			$(
-																					'#login_message')
-																					.addClass(
-																							'message error')
-																					.html(
-																							data.message);
-																			if (_stenikMain
-																					.isMobile()
-																					&& $(
-																							window)
-																							.width() <= _stenikMain.breakpoints.phone) {
-																				$(
-																						'#colorbox')
-																						.animate(
-																								{
-																									scrollTop : $(
-																											'#login_message')
-																											.position().top
-																								},
-																								300);
-																			}
-																		}
-
-																		$.fn.colorbox
-																				.resize({
-																					maxHeight : '100%'
-																				});
-																	});
-												});
-							});
-						</script>
 					</div>
 					<div id="cboxTitle" style="float: left; display: block;"></div>
 					<div id="cboxCurrent" style="float: left; display: none;"></div>

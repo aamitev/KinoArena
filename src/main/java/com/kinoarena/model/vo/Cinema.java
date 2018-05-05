@@ -14,18 +14,22 @@ public class Cinema {
 	private String name;
 	private String email;
 	private String gsm;
+	private String cinemaCoverURL;
 
 	private Address address;
+
+	public Cinema() {
+	};
 
 	public Cinema(int id, String name, String email, String gsm, Address address) throws ModelException {
 		setId(id);
 		setName(name);
 		setEmail(email);
-		setGSM(gsm);
+		setGsm(gsm);
 		setAddress(address);
 	}
 
-	private void setAddress(Address address) throws ModelException {
+	public void setAddress(Address address) throws ModelException {
 		if (address != null) {
 
 			this.address = address;
@@ -33,14 +37,7 @@ public class Cinema {
 			throw new ModelException(INVALID_ADDRESS);
 	}
 
-	private void setGSM(String gsm) throws ModelException {
-		if (Utils.gsmValidator(gsm)) {
-			this.gsm = gsm;
-		} else
-			throw new ModelException(INVALID_GSM);
-	}
-
-	private void setEmail(String email) throws ModelException {
+	public void setEmail(String email) throws ModelException {
 		if (Utils.checkString(email)) {
 			if (Utils.emailValidator(email)) {
 				this.email = email;
@@ -50,21 +47,15 @@ public class Cinema {
 			throw new ModelException(ILLEGAL_EMAIL);
 	}
 
-	private void setName(String name) throws ModelException {
+	public void setName(String name) throws ModelException {
 		if (Utils.checkString(name)) {
 			this.name = name;
 		} else
 			throw new ModelException(INVALID_CINEMA_NAME);
 	}
 
-	public void setId(int id) {
-		if (id >= 0) {
-			this.id = id;
-		}
-	}
-
-	public int getId(int id) {
-		return this.id;
+	public String getCinemaCoverURL() {
+		return cinemaCoverURL;
 	}
 
 	public String getName() {
@@ -75,46 +66,31 @@ public class Cinema {
 		return this.email;
 	}
 
-	public String getGSM() {
-		return this.gsm;
-	}
-
 	public Address getAddress() {
 		return this.address;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+	public void setCinemaCoverURL(String cinemaCoverURL) {
+		this.cinemaCoverURL = cinemaCoverURL;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Cinema other = (Cinema) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (id != other.id)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getGsm() {
+		return gsm;
+	}
+
+	public void setGsm(String gsm) throws ModelException {
+		if (Utils.gsmValidator(gsm)) {
+			this.gsm = gsm;
+		} else
+			throw new ModelException(INVALID_GSM);
 	}
 
 }

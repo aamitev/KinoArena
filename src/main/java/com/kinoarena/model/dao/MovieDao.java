@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -55,15 +56,20 @@ public class MovieDao implements IMovieDao {
 	}
 
 	@Override
-	public Movie getMovieById(int id) throws Exception {
-		Movie movie = jdbcTemplate.queryForObject(GET_ACTIVE_MOVIES_BY_ID, new Object[] { id },
-				movieRowMapper);
-		return movie;
+	public Movie getMovieById(int id) {
+		try {
+			Movie movie = jdbcTemplate.queryForObject(GET_ACTIVE_MOVIES_BY_ID, new Object[] { id }, movieRowMapper);
+			return movie;
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
-	
+
 	public List<Movie> getActiveMoviesByTitle(String title) {
 		List<Movie> movies = jdbcTemplate.query(GET_ACTIVE_MOVIES_BY_TITLE,
-				new Object[] { title +"%", Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
+				new Object[] { title + "%", Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
 		return movies;
 	}
 
@@ -84,5 +90,4 @@ public class MovieDao implements IMovieDao {
 				new Object[] { Timestamp.valueOf(LocalDateTime.now()) }, movieRowMapper);
 		return movies;
 	}
-
 }
