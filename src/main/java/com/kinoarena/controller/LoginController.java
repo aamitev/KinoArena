@@ -23,7 +23,8 @@ public class LoginController {
 	private UserDAO user;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login(Model model, HttpServletRequest request, HttpSession session) {
+		session.setAttribute("referer", request.getHeader("Referer"));
 		return "login";
 	}
 
@@ -31,16 +32,19 @@ public class LoginController {
 	public String verifyLogin(HttpServletRequest request, HttpSession session, Model model) {
 		String userEmail = request.getParameter("email").toString();
 		String userPass = request.getParameter("password").toString();
+		String referer = "index";
+		if(session.getAttribute("referer") != null) {
+			referer = ((String) session.getAttribute("referer")).split("/KinoArena")[1];
+		}
 		User loggedUser;
 		try {
 			if (user.login(userEmail, userPass) != null) {
 				loggedUser = user.login(userEmail, userPass);
 				session.setAttribute("loggedUser", loggedUser);
-				return "userProfile";
+				return "redirect:"+referer;
 			}
 		} catch (WebProfileException e) {
 			e.printStackTrace();
-//			return "error";
 			return "login";
 		}
 		return "index";

@@ -12,13 +12,11 @@ function isFavorite(movieID) {
 		console.log(response);
 
 		if(response.success){
-			console.log("ss");
 
 		html = `<spam class="notActive">Премахни от любими</spam>`;
 
 		}else
 		if(!response.success){
-			console.log("sss");
 
 			html = `<spam class="active">Добави в любими</spam>`;
 		}

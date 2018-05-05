@@ -5,7 +5,7 @@
 <!DOCTYPE html ">
 <html>
 <head>
-<title>Cinemas</title>
+<title>Кина</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
