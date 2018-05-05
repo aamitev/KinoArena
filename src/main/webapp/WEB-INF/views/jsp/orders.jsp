@@ -57,6 +57,11 @@
 									class="icon"><i class="clock"></i></span> <span class="txt">История
 										на резервациите и закупените билети</span>
 							</li>
+							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
+								<li><a href="./orders"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави филм</span>
+								</a></li>
+							</c:if>
 							<li><a href="./logout"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>

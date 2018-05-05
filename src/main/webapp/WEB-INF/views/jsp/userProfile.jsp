@@ -20,7 +20,7 @@
 	</div>
 
 	<div id="global_wrapper" class="globalWrapper">
-	<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="header.jsp"></jsp:include>
 		<div class="videoBox" id="video_box">
 			<div id="player_holder" class="playerHolder">
 				<span class="videoClose"><i class="close"></i></span>
@@ -43,6 +43,7 @@
 				<aside class="sidebar left">
 					<nav class="profileMenu">
 						<ul>
+
 							<li class="selected"> <span
 									class="icon"><i class="profile"></i></span> <span class="txt">Персонална
 										информация</span>
@@ -58,6 +59,11 @@
 										class="clock"></i></span> <span class="txt">История на
 										резервациите и закупените билети</span>
 							</a></li>
+							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
+								<li><a href="./orders"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави филм</span>
+								</a></li>
+							</c:if>
 							<li><a href="./logout"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>
@@ -65,13 +71,11 @@
 					</nav>
 				</aside>
 				<div class="contentWrapper">
-				<span class = "icon">
-					
-					<i class = "profile"></i>
-				</span>
-					<h5 class = "txt" >Персонална информация</h5>
-					<img src="/KinoArena/images/profile-info.png"
-						alt="bg image" class="bgImage">
+					<span class="icon"> <i class="profile"></i>
+					</span>
+					<h5 class="txt">Персонална информация</h5>
+					<img src="/KinoArena/images/profile-info.png" alt="bg image"
+						class="bgImage">
 					<p class="requiredInfo">
 						<span class="red">*</span> Задължителни полета
 					</p>
@@ -83,7 +87,7 @@
 					</p>
 					<hr class="red">
 					<form name="stenik_user_personal_information" method="post"
-						 novalidate="novalidate" class="stdForm">
+						novalidate="novalidate" class="stdForm">
 						<div class="formGroup">
 							<span class="groupLabel">Пол *</span>
 							<div class="formItem radio">
@@ -91,8 +95,7 @@
 									class="required">Мъж</label><input type="radio"
 									id="stenik_user_personal_information_gender_0"
 									name="stenik_user_personal_information[gender]"
-									required="required" value="m" 
-									checked="checked" />
+									required="required" value="m" checked="checked" />
 							</div>
 							<div class="formItem radio">
 								<label for="stenik_user_personal_information_gender_1"
@@ -108,38 +111,42 @@
 							<input type="text"
 								id="stenik_user_personal_information_firstname"
 								name="stenik_user_personal_information[firstname]"
-								required="required" placeholder="Име *" value=<c:out value="${sessionScope.loggedUser.getFirstName() }"/> />
+								required="required" placeholder="Име *"
+								value="${sessionScope.loggedUser.getFirstName() }"/>
 						</div>
 						<div class="formItem col2 left">
 							<input type="text"
 								id="stenik_user_personal_information_middleName"
 								name="stenik_user_personal_information[middleName]"
-								required="required" placeholder="Бащино име *" value=<c:out value="${sessionScope.loggedUser.getSecondName() }"/> />
+								required="required" placeholder="Бащино име *"
+								value="${sessionScope.loggedUser.getSecondName() }"/>
 						</div>
 						<div class="formItem col2 right">
 							<input type="text" id="stenik_user_personal_information_lastname"
 								name="stenik_user_personal_information[lastname]"
-								required="required" placeholder="Фамилия *" value=<c:out value="${sessionScope.loggedUser.getLastName() }"/> />
+								required="required" placeholder="Фамилия *"
+								value="${sessionScope.loggedUser.getLastName() }"/>
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 left">
 							<input type="email" id="stenik_user_personal_information_email"
 								name="stenik_user_personal_information[email]"
 								readonly="readonly" disabled="disabled" required="required"
-								placeholder="form.email" value=<c:out value="${sessionScope.loggedUser.getEmail() }"/> />
+								placeholder="form.email"
+								value="${sessionScope.loggedUser.getEmail() }" />
 						</div>
 						<div class="formItem col2 right">
 							<input type="text" id="stenik_user_personal_information_phone"
 								name="stenik_user_personal_information[phone]"
-								required="required" placeholder=<c:out value="${sessionScope.loggedUser.getGsm() }"/> />
+								required="required" placeholder="Телефон"
+								value = "${sessionScope.loggedUser.getGsm()}" 
+								/> 
 						</div>
 						<div class="clear"></div>
 						<div class="formItem select col2 left">
 							<select id="stenik_user_personal_information_city"
-									name="stenik_user_personal_information[city]" 
-									placeholder="Град"><option
-									value=""></option>
-								<option value="" selected="selected"><c:out value="${sessionScope.loggedUser.getAddress().getCity() }"/></option>
+								name="stenik_user_personal_information[city]" >
+								<option value="${sessionScope.logged}" selected="selected"></option>
 								<option value="Айтос">Айтос</option>
 								<option value="Аксаково">Аксаково</option>
 								<option value="Алфатар">Алфатар</option>
@@ -400,16 +407,15 @@
 							<input type="text"
 								id="stenik_user_personal_information_post_code"
 								name="stenik_user_personal_information[post_code]"
-								placeholder="Пощенски код" 
-								value= <c:out value="${sessionScope.loggedUser.getAddress().getPostcode() }"/>
-								/>
+								placeholder="Пощенски код"
+								value="${sessionScope.loggedUser.getAddress().getPostcode() }"/>
 						</div>
 						<div class="clear"></div>
 						<div class="formItem">
 							<input type="text" id="stenik_user_personal_information_address"
 								name="stenik_user_personal_information[address]"
-								placeholder="Адрес" 
-								value= <c:out value="${sessionScope.loggedUser.getAddress().getAddress() }"/>/>
+								placeholder="Адрес"
+								value="${sessionScope.loggedUser.getAddress().getAddress() }"/>
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 datepicker left">
@@ -423,33 +429,38 @@
 							<input type="text"
 								id="stenik_user_personal_information_education"
 								name="stenik_user_personal_information[education]"
-								placeholder="Образование" 
-								value= <c:out value="${sessionScope.loggedUser.getEducation()}"/>
-							/>
+								placeholder="Образование"
+								value="${sessionScope.loggedUser.getEducation()}"/> 
 						</div>
 						<div class="clear"></div>
 						<div class="formItem col2 left">
 							<input type="text"
 								id="stenik_user_personal_information_workingPosition"
 								name="stenik_user_personal_information[workingPosition]"
-								placeholder="Работна позиция" 
-								value = <c:out value="${sessionScope.loggedUser.getJob() }"/>
-								/>
+								placeholder="Работна позиция"
+								value="${sessionScope.loggedUser.getJob() }"/>
 						</div>
-						<div class="formItem col2 right">
-							<input type="text"
-								id="stenik_user_personal_information_facebookProfile"
-								name="stenik_user_personal_information[facebookProfile]"
-								placeholder="Фейсбук профил" />
-						</div>
+
 						<div class="clearH"></div>
-						<!-- <div>
-							<button class="button big red fixedWidth" >Запиши</button>
+
+
+						<div>
+							<button class="button big red fixedWidth">Запиши</button>
 						</div>
-						 -->
+
 						<input type="hidden" id="stenik_user_personal_information__token"
 							name="stenik_user_personal_information[_token]"
 							value="Vmb1CFR5Q8OgV9Yjow17KxaoyHodZDnHKoPmlEHt5vI" />
+					</form>
+					<form name="stenik_user_personal_information" method="post"
+						novalidate="novalidate" class="stdForm">
+						<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
+							<div>
+								<input type="text" name="makeAdmin" id="makeAdmin"
+									placeholder="Направи потребител админ по имейл"><br>
+							</div>
+							<button class="button big red fixedWidth">Направи Админ</button>
+						</c:if>
 					</form>
 				</div>
 				<!-- end of .contentWrapper -->
@@ -458,7 +469,7 @@
 		</div>
 		</main>
 		<!-- end of #main -->
-	
+
 		<!-- end of #footer -->
 		<div id="scroll_to_top" class="scrollToTop">
 			<i class="circleUp"></i>
@@ -466,398 +477,6 @@
 
 		<div id="fb-root"></div>
 	</div>
-
-	<!-- <script type="text/javascript">
-		var item = "./images/frontend/bg-items/bg-assets-15years.json";
-		var haveDots = "";
-	</script>
-	<script type="text/javascript" src="/js/5d60927.js"></script>
-
-	<script>
-		function loginPopUp() {
-			jQuery.ajax({
-				url : "/bg/login",
-				type : "GET"
-			}).done(function(data) {
-				jQuery.colorbox({
-					fixed : true,
-					top : false,
-					maxHeight : false,
-					transition : null,
-					stenikAnimations : true,
-					html : data
-				});
-			});
-		}
-		/* PRINT ERRORS
-		--------------------------------------------------------------- */
-		function printErrors(errors, formName) {
-			for ( var key in errors) {
-				if (Object.prototype.toString.call(errors[key]) === '[object Object]') {
-					printErrors(errors[key], formName + key + '_');
-				} else {
-					$(formName + key).parents().eq(0).addClass('error')
-							.append(
-									'<div class="center red">' + errors[key]
-											+ '</div>');
-				}
-			}
-		}
-		jQuery(function($) {
-			/* Banner click handle
-			--------------------------------------------------- */
-			$('div.banner').on('click', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				var banner = $(this).data('banner');
-				var url = $(this).data('href');
-				var target = $(this).data('target');
-				if (banner != null) {
-					$.ajax({
-						url : "/bg/helper/banner/add/click",
-						type : 'POST',
-						dataType : 'json',
-						data : {
-							'banner' : banner
-						},
-					}).done(function(data) {
-						if (data.success) {
-							if (url) {
-								var a = document.createElement('a');
-								a.href = url;
-								a.target = target;
-								document.body.appendChild(a);
-								a.click();
-							}
-							;
-						}
-						;
-					});
-				}
-				;
-			});
-			/* Banner click handle
-			--------------------------------------------------- */
-			$('a.disable').on('click', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-			})
-			/* Add to (remove from) favourites
-			--------------------------------------------------- */
-			var favBtnSelector = '.favourites';
-			if ($(favBtnSelector).length > 0) {
-				var user = 'akrobata9608@gmail.com';
-				var $favRequest;
-				$(document)
-						.on(
-								'click',
-								favBtnSelector,
-								function(e) {
-									e.preventDefault();
-									e.stopPropagation();
-									var $fav = $(this);
-									if (user != '' && $fav.attr('href').length) {
-										if ($favRequest
-												&& $favRequest.readyState != 4) {
-											$favRequest.abort();
-										}
-										$favRequest = $
-												.ajax({
-													url : $fav.attr('href'),
-													type : 'GET'
-												})
-												.done(
-														function(data) {
-															if (data.removed) {
-																$fav
-																		.find(
-																				'.txt')
-																		.removeClass(
-																				'contentAfter')
-																		.addClass(
-																				'contentBefore');
-																if ($fav
-																		.hasClass('removeMovieBox')) {
-																	$fav
-																			.parents(
-																					'.movieBox')
-																			.eq(
-																					0)
-																			.remove();
-																}
-															} else {
-																$fav
-																		.find(
-																				'.txt')
-																		.removeClass(
-																				'contentBefore')
-																		.addClass(
-																				'contentAfter');
-															}
-															$
-																	.colorbox({
-																		fixed : true,
-																		top : true,
-																		transition : null,
-																		stenikAnimations : true,
-																		html : '<div class="popup">'
-																				+ data.message
-																				+ '</div>'
-																	});
-														});
-									} else {
-										loginPopUp();
-									}
-								});
-			}
-			/* Login pop-ups
-			--------------------------------------------------- */
-			$document.on('click', '.loginPopupLink', function(e) {
-				e.preventDefault();
-				loginPopUp();
-			});
-			$document.on('click', '.forgottenPasswordPopupLink', function(e) {
-				e.preventDefault();
-				$.colorbox({
-					fixed : true,
-					top : true,
-					transition : null,
-					stenikAnimations : true,
-					href : "/bg/resetting/reset"
-				});
-			})
-			$document.on('click', '.registerPopupLink', function(e) {
-				e.preventDefault();
-				$.colorbox({
-					top : false,
-					transition : null,
-					stenikAnimations : true,
-					overlayClose : false,
-					escKey : false,
-					href : "/bg/register"
-				});
-			});
-			/* Movies rating
-			--------------------------------------------------- */
-			$('.rating')
-					.find('input')
-					.stenikRating(
-							{
-								handles : true,
-								onSelect : function(data) {
-									var $input = $(this).parents(
-											'.stenikRating').eq(0)
-											.find('input');
-									$
-											.ajax(
-													{
-														url : "/bg/movie/helper/update/movie/rating",
-														data : {
-															'movie' : $input
-																	.data('movie'),
-															'rating' : data
-														},
-														method : 'POST',
-														dataType : 'JSON'
-													})
-											.done(
-													function(data) {
-														if (data.success == false) {
-															if (data.message == 'login') {
-																loginPopUp();
-															}
-														} else {
-															$input
-																	.stenikRating(
-																			'setValue',
-																			data.rating);
-														}
-														$
-																.colorbox({
-																	fixed : true,
-																	top : false,
-																	transition : null,
-																	stenikAnimations : true,
-																	html : "<div class=\"popup\">"
-																			+ data.message
-																			+ "</div>"
-																});
-													})
-											.fail(
-													function(jqXHR, textStatus,
-															errorThrown) {
-														$
-																.colorbox({
-																	fixed : true,
-																	top : false,
-																	transition : null,
-																	stenikAnimations : true,
-																	html : "<div class=\"popup\"><strong class=\"red\">Възникна грешка! Моля, опитайте по-късно!</strong></div>"
-																});
-													});
-								}
-							});
-			/* Newsletter signup ajax
-			--------------------------------------------------- */
-			var $newsletterInput = $('#newsletter_email'), $newsletterButton = $('#newsletter_button'), $newsletterRequest;
-			$newsletterButton.on('click', function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				if ($newsletterRequest && $newsletterRequest.readyState != 4) {
-					$newsletterRequest.abort();
-				}
-				$newsletterRequest = $.ajax({
-					url : '/bg/newsletter',
-					type : 'post',
-					data : {
-						email : $newsletterInput.val()
-					},
-					dataType : 'json'
-				}).done(
-						function(data) {
-							$newsletterInput.val('');
-							var msg = data.html;
-							if (data.success) {
-								msg = '<div class="message success noMarginB">'
-										+ msg + '</div>';
-							} else {
-								msg = '<div class="message error noMarginB">'
-										+ msg + '</div>';
-							}
-							$.colorbox({
-								fixed : true,
-								top : true,
-								transition : null,
-								stenikAnimations : true,
-								html : '<div class="popup">' + msg + '</div>'
-							});
-						});
-			});
-		});
-	</script>
-
-	<script>
-		/* Youtube player init
-		------------------------------------------------------- */
-		// Asynchronously Youtube IFrame Player API load
-		var tag = document.createElement('script');
-		tag.src = "//www.youtube.com/iframe_api";
-		var firstScriptTag = document.getElementsByTagName('script')[0];
-		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-		// Player init
-		var $body = jQuery('body');
-		function onYouTubeIframeAPIReady() {
-			var $videoBox = jQuery('#video_box'), $playerHolder = jQuery('#player_holder'), $videoWrapper = $playerHolder
-					.find('.videoWrapper'), $videoClose = $playerHolder
-					.find('.videoClose'), $videoHandles = jQuery('[data-video-id]');
-			var $videoHandle, $myPlayer, myVideoId, videoClass = null;
-			// Show
-			$videoHandles.click(function(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				$videoHandle = jQuery(this);
-				myVideoId = $videoHandle.data('video-id');
-				if ($videoHandle.data('videoClass')) {
-					videoClass = $videoHandle.data('videoClass');
-					$videoBox.addClass(videoClass);
-				}
-				$body.addClass('videoActive').trigger('stenikPlayerActive');
-				TweenLite.fromTo($playerHolder, 0.3, {
-					y : -100,
-					opacity : 0
-				}, {
-					y : 0,
-					opacity : 1,
-					delay : 0.2,
-					onComplete : function() {
-						youtubeInit();
-					}
-				});
-			});
-			// Hide
-			$videoClose.on('click', function() {
-				TweenLite.to($playerHolder, 0.3, {
-					y : -100,
-					opacity : 0,
-					ease : Back.easeIn,
-					onComplete : function() {
-						$body.removeClass('videoActive').trigger(
-								'stenikPlayerInactive');
-						if (videoClass) {
-							$videoBox.removeClass(videoClass);
-							videoClass = null;
-						}
-						$videoWrapper.empty();
-					}
-				});
-			});
-			function youtubeInit() {
-				// Clear the previous player and add a new placeholder for the iframe
-				$videoWrapper.empty().append(
-						'<div class="player" id="youtube_player"></div>');
-				$myPlayer = new YT.Player('youtube_player', {
-					videoId : myVideoId,
-					playerVars : {
-						'autoplay' : 1,
-						rel : 0
-					}
-				});
-			}
-		}
-	</script>
-
-	<script>
-		setTimeout(
-				function() {
-					(function(d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0];
-						if (d.getElementById(id))
-							return;
-						js = d.createElement(s);
-						js.id = id;
-						js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.0";
-						fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));
-				}, 1500);
-	</script>
-
-	<script>
-		var $dateOfBirth = $('#stenik_user_personal_information_dateOfBirth')
-		$dateOfBirth.datetimepicker({
-			lang : 'bg',
-			format : 'd.m.Y',
-			formatDate : 'd.m.Y',
-			timepicker : false,
-			minDate : '01.01.1945',
-			maxDate : '12.12.2015',
-			scrollInput : false
-		});
-		function addZero(date) {
-			return date < 9 ? '0' + date : date;
-		}
-		jQuery(function($) {
-			var date = new Date($dateOfBirth.val());
-			$dateOfBirth
-					.val(addZero(date.getDate()) + '.'
-							+ addZero((date.getMonth() + 1)) + '.'
-							+ date.getFullYear());
-		});
-	</script>
-
-	Google Code for Remarketing Tag
-
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 855321203;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-
-	<script type="text/javascript"
-		src="//www.googleadservices.com/pagead/conversion.js">
-		
-	</script> -->
 
 	<noscript>
 

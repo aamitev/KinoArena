@@ -74,23 +74,20 @@ public class LoginController {
 			String email = request.getParameter("email").toString();
 			String password = request.getParameter("password").toString();
 			String rePassword = request.getParameter("rePassword").toString();
-			String gender = request.getParameter("gender").toString();
+			
+			
+			boolean gender = Boolean.parseBoolean(request.getParameter("sex"));
+			
 			String birthdate = request.getParameter("dateOfBirth").toString();
 
 			if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
 					&& !Utils.emailValidator(email) && !Utils.comparePasswords(password, rePassword)
-					&& !Utils.checkString(gender) && !Utils.dateValidator(birthdate)) {
+					&& !Utils.dateValidator(birthdate)) {
 				return "register";
 			}
 
-			boolean isMale = false;
-
-			if (gender.toLowerCase().startsWith("m") || gender.toLowerCase().startsWith("м")) {
-				isMale = true;
-			}
-
 			LocalDate dateOfBirth = LocalDate.parse(birthdate);
-			user.register(firstName, secondName, lastName, email, password, isMale, dateOfBirth);
+			user.register(firstName, secondName, lastName, email, password, gender, dateOfBirth);
 
 			return "index";
 		} catch (Exception e) {
@@ -119,7 +116,17 @@ public class LoginController {
 
 		return "userProfile";
 	}
-
+	
+	
+	
+//	@RequestMapping(value = "/submit", method = RequestMethod.POST)
+//	public String updateInfo(HttpServletRequest request, HttpSession session, Model model) {
+//		
+//		
+//		return "userProfile";
+//	}
+	
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, Model model) {
 		request.getSession().invalidate();
