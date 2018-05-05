@@ -57,7 +57,6 @@ public class UserDAO implements IUserDAO {
 		System.out.println("User password updated!");
 	}
 	
-	@Override
 	public void makeUserAdmin(String email) {
 		jdbcTemplate.update(SQL_MAKE_ADMIN, true, email);
 	}

@@ -1,13 +1,11 @@
 function favoritesControler(movieID) {
 	var link = "";
 	if(document.getElementById("favoriteButton").firstChild.className == "notActive"){
-		console.log(document.getElementById("favoriteButton").firstChild.className);
 		link = "/KinoArena/removeFavorite?movieID="+movieID;
 	}else{
 		link = "/KinoArena/addToFavorites?movieID="+movieID;
 	}
 	sendFavoriteRequest(link)
-	isFavorite(movieID);
 	location.reload();
 }
 	
@@ -24,3 +22,27 @@ function sendFavoriteRequest(link){
 	});
 }
 
+window.addEventListener('load', () => {
+	var movieID = window.location.pathname.split("/");
+	movieID = movieID[movieID.length -1];
+    var xhr = new XMLHttpRequest();
+	xhr.open("GET", "/KinoArena/inFavorites/"+movieID, true);
+	xhr.send(null);
+	
+	xhr.addEventListener('load', () => {
+
+		var response = JSON.parse(xhr.responseText);
+		var html = "";
+
+		if(response.success){
+
+		html = `<spam class="notActive">Премахни от любими</spam>`;
+
+		}else
+		if(!response.success){
+
+			html = `<spam class="active">Добави в любими</spam>`;
+		}
+			document.getElementById('favoriteButton').innerHTML = html;
+	});
+});

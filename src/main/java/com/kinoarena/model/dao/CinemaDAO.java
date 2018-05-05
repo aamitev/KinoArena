@@ -25,7 +25,6 @@ public class CinemaDAO implements ICinemaDAO {
 	@Override
 	public List<Cinema> getAllCinemas() {
 		List<Cinema> cinemas = jdbcTemplate.query(GET_ALL_CINEMAS, cinemaRowMapper);
-		System.out.println(cinemas.toString());
 		return cinemas;
 
 	}

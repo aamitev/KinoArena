@@ -23,7 +23,7 @@ function getProgramDates(id){
 					dateStr = date.year+`-`+date.month+`-`+date.day;
 					
 					html += `<div class="owl-item active" style="width: 122.5px; margin-right: 0px;">
-					<a onclick ="getAllCinemaProgram(`+screenings[index].movie.id+`,'`+dateStr+ `')" class="tabItem ">
+					<a onclick ="getAllCinemaProgram(`+screenings[index].movieId+`,'`+dateStr+ `')" class="tabItem ">
 					<div class="row">`+date.day+"/"+date.month+`<br>(дд/мм)</div>
 					</a>
 					</div>`
@@ -57,10 +57,10 @@ var link = "/KinoArena/screenings?movieId="+id + "&date=" + date;
 				var html = "" ;
 				var firsttime = true;
 				for (var cinema in screenings){
-					firsttime = true;
+					cinemaCheker = "";
 				for (var hall in screenings[cinema]){
 					var objCinema = screenings[cinema][hall][0].hall.cinema;
-					if(firsttime){
+					if(cinemaCheker != objCinema.name){
 						html += `<div class="scheduleRow">
 							<aside class="sideInfo">
 								<article class="cinemaContacts">
@@ -72,7 +72,7 @@ var link = "/KinoArena/screenings?movieId="+id + "&date=" + date;
 							
 									<div class="contentWrapper">
 					<div class="timeTable">`
-					firsttime = false;
+					cinemaCheker = objCinema.name;
 					}
 							html += `<div class="row">
 						<div class="attr secondary">
@@ -102,9 +102,12 @@ var link = "/KinoArena/screenings?movieId="+id + "&date=" + date;
 
 						</div>
 					</div>
-					</div>`
+					</div>
+					`
 				}
 				html += `</div>
+				
+				</div>
 					</div>`
 				}
 				

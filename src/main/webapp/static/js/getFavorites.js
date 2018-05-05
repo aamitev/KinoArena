@@ -5,7 +5,6 @@ function getFavoriteMovies(){
 	
 	xhr.addEventListener('load', () => {
 		var response = xhr.responseText;
-		console.log(response)
 		if(xhr.status == 302){
 			location.replace(response);
 		}
@@ -13,13 +12,12 @@ function getFavoriteMovies(){
 
 		if(xhr.status == 200){
 			 var html ="";
-			 console.log(movies);
 			 for (var index=0; index < movies.length; index++){	
 				 html += `
 				<div class="filterItem  movieBox filterSelected"
 	data-filter="tab-onScreen" dara-responsive-href="/bg/movie/privlichane">
 	<figure class="featured">
-	<a href="/KinoArena/movie/`+movies[index].id+`">
+	<a href="/KinoArena/movies/`+movies[index].id+`">
 		<img title="`+movies[index].title+`" width="139" height="208" alt="`+movies[index].title+`"
 			class="poster"
 			src="/KinoArena/`+movies[index].coverURL+`">

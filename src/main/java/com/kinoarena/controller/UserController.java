@@ -60,6 +60,7 @@ public class UserController {
 			User user = (User) session.getAttribute("loggedUser");
 			List<Movie> movies = favoriteMovieDao.getFavoriteMovies(user.getId());
 			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
 			response.getWriter().println(gson.toJson(movies));
 
 		} catch (Exception e) {

@@ -30,6 +30,12 @@ public class ScreeningDao implements IScreeningDao {
 			+ "LEFT OUTER JOIN genres g ON(m.genres_id = g.genre_id) WHERE(m.movie_id = ? AND DATE(s.startTime) >= DATE(?))"
 			+ "GROUP BY (DATE(s.startTime));";
 
+	private static final String GET_SCREENINGS_DTO_BY_CINEMA_ID = "SELECT * FROM screening s "
+			+ "JOIN halls h ON(s.halls_id = h.hall_id) "
+			+ "JOIN cinema c ON(h.cinema_id = c.cinema_id) "
+			+ "WHERE (c.cinema_id = ?) AND (DATE(s.startTime) >= DATE(?))"
+			+ "GROUP BY (DATE(s.startTime));";
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
@@ -37,8 +43,14 @@ public class ScreeningDao implements IScreeningDao {
 	@Autowired
 	private ScreeningRowMapper screeningMapper;
 
-	public List<ScreeningDTO> getScreeningsDTO(int id) {
+	public List<ScreeningDTO> getScreeningsDtoByMovieId(int id) {
 		List<ScreeningDTO> screenings = jdbcTemplate.query(GET_SCREENINGS_DTO_BY_MOVIE_ID,
+				new Object[] { id, LocalDateTime.now() }, screeningDtoRowMapper);
+		return screenings;
+	}
+	
+	public List<ScreeningDTO> getScreeningsDtoByCinemaId(int id) {
+		List<ScreeningDTO> screenings = jdbcTemplate.query(GET_SCREENINGS_DTO_BY_CINEMA_ID,
 				new Object[] { id, LocalDateTime.now() }, screeningDtoRowMapper);
 		return screenings;
 	}

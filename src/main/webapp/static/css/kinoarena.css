@@ -1018,7 +1018,6 @@ html, body {
 }
 
 .wrapper {
-	padding-top: 150px;
 	width: 980px;
 	display: block;
 	margin: 0 auto;
@@ -9035,7 +9034,7 @@ body:not (.mobile ) .mapWrapper .map .gmnoprint .gm-style-mtc:last-child
 
 .movieDesc .descContent .report {
 	width: 290px;
-	float: none;
+	float: right;
 	font-size: 14px;
 	padding-bottom: 50px;
 	/* fixed meta requirement */
@@ -12572,6 +12571,7 @@ keyframes ripple { 100% {
 }
 
 .homepage.loaded .filterBar {
+	padding-top:150px;
 	-webkit-animation: fromTransYAnim_-40px 0.8s 0.7s forwards;
 	-moz-animation: fromTransYAnim_-40px 0.8s 0.7s forwards;
 	animation: fromTransYAnim_-40px 0.8s 0.7s forwards;

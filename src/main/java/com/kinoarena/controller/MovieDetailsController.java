@@ -1,9 +1,5 @@
 package com.kinoarena.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -20,34 +16,49 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kinoarena.dto.ScreeningDTO;
-import com.kinoarena.model.dao.AddressDao;
+import com.kinoarena.model.dao.MovieDao;
 import com.kinoarena.model.dao.ScreeningDao;
-import com.kinoarena.model.vo.Cinema;
-import com.kinoarena.model.vo.Hall;
 import com.kinoarena.model.vo.Movie;
 import com.kinoarena.model.vo.Screening;
 
 @Controller
-public class ScreeningsController {
-
-	private Gson gson = new GsonBuilder().create();
+public class MovieDetailsController {
 
 	@Autowired
 	private ScreeningDao screeningDao;
+	@Autowired
+	private MovieDao movieDao;
+	
+	private Gson gson = new GsonBuilder().create();
 
-	// Used in movie details page, program dates.
+	//movieDetails page 
+	@RequestMapping(method = RequestMethod.GET, value = "/movies/{id}")
+	public String getMovie(Model model, @PathVariable Integer id) {
+		try {
+			Movie movie = movieDao.getMovieById(id);
+			model.addAttribute("movie", movie);
+
+			return "movieDetails";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+
+	// Returns screeningDTO used in movieDetails page for the screening dates
 	@RequestMapping(method = RequestMethod.GET, value = "/screenings", params = "movieId")
 	public void getScreeningsDtoByMovieId(@RequestParam("movieId") int movieId, HttpServletResponse response) {
 		try {
-			List<ScreeningDTO> screenings = screeningDao.getScreeningsDTO(movieId);
+			List<ScreeningDTO> screenings = screeningDao.getScreeningsDtoByMovieId(movieId);
 			String json = gson.toJson(screenings);
 			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
 			response.getWriter().println(json);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	//Returns hashmap of Cinema:{hall{[screenings]}}, used in movieDetail page 
 	@RequestMapping(method = RequestMethod.GET, value = "/screenings", params = { "movieId", "date" })
 	public void getScreeningsByMovieIdAndDate(@RequestParam("movieId") int movieId, @RequestParam("date") String date,
 			HttpServletResponse response) {
@@ -56,20 +67,12 @@ public class ScreeningsController {
 					date);
 			String json = gson.toJson(screenings);
 			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
 			response.getWriter().println(json);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/program")
-	public String getScreeningProgram(Model model) {
-		try {
-			return "program";
-		} catch (Exception e) {
-			return "error";
-		}
-
-	}
 
 }

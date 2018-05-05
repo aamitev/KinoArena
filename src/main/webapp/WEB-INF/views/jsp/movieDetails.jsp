@@ -5,12 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../css/kinoarena.css">
+<link rel="stylesheet" type="text/css" href="/KinoArena/css/kinoarena.css">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<title>Detail</title>
+<title>${movie.title}</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -114,7 +114,5 @@
 	<script onload="getProgramDates(${movie.id})"
 		src="/KinoArena/js/movieProgram.js"></script>
 	<script src="/KinoArena/js/favoriteMovie.js"></script>
-	<script onload="isFavorite(${movie.id})"
-		src="/KinoArena/js/favoriteMovieChecker.js"></script>
 </body>
 </html>

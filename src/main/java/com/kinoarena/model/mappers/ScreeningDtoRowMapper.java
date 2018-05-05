@@ -12,14 +12,11 @@ import com.kinoarena.dto.ScreeningDTO;
 @Component
 public class ScreeningDtoRowMapper implements RowMapper<ScreeningDTO> {
 
-	@Autowired
-	private MovieRowMapper movieRowMapper;
-
 	public ScreeningDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		ScreeningDTO screening = null;
 		try {
 			screening = new ScreeningDTO(rs.getInt("screening_id"), rs.getTimestamp("startTime").toLocalDateTime(),
-					movieRowMapper.mapRow(rs, rowNum), rs.getInt("halls_id"));
+					rs.getInt("movie_id"), rs.getInt("halls_id"));
 
 		} catch (Exception e) {
 			throw new SQLException(e);

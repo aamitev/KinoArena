@@ -1,5 +1,6 @@
 function getActiveByGenre(sufix){
 	var link = "./movies?genre=" + sufix;
+	console.log(link);
 	homeMovieBoxRequest(link)
 
 }
@@ -22,6 +23,8 @@ function homeMovieBoxRequest(link) {
 	xhr.onreadystatechange = function() {
 		 if (this.readyState == 4 && this.status == 200) {
 			 movieBoxGenerator(this.responseText);
+				console.log(this.responseText);
+
 	    }
 	}
 
@@ -37,7 +40,7 @@ function movieBoxGenerator(response){
 				data-filter="tab-1 tab-6  ">
 				 <figure class="featured lazyLoad imgLoaded"
 					data-img-width="224" data-img-height="336">
-					<a href="./movie/` +movies[index].id+`">
+					<a href="./movies/` +movies[index].id+`">
 					<img
 						src="/KinoArena` + movies[index].coverURL + `"
 						alt="`+ movies[index].title+ `" width="224" height="336"
@@ -45,7 +48,7 @@ function movieBoxGenerator(response){
 						</a>
 				</figure>
 				<h5 class="title">
-					<a href="./movie/`+ movies[index].id+ `">` + movies[index].title+ 
+					<a href="./movies/`+ movies[index].id+ `">` + movies[index].title+ 
 					`</a>
 				</h5>
 

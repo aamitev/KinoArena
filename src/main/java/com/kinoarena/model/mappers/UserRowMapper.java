@@ -22,6 +22,7 @@ public class UserRowMapper implements RowMapper<User> {
 			user = new User(rs.getInt("user_id"), rs.getString("email"), rs.getString("password"),
 					rs.getString("firstName"), rs.getString("secondName"), rs.getString("lastName"),
 					rs.getBoolean("isMale"), rs.getDate("birthday").toLocalDate());
+			
 			user.setAdminRights(rs.getBoolean("isAdmin"));
 			if (rs.getObject("gsm") != null) {
 				user.setGSM(rs.getString("gsm"));

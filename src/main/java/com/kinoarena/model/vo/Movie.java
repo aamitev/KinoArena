@@ -17,21 +17,21 @@ public class Movie {
 	private int ageLimitation;
 	private MovieType movieType;
 	private Genre genre;
-	
 
-	public Movie(int id,String title, int duration) throws MovieException {
+	public Movie() {
+	}
+
+	public Movie(int id, String title, int duration) throws MovieException {
 		this.setId(id);
 		this.setTitle(title);
 		this.setDirector(director);
 		this.setDuration(duration);
 	}
 
-	public Movie(int id,String title, String coverURL, int duration) throws MovieException {
-		this(id ,title, duration);
+	public Movie(int id, String title, String coverURL, int duration) throws MovieException {
+		this(id, title, duration);
 		this.setCoverURL(coverURL);
 	}
-	
-	
 
 	public String getTitle() {
 		return title;
@@ -68,7 +68,7 @@ public class Movie {
 		if (director != null) {
 			this.director = director;
 		}
-		
+
 	}
 
 	public int getDuration() {
@@ -95,7 +95,7 @@ public class Movie {
 	}
 
 	public void setGenre(Genre genre) throws MovieException {
-		if(genre != null) {
+		if (genre != null) {
 			this.genre = genre;
 		}
 
@@ -104,11 +104,13 @@ public class Movie {
 	public LocalDate getPrimiere() {
 		return primiere;
 	}
+
 	public void setPrimiere(Date primiere) throws MovieException {
 		if (primiere != null) {
 			this.primiere = primiere.toLocalDate();
 		}
 	}
+
 	public void setPrimiere(LocalDate primiere) throws MovieException {
 		if (primiere != null) {
 			this.primiere = primiere;

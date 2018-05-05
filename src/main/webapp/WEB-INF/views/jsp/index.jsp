@@ -49,7 +49,7 @@
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<a onclick="getActiveByGenre('animation')">
+									<a onclick="getActiveByGenre('анимация')">
 										<div class="tabItem filter" data-filter-anchor="tab-3">
 											<div class="row">Детски</div>
 											<div class="row">филми</div>
@@ -136,8 +136,8 @@
 			<div class="clearH"></div>
 		</div>
 	</div>
-	<script onload="getActiveMovies()" src="./js/filterContent.js"></script>
-	<script src="./js/searchbar.js"></script>
+	<script onload="getActiveMovies()" src="/KinoArena/js/filterContent.js"></script>
+	<script src="/KinoArena/js/searchbar.js"></script>
 
 	<!-- end of #main -->
 </body>
