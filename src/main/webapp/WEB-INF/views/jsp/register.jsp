@@ -69,12 +69,11 @@
 							<input type="password" id="rePassword" name="rePassword"
 								required="required" placeholder="Повторете паролата *">
 						</div>
-						<div >
-							<h6 align = "left" >Мъж</h6>
-							<input type="radio" name="gender" value="male" />
+						<div>
 
-							<h6 align = "left">Жена</h6>
-							<input type="radio" name="gender" value="female" />
+							<input id="sex" type="radio" name="sex"><br> <input
+								type='button' value='Мъж' id='selectMale'> <input
+								type='button' value='Жена' id='selectFemale'>
 						</div>
 						<div class="formItem datepicker">
 							<input type="datetime" id="dateOfBirth" name="dateOfBirth"
@@ -82,7 +81,7 @@
 						</div>
 						<div class="formItem checkbox">
 							<div class="stenik-checkbox">
-								<input type="checkbox" name="gender" value="0" />
+								<input type="checkbox" name="terms" value="0" />
 								<p align="left">Запознах се с общите условия</p>
 							</div>
 						</div>
@@ -125,5 +124,39 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$("#isSelect").click(function() {
+
+				alert($('input:radio[name=sex]:checked').val());
+
+			});
+
+			$("#selectMale").click(function() {
+				$('input:radio[name=sex]:nth(0)').attr('value', true);
+				$('input:radio[name=sex]:nth(0)').attr('checked', true);
+				$('input:radio[name=sex]')[0].checked = true;
+
+			});
+
+			$("#selectFemale").click(function() {
+				$('input:radio[name=sex]:nth(0)').attr('value', false);
+				$('input:radio[name=sex]:nth(0)').attr('checked', true);
+				$('input:radio[name=sex]')[0].checked = true;
+
+			});
+
+			$("#reset").click(function() {
+
+				$('input:radio[name=sex]').attr('checked', false);
+
+			});
+
+		});
+	</script>
+
+
 </body>
 </html>

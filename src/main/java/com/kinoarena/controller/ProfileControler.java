@@ -18,11 +18,6 @@ public class ProfileControler {
 		return "changePassword";
 	}
 	
-	@RequestMapping(value = "/interests", method = RequestMethod.GET)
-	public String interests(Model model) {
-		return "interests";
-	}
-	
 	@RequestMapping(value = "/favorites", method = RequestMethod.GET)
 	public String favorites(Model model) {
 		return "favorites";
