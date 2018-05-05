@@ -18,6 +18,9 @@ public class Movie {
 	private MovieType movieType;
 	private Genre genre;
 	
+	public Movie() {
+		
+	}
 
 	public Movie(int id,String title, int duration) throws MovieException {
 		this.setId(id);

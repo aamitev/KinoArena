@@ -18,4 +18,6 @@ public interface IMovieDao {
 	public List<Movie> getAllMovies() throws Exception;
 
 	public Movie getMovieById(int id) throws Exception;
+	
+	public Genre getGenre(String genre);
 }

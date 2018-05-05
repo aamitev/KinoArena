@@ -58,7 +58,7 @@
 										на резервациите и закупените билети</span>
 							</li>
 							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
-								<li><a href="./orders"> <span class="icon"><i
+								<li><a href="./addMovie"> <span class="icon"><i
 											class="clock"></i></span> <span class="txt">Добави филм</span>
 								</a></li>
 							</c:if>
