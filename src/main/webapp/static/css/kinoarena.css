@@ -7568,7 +7568,7 @@ color
 
 .post .contentWrapper, .postDetail .contentWrapper {
 	position: relative;
-	max-height: 178px;
+	max-height: 250px;
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	-ms-backface-visibility: hidden;
@@ -7669,7 +7669,7 @@ color
 }
 
 .small.post .contentWrapper, .small.postDetail .contentWrapper {
-	height: 155px;
+	height: 200px;
 }
 
 .inline.post .featured, .inline.postDetail .featured {
@@ -7683,7 +7683,7 @@ color
 	bottom: 0;
 	margin: 0;
 	height: auto;
-	max-height: 100%;
+	max-height: 200%;
 	padding: 10px 12px;
 	color: #fff;
 	font-size: 16px;
