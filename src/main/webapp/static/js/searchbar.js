@@ -11,7 +11,7 @@ document.getElementById("search_input").addEventListener("keyup", function() {
 		var movies = JSON.parse(xhr.responseText);
 		var html = '';
 		for (var index=0; index < movies.length; index++) {
-			html +=`<a href="./movie/`+movies[index].id+`" class="searchItem">
+			html +=`<a href="./movies/`+movies[index].id+`" class="searchItem">
 	        <figure class="featured">
 	                            
 	<img title="`+movies[index].title+`" width="60" height="90" alt="`+movies[index].title+`" src="/KinoArena`+movies[index].coverURL+`">

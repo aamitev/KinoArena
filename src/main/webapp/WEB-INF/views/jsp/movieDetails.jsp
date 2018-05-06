@@ -2,10 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/KinoArena/css/kinoarena.css">
+<link rel="stylesheet" type="text/css"
+	href="/KinoArena/css/kinoarena.css">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -20,7 +23,12 @@
 			<header class="descHeader">
 				<h1 class="title">${movie.title}</h1>
 				<a id="favoriteButton" onclick="favoritesControler(${movie.id})"
-					class="button fixedPosition favourites rippleWrapper">
+					class="button fixedPosition favourites rippleWrapper"> <c:if
+						test="${not empty inFavorites}">
+						<p class="notActive">Премахни от любими</p>
+					</c:if> <c:if test="${empty inFavorites}">
+						<p class="active">Добави в любими</p>
+					</c:if>
 				</a>
 			</header>
 			<article class="descContent mobileStyles">
@@ -109,10 +117,46 @@
 			</article>
 		</section>
 		<!-- end of .movieDesc -->
-		<div id="block_projectionDays" class="block projectionDays"></div>
+		<div id="block_projectionDays" class="block projectionDays">
+			<c:if test="${not empty dates}">
+				<div class="clear"></div>
+				<h4 class="projectionDaysTitle">Програма</h4>
+				<div class="clearH"></div>
+				<div class="wrapper">
+					<header class="stenikTabsHeader" data-rows="2">
+						<div
+							class="sliderWrapper owl-carousel owl-theme owl-loaded owl-text-select-on first-slide hide-nav">
+							<div class="owl-stage-outer">
+								<div class="owl-stage"
+									style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 980px;">
+									<c:forEach items="${dates}" var="date">
+										<fmt:parseDate value="${date.startTime}" pattern="yyyy-MM-dd"
+											var="parsedDate" />
+										<fmt:formatDate value="${parsedDate}" type="date"
+											pattern="yyy-MM-dd" var="formatedDate"/>
+										<div class="owl-item active"
+											style="width: 122.5px; margin-right: 0px;">
+											<a onclick="getAllCinemaProgram(${movie.id},'${formatedDate}')"
+												class="tabItem ">
+												<div class="row">
+													<fmt:formatDate value="${parsedDate}" type="date"
+														pattern="dd/MM" />
+												</div>
+											</a>
+										</div>
+									</c:forEach>
+									<div id="block" class="block"></div>
+								</div>
+							</div>
+						</div>
+					</header>
+					<div class="clearH2"></div>
+				</div>
+			</c:if>
+		</div>
 	</div>
-	<script onload="getProgramDates(${movie.id})"
-		src="/KinoArena/js/movieProgram.js"></script>
 	<script src="/KinoArena/js/favoriteMovie.js"></script>
+	<script src="/KinoArena/js/movieProgram.js"></script>
+
 </body>
 </html>

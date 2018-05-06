@@ -84,21 +84,42 @@
 							</div>
 						</div>
 					</header>
-					<div id="favorites" class="filterContent small"></div>
+					<div id="favorites" class="filterContent small">
+						<c:if test="${not empty favoriteMovies}">
+							<c:forEach items="${favoriteMovies}" var="movie">
+
+								<div class="filterItem  movieBox filterSelected"
+									data-filter="tab-onScreen">
+									<figure class="featured">
+										<a href="/KinoArena/movies/${movie.id}"> <img
+											title="${movie.title}" width="139" height="208"
+											alt="${movie.title}" class="poster"
+											src="/KinoArena/${movie.coverURL }">
+										</a>
+
+									</figure>
+									<h3 class="title">
+										<a href="/KinoArena/movie/${movie.id}">${movie.title}</a>
+									</h3>
+									<div class="attr highlight" style="padding-bottom: 1px;">
+										<p>forbidden for under:${movie.ageLimitation}<p>
+									</div>
+								</div>
+							</c:forEach>
+						</c:if>
+					</div>
 				</div>
+				<!-- end of .profilePanel -->
 			</div>
-			<!-- end of .profilePanel -->
-		</div>
 		</main>
 		<!-- end of #main -->
 	</div>
-		<div id="scroll_to_top" class="scrollToTop">
-			<i class="circleUp"></i>
-		</div>
-
-		<div id="fb-root"></div>
+	<div id="scroll_to_top" class="scrollToTop">
+		<i class="circleUp"></i>
 	</div>
-	
+
+	<div id="fb-root"></div>
+
 	<noscript>
 
 		<div style="display: inline;">
@@ -109,7 +130,5 @@
 		</div>
 
 	</noscript>
-		<script onload="getFavoriteMovies()" type="text/javascript"
-		src="./js/getFavorites.js"></script>
 </body>
 </html>

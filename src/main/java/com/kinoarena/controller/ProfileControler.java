@@ -20,15 +20,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kinoarena.model.dao.FavoriteMovieDAO;
 import com.kinoarena.model.dao.MovieDao;
 import com.kinoarena.model.enums.MovieType;
 import com.kinoarena.model.vo.Movie;
+import com.kinoarena.model.vo.User;
 
 @Controller
 public class ProfileControler {
 
 	@Autowired
 	private MovieDao movieDao;
+	@Autowired
+	private FavoriteMovieDAO favoriteMovieDao;
 
 	@RequestMapping(value = "/userProfile", method = RequestMethod.GET)
 	public String profile(Model model, HttpSession session) {
@@ -62,6 +66,9 @@ public class ProfileControler {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
+			User user = (User) session.getAttribute("loggedUser");
+			List<Movie> favoriteMovies = favoriteMovieDao.getFavoriteMovies(user.getId());
+			model.addAttribute("favoriteMovies", favoriteMovies);
 			return "favorites";
 		} catch (Exception e) {
 			e.printStackTrace();

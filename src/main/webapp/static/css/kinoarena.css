@@ -886,7 +886,7 @@ hr, .hLine, .title, .content, .block, .list, .cinemasList, .stdForm,
 	.arenaScrollbar, .timelineScrollbar, .verticalScrollbar, .tinynav,
 	.selectedSeatsWrapper, .selectedSeatsOutput {
 	float: left;
-	width: 100%;
+	width: 103%;
 }
 
 .circleButton .mainTxt .icon:before, .captcha .reloadBtn:before,
@@ -6532,7 +6532,7 @@ a:hover .timelineSet .item img, .timelineSet a:hover .item img, a:hover .schedul
 .movieBox .attr.highlight {
 	float: right;
 	height: 23px;
-	max-width: 110px;
+	max-width: 130px;
 }
 
 .movieBox .attr.highlight .item {

@@ -20,7 +20,7 @@ import com.kinoarena.utils.Utils;
 public class LoginController {
 
 	@Autowired
-	private UserDAO user;
+	private UserDAO userDao;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model, HttpServletRequest request, HttpSession session) {
@@ -30,24 +30,32 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String verifyLogin(HttpServletRequest request, HttpSession session, Model model) {
-		String userEmail = request.getParameter("email").toString();
-		String userPass = request.getParameter("password").toString();
-		String referer = "index";
-		if(session.getAttribute("referer") != null) {
-			referer = ((String) session.getAttribute("referer")).split("/KinoArena")[1];
-		}
-		User loggedUser;
 		try {
-			if (user.login(userEmail, userPass) != null) {
-				loggedUser = user.login(userEmail, userPass);
-				session.setAttribute("loggedUser", loggedUser);
-				return "redirect:"+referer;
+			if (session.getAttribute("loggedUser") != null) {
+				return "redirect:/index";
 			}
+			String userEmail = request.getParameter("email").toString();
+			String userPass = request.getParameter("password").toString();
+			String referer = "index";
+			if (session.getAttribute("referer") != null) {
+				String[] link = ((String) session.getAttribute("referer")).split("/");
+				if (link[link.length - 2].equals("movies")) {
+					referer = "/" + link[link.length - 2] +"/" +link[link.length - 1];
+				}
+			}
+			User loggedUser = userDao.login(userEmail, userPass);
+			System.out.println(referer);
+			if (loggedUser != null) {
+				session.setAttribute("loggedUser", loggedUser);
+				return "redirect:" + referer;
+			}
+			return "login";
+
 		} catch (WebProfileException e) {
 			e.printStackTrace();
+			System.out.println("Wrong password");
 			return "login";
 		}
-		return "index";
 	}
 
 	@RequestMapping(value = "/forgottenPassword", method = RequestMethod.GET)
@@ -74,10 +82,9 @@ public class LoginController {
 			String email = request.getParameter("email").toString();
 			String password = request.getParameter("password").toString();
 			String rePassword = request.getParameter("rePassword").toString();
-			
-			
+
 			boolean gender = Boolean.parseBoolean(request.getParameter("sex"));
-			
+
 			String birthdate = request.getParameter("dateOfBirth").toString();
 
 			if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
@@ -87,7 +94,7 @@ public class LoginController {
 			}
 
 			LocalDate dateOfBirth = LocalDate.parse(birthdate);
-			user.register(firstName, secondName, lastName, email, password, gender, dateOfBirth);
+			userDao.register(firstName, secondName, lastName, email, password, gender, dateOfBirth);
 
 			return "index";
 		} catch (Exception e) {
@@ -112,21 +119,19 @@ public class LoginController {
 
 		System.out.println(loggedUser.getEmail());
 
-		user.changePassword(loggedUser, reenterNewPass);
+		userDao.changePassword(loggedUser, reenterNewPass);
 
 		return "userProfile";
 	}
-	
-	
-	
-//	@RequestMapping(value = "/submit", method = RequestMethod.POST)
-//	public String updateInfo(HttpServletRequest request, HttpSession session, Model model) {
-//		
-//		
-//		return "userProfile";
-//	}
-	
-	
+
+	// @RequestMapping(value = "/submit", method = RequestMethod.POST)
+	// public String updateInfo(HttpServletRequest request, HttpSession session,
+	// Model model) {
+	//
+	//
+	// return "userProfile";
+	// }
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, Model model) {
 		request.getSession().invalidate();

@@ -68,31 +68,6 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/inFavorites/{id}")
-	public void isMovieInFavorites(Model model, @PathVariable Integer id, HttpSession session,
-			HttpServletResponse response) {
-		try {
-			if (session.getAttribute("loggedUser") != null) {
-				User user = (User) session.getAttribute("loggedUser");
-				Movie movie = favoriteMovieDao.getFavoriteMovie(user.getId(), id);
-				if (movie != null) {
-					response.setContentType("application/json");
-					response.getWriter().println("{\"success\": true}");
-					return;
-				}
-			}
-			response.setContentType("application/json");
-			response.getWriter().println("{\"succes\": false}");
-		} catch (Exception e) {
-			e.printStackTrace();
-			try {
-				response.getWriter().println("error");
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
-
 	@RequestMapping(method = RequestMethod.POST, value = "/removeFavorite", params = "movieID")
 	public void removeFavoriteMovie(Model model, @RequestParam("movieID") int movieID, HttpServletResponse response,
 			HttpSession session) {

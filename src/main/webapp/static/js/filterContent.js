@@ -54,7 +54,7 @@ function movieBoxGenerator(response){
 
 				<div class="attr highlight">
 					<div class="item tooltip_26">
-						<p> minimal age - `+ movies[index].ageLimitation +`</p>
+						<p>forbidden for under:`+ movies[index].ageLimitation +`</p>
 					</div>
 				</div>
 			</div>`

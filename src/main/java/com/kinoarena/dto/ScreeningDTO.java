@@ -25,13 +25,6 @@ public class ScreeningDTO {
 		this.id = id;
 	}
 
-	LocalDateTime getStartTime() {
-		return startTime;
-	}
-
-	void setStartTime(LocalDateTime startTime) {
-		this.startTime = startTime;
-	}
 
 	int getHallId() {
 		return hallId;
@@ -47,6 +40,14 @@ public class ScreeningDTO {
 
 	public void setMovieId(int movieId) {
 		this.movieId = movieId;
+	}
+
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
 	}
 
 }
