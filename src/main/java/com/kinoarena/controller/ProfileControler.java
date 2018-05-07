@@ -4,8 +4,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kinoarena.model.dao.FavoriteMovieDAO;
 import com.kinoarena.model.dao.MovieDao;
-import com.kinoarena.model.enums.MovieType;
 import com.kinoarena.model.vo.Movie;
 import com.kinoarena.model.vo.User;
 
@@ -121,21 +118,7 @@ public class ProfileControler {
 				movie.setAgeLimitation(ageLimitation);
 				movie.setCoverURL("/uploaded/movie/" + file.getOriginalFilename());
 				movie.setGenre(movieDao.getGenre(genre));
-				switch (movieType) {
-				case "2D":
-					movie.setMovieType(MovieType._2D);
-					break;
-				case "3D":
-					movie.setMovieType(MovieType._3D);
-					break;
-				case "4D":
-					movie.setMovieType(MovieType._4D);
-					break;
-
-				default:
-					movie.setMovieType(MovieType._2D);
-					break;
-				}
+				movie.setMovieType(movieType.toUpperCase());
 				movieDao.addMovie(movie);
 
 				return "success";

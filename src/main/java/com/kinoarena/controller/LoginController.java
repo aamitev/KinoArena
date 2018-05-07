@@ -53,7 +53,6 @@ public class LoginController {
 
 		} catch (WebProfileException e) {
 			e.printStackTrace();
-			System.out.println("Wrong password");
 			return "login";
 		}
 	}

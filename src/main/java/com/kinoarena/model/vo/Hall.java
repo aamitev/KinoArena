@@ -13,7 +13,7 @@ public class Hall {
 	private static final String INVALID_NAME = "Invalid name.";
 	private int id;
 	private String name;
-	private HallType halltype;
+	private HallType hallType;
 	private Set<Seat> seats;
 	private Cinema cinema;
 
@@ -56,15 +56,15 @@ public class Hall {
 		return this.cinema;
 	}
 
-	public HallType getHalltype() {
-		return halltype;
+	public HallType getHallType() {
+		return hallType;
 	}
 
-	public void setHalltype(HallType halltype) throws MovieException {
+	public void setHallType(HallType halltype) throws MovieException {
 		if (halltype == null) {
 			throw new MovieException("Invalid hallType");
 		}
-		this.halltype = halltype;
+		this.hallType = halltype;
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import com.kinoarena.model.mappers.ScreeningDtoRowMapper;
 import com.kinoarena.model.mappers.ScreeningRowMapper;
 import com.kinoarena.model.vo.Cinema;
 import com.kinoarena.model.vo.Hall;
+import com.kinoarena.model.vo.Movie;
 import com.kinoarena.model.vo.Screening;
 
 @Component
@@ -35,6 +36,14 @@ public class ScreeningDao implements IScreeningDao {
 			+ "JOIN cinema c ON(h.cinema_id = c.cinema_id) "
 			+ "WHERE (c.cinema_id = ?) AND (DATE(s.startTime) >= DATE(?))"
 			+ "GROUP BY (DATE(s.startTime));";
+
+	private static final String SCREENINGS_BY_CINEMA_AND_DATE = "SELECT * FROM screening s "
+			+ "JOIN movies m ON(s.movie_id=m.movie_id) "
+			+ "JOIN genres g ON(m.genres_id=g.genre_id) "
+			+ "JOIN halls h ON(s.halls_id=h.hall_id) "
+			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
+			+ "JOIN address a ON(c.address_id= a.address_id)"
+			+ "WHERE(c.cinema_id = ?)AND(DATE(s.startTime)=(?));";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -71,6 +80,27 @@ public class ScreeningDao implements IScreeningDao {
 				screeningsByCinema.get(cinema.getName()).put(hall.getName(), new LinkedList<Screening>());
 			}
 			screeningsByCinema.get(cinema.getName()).get(hall.getName()).add(screening);
+		}
+
+		return screeningsByCinema;
+	}
+	
+
+	public Map<String, Map<String, List<Screening>>> getScreeningsByCinemaIdAndDate(int id, String date) {
+		List<Screening> screenings = jdbcTemplate.query(SCREENINGS_BY_CINEMA_AND_DATE, new Object[] { id, date },
+				screeningMapper);
+		Map<String, Map<String, List<Screening>>> screeningsByCinema = new HashMap<String, Map<String, List<Screening>>>();
+
+		for (Screening screening : screenings) {
+			Hall hall = screening.getHall();
+			Movie movie = screening.getMovie();
+			if (!screeningsByCinema.containsKey(movie.getTitle())) {
+				screeningsByCinema.put(movie.getTitle(), new HashMap<String, List<Screening>>());
+			}
+			if (!screeningsByCinema.get(movie.getTitle()).containsKey(hall.getName())) {
+				screeningsByCinema.get(movie.getTitle()).put(hall.getName(), new LinkedList<Screening>());
+			}
+			screeningsByCinema.get(movie.getTitle()).get(hall.getName()).add(screening);
 		}
 
 		return screeningsByCinema;

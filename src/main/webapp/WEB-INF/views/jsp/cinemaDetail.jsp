@@ -11,13 +11,16 @@
 	<c:import url="header.jsp"></c:import>
 
 	<div class="wrapper">
+		<section class="pageDesc">
+			<h1 style="text-align: center;" >${cinema.name}</h1>
+		</section>
 		<nav class="tabularMenu" data-items="3">
 			<ul>
-				<li class="selected"><a href="/bg/cinema/kino-arena-zapad">
-						<div class="icon">
-							<i class="chair"></i>
-						</div> За киното
-				</a></li>
+				<li class="selected">
+					<div class="icon">
+						<i class="chair"></i>
+					</div> За киното
+				</li>
 			</ul>
 		</nav>
 		<div class="clearH2"></div>

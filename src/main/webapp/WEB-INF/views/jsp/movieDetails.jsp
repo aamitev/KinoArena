@@ -44,7 +44,7 @@
 							<p>${movie.description}</p>
 
 							<p>ФИЛМЪТ СЕ РАЗПРОСТРАНЯВА ВЪВ ФОРМАТ:</p>
-							<p>${movie.movieType.value}</p>
+							<p>${movie.movieType}</p>
 						</article>
 					</div>
 				</c:if>
@@ -135,7 +135,7 @@
 										<fmt:formatDate value="${parsedDate}" type="date"
 											pattern="yyy-MM-dd" var="formatedDate"/>
 										<div class="owl-item active"
-											style="width: 122.5px; margin-right: 0px;">
+											style="width: 122.5px;  margin-right: 0px;">
 											<a onclick="getAllCinemaProgram(${movie.id},'${formatedDate}')"
 												class="tabItem ">
 												<div class="row">
