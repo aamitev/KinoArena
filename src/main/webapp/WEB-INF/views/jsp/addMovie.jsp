@@ -47,7 +47,7 @@
 			<div class="profilePanel">
 				<aside class="sidebar left">
 					<nav class="profileMenu">
-						<ul>
+						<ul class="x-navigation">
 
 							<li><a href="./userProfile"> <span class="icon"><i
 										class="profile"></i></span> <span class="txt">Персонална
@@ -67,9 +67,16 @@
 										резервациите и закупените билети</span>
 							</a></li>
 							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
-								<li class="selected"><a href="./addMovie"> <span
-										class="icon"><i class="clock"></i></span> <span class="txt">Добави
-											филм</span>
+								<li class="selected"><span class="icon"><i
+										class="clock"></i></span> <span class="txt">Добави филм</span></li>
+								<li><a href="./addProjection"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави прожекция</span>
+								</a></li>
+								<li><a href="./addCinema"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави кино</span>
+								</a></li>
+								<li><a href="./addHall"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави зала</span>
 								</a></li>
 							</c:if>
 							<li><a href="./logout"> <span class="icon"><i
@@ -78,6 +85,7 @@
 						</ul>
 					</nav>
 				</aside>
+
 				<div class="contentWrapper">
 					<span class="icon"> <i class="profile"></i>
 					</span>
@@ -121,8 +129,9 @@
 
 						<!-- <input type="text" name="movieType" id="movieType"
 							style="width: 60%; line-height: 100%;" placeholder = "Вид прожекция"> -->
-						<select id="projectionType" name = "projectionType">
-							<option value="" myTag="Вид прожекция" selected disabled>Вид прожекция</option>
+						<select id="projectionType" name="projectionType">
+							<option value="" myTag="Вид прожекция" selected disabled>Вид
+								прожекция</option>
 							<option value="2D" myTag="2D">2D</option>
 							<option value="3D" myTag="3D">3D</option>
 							<option value="4D" myTag="4D">4D</option>

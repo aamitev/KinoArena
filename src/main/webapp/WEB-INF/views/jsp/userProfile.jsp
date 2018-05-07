@@ -44,13 +44,12 @@
 					<nav class="profileMenu">
 						<ul>
 
-							<li class="selected"> <span
-									class="icon"><i class="profile"></i></span> <span class="txt">Персонална
-										информация</span>
-							</li>
-							<li><a href="./changePassword"> <span
-									class="icon"><i class="password"></i></span> <span class="txt">Промяна
-										на парола</span>
+							<li class="selected"><span class="icon"><i
+									class="profile"></i></span> <span class="txt">Персонална
+									информация</span></li>
+							<li><a href="./changePassword"> <span class="icon"><i
+										class="password"></i></span> <span class="txt">Промяна на
+										парола</span>
 							</a></li>
 							<li><a href="./favorites"> <span class="icon"><i
 										class="heart"></i></span> <span class="txt">Моите филми</span>
@@ -62,6 +61,15 @@
 							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
 								<li><a href="./addMovie"> <span class="icon"><i
 											class="clock"></i></span> <span class="txt">Добави филм</span>
+								</a></li>
+								<li><a href="./addProjection"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави прожекция</span>
+								</a></li>
+								<li><a href="./addCinema"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави кино</span>
+								</a></li>
+								<li><a href="./addHall"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави зала</span>
 								</a></li>
 							</c:if>
 							<li><a href="./logout"> <span class="icon"><i
@@ -131,7 +139,7 @@
 						<div class="formItem col2 left">
 							<input type="email" id="stenik_user_personal_information_email"
 								name="stenik_user_personal_information[email]"
-								readonly="readonly" disabled="disabled" required="required"
+								readonly="readonly" required="required"
 								placeholder="form.email"
 								value="${sessionScope.loggedUser.getEmail() }" />
 						</div>

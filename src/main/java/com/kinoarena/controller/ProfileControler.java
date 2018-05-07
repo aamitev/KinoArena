@@ -46,7 +46,25 @@ public class ProfileControler {
 			return "error";
 		}
 	}
-
+	
+	public String editProfile(Model model, HttpSession session, HttpServletRequest request) {
+		try {
+			if (session.getAttribute("loggedUser") == null) {
+				return "redirect:/login";
+			}
+			//TODO: finish it!!
+			
+			
+			
+			
+			
+			return "userProfile";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
 	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
 	public String changePassword(Model model, HttpSession session) {
 		try {
@@ -147,7 +165,46 @@ public class ProfileControler {
 			return "error";
 		}
 	}
-
+		
+	@RequestMapping(value = "/addProjection", method = RequestMethod.GET)
+	public String addProjection(Model model, HttpSession session) {
+		try {
+			if (session.getAttribute("loggedUser") == null) {
+				return "redirect:/login";
+			}
+			return "addProjection";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value = "/addCinema", method = RequestMethod.GET)
+	public String addCinema(Model model, HttpSession session) {
+		try {
+			if (session.getAttribute("loggedUser") == null) {
+				return "redirect:/login";
+			}
+			return "addCinema";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value = "/addHall", method = RequestMethod.GET)
+	public String addHall(Model model, HttpSession session) {
+		try {
+			if (session.getAttribute("loggedUser") == null) {
+				return "redirect:/login";
+			}
+			return "addHall";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+	
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
 	public String orders(Model model, HttpSession session) {
 		try {
