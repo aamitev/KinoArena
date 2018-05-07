@@ -3168,7 +3168,7 @@ textarea {
 	z-index: 9999;
 	left: 0px;
 	top: 100%;
-	width: 100%;
+	width: 103%;
 	color: #111;
 	margin-top: -2px;
 	background: #fff;
@@ -3953,7 +3953,6 @@ textarea {
 /* ---- Page desc ---- */
 .pageDesc {
 	padding-top: 100px;
-	text-align: center;
 	position: relative;
 	z-index: 1;
 }
@@ -6532,7 +6531,7 @@ a:hover .timelineSet .item img, .timelineSet a:hover .item img, a:hover .schedul
 .movieBox .attr.highlight {
 	float: right;
 	height: 23px;
-	max-width: 130px;
+	max-width: 140px;
 }
 
 .movieBox .attr.highlight .item {
@@ -8412,7 +8411,7 @@ body:not (.mobile ) .mapWrapper .map .gmnoprint .gm-style-mtc:last-child
 
 /* ---- Tabular menu ---- */
 .tabularMenu {
-	padding-top: 200px;
+	padding-top: 3%;
 	position: relative;
 	z-index: 1;
 	margin: 10px 0 20px;

@@ -28,29 +28,13 @@ public class CinemaController {
 	@RequestMapping(method = RequestMethod.GET, value = "/cinemas")
 	public String cinemasPage(Model model, HttpServletResponse response) {
 		try {
+			List<Cinema> cinemas = cinemaDao.getAllCinemas();
+			model.addAttribute("cinemas", cinemas);
+			
 			return "cinemas";
 		} catch (Exception e) {
 			return "error";
 			
-		}
-	}
-	//returns all cinemas, used in cinemas page
-	@RequestMapping(method = RequestMethod.GET, value = "/allCinema")
-	public void getAllCinemas(Model model, HttpServletResponse response) {
-		try {
-			List<Cinema> cinemas = cinemaDao.getAllCinemas();
-			String json = gson.toJson(cinemas);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().println(json);
-		} catch (Exception e) {
-			e.printStackTrace();
-			try {
-				response.getWriter().println("error");
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 		}
 	}
 	//returns cinema, used in cinemaDetail page

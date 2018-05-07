@@ -33,7 +33,7 @@ var link = "/KinoArena/screenings?movieId="+id + "&date=" + date;
 					}
 							html += `<div class="row">
 						<div class="attr secondary">
-							<div class="item"><h3>`+screenings[cinema][hall][0].hall.halltype+`				
+							<div class="item"><h3>`+screenings[cinema][hall][0].hall.hallType+` `+screenings[cinema][hall][0].movie.movieType+`			
 							</div>
 						</div>
 						

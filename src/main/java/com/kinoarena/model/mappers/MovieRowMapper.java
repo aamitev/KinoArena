@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.kinoarena.model.enums.MovieType;
 import com.kinoarena.model.vo.Movie;
 
 @Component
@@ -24,7 +23,7 @@ public class MovieRowMapper implements RowMapper<Movie> {
 			movie.setPrimiere(rs.getDate("premiere"));
 			movie.setAgeLimitation(rs.getInt("ageLimitation"));
 			movie.setDirector(rs.getString("director"));
-			movie.setMovieType(MovieType.valueOf("_" + rs.getString("movieType").toUpperCase()));
+			movie.setMovieType(rs.getString("movieType"));
 			movie.setGenre(genreMapper.mapRow(rs, rowNum));
 		} catch (Exception e) {
 			throw new SQLException(e);

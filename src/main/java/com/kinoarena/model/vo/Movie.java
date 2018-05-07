@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 import com.kinoarena.exceptions.MovieException;
-import com.kinoarena.model.enums.MovieType;
 
 public class Movie {
 	private int id;
@@ -15,7 +14,7 @@ public class Movie {
 	private int duration;
 	private LocalDate primiere;
 	private int ageLimitation;
-	private MovieType movieType;
+	private String movieType;
 	private Genre genre;
 
 	public Movie() {
@@ -125,11 +124,11 @@ public class Movie {
 		this.id = id;
 	}
 
-	public MovieType getMovieType() {
+	public String getMovieType() {
 		return movieType;
 	}
 
-	public void setMovieType(MovieType movieType) throws MovieException {
+	public void setMovieType(String movieType) throws MovieException {
 		if (movieType == null) {
 			throw new MovieException("Invalid movieType");
 		}

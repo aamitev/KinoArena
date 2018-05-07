@@ -36,8 +36,10 @@ public class UserDAO implements IUserDAO {
 			return user;
 		} catch (EmptyResultDataAccessException e) {
 			e.printStackTrace();
+			System.out.println("Wrong password");
 			return null;
 		} catch (Exception e) {
+			System.out.println("Wrong password");
 			throw new WebProfileException(WRONG_PASSWORD, e);
 		}
 	}
