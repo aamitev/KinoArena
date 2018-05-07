@@ -1,8 +1,6 @@
 package com.kinoarena.model.vo;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.kinoarena.exceptions.ModelException;
 import com.kinoarena.utils.Utils;

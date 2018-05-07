@@ -17,7 +17,8 @@
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 
 </head>
-<body>
+<body class="loaded scrolling menu Loaded after Loaded">
+
 	<div class="page_bg"
 		style="background-image: url('/images/frontend/bg-items/bg-15years.jpg');"></div>
 
@@ -47,51 +48,87 @@
 		</section>
 		<div class="wrapper">
 			<div class="profilePanel">
+				<aside class="sidebar left">
+					<nav class="profileMenu">
+						<ul class="x-navigation">
+
+							<li><a href="./userProfile"> <span class="icon"><i
+										class="profile"></i></span> <span class="txt">Персонална
+										информация</span>
+							</a></li>
+
+							<li><a href="./changePassword"> <span class="icon"><i
+										class="password"></i></span> <span class="txt">Промяна на
+										парола</span>
+							</a></li>
+
+							<li><a href="./favorites"> <span class="icon"><i
+										class="heart"></i></span> <span class="txt">Моите филми</span>
+							</a></li>
+							<li><a href="./orders"> <span class="icon"><i
+										class="clock"></i></span> <span class="txt">История на
+										резервациите и закупените билети</span>
+							</a></li>
+							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
+								<li><a href="./addMovie"><span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави филм</span></a></li>
+								<li><a href="./addProjection"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави прожекция</span>
+								</a></li>
+								<li class="selected"><span class="icon"><i
+										class="clock"></i></span> <span class="txt">Добави кино</span></li>
+								<li><a href="./addHall"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави зала</span>
+								</a></li>
+							</c:if>
+							<li><a href="./logout"> <span class="icon"><i
+										class="exit"></i></span> <span class="txt">Изход</span>
+							</a></li>
+						</ul>
+					</nav>
+				</aside>
 
 				<div class="contentWrapper">
 					<span class="icon"> <i class="profile"></i>
 					</span>
+					<!-- ADDING IMAGE -->
+					<!-- <input id = "image" name = "image" type="file" style="width:270px" > -->
 
-					<aside class="sidebar left">
-						<nav class="profileMenu">
-							<ul class="x-navigation">
 
-								<li><a href="./userProfile"> <span class="icon"><i
-											class="profile"></i></span> <span class="txt">Персонална
-											информация</span>
-								</a></li>
+					<form id="addCinemaForm" method="POST" action="./addCinema"
+						enctype="multipart/form-data">
 
-								<li><a href="./changePassword"> <span class="icon"><i
-											class="password"></i></span> <span class="txt">Промяна на
-											парола</span>
-								</a></li>
+						<!-- DISPLAY UPLOADED IMAGE -->
+						<input type="file" name="file" onchange="readURL(this);"
+							 style="width: 300px">
+						<img id="cinemaImg" src="#" alt="cinemaImg"
+							style="width: 500px; line-height: 400px" border="5" />
+						<!-- DISPLAY UPLOADED IMAGE -->
 
-								<li><a href="./favorites"> <span class="icon"><i
-											class="heart"></i></span> <span class="txt">Моите филми</span>
-								</a></li>
-								<li><a href="./orders"> <span class="icon"><i
-											class="clock"></i></span> <span class="txt">История на
-											резервациите и закупените билети</span>
-								</a></li>
-								<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
-									<li><a href="./addMovie"> <span class="icon"><i
-												class="clock"></i></span> <span class="txt">Добави филм</span>
-									</a></li>
-									<li><a href="./addProjection"> <span class="icon"><i
-												class="clock"></i></span> <span class="txt">Добави прожекция</span>
-									</a></li>
-									<li class="selected"><span class="icon"><i
-											class="clock"></i></span> <span class="txt">Добави кино</span></li>
-									<li><a href="./addHall"> <span class="icon"><i
-												class="clock"></i></span> <span class="txt">Добави зала</span>
-									</a></li>
-								</c:if>
-								<li><a href="./logout"> <span class="icon"><i
-											class="exit"></i></span> <span class="txt">Изход</span>
-								</a></li>
-							</ul>
-						</nav>
-					</aside>
+						<div id="myModal" class="modal">
+							<span class="close">&times;</span> <img class="modal-content"
+								id="img01">
+							<div id="caption"></div>
+						</div>
+						<input type="text" name="cinemaName" id="cinemaName"
+							style="width: 60%; line-height: 100%;" placeholder="Име на кино">
+
+						<input type="text" name="email" id="email"
+							style="width: 60%; line-height: 100%;" placeholder="Имейл">
+						<input type="text" name="gsm" id="gsm"
+							style="width: 60%; line-height: 100%;" placeholder="Телефон">
+						<input type="text" name="address" id="address"
+							style="width: 60%; line-height: 100%;" placeholder="Адрес">
+						<input type="text" name="postcode" id="postcode"
+							style="width: 60%; line-height: 100%;" placeholder="Пощенски код">
+						<input type="text" name="city" id="city"
+							style="width: 60%; line-height: 100%;" placeholder="Град">
+
+						<!-- ADD CINEMA-->
+						<input id="submit" type="submit" value="Добави"
+							style="background-color: red;">
+					</form>
+					<!-- ADDING IMAGE -->
 				</div>
 				<div id="scroll_to_top" class="scrollToTop">
 					<i class="circleUp"></i>
@@ -133,6 +170,21 @@
 		</div>
 
 	</noscript>
+	<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
 
+				reader.onload = function(e) {
+					$('#cinemaImg').attr('src', e.target.result).width(500).height(
+							400);
+				};
+
+				reader.readAsDataURL(input.files[0]);
+
+			}
+		}
+	</script>
+	
 </body>
 </html>

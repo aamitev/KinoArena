@@ -22,7 +22,8 @@ public class UserDtoRowMapper implements RowMapper<UserDTO>{
 		try {
 			user = new UserDTO(rs.getInt("user_id"), rs.getString("email"), 
 					rs.getString("firstName"), rs.getString("secondName"), rs.getString("lastName"),
-					rs.getBoolean("isMale"), rs.getDate("birthday").toLocalDate());
+					rs.getBoolean("isMale"), rs.getDate("birthday").toLocalDate(), rs.getBoolean("isAdmin"), 
+					rs.getString("gsm"), rs.getString("education"), rs.getString("job"));
 			
 			if (rs.getObject("gsm") != null) {
 				user.setGSM(rs.getString("gsm"));

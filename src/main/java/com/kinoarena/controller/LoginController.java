@@ -11,9 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kinoarena.dto.UserDTO;
 import com.kinoarena.exceptions.WebProfileException;
 import com.kinoarena.model.dao.UserDAO;
-import com.kinoarena.model.vo.User;
 import com.kinoarena.utils.Utils;
 
 @Controller
@@ -43,16 +43,16 @@ public class LoginController {
 					referer = "/" + link[link.length - 2] +"/" +link[link.length - 1];
 				}
 			}
-			User loggedUser = userDao.login(userEmail, userPass);
-			System.out.println(referer);
+			UserDTO loggedUser = userDao.login(userEmail, userPass);
 			if (loggedUser != null) {
 				session.setAttribute("loggedUser", loggedUser);
 				return "redirect:" + referer;
 			}
+			model.addAttribute("error", "Invalid credentials");
 			return "login";
 
 		} catch (WebProfileException e) {
-			e.printStackTrace();
+			model.addAttribute("error", "Invalid credentials");
 			return "login";
 		}
 	}
@@ -89,6 +89,7 @@ public class LoginController {
 			if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
 					&& !Utils.emailValidator(email) && !Utils.comparePasswords(password, rePassword)
 					&& !Utils.dateValidator(birthdate)) {
+				model.addAttribute("error", "Empty fields.");
 				return "register";
 			}
 
@@ -98,7 +99,8 @@ public class LoginController {
 			return "index";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			model.addAttribute("error", "Empty fields.");
+			return "register";
 		}
 	}
 
@@ -109,7 +111,7 @@ public class LoginController {
 		String newPass = request.getParameter("newPass").toString();
 		String reenterNewPass = request.getParameter("reenterNewPass").toString();
 
-		User loggedUser = (User) session.getAttribute("loggedUser");
+		UserDTO loggedUser = (UserDTO) session.getAttribute("loggedUser");
 
 		if (!newPass.equals(reenterNewPass)) {
 			System.out.println("Password mismatch");

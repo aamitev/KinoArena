@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.kinoarena.model.mappers.CinemaRowMapper;
 import com.kinoarena.model.vo.Cinema;
-import com.kinoarena.model.vo.Movie;
 
 @Component
 public class CinemaDAO implements ICinemaDAO {
@@ -17,6 +16,7 @@ public class CinemaDAO implements ICinemaDAO {
 
 	private static final String GET_CINEMA_BY_ID = "SELECT * FROM cinema c JOIN address a ON(c.address_id = a.address_id) WHERE (c.cinema_id = ?)";
 
+	private static final String SQL_ADD_CINEMA = "INSERT INTO cinema VALUES(null, ?, ?, ?, ?, ?);";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
@@ -28,7 +28,7 @@ public class CinemaDAO implements ICinemaDAO {
 		return cinemas;
 
 	}
-	
+
 	@Override
 	public Cinema getCinemaById(int id) {
 		try {
@@ -39,5 +39,13 @@ public class CinemaDAO implements ICinemaDAO {
 			return null;
 		}
 
+	}
+
+	@Override
+	public void addCinema(Cinema cinema) {
+		if (cinema != null) {
+			jdbcTemplate.update(SQL_ADD_CINEMA, cinema.getName(), cinema.getEmail(), cinema.getGsm(),
+					cinema.getCinemaCoverURL(), cinema.getAddress().getId());
+		}
 	}
 }

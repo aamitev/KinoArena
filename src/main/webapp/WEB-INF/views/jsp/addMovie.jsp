@@ -136,11 +136,7 @@
 							<option value="3D" myTag="3D">3D</option>
 							<option value="4D" myTag="4D">4D</option>
 						</select> <input type="hidden" id="setMyTag" />
-						<!-- <select>
-							<option value="volvo">2D</option>
-							<option value="saab">3D</option>
-							<option value="opel">4D</option>
-						</select> -->
+						
 						<input type="text" name="genre" id="genre"
 							style="width: 60%; line-height: 100%;" placeholder="Жанр">
 						<!-- ADD DESCRIPTION -->

@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
 <jsp:include page="header.jsp"></jsp:include>
+
 </head>
 <body>
 	<div id="colorbox" class="" role="dialog" tabindex="-1"
@@ -26,6 +31,11 @@
 
 							<div class="loginForm">
 								<div id="login_message"></div>
+								<%-- <p th:if="${error}" th:text="${error}" style = "color: red">Invalid username or password</p> --%>
+								
+								<c:if test="${not empty error}">
+									<p style="color: red">Invalid username or password</p>
+								</c:if>
 								<form method="POST" class="stdForm" id="login_form"
 									action="./login">
 									<input type="hidden" name="_csrf_token"
@@ -46,7 +56,7 @@
 										<div class="stenik-checkbox">
 											<div class="inputWrapper">
 												<input type="checkbox" id="remember_me" name="_remember_me"
-													cheched="checked">
+													checked="checked">
 											</div>
 										</div>
 									</div>

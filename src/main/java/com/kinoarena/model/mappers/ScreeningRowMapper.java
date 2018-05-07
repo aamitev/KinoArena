@@ -2,14 +2,11 @@ package com.kinoarena.model.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.kinoarena.model.vo.Hall;
-import com.kinoarena.model.vo.Movie;
 import com.kinoarena.model.vo.Screening;
 
 @Component

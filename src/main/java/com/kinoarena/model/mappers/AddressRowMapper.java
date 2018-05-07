@@ -15,7 +15,7 @@ public class AddressRowMapper implements RowMapper<Address> {
 	public Address mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Address address = null;
 		try {
-			address = new Address(rs.getString("address"), rs.getString("postCode"), rs.getString("city"));
+			address = new Address(rs.getInt("address_id"), rs.getString("address"), rs.getString("postCode"), rs.getString("city"));
 			
 		} catch (Exception e) {
 			throw new SQLException(e);
