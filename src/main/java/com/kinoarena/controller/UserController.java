@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kinoarena.dto.UserDTO;
 import com.kinoarena.model.dao.FavoriteMovieDAO;
 import com.kinoarena.model.vo.Movie;
-import com.kinoarena.model.vo.User;
 
 @Controller
 public class UserController {
@@ -36,7 +36,7 @@ public class UserController {
 				response.getWriter().println("/KinoArena/login");
 				return;
 			}
-			User user = (User) session.getAttribute("loggedUser");
+			UserDTO user = (UserDTO) session.getAttribute("loggedUser");
 			favoriteMovieDao.addFavoriteMovie(user.getId(), movieID);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -56,7 +56,7 @@ public class UserController {
 				response.setStatus(302);
 				response.getWriter().println("/KinoArena/login");
 			}
-			User user = (User) session.getAttribute("loggedUser");
+			UserDTO user = (UserDTO) session.getAttribute("loggedUser");
 			List<Movie> movies = favoriteMovieDao.getFavoriteMovies(user.getId());
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -76,7 +76,7 @@ public class UserController {
 				response.getWriter().println("/KinoArena/login");
 				return;
 			}
-			User user = (User) session.getAttribute("loggedUser");
+			UserDTO user = (UserDTO) session.getAttribute("loggedUser");
 			favoriteMovieDao.removeFavoriteMovie(user.getId(), movieID);
 		} catch (Exception e) {
 			e.printStackTrace();

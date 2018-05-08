@@ -22,12 +22,11 @@ public class ScreeningRowMapper implements RowMapper<Screening> {
 		try {
 			screening = new Screening(rs.getInt("screening_id"), rs.getTimestamp("startTime").toLocalDateTime(),
 					movieRowMapper.mapRow(rs, rowNum), hallMapper.mapRow(rs, rowNum));
-
+			return screening;
 		} catch (Exception e) {
 			throw new SQLException(e);
 		}
 
-		return screening;
 	}
 
 }
