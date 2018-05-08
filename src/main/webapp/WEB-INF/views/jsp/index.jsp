@@ -6,13 +6,7 @@
 
 <html>
 <head>
-<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="/KinoArena/css/kinoarena.css">
-=======
-
-<link rel="stylesheet" type="text/css"
-	href="/KinoArena/css/kinoarena.css">
->>>>>>> c9e7abaeb30ca6b31e3d6a6f9d8b9881da6a577f
 </head>
 <body>
 	<div id="global_wrapper" class="globalWrapper">

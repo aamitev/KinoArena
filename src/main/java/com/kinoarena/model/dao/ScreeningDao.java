@@ -37,7 +37,6 @@ public class ScreeningDao implements IScreeningDao {
 			+ "WHERE (c.cinema_id = ?) AND (DATE(s.startTime) >= DATE(?))" + "GROUP BY (DATE(s.startTime));";
 
 	private static final String SCREENINGS_BY_CINEMA_AND_DATE = "SELECT * FROM screening s "
-<<<<<<< HEAD
 			+ "JOIN movies m ON(s.movie_id=m.movie_id) "
 			+ "JOIN genres g ON(m.genres_id=g.genre_id) "
 			+ "JOIN halls h ON(s.halls_id=h.hall_id) "
@@ -45,17 +44,13 @@ public class ScreeningDao implements IScreeningDao {
 			+ "JOIN address a ON(c.address_id= a.address_id)"
 			+ "WHERE(c.cinema_id = ?)AND(DATE(s.startTime)=(?));";
 	public static final String SQL_ADD_SCREENING = "INSERT into screening VALUES(null, ?, ?, ?);";
-=======
-			+ "JOIN movies m ON(s.movie_id=m.movie_id) " + "JOIN genres g ON(m.genres_id=g.genre_id) "
-			+ "JOIN halls h ON(s.halls_id=h.hall_id) " + "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
-			+ "JOIN address a ON(c.address_id= a.address_id)" + "WHERE(c.cinema_id = ?)AND(DATE(s.startTime)=(?));";
+
 
 	private static final String GET_SCREENING_BY_ID = "SELECT * FROM screening s " +
 			"JOIN movies m ON(s.movie_id=m.movie_id) LEFT OUTER JOIN genres g ON(m.genres_id=g.genre_id) " + 
 			"JOIN halls h ON(s.halls_id=h.hall_id) JOIN cinema c ON(h.cinema_id=c.cinema_id) " + 
 			"JOIN address a ON(c.address_id= a.address_id) WHERE(s.screening_id=?);";
 
->>>>>>> c9e7abaeb30ca6b31e3d6a6f9d8b9881da6a577f
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
