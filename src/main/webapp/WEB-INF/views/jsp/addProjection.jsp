@@ -1,9 +1,11 @@
+<%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html >
 <html>
 <head>
-
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
 <link rel="stylesheet" type="text/css" href="./css/custom.css">
 <link class="jsbin"
@@ -13,7 +15,16 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script class="jsbin"
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body class="loaded  scrolling menuLoaded afterLoaded">
 
@@ -71,10 +82,8 @@
 								<li><a href="./addMovie"> <span class="icon"><i
 											class="clock"></i></span> <span class="txt">Добави филм</span>
 								</a></li>
-								<li class="selected"> <span
-										class="icon"><i class="clock"></i></span> <span class="txt">Добави
-											прожекция</span>
-								</li>
+								<li class="selected"><span class="icon"><i
+										class="clock"></i></span> <span class="txt">Добави прожекция</span></li>
 								<li><a href="./addCinema"> <span class="icon"><i
 											class="clock"></i></span> <span class="txt">Добави кино</span>
 								</a></li>
@@ -89,40 +98,67 @@
 					</nav>
 				</aside>
 				<div class="contentWrapper">
-					<span class="icon"> <i class="profile"></i>
-					</span>
-			
+					<form action="./addProjection" method="POST">
+						<span class="icon"> <i class="profile"></i>
+						</span> <select id="movieTitle" name="movieTitle">
+							<option value="" myTag="Избери заглавие" selected disabled>Име
+								на прожекция</option>
+							<c:forEach var="movie" items="${allMovies}">
+								<option value="${movie.title}" myTag="${movie.title}"><c:out
+										value="${movie.title}" /></option>
+							</c:forEach>
+						</select> <input type="hidden" id="projectionVal" name="projectionVal" />
+
+						<input type="date" id="datePicker" name="datePicker" value=""
+							class="date" /> <input min='1' max='24' type="number"
+							id="hourPicker" name="hourPicker" class="time"> <input
+							min='0' max='59' type="number" id="minutesPicker"
+							name="minutesPicker" class="time"> <select id="hall"
+							name="hall">
+							<option value="" myTag="Избери зала" selected disabled>Номер
+								на зала</option>
+							<c:forEach var="hall" items="${allHalls}">
+								<option id="hall" value="${hall.getName()}" myTag="${hall.name}" otherTag = "${hall.cinema.name}"><c:out
+										value="Зала ${hall.getName()} ${hall.getCinema().getName()}" /></option>
+							</c:forEach>
+						</select> <input type="hidden" id="hallName" name="hallName" />
+						<input type="hidden" id="cinemaName" name="cinemaName" />
+						<button class="button red">Добави прожекция</button>
 
 
+					</form>
 				</div>
-				<div id="scroll_to_top" class="scrollToTop">
-					<i class="circleUp"></i>
-				</div>
-
-				<div id="fb-root"></div>
-				<noscript>
-
-					<div style="display: inline;">
-
-						<img height="1" width="1" style="border-style: none;" alt=""
-							src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/855321203/?guid=ON&amp;script=0" />
-
-					</div>
-
-				</noscript>
-				<!-- end of .contentWrapper -->
 			</div>
-			<!-- end of .profilePanel -->
-		</div>
-		</main>
-		<!-- end of #main -->
 
-		<!-- end of #footer -->
+		</div>
 		<div id="scroll_to_top" class="scrollToTop">
 			<i class="circleUp"></i>
 		</div>
 
 		<div id="fb-root"></div>
+		<noscript>
+
+			<div style="display: inline;">
+
+				<img height="1" width="1" style="border-style: none;" alt=""
+					src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/855321203/?guid=ON&amp;script=0" />
+
+			</div>
+
+		</noscript>
+		<!-- end of .contentWrapper -->
+	</div>
+	<!-- end of .profilePanel -->
+	</div>
+	</main>
+	<!-- end of #main -->
+
+	<!-- end of #footer -->
+	<div id="scroll_to_top" class="scrollToTop">
+		<i class="circleUp"></i>
+	</div>
+
+	<div id="fb-root"></div>
 	</div>
 
 	<noscript>
@@ -135,9 +171,47 @@
 		</div>
 
 	</noscript>
-<!--
+	<script>
+		$(function() {
+			$("#movieTitle").change(function() {
+				var element = $(this).find('option:selected');
+				var myTag = element.attr("myTag");
 
-//-->
-</script>
+				$('#projectionVal').val(myTag);
+			});
+		});
+	</script>
+
+	<script>
+		$(function() {
+			$("#hall").change(function() {
+				var element = $(this).find('option:selected');
+				var myTag = element.attr("myTag");
+				var otherTag = element.attr("otherTag");
+
+				$('#cinemaName').val(otherTag);
+				$('#hallName').val(myTag);
+			});
+		});
+	</script>
+	
+	
+	<script>
+		$(document).ready(function() {
+			var date = new Date();
+
+			var day = date.getDate();
+			var month = date.getMonth() + 1;
+			var year = date.getFullYear();
+
+			if (month < 10)
+				month = "0" + month;
+			if (day < 10)
+				day = "0" + day;
+
+			var today = year + "-" + month + "-" + day;
+			$("#datePicker").attr("value", today);
+		});
+	</script>
 </body>
 </html>

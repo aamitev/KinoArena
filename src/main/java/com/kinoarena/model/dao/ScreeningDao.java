@@ -44,7 +44,7 @@ public class ScreeningDao implements IScreeningDao {
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
 			+ "JOIN address a ON(c.address_id= a.address_id)"
 			+ "WHERE(c.cinema_id = ?)AND(DATE(s.startTime)=(?));";
-
+	public static final String SQL_ADD_SCREENING = "INSERT into screening VALUES(null, ?, ?, ?);";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
@@ -111,4 +111,11 @@ public class ScreeningDao implements IScreeningDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void addScreening(String startTime, Movie movie, Hall hall) {
+		jdbcTemplate.update(SQL_ADD_SCREENING, startTime, movie.getId(), hall.getId());
+	}
+	
+	
 }

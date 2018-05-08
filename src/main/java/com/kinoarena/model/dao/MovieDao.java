@@ -18,7 +18,7 @@ import com.kinoarena.model.vo.Movie;
 @Component
 public class MovieDao implements IMovieDao {
 
-	private static final String GET_MOVIES = "SELECT * FROM movies;";
+	private static final String GET_MOVIES = "SELECT * FROM movies m JOIN genres g ON(m.genres_id = g.genre_id);";
 	private static final String GET_ACTIVE_MOVIES = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(s.startTime > DATE(?)) GROUP BY (m.movie_id);";
 	private static final String GET_ACTIVE_MOVIES_BY_GENRE = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(g.genre = ? ) "
 			+ "AND (DATE(s.startTime) >= DATE(?)) GROUP BY (m.movie_id);";
@@ -29,6 +29,8 @@ public class MovieDao implements IMovieDao {
 			+ " JOIN halls h ON(s.halls_id=h.hall_id) WHERE(h.hallType = ?) AND (s.startTime >= ?) GROUP BY (m.movie_id);";
 	private static final String GET_MOVIE_BY_ID = "SELECT m.*,g.* FROM movies m LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE (m.movie_id = ? );";
 	private static final String SQL_INSERT_MOVIE = "INSERT INTO movies VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	private static final String SQL_GET_MOVIE_BY_TITLE = "SELECT * FROM movies m JOIN genres g ON (m.genres_id = g.genre_id) WHERE title = ?;";
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
@@ -105,5 +107,11 @@ public class MovieDao implements IMovieDao {
 		Genre genreObj = (Genre) jdbcTemplate.queryForObject("SELECT * FROM genres WHERE genre = ?;",
 	            new Object[] { genre }, genreRowMapper);
 		return genreObj;
+	}
+
+	@Override
+	public Movie getMovieByName(String name) {
+		Movie movie = (Movie)(jdbcTemplate.queryForObject(SQL_GET_MOVIE_BY_TITLE, new Object[] {name}, movieRowMapper));
+		return movie;
 	}
 }

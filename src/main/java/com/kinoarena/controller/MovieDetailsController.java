@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kinoarena.dto.ScreeningDTO;
+import com.kinoarena.dto.UserDTO;
 import com.kinoarena.model.dao.FavoriteMovieDAO;
 import com.kinoarena.model.dao.MovieDao;
 import com.kinoarena.model.dao.ScreeningDao;
@@ -47,7 +48,7 @@ public class MovieDetailsController {
 			model.addAttribute("movie", movie);
 
 			if (session.getAttribute("loggedUser") != null) {
-				User user = (User) session.getAttribute("loggedUser");
+				UserDTO user = (UserDTO) session.getAttribute("loggedUser");
 
 				Movie favoriteMovie = favoriteMovieDao.getFavoriteMovie(user.getId(), id);
 				if (favoriteMovie != null) {
