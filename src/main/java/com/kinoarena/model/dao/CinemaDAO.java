@@ -41,7 +41,7 @@ public class CinemaDAO implements ICinemaDAO {
 
 	}
 
-	@Override
+
 	public void addCinema(Cinema cinema) {
 		if (cinema != null) {
 			jdbcTemplate.update(SQL_ADD_CINEMA, cinema.getName(), cinema.getEmail(), cinema.getGsm(),

@@ -44,7 +44,6 @@ public class FavoriteMovieDAO {
 					movieRowMapper);
 			return movie;
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
 			return null;
 		}
 

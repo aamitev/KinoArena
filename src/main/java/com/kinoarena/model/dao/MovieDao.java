@@ -20,6 +20,8 @@ public class MovieDao implements IMovieDao {
 
 	private static final String GET_MOVIES = "SELECT * FROM movies m JOIN genres g ON(m.genres_id = g.genre_id);";
 	private static final String GET_ACTIVE_MOVIES = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(s.startTime > DATE(?)) GROUP BY (m.movie_id);";
+	private static final String GET_MOVIES = "SELECT * FROM movies;";
+	private static final String GET_ACTIVE_MOVIES = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(DATE(s.startTime) > DATE(?)) GROUP BY (m.movie_id);";
 	private static final String GET_ACTIVE_MOVIES_BY_GENRE = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(g.genre = ? ) "
 			+ "AND (DATE(s.startTime) >= DATE(?)) GROUP BY (m.movie_id);";
 	private static final String GET_ACTIVE_MOVIES_BY_TITLE = "SELECT m.*,g.* FROM movies m JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE(m.title LIKE(?) ) "

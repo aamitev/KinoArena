@@ -37,10 +37,12 @@ public class LoginController {
 			String userEmail = request.getParameter("email").toString();
 			String userPass = request.getParameter("password").toString();
 			String referer = "index";
+
 			if (session.getAttribute("referer") != null) {
+
 				String[] link = ((String) session.getAttribute("referer")).split("/");
 				if (link[link.length - 2].equals("movies")) {
-					referer = "/" + link[link.length - 2] +"/" +link[link.length - 1];
+					referer = "/" + link[link.length - 2] + "/" + link[link.length - 1];
 				}
 			}
 			UserDTO loggedUser = userDao.login(userEmail, userPass);

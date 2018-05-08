@@ -49,6 +49,7 @@ public class UserDAO implements IUserDAO {
 			System.out.println(INVALID_CREDENTIALS);
 			throw new WebProfileException(INVALID_CREDENTIALS);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(INVALID_CREDENTIALS);
 			throw new WebProfileException(INVALID_CREDENTIALS, e);
 		}

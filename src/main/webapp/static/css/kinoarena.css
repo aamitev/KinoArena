@@ -886,7 +886,7 @@ hr, .hLine, .title, .content, .block, .list, .cinemasList, .stdForm,
 	.arenaScrollbar, .timelineScrollbar, .verticalScrollbar, .tinynav,
 	.selectedSeatsWrapper, .selectedSeatsOutput {
 	float: left;
-	width: 103%;
+	width: 100%;
 }
 
 .circleButton .mainTxt .icon:before, .captcha .reloadBtn:before,
@@ -6955,8 +6955,9 @@ px
 .scheduleRow .timeTable .attr .item {
 	float: left;
 	width: auto;
-	margin: 3px 5px;
+	margin: 3px;
 	height: 14px;
+	padding-bottom: 9%;
 }
 
 .scheduleRow .timeTable .attr .item img {
@@ -10564,6 +10565,7 @@ opacity
 
 .bookingWrapper .info {
 	margin: 0 0 15px;
+	text-align: center;
 }
 
 /* ---- Shape (svg) button ---- */
