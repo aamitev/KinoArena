@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -32,18 +33,18 @@ public class ScreeningDao implements IScreeningDao {
 			+ "GROUP BY (DATE(s.startTime));";
 
 	private static final String GET_SCREENINGS_DTO_BY_CINEMA_ID = "SELECT * FROM screening s "
-			+ "JOIN halls h ON(s.halls_id = h.hall_id) "
-			+ "JOIN cinema c ON(h.cinema_id = c.cinema_id) "
-			+ "WHERE (c.cinema_id = ?) AND (DATE(s.startTime) >= DATE(?))"
-			+ "GROUP BY (DATE(s.startTime));";
+			+ "JOIN halls h ON(s.halls_id = h.hall_id) " + "JOIN cinema c ON(h.cinema_id = c.cinema_id) "
+			+ "WHERE (c.cinema_id = ?) AND (DATE(s.startTime) >= DATE(?))" + "GROUP BY (DATE(s.startTime));";
 
 	private static final String SCREENINGS_BY_CINEMA_AND_DATE = "SELECT * FROM screening s "
-			+ "JOIN movies m ON(s.movie_id=m.movie_id) "
-			+ "JOIN genres g ON(m.genres_id=g.genre_id) "
-			+ "JOIN halls h ON(s.halls_id=h.hall_id) "
-			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
-			+ "JOIN address a ON(c.address_id= a.address_id)"
-			+ "WHERE(c.cinema_id = ?)AND(DATE(s.startTime)=(?));";
+			+ "JOIN movies m ON(s.movie_id=m.movie_id) " + "JOIN genres g ON(m.genres_id=g.genre_id) "
+			+ "JOIN halls h ON(s.halls_id=h.hall_id) " + "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
+			+ "JOIN address a ON(c.address_id= a.address_id)" + "WHERE(c.cinema_id = ?)AND(DATE(s.startTime)=(?));";
+
+	private static final String GET_SCREENING_BY_ID = "SELECT * FROM screening s " +
+			"JOIN movies m ON(s.movie_id=m.movie_id) LEFT OUTER JOIN genres g ON(m.genres_id=g.genre_id) " + 
+			"JOIN halls h ON(s.halls_id=h.hall_id) JOIN cinema c ON(h.cinema_id=c.cinema_id) " + 
+			"JOIN address a ON(c.address_id= a.address_id) WHERE(s.screening_id=?);";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -52,12 +53,24 @@ public class ScreeningDao implements IScreeningDao {
 	@Autowired
 	private ScreeningRowMapper screeningMapper;
 
+	public Screening getScreeningById(int id) {
+		try {
+			Screening screening = jdbcTemplate.queryForObject(GET_SCREENING_BY_ID, new Object[] { id },
+					screeningMapper);
+			return screening;
+		} catch (EmptyResultDataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
 	public List<ScreeningDTO> getScreeningsDtoByMovieId(int id) {
 		List<ScreeningDTO> screenings = jdbcTemplate.query(GET_SCREENINGS_DTO_BY_MOVIE_ID,
 				new Object[] { id, LocalDateTime.now() }, screeningDtoRowMapper);
 		return screenings;
 	}
-	
+
 	public List<ScreeningDTO> getScreeningsDtoByCinemaId(int id) {
 		List<ScreeningDTO> screenings = jdbcTemplate.query(GET_SCREENINGS_DTO_BY_CINEMA_ID,
 				new Object[] { id, LocalDateTime.now() }, screeningDtoRowMapper);
@@ -84,7 +97,6 @@ public class ScreeningDao implements IScreeningDao {
 
 		return screeningsByCinema;
 	}
-	
 
 	public Map<String, Map<String, List<Screening>>> getScreeningsByCinemaIdAndDate(int id, String date) {
 		List<Screening> screenings = jdbcTemplate.query(SCREENINGS_BY_CINEMA_AND_DATE, new Object[] { id, date },

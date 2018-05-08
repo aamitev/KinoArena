@@ -33,6 +33,7 @@ public class CinemaController {
 			
 			return "cinemas";
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "error";
 			
 		}

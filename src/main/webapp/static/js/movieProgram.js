@@ -48,7 +48,7 @@ var link = "/KinoArena/screenings?movieId="+id + "&date=" + date;
 							var screeningObj= screenings[cinema][hall][screeningIndex];
 							html += ` <div class="owl-item active"
 											style="width: auto; margin-right: 0px;">
-											<a href="#" class="item booking tooltip_1"
+											<a href="/KinoArena/reserve/`+screeningObj.id+`" class="item booking tooltip_1"
 												data-tooltip="11 лв. / 13 лв." data-tooltip-class="wide"> <span
 												class="time">`+screeningObj.startTime.time.hour+":"+screeningObj.startTime.time.minute+`</span>
 											</a>

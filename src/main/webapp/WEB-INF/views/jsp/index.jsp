@@ -7,7 +7,8 @@
 <html>
 <head>
 
-<link rel="stylesheet" type="text/css" href="/KinoArena/css/kinoarena.css">
+<link rel="stylesheet" type="text/css"
+	href="/KinoArena/css/kinoarena.css">
 </head>
 <body>
 	<div id="global_wrapper" class="globalWrapper">
@@ -74,33 +75,35 @@
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<a onclick="getActiveMoviesByHallType('luxe')">
-										<div class="tabItem filter hasIMGIcons"
-											data-filter-anchor="tab-5">
-											<div class="hoverImgToggle">
 
-												<img title="header-luxe.png" alt="Luxe" class="defaultImg"
-													src="/KinoArena/images/luxe.png"> <img
-													title="header-luxe-hover.png" alt="Luxe" class="hoverImg"
-													src="/KinoArena/images/luxe-hover.png">
-											</div>
+									<div class="tabItem filter hasIMGIcons"
+										data-filter-anchor="tab-5">
+										<div class="hoverImgToggle">
+											<a onclick="getActiveMoviesByHallType('luxe')"> <img
+												title="header-luxe.png" alt="Luxe" class="defaultImg"
+												src="/KinoArena/images/luxe.png"> <img
+												title="header-luxe-hover.png" alt="Luxe" class="hoverImg"
+												src="/KinoArena/images/luxe-hover.png">
+											</a>
 										</div>
-									</a>
+									</div>
+
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<a onclick="getActiveMoviesByHallType('vip')">	
-										<div class="tabItem filter hasIMGIcons"
-											data-filter-anchor="tab-6">
-											<div class="hoverImgToggle">
 
-												<img title="header-vip.png" alt="VIP" class="defaultImg"
-													src="/KinoArena/images/vip.png"> <img
-													title="header-vip-hover.png" alt="VIP" class="hoverImg"
-													src="/KinoArena/images/vip-hover.png">
-											</div>
+									<div class="tabItem filter hasIMGIcons"
+										data-filter-anchor="tab-6">
+										<div class="hoverImgToggle">
+											<a onclick="getActiveMoviesByHallType('vip')"> <img
+												title="header-vip.png" alt="VIP" class="defaultImg"
+												src="/KinoArena/images/vip.png"> <img
+												title="header-vip-hover.png" alt="VIP" class="hoverImg"
+												src="/KinoArena/images/vip-hover.png">
+											</a>
 										</div>
-									</a>
+									</div>
+
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
