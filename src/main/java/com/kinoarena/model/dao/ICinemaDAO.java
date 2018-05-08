@@ -8,5 +8,7 @@ public interface ICinemaDAO {
 	public Collection<Cinema> getAllCinemas() throws Exception;
 
 	public Cinema getCinemaById(int id);
+	
+	public void addCinema(Cinema cinema);
 
 }

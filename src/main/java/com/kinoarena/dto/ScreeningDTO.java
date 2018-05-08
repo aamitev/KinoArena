@@ -2,8 +2,6 @@ package com.kinoarena.dto;
 
 import java.time.LocalDateTime;
 
-import com.kinoarena.model.vo.Movie;
-
 public class ScreeningDTO {
 	private int id;
 	private LocalDateTime startTime;

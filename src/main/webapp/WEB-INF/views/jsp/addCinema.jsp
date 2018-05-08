@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
+
+<!DOCTYPE html >
 <html>
 <head>
+
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
 <link rel="stylesheet" type="text/css" href="./css/custom.css">
 <link class="jsbin"
@@ -13,8 +15,9 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script class="jsbin"
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
 </head>
-<body class="loaded  scrolling menuLoaded afterLoaded">
+<body class="loaded scrolling menu Loaded after Loaded">
 
 	<div class="page_bg"
 		style="background-image: url('/images/frontend/bg-items/bg-15years.jpg');"></div>
@@ -67,14 +70,13 @@
 										резервациите и закупените билети</span>
 							</a></li>
 							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
-								<li class="selected"><span class="icon"><i
-										class="clock"></i></span> <span class="txt">Добави филм</span></li>
+								<li><a href="./addMovie"><span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави филм</span></a></li>
 								<li><a href="./addProjection"> <span class="icon"><i
 											class="clock"></i></span> <span class="txt">Добави прожекция</span>
 								</a></li>
-								<li><a href="./addCinema"> <span class="icon"><i
-											class="clock"></i></span> <span class="txt">Добави кино</span>
-								</a></li>
+								<li class="selected"><span class="icon"><i
+										class="clock"></i></span> <span class="txt">Добави кино</span></li>
 								<li><a href="./addHall"> <span class="icon"><i
 											class="clock"></i></span> <span class="txt">Добави зала</span>
 								</a></li>
@@ -93,13 +95,13 @@
 					<!-- <input id = "image" name = "image" type="file" style="width:270px" > -->
 
 
-
-					<form id="addMovieForm" method="POST" action="./addMovie"
+					<form id="addCinemaForm" method="POST" action="./addCinema"
 						enctype="multipart/form-data">
 
 						<!-- DISPLAY UPLOADED IMAGE -->
 						<input type="file" name="file" onchange="readURL(this);"
-							style="width: 300px"> <img id="movie" src="#" alt="movie"
+							 style="width: 300px">
+						<img id="cinemaImg" src="#" alt="cinemaImg"
 							style="width: 500px; line-height: 400px" border="5" />
 						<!-- DISPLAY UPLOADED IMAGE -->
 
@@ -108,39 +110,22 @@
 								id="img01">
 							<div id="caption"></div>
 						</div>
-						<!--  'testTitle', 'C://testCover', 'testDescription', 'testDirector', 90, '2018-12-12', 0, 'animation', 2 -->
-						<!-- ADD DESCRIPTION -->
-						<input type="text" name="title" id="title"
-							style="width: 60%; line-height: 100%;" placeholder="Заглавие">
+						<input type="text" name="cinemaName" id="cinemaName"
+							style="width: 60%; line-height: 100%;" placeholder="Име на кино">
 
-						<input type="text" name="description" id="desscription"
-							style="width: 60%; line-height: 500%;" placeholder="Описание">
-						<input type="text" name="director" id="director"
-							style="width: 60%; line-height: 100%;" placeholder="Режисьор">
-						<input type="text" name="length" id="length"
-							style="width: 60%; line-height: 100%;" placeholder="Времетраене">
+						<input type="text" name="email" id="email"
+							style="width: 60%; line-height: 100%;" placeholder="Имейл">
+						<input type="text" name="gsm" id="gsm"
+							style="width: 60%; line-height: 100%;" placeholder="Телефон">
+						<input type="text" name="address" id="address"
+							style="width: 60%; line-height: 100%;" placeholder="Адрес">
+						<input type="text" name="postcode" id="postcode"
+							style="width: 60%; line-height: 100%;" placeholder="Пощенски код">
+						<input type="text" name="city" id="city"
+							style="width: 60%; line-height: 100%;" placeholder="Град">
 
-						<input type="text" name="premiere" id="premiere"
-							style="width: 60%; line-height: 100%;" placeholder="Премиера">
-
-						<input type="text" name="ageLimitation" id="ageLimitation"
-							style="width: 60%; line-height: 100%;"
-							placeholder="Възрастово ограничение">
-
-						<!-- <input type="text" name="movieType" id="movieType"
-							style="width: 60%; line-height: 100%;" placeholder = "Вид прожекция"> -->
-						<select id="projectionType" name="projectionType">
-							<option value="" myTag="Вид прожекция" selected disabled>Вид
-								прожекция</option>
-							<option value="2D" myTag="2D">2D</option>
-							<option value="3D" myTag="3D">3D</option>
-							<option value="4D" myTag="4D">4D</option>
-						</select> <input type="hidden" id="setMyTag" />
-						
-						<input type="text" name="genre" id="genre"
-							style="width: 60%; line-height: 100%;" placeholder="Жанр">
-						<!-- ADD DESCRIPTION -->
-						<input id="submit" type="submit" value="Upload"
+						<!-- ADD CINEMA-->
+						<input id="submit" type="submit" value="Добави"
 							style="background-color: red;">
 					</form>
 					<!-- ADDING IMAGE -->
@@ -191,7 +176,7 @@
 				var reader = new FileReader();
 
 				reader.onload = function(e) {
-					$('#movie').attr('src', e.target.result).width(500).height(
+					$('#cinemaImg').attr('src', e.target.result).width(500).height(
 							400);
 				};
 
@@ -200,49 +185,6 @@
 			}
 		}
 	</script>
-	<script>
-		$(function() {
-			$("#projectionType").change(function() {
-				var element = $(this).find('option:selected');
-				var myTag = element.attr("myTag");
-
-				$('#setMyTag').val(myTag);
-			});
-		});
-	</script>
-	<!-- <script>
-		document
-				.getElementById('submit')
-				.addEventListener(
-						'click',
-						function() {
-							var imageSrc = document.getElementById("movie").src;
-							document.getElementById('addMovieForm').action = '/addMovie?imgURL='
-									+ imageSrc;
-						});
-	</script> -->
-	<!-- <script>
-		// Get the modal
-		var modal = document.getElementById('myModal');
-
-		// Get the image and insert it inside the modal - use its "alt" text as a caption
-		var img = document.getElementById('movie');
-		var modalImg = document.getElementById("img01");
-		var captionText = document.getElementById("caption");
-		img.onclick = function() {
-			modal.style.display = "block";
-			modalImg.src = this.src;
-			captionText.innerHTML = this.alt;
-		}
-
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];
-
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-			modal.style.display = "none";
-		}
-	</script> -->
-
+	
 </body>
 </html>

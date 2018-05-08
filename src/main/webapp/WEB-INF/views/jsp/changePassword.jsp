@@ -48,20 +48,30 @@
 							<li class="selected"><span class="icon"><i
 									class="password"></i></span> <span class="txt">Промяна на
 									парола</span></li>
-							
+
 							<li><a href="./favorites"> <span class="icon"><i
 										class="heart"></i></span> <span class="txt">Моите филми</span>
 							</a></li>
-							
+
 							<li><a href="./orders"> <span class="icon"><i
 										class="clock"></i></span> <span class="txt">История на
 										резервациите и закупените билети</span>
 							</a></li>
 							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
-								<li><a href="./addMovie"> <span class="icon"><i
-											class="clock"></i></span> <span class="txt">Добави филм</span>
-								</a></li>
-							</c:if>
+									<li><a href="./addMovie"> <span class="icon"><i
+												class="clock"></i></span> <span class="txt">Добави филм</span>
+									</a></li>
+									<li><a href="./addProjection"> <span
+											class="icon"><i class="clock"></i></span> <span class="txt">Добави
+												прожекция</span>
+									</a></li>
+									<li><a href="./addCinema"> <span class="icon"><i
+												class="clock"></i></span> <span class="txt">Добави кино</span>
+									</a></li>
+									<li ><a href="./addHall"> <span class="icon"><i
+												class="clock"></i></span> <span class="txt">Добави зала</span>
+									</a></li>
+								</c:if>
 							<li><a href="/KinoArena/logout"> <span class="icon"><i
 										class="exit"></i></span> <span class="txt">Изход</span>
 							</a></li>
@@ -114,7 +124,7 @@
 		</div>
 		</main>
 		<!-- end of #main -->
-		
+
 		<!-- end of #footer -->
 		<div id="scroll_to_top" class="scrollToTop">
 			<i class="circleUp"></i>

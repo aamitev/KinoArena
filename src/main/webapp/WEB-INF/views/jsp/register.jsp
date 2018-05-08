@@ -42,6 +42,10 @@
 				</p>
 				<div class="registerForm">
 					<div id="register_message"></div>
+					
+					<c:if test="${not empty error}">
+									<p style="color: red">One or more required fields is/are empty.</p>
+								</c:if>
 					<form name="stenik_user_registration" method="post"
 						action="./register" novalidate="novalidate" class="stdForm"
 						id="register_form">

@@ -57,8 +57,18 @@
 										резервациите и закупените билети</span>
 							</a></li>
 							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
-								<li><a href="./addMovie"> <span class="icon"><i
+								<li ><a href = "./addMovie"> <span class="icon"><i
 											class="clock"></i></span> <span class="txt">Добави филм</span>
+								</a></li>
+								<li ><a href="./addProjection"> <span
+										class="icon"><i class="clock"></i></span> <span class="txt">Добави
+											прожекция</span>
+								</a></li>
+								<li><a href="./addCinema"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави кино</span>
+								</a></li>
+								<li><a href="./addHall"> <span class="icon"><i
+											class="clock"></i></span> <span class="txt">Добави зала</span>
 								</a></li>
 							</c:if>
 							<li><a href="./logout"> <span class="icon"><i
