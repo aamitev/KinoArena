@@ -37,7 +37,6 @@ public class LoginController {
 			String userEmail = request.getParameter("email").toString();
 			String userPass = request.getParameter("password").toString();
 			String referer = "index";
-
 			if (session.getAttribute("referer") != null) {
 
 				String[] link = ((String) session.getAttribute("referer")).split("/");
@@ -84,9 +83,13 @@ public class LoginController {
 			String password = request.getParameter("password").toString();
 			String rePassword = request.getParameter("rePassword").toString();
 
-			boolean gender = Boolean.parseBoolean(request.getParameter("sex"));
-
+			boolean gender = (request.getParameter("gender").equals("male")) ? true : false;
 			String birthdate = request.getParameter("dateOfBirth").toString();
+
+			if (!Utils.emailValidator(email)) {
+				model.addAttribute("error", "Empty fields.");
+				return "register";
+			}
 
 			if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
 					&& !Utils.emailValidator(email) && !Utils.comparePasswords(password, rePassword)

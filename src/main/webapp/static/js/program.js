@@ -53,7 +53,6 @@ function getScreenings(cinemaId,date){
 							<div class="timeTable">
 								<span class="title">Купи билет</span>
 								<div class="clear"></div>`;
-
 								}
 						if(screenings[movieIndex][hallIndex].length > 0){
 							var hall = screenings[movieIndex][hallIndex][0].hall;

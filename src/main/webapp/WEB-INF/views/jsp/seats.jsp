@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<form class="stdForm" method="POST"
-				action="/bg/booking/seats/122772_2">
+				action="/KinoArena/finalize">
 				<div class="blackBox hallWrapper">
 					<div class="loopDisk"></div>
 
@@ -112,8 +112,12 @@
 													<c:if test="${seat.taken}">class="seat busy"</c:if>
 													<c:if test="${not seat.taken}">class="seat"</c:if>
 													data-category="0000000001" data-row="${seat.row}"
-													data-seat="${seat.number}" data-area="1" data-id="222"
+													data-seat="${seat.number}" data-area="1" data-id="${seat.id}"
 													disable>
+													<div class="hidden">
+														<input type="text" name="seatId${seat.id}"
+															id="seat_input${seat.id}" >
+													</div>
 													<svg class="seatSVG"
 														style="width: 48.8235px; height: 48.8235px;"
 														xmlns="http://www.w3.org/2000/svg"
@@ -148,9 +152,6 @@
 				</div>
 				<hr class="red">
 				<div class="center">
-					<div class="hidden">
-						<input type="text" name="selectedItems" id="selected_seats_field">
-					</div>
 					<button id="booking_proceed_button" class="button red big disabled"
 						disabled>
 						<span class="txt">Продължи</span><span class="buttonBg"></span>
@@ -225,7 +226,6 @@
 
 									<c:forEach var="ticketTypes"
 										items="${reservedTicketTypes.values()}">
-
 										<tr class="calcRow first last">
 											<td class="type first">${ticketTypes[0].type}</td>
 											<td class="quantity">${fn:length(ticketTypes)}</td>

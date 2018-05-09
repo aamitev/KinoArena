@@ -9,8 +9,4 @@ public interface ISeatDAO {
 
 	Map<Byte, List<Seat>> getAllSeadsByHall(int id) throws Exception;
 
-	List<Seat> getAllReservedSeatsByScreeningID(int id) throws Exception;
-
-	void reserveSeats(List<Seat> seats, int screeningId);
-
 }

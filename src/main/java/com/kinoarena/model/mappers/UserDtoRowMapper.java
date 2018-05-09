@@ -1,6 +1,5 @@
 package com.kinoarena.model.mappers;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -11,20 +10,19 @@ import org.springframework.stereotype.Component;
 import com.kinoarena.dto.UserDTO;
 
 @Component
-public class UserDtoRowMapper implements RowMapper<UserDTO>{
+public class UserDtoRowMapper implements RowMapper<UserDTO> {
 
 	@Autowired
 	private AddressRowMapper addressMapper;
-	
+
 	@Override
 	public UserDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		UserDTO user = null;
 		try {
-			user = new UserDTO(rs.getInt("user_id"), rs.getString("email"), 
-					rs.getString("firstName"), rs.getString("secondName"), rs.getString("lastName"),
-					rs.getBoolean("isMale"), rs.getDate("birthday").toLocalDate(), rs.getBoolean("isAdmin"), 
-					rs.getString("gsm"), rs.getString("education"), rs.getString("job"));
-			
+			user = new UserDTO(rs.getInt("user_id"), rs.getString("email"), rs.getString("firstName"),
+					rs.getString("secondName"), rs.getString("lastName"), rs.getBoolean("isMale"),
+					rs.getDate("birthday").toLocalDate(), rs.getBoolean("isAdmin"));
+
 			if (rs.getObject("gsm") != null) {
 				user.setGSM(rs.getString("gsm"));
 			}
@@ -42,7 +40,5 @@ public class UserDtoRowMapper implements RowMapper<UserDTO>{
 			throw new SQLException(e);
 		}
 	}
-
-	
 
 }

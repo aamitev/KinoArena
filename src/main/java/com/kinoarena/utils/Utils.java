@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 public abstract class Utils {
-	private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+	private static final String EMAIL_REGEX = "^(.+)@(.+)$";
 	private static final String BIRTHDATE_REGEX = "\\d{4}-\\d{2}-\\d{2}";
 	private static final Pattern VALID_BIRTHDATE = Pattern.compile(BIRTHDATE_REGEX);
 	private static final int MIN_PASS_LENGTH = 5;
@@ -16,8 +16,10 @@ public abstract class Utils {
 	private static final int GSM_WITH_COUNTRY_CODE = 13;
 
 	public static boolean emailValidator(String emailStr) {
-		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-		return matcher.find();
+		if (Pattern.compile(EMAIL_REGEX).matcher(emailStr).matches()) {
+			return true;
+		}
+		return false;
 	}
 
 	public static boolean gsmValidator(String gsm) {

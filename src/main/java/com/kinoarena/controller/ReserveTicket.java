@@ -88,11 +88,9 @@ public class ReserveTicket {
 			session.setAttribute("ticketNumbers", ticketNumbers);
 			model.addAttribute("reservedTicketTypes", reservedTypes);
 			model.addAttribute("ticketNumbers", ticketNumbers);
-			System.out.println(reservedTypes.toString());
-			List<Seat> reservedSeats = seatDao.getAllReservedSeatsByScreeningID(screeningId);
+			List<Seat> reservedSeats = reservationDAO.getAllReservedSeatsByScreeningID(screeningId);
 			Map<Byte, List<Seat>> seats = seatDao.getAllSeadsByHall(hallId);
-			System.out.println(seats.toString());
-			System.out.println(reservedSeats.toString());
+
 			for (Entry<Byte, List<Seat>> row : seats.entrySet()) {
 				for (Seat seat : row.getValue()) {
 					if (reservedSeats.contains(seat)) {
@@ -109,14 +107,22 @@ public class ReserveTicket {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/finalize")
-	public String finalizeReservation(Model model, HttpSession session, HttpServletRequest request) {
+	public String finalizeReservation(Model model, HttpSession session, HttpServletRequest request,
+			@RequestParam Map<String, String> allRequestParams) {
 		try {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
 			int screeningId = ((Screening) session.getAttribute("screening")).getId();
-
-			return "seats";
+			List<Integer> reservedSeatsIDs = new ArrayList<Integer>();
+			for (Entry<String, String> entry : allRequestParams.entrySet()) {
+				if (entry.getValue().length() > 0 ){
+					reservedSeatsIDs.add(Integer.parseInt(entry.getValue()));
+				}
+			}
+			reservationDAO.reserveSeats(reservedSeatsIDs, screeningId);
+			model.addAttribute("finalized", true);
+			return "finalizeReservation";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";

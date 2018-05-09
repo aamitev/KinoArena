@@ -34,28 +34,27 @@ public class UserDTO {
 	public UserDTO() {
 
 	}
-	public UserDTO(String firstName, String secondName, String lastName, String email, boolean sex, LocalDate birthday)
-			throws ModelException {
+
+	public UserDTO(int id,String email, String firstName, String secondName, String lastName, boolean sex,
+			LocalDate birthday, boolean isAdmin) throws ModelException {
+		setId(id);
 		setFirstName(firstName);
 		setSecondName(secondName);
 		setLastName(lastName);
 		setEmail(email);
 		setSex(isMale);
 		setBirthday(birthday);
+		setAdmin(isAdmin);
 	}
-	
+
 	public UserDTO(int id, String email, String firstName, String secondName, String lastName, boolean isMale,
 			LocalDate birthday, boolean isAdmin, String gsm, String education, String job) throws ModelException {
-		this(firstName, secondName, lastName, email, isMale, birthday);
-		setId(id);
-		setAdminRights(isAdmin);
+		this(id, firstName, secondName, lastName, email, isMale, birthday, isAdmin);
+
 		setGSM(gsm);
 		setEducation(education);
 		setJob(job);
 	}
-
-	
-	
 
 	public void setId(int id) throws ModelException {
 		if (id > 0) {
@@ -130,15 +129,15 @@ public class UserDTO {
 		} else
 			throw new ModelException(INVALID_EDUCATION);
 	}
-	
-	public void setAdminRights(boolean rights) {
-		this.isAdmin = rights;
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
-	
+
 	public boolean isAdmin() {
 		return this.isAdmin;
 	}
-	
+
 	public int getId() {
 		return this.id;
 	}

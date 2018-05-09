@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -42,10 +42,11 @@
 				</p>
 				<div class="registerForm">
 					<div id="register_message"></div>
-					
+
 					<c:if test="${not empty error}">
-									<p style="color: red">One or more required fields is/are empty.</p>
-								</c:if>
+						<p style="color: red">One or more required fields is/are
+							empty.</p>
+					</c:if>
 					<form name="stenik_user_registration" method="post"
 						action="./register" novalidate="novalidate" class="stdForm"
 						id="register_form">
@@ -75,9 +76,14 @@
 						</div>
 						<div>
 
-							<input id="sex" type="radio" name="sex"><br> <input
+							<!-- 							<input id="sex" type="radio" name="sex"><br> <input
 								type='button' value='Мъж' id='selectMale'> <input
-								type='button' value='Жена' id='selectFemale'>
+								type='button' value='Жена' id='selectFemale'> -->
+
+							<input type="radio" name="gender" value="male" checked>
+							Male<br> <input type="radio" name="gender" value="female">
+							Female<br>
+
 						</div>
 						<div class="formItem datepicker">
 							<input type="datetime" id="dateOfBirth" name="dateOfBirth"

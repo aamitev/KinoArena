@@ -17,9 +17,9 @@ import com.kinoarena.model.vo.Address;
 public class UserDAO implements IUserDAO {
 
 	private static final String INVALID_CREDENTIALS = "Invalid credentials.";
-	public static final String SQL_LOGIN_STATEMENT = "SELECT * FROM users u LEFT OUTER JOIN address a ON(u.address_id = a.address_id) WHERE u.email = ? AND u.password = sha1(?);";
+	public static final String SQL_LOGIN_STATEMENT = "SELECT * FROM users u LEFT OUTER JOIN address a ON(u.address_id = a.address_id) WHERE u.email = ? AND u.password = sha1(?) AND u.userDeleted = false;";
 	public static final String SQL_CHANGE_PASSWORD_STATEMENT = "UPDATE users SET password = sha1(?) WHERE email = ?;";
-	public static final String SQL_ADD_USER = "INSERT INTO users(user_id, email, password, firstName, secondName, lastName, isMale, birthday, isAdmin) VALUES(null, ?, sha1(?), ?, ?, ?, ?, ?, ?);";
+	public static final String SQL_ADD_USER = "INSERT INTO users(user_id, email, password, firstName, secondName, lastName, isMale, birthday, isAdmin) VALUES(null, ?, sha1(?), ?, ?, ?, ?, DATE(?), 0);";
 	public static final String SQL_MAKE_ADMIN = "UPDATE users SET isAdmin = ? WHERE email = ? ;";
 	public static final String SQL_GET_USER_BY_EMAIL = "SELECT * FROM users u LEFT OUTER JOIN address a ON(u.address_id = a.address_id) WHERE u.email = ?;";
 	public static final String SQL_GET_ADDRESS = "SELECT * FROM address WHERE address = ?;";
@@ -60,7 +60,7 @@ public class UserDAO implements IUserDAO {
 			boolean isMale, LocalDate dateOfBirth) {
 
 		jdbcTemplate.update(SQL_ADD_USER, email, password, firstName, secondName, lastName, isMale,
-				dateOfBirth.toString());
+				dateOfBirth);
 	}
 
 	@Override
