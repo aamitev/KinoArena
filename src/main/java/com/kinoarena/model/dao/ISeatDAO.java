@@ -11,4 +11,6 @@ public interface ISeatDAO {
 
 	List<Seat> getAllReservedSeatsByScreeningID(int id) throws Exception;
 
+	void reserveSeats(List<Seat> seats, int screeningId);
+
 }

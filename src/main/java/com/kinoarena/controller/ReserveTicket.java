@@ -109,48 +109,13 @@ public class ReserveTicket {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/finalize")
-	public String procesTicketTypes(Model model, HttpSession session, HttpServletRequest request) {
+	public String finalizeReservation(Model model, HttpSession session, HttpServletRequest request) {
 		try {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
 			int screeningId = ((Screening) session.getAttribute("screening")).getId();
 
-			List<ReservationTicketType> ticketTypes = reservationDAO.getTicketTypesByScreeningId(screeningId);
-			Map<String, List<ReservationTicketType>> reservedTypes = new HashMap<String, List<ReservationTicketType>>();
-			int ticketNumbers = 0;
-			for (ReservationTicketType type : ticketTypes) {
-				int qty = Integer.parseInt(request.getParameter("qty" + type.getId()));
-				for (int index = qty; index > 0; index--) {
-					if (index == qty) {
-						reservedTypes.put(type.getType(), new ArrayList<ReservationTicketType>());
-					}
-					reservedTypes.get(type.getType()).add(type);
-					ticketNumbers++;
-				}
-				// here we validate the tickets
-				if ((ticketNumbers > Ticket.MAX_TICKET_NUMBER) || (ticketNumbers <= Ticket.MIN_TICKET_NUMBER)) {
-					model.addAttribute("ticketTypes", ticketTypes);
-					model.addAttribute("error", "Invalid number of tickets");
-					return "reserveTicket";
-				}
-			}
-			session.setAttribute("ticketNumbers", ticketNumbers);
-			model.addAttribute("reservedTicketTypes", reservedTypes);
-			model.addAttribute("ticketNumbers", ticketNumbers);
-			System.out.println(reservedTypes.toString());
-			List<Seat> reservedSeats = seatDao.getAllReservedSeatsByScreeningID(screeningId);
-			Map<Byte, List<Seat>> seats = seatDao.getAllSeadsByHall(hallId);
-			System.out.println(seats.toString());
-			System.out.println(reservedSeats.toString());
-			for (Entry<Byte, List<Seat>> row : seats.entrySet()) {
-				for (Seat seat : row.getValue()) {
-					if (reservedSeats.contains(seat)) {
-						seat.setTaken(true);
-					}
-				}
-			}
-			model.addAttribute("seats", seats);
 			return "seats";
 		} catch (Exception e) {
 			e.printStackTrace();

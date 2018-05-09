@@ -25,6 +25,7 @@ public class SeatDAO implements ISeatDAO {
 	private static final String GET_SEATS_BY_HALL = "SELECT * FROM seat s " + "JOIN halls h ON(s.halls_id = h.hall_id) "
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
 			+ "JOIN address a ON(a.address_id = c.address_id) WHERE(h.hall_id = ?);";
+	private static final String RESERVE_SEATS = "INSERT INTO reservedseat VALUES(null,?,?)";
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -50,21 +51,18 @@ public class SeatDAO implements ISeatDAO {
 		List<Seat> movies = jdbcTemplate.query(GET_RESERVED_SEATS_BY_SCREENING, new Object[] { id }, seatRowMapper);
 		return movies;
 	}
-	
-	//insert batch example
-	public void insertSeats(final List<Seat> seats){
-			
-	  String sql = "INSERT INTO CUSTOMER " +
-		"(CUST_ID, NAME, AGE) VALUES (?, ?, ?)";
-				
-	  jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+
+	// reserve number of seats
+	@Override
+	public void reserveSeats(final List<Seat> seats,int screeningId){
+							
+	  jdbcTemplate.batchUpdate(RESERVE_SEATS, new BatchPreparedStatementSetter() {
 				
 		@Override
 		public void setValues(PreparedStatement ps, int i) throws SQLException {
-			Seat customer = seats.get(i);
-//			ps.setLong(1, customer.getCustId());
-//			ps.setString(2, customer.getName());
-//			ps.setInt(3, customer.getAge() );
+			Seat seat = seats.get(i);
+			ps.setInt(1, seat.getId());
+			ps.setInt(2, screeningId);
 		}
 				
 		@Override
