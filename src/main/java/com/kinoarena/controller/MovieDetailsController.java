@@ -86,7 +86,7 @@ public class MovieDetailsController {
 	public void getScreeningsByMovieIdAndDate(@RequestParam("movieId") int movieId, @RequestParam("date") String date,
 			HttpServletResponse response) {
 		try {
-			Map<String, Map<String, List<Screening>>> screenings = screeningDao.getScreeningsByMovieIdAndDate(movieId,
+			Map<String, Map<Integer, List<Screening>>> screenings = screeningDao.getScreeningsByMovieIdAndDate(movieId,
 					date);
 			String json = gson.toJson(screenings);
 			response.setContentType("application/json");

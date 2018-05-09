@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kinoarena.dto.ScreeningDTO;
 import com.kinoarena.dto.UserDTO;
 import com.kinoarena.model.dao.AddressDao;
 import com.kinoarena.model.dao.CinemaDAO;
@@ -26,6 +27,7 @@ import com.kinoarena.model.dao.FavoriteMovieDAO;
 import com.kinoarena.model.dao.GenreDao;
 import com.kinoarena.model.dao.HallDAO;
 import com.kinoarena.model.dao.MovieDao;
+import com.kinoarena.model.dao.ReservationDAO;
 import com.kinoarena.model.dao.ScreeningDao;
 import com.kinoarena.model.dao.SeatDAO;
 import com.kinoarena.model.dao.UserDAO;
@@ -34,11 +36,13 @@ import com.kinoarena.model.vo.Address;
 import com.kinoarena.model.vo.Cinema;
 import com.kinoarena.model.vo.Hall;
 import com.kinoarena.model.vo.Movie;
+import com.kinoarena.model.vo.ReservationTicketType;
 import com.kinoarena.utils.Utils;
 
 @Controller
 public class ProfileControler {
-
+	@Autowired
+	ReservationDAO reservationDAO;
 	@Autowired
 	private UserDAO userDao;
 	@Autowired
@@ -184,23 +188,23 @@ public class ProfileControler {
 
 	@RequestMapping(value = "/addMovie", method = RequestMethod.POST)
 	public String movieUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request, Model model) {
-		if (!Utils.fileValidator(file, model)) {
-			return "addMovie";
-		}
+		try {
+			if (!Utils.fileValidator(file, model)) {
+				return "addMovie";
+			}
 
-		String UPLOAD_FOLDER = "C:\\kinoarena\\movies\\";
+			String UPLOAD_FOLDER = "C:\\kinoarena\\movies\\";
 
-		String title = request.getParameter("title").toString();
-		String description = request.getParameter("description").toString();
-		String director = request.getParameter("director").toString();
-		int length = Integer.parseInt(request.getParameter("length").toString());
-		LocalDate premiere = LocalDate.parse(request.getParameter("premiere").toString());
-		int ageLimitation = Integer.parseInt(request.getParameter("ageLimitation").toString());
-		String movieType = request.getParameter("projectionType").toString();
-		String genre = request.getParameter("chosenGenre").toString();
+			String title = request.getParameter("title").toString();
+			String description = request.getParameter("description").toString();
+			String director = request.getParameter("director").toString();
+			int length = Integer.parseInt(request.getParameter("length").toString());
+			LocalDate premiere = LocalDate.parse(request.getParameter("premiere").toString());
+			int ageLimitation = Integer.parseInt(request.getParameter("ageLimitation").toString());
+			String movieType = request.getParameter("projectionType").toString();
+			String genre = request.getParameter("chosenGenre").toString();
 
-		if (!file.isEmpty()) {
-			try {
+			if (!file.isEmpty()) {
 
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream stream = new BufferedOutputStream(
@@ -219,13 +223,14 @@ public class ProfileControler {
 				movie.setGenre(movieDao.getGenre(genre));
 				movie.setMovieType(movieType.toUpperCase());
 				movieDao.addMovie(movie);
+				model.addAttribute("success", true);
+				return "redirect:/addMovie";
 
-				return "success";
-			} catch (Exception e) {
-				e.printStackTrace();
+			} else {
 				return "error";
 			}
-		} else {
+		} catch (Exception e) {
+			e.printStackTrace();
 			return "error";
 		}
 	}
@@ -239,7 +244,6 @@ public class ProfileControler {
 
 			request.setAttribute("allHalls", hallDao.getAllHalls());
 			request.setAttribute("allMovies", movieDao.getAllMovies());
-
 			return "addProjection";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -269,8 +273,12 @@ public class ProfileControler {
 			Hall hall = hallDao.getHallByName(hallName, cinemaName);
 
 			screeningDao.addScreening(projectionDateTime, movie, hall);
+			List<ReservationTicketType> ticketTypes = reservationDAO.getTicketTypes();
+			ScreeningDTO screeningDto = screeningDao.getLastScreening();
+			screeningDao.addTicketTypesToScreening(screeningDto.getId(), ticketTypes);
+			model.addAttribute("success", true);
 
-			return "addProjection";
+			return "redirect:/addProjection";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";
@@ -325,7 +333,7 @@ public class ProfileControler {
 
 				cinemaDao.addCinema(cinema);
 				model.addAttribute("success", true);
-				return "addCinema";
+				return "redirect:/addCinema";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "error";
@@ -377,7 +385,7 @@ public class ProfileControler {
 				int nextHallNumber = hallDao.getLastHallNumber(cinema) + 1;
 				hallObj = new Hall(lastHall + 1, nextHallNumber + 1, cinemaObj);
 			} else {
-				hallObj = new Hall(1,1,cinemaObj);
+				hallObj = new Hall(1, 1, cinemaObj);
 			}
 			hallObj.setHallType(HallType.valueOf(hall.toUpperCase()));
 			hallObj.initializeSeats();
@@ -385,8 +393,9 @@ public class ProfileControler {
 			System.out.println(hallObj.getSeats().size());
 
 			hallDao.addHall(hallObj);
+			model.addAttribute("success", true);
 
-			return "addHall";
+			return "redirect:/addHall";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";

@@ -94,21 +94,23 @@
 							</ul>
 						</nav>
 					</aside>
-
+					<c:if test="${not empty success} ">
+						<p style="color: green;">SUCCESS</p>
+					</c:if>
 					<form id="addHallForm" action="./addHall" method="POST">
-						<select  id="cinema" name="cinema">
+
+						<select id="cinema" name="cinema">
 							<c:forEach var="cinema" items="${allCinemas}">
 								<option id="cinema" value="${cinema.name}"
 									myTag="${cinema.name}"><c:out value="${cinema.name}" /></option>
 							</c:forEach>
-						</select> <select  id="hallType" name="hallType">
+						</select> <select id="hallType" name="hallType">
 							<option value="LUXE" myTag="LUXE">LUXE</option>
 							<option value="IMAX" myTag="IMAX">IMAX</option>
 							<option value="PREMIUM" myTag="IMAX">PREMIUM</option>
 							<option value="VIP" myTag="IMAX">VIP</option>
 						</select>
-						<button id="button_select" class="red button">Добави
-							зала</button>
+						<button id="button_select" class="red button">Добави зала</button>
 					</form>
 
 				</div>

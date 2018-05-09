@@ -89,7 +89,7 @@
 							</div>
 							<div class="row">
 								<div class="title">Зала</div>
-								<div class="attr">${screening.hall.name}</div>
+								<div class="attr">${screening.hall.hallNumber}</div>
 							</div>
 						</aside>
 						<!-- end of .moviePlot -->

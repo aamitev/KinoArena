@@ -87,7 +87,10 @@
 					</nav>
 				</aside>
 
-				<div class="contentWrapper">
+				<div class="contentWrapper" style="height: auto;">
+					<c:if test="${not empty succes} }">
+						<p style="color: green; margin: 3%;">SUCCESS</p>
+					</c:if>
 					<span class="icon"> <i class="profile"></i>
 					</span>
 					<!-- ADDING IMAGE -->
@@ -121,11 +124,10 @@
 						<input type="text" name="length" id="length"
 							style="width: 60%; line-height: 100%;" placeholder="Времетраене">
 
-						<!-- <input type="text" name="premiere" id="premiere"
-							style="width: 60%; line-height: 100%;" placeholder="Премиера"> -->
+
 						<input type="date" id="premiere" name="premiere" value=""
-							class="date" placeholder = "Премиера"/>
-						<input type="text" name="ageLimitation" id="ageLimitation"
+							class="date" placeholder="Премиера" /> <input type="text"
+							name="ageLimitation" id="ageLimitation"
 							style="width: 60%; line-height: 100%;"
 							placeholder="Възрастово ограничение">
 
@@ -141,15 +143,14 @@
 						<!-- <input type="hidden" id="setMyTag" /> <input type="text"
 							name="genre" id="genre" style="width: 60%; line-height: 100%;"
 							placeholder="Жанр">  -->
-						<select id="genre"
-							name="genre">
-							<option value="" myTag="chooseGenre" selected disabled>Избери жанр</option>
+						<select id="genre" name="genre">
+							<option value="" myTag="chooseGenre" selected disabled>Избери
+								жанр</option>
 							<c:forEach var="genre" items="${allGenres}">
 								<option id="genre" value="${genre.genre}" myTag="${genre.genre}"><c:out
 										value="${genre.genre}" /></option>
 							</c:forEach>
-						</select>
-						<input type="hidden" id="chosenGenre" name="chosenGenre" />
+						</select> <input type="hidden" id="chosenGenre" name="chosenGenre" />
 						<!-- ADD DESCRIPTION -->
 						<input id="submit" type="submit" value="Upload"
 							style="background-color: red;">
@@ -221,7 +222,7 @@
 			});
 		});
 	</script>
-	
+
 	<script>
 		$(function() {
 			$("#genre").change(function() {
@@ -232,7 +233,7 @@
 			});
 		});
 	</script>
-	
+
 	<script>
 		$(document).ready(function() {
 			var date = new Date();
