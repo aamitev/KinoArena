@@ -37,8 +37,7 @@
 						class="triangle-set item-4"></span>
 				</div>
 			</div>
-			<form class="stdForm" method="POST"
-				action="/KinoArena/finalize">
+			<form class="stdForm" method="POST" action="/KinoArena/finalize">
 				<div class="blackBox hallWrapper">
 					<div class="loopDisk"></div>
 
@@ -112,11 +111,11 @@
 													<c:if test="${seat.taken}">class="seat busy"</c:if>
 													<c:if test="${not seat.taken}">class="seat"</c:if>
 													data-category="0000000001" data-row="${seat.row}"
-													data-seat="${seat.number}" data-area="1" data-id="${seat.id}"
-													disable>
+													data-seat="${seat.number}" data-area="1"
+													data-id="${seat.id}" disable>
 													<div class="hidden">
 														<input type="text" name="seatId${seat.id}"
-															id="seat_input${seat.id}" >
+															id="seat_input${seat.id}">
 													</div>
 													<svg class="seatSVG"
 														style="width: 48.8235px; height: 48.8235px;"
@@ -198,7 +197,7 @@
 							</div>
 							<div class="row">
 								<div class="title">Зала</div>
-								<div class="attr">${screening.hall.name}</div>
+								<div class="attr">${screening.hall.hallNumber}</div>
 							</div>
 						</aside>
 						<!-- end of .moviePlot -->

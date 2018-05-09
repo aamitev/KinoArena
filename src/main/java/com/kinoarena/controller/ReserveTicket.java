@@ -120,6 +120,7 @@ public class ReserveTicket {
 					reservedSeatsIDs.add(Integer.parseInt(entry.getValue()));
 				}
 			}
+			System.out.println(reservedSeatsIDs);
 			reservationDAO.reserveSeats(reservedSeatsIDs, screeningId);
 			model.addAttribute("finalized", true);
 			return "finalizeReservation";

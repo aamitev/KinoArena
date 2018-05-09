@@ -20,7 +20,7 @@ public class ReservationDAO implements IReservationDAO {
 	private static final String GET_TICKETTYPE_BY_SCREENING_ID = "SELECT r.* FROM reservationtype r "
 			+ "JOIN  screening_has_reservationtype shr ON(r.reservationType_id =shr.reservationType_id) "
 			+ "JOIN screening s ON(shr.screening_id = s.screening_id) WHERE (s.screening_id = ?);";
-	private static final String RESERVE_SEATS = "INSERT INTO reservedseat VALUES(null,?,?)";
+	private static final String RESERVE_SEATS = "INSERT INTO reservedseat VALUES(null,?,?,false)";
 	private static final String GET_RESERVED_SEATS_BY_SCREENING = "SELECT * FROM reservedseat rs "
 			+ "JOIN seat s ON(rs.seat_id = s.seat_id) " + "JOIN halls h ON(s.halls_id = h.hall_id) "
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
