@@ -127,13 +127,7 @@ public class LoginController {
 		return "userProfile";
 	}
 
-	// @RequestMapping(value = "/submit", method = RequestMethod.POST)
-	// public String updateInfo(HttpServletRequest request, HttpSession session,
-	// Model model) {
-	//
-	//
-	// return "userProfile";
-	// }
+
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, Model model) {

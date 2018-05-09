@@ -18,6 +18,9 @@ public class HallDAO implements IHallDAO {
 	@Autowired
 	private HallRowMapper hallMapper;
 	
+	@Autowired
+	private SeatDAO seatDao;
+	
 	@Override
 	public List<Hall> getAllHalls() {
 		
@@ -30,4 +33,23 @@ public class HallDAO implements IHallDAO {
 		return hall;
 	}
 
+	@Override
+	public Hall getLastHallNumber(String hallName) {
+		Hall hall = jdbcTemplate.queryForObject(SQL_GET_LAST_HALL, new Object[] {hallName}, hallMapper);
+		return hall;
+	}
+
+	@Override
+	public int getLastHallId() {
+		Hall hall = jdbcTemplate.queryForObject(SQL_GET_LAST_HALL_BY_ID, new Object[] {}, hallMapper);
+		return hall.getId();
+	}
+
+	@Override
+	public void addHall(Hall hall) {
+		jdbcTemplate.update(SQL_ADD_HALL, hall.getId(), hall.getHallNumber(), hall.getCinema().getId(), hall.getHallType().getHallType());
+		SeatDAO
+	}
+
+	
 }

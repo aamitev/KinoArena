@@ -1,20 +1,30 @@
 package com.kinoarena.model.vo;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kinoarena.exceptions.ModelException;
 import com.kinoarena.exceptions.MovieException;
+import com.kinoarena.model.dao.SeatDAO;
 import com.kinoarena.model.enums.HallType;
 
 public class Hall {
-	//private static final String INVALID_NUMBER_OF_SEATS = "Invalid number of seats.";
+	// private static final String INVALID_NUMBER_OF_SEATS = "Invalid number of
+	// seats.";
+	@Autowired
+	private SeatDAO seatDao;
 	private static final String INVALID_CINEMA = "Invalid cinema.";
 	private static final String INVALID_ID = "Invalid id.";
 	private static final String INVALID_NAME = "Invalid name.";
+	private static final int MAX_SEATS = 100;
+	private static final int MAX_SEATS_PER_ROW = 10;
 	private int id;
 	private String name;
 	private HallType hallType;
-	private Set<Seat> seats;
+	private List<Seat> seats;
 	private Cinema cinema;
 	private int hallNumber;
 
@@ -22,6 +32,16 @@ public class Hall {
 		setId(id);
 		setName(name);
 		setCinema(cinema);
+
+		this.seats = new ArrayList<Seat>();
+		int nextSeatID = seatDao.getLastSeatId() + 1;
+		for(int index = 1, row = 1; index <= MAX_SEATS; index++) {
+			seats.add(new Seat(nextSeatID++, row, index, false, this));
+			if(index % MAX_SEATS_PER_ROW == 0) {
+				row++;
+			}
+		}
+		
 	}
 
 	public Hall(int id, int hallNumber) throws ModelException {
@@ -32,6 +52,7 @@ public class Hall {
 	public void setHallNumber(int hallNumber) {
 		this.hallNumber = hallNumber;
 	}
+
 	public int getHallNumber() {
 		return this.hallNumber;
 	}
@@ -41,6 +62,12 @@ public class Hall {
 			this.id = id;
 		} else
 			throw new ModelException(INVALID_ID);
+	}
+
+	public void addSeat(Seat seat) {
+		if (seat != null && !this.seats.contains(seat)) {
+			this.seats.add(seat);
+		}
 	}
 
 	public void setName(String name) throws ModelException {
@@ -84,9 +111,7 @@ public class Hall {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cinema == null) ? 0 : cinema.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((hallType == null) ? 0 : hallType.hashCode());
 		return result;
 	}
 
@@ -99,19 +124,9 @@ public class Hall {
 		if (getClass() != obj.getClass())
 			return false;
 		Hall other = (Hall) obj;
-		if (cinema == null) {
-			if (other.cinema != null)
-				return false;
-		} else if (!cinema.equals(other.cinema))
-			return false;
-		if (id != other.id)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
+		if (hallType != other.hallType)
 			return false;
 		return true;
 	}
-	
+
 }

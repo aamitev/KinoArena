@@ -95,12 +95,38 @@
 							</ul>
 						</nav>
 					</aside>
-					
+
+					<form id="addHallForm" action="./addHall" method="POST">
+						<select id="cinema" name="cinema">
+						<option id = "cinema" selected disabled >Кино</option>
+							<c:forEach var="cinema" items="${allCinemas}">
+								<option id="cinema" value="${cinema.name}"
+									myTag="${cinema.name}"><c:out
+										value="${cinema.name}" /></option>
+							</c:forEach>
+						</select>
+					<input type="hidden" id="cinemaName" name="cinemaName" />
+						<select id="hall" name="hall">
+						<option id = "hall" selected disabled >Зала</option>
+							<c:forEach var="hall" items="${allHalls}">
+								<option id="hall" value="${hall.hallType}"
+									myTag="${hall.hallType}"><c:out
+										value="${hall.hallType}" /></option>
+							</c:forEach>
+						</select>
+					<input type="hidden" id="hallType" name="hallType" />
+						
+						<button class = "red button"> Добави зала</button>
+						
+					</form>
+
 				</div>
 				<div id="scroll_to_top" class="scrollToTop">
 					<i class="circleUp"></i>
 				</div>
-				
+
+
+
 				<div id="fb-root"></div>
 				<noscript>
 
@@ -108,7 +134,7 @@
 
 						<img height="1" width="1" style="border-style: none;" alt=""
 							src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/855321203/?guid=ON&amp;script=0" />
-						
+
 					</div>
 
 				</noscript>
@@ -137,8 +163,27 @@
 		</div>
 
 	</noscript>
+	<script>
+		$(function() {
+			$("#cinema").change(function() {
+				var element = $(this).find('option:selected');
+				var myTag = element.attr("myTag");
 
+				$('#cinemaName').val(myTag);
+			});
+		});
+	</script>
+	
+	<script>
+		$(function() {
+			$("#hall").change(function() {
+				var element = $(this).find('option:selected');
+				var myTag = element.attr("myTag");
 
+				$('#hallType').val(myTag);
+			});
+		});
+	</script>
 	<!--
 
 //-->

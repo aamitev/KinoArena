@@ -4,7 +4,10 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -328,7 +331,11 @@ public class ProfileControler {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
-
+			
+			Set<Hall> halls = new HashSet<Hall>(hallDao.getAllHalls());
+			
+			request.setAttribute("allCinemas", cinemaDao.getAllCinemas());
+			request.setAttribute("allHalls", halls);
 			return "addHall";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -342,7 +349,16 @@ public class ProfileControler {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
-
+			
+			String cinema = request.getParameter("cinemaName");
+			String hall = request.getParameter("hallType");
+			
+			System.out.println(cinema);
+			System.out.println(hall);
+			
+			Cinema cinemaObj = cinemaDao.getCinemaByName(cinema);
+			Hall hallObj = new Hall(hallDao.getLastHallId(), hall, cinemaObj);
+			
 			return "addHall";
 		} catch (Exception e) {
 			e.printStackTrace();

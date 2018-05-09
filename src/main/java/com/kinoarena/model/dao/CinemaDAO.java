@@ -48,4 +48,10 @@ public class CinemaDAO implements ICinemaDAO {
 					cinema.getCinemaCoverURL(), cinema.getAddress().getId());
 		}
 	}
+
+	@Override
+	public Cinema getCinemaByName(String name) {
+		Cinema cinema = jdbcTemplate.queryForObject(SQL_GET_CINEMA_BY_NAME, new Object[] {name}, cinemaRowMapper);
+		return cinema;
+	}
 }
