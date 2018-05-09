@@ -19,19 +19,15 @@ import com.kinoarena.model.vo.Seat;
 public class SeatDAO implements ISeatDAO {
 
 	private static final String GET_RESERVED_SEATS_BY_SCREENING = "SELECT * FROM reservedseat rs "
-<<<<<<< HEAD
-			+ "JOINseat s ON(rs.seat_id = s.seat_id) " + "JOIN halls h ON(s.halls_id = h.hall_id) "
-			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) " + "JOIN address a ON(a.address_id = c.address_id);";
-	private static final String GET_LAST_SEAT = "SELECT * FROM seat s JOIN halls h ON (s.halls_id = h.hall_id) JOIN cinema c ON (h.cinema_id = c.cinema_id) JOIN address a ON (c.address_id = a.address_id) ORDER BY seat_id DESC LIMIT 1;";
-	
-=======
 			+ "JOIN seat s ON(rs.seat_id = s.seat_id) " + "JOIN halls h ON(s.halls_id = h.hall_id) "
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
 			+ "JOIN address a ON(a.address_id = c.address_id) WHERE(rs.screening_id = ?);";
+
+	private static final String GET_LAST_SEAT = "SELECT * FROM seat s JOIN halls h ON (s.halls_id = h.hall_id) JOIN cinema c ON (h.cinema_id = c.cinema_id) JOIN address a ON (c.address_id = a.address_id) ORDER BY seat_id DESC LIMIT 1;";
+
 	private static final String GET_SEATS_BY_HALL = "SELECT * FROM seat s " + "JOIN halls h ON(s.halls_id = h.hall_id) "
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
 			+ "JOIN address a ON(a.address_id = c.address_id) WHERE(h.hall_id = ?);";
->>>>>>> 0732713bd14ea4f36a0fe9dd5758efd17737fdab
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
@@ -57,46 +53,46 @@ public class SeatDAO implements ISeatDAO {
 		List<Seat> movies = jdbcTemplate.query(GET_RESERVED_SEATS_BY_SCREENING, new Object[] { id }, seatRowMapper);
 		return movies;
 	}
-<<<<<<< HEAD
 
 	@Override
 	public int getLastSeatId() {
 		Seat seat = jdbcTemplate.queryForObject(GET_LAST_SEAT, new Object[] {}, seatRowMapper);
-		
+
 		return seat.getId();
 	}
 
 	@Override
 	public void addSeat(List<Seat> seats) {
-		for(Seat seat : seats) {
+		for (Seat seat : seats) {
 			jdbcTemplate.update(SQL_ADD_SEAT, seat.getId(), seat.getRow(), seat.getNumber(), seat.getId());
 		}
 	}
-	
-	
-=======
-	
-	//insert batch example
-	public void insertSeats(final List<Seat> seats){
-			
-	  String sql = "INSERT INTO CUSTOMER " +
-		"(CUST_ID, NAME, AGE) VALUES (?, ?, ?)";
-				
-	  jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
-				
-		@Override
-		public void setValues(PreparedStatement ps, int i) throws SQLException {
-			Seat customer = seats.get(i);
-//			ps.setLong(1, customer.getCustId());
-//			ps.setString(2, customer.getName());
-//			ps.setInt(3, customer.getAge() );
-		}
-				
-		@Override
-		public int getBatchSize() {
-			return seats.size();
-		}
-	  });
+
+	// insert batch example
+	public void insertSeats(final List<Seat> seats) {
+
+		String sql = "INSERT INTO CUSTOMER " + "(CUST_ID, NAME, AGE) VALUES (?, ?, ?)";
+
+		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException {
+				Seat customer = seats.get(i);
+				// ps.setLong(1, customer.getCustId());
+				// ps.setString(2, customer.getName());
+				// ps.setInt(3, customer.getAge() );
+			}
+
+			@Override
+			public int getBatchSize() {
+				return seats.size();
+			}
+		});
 	}
->>>>>>> 0732713bd14ea4f36a0fe9dd5758efd17737fdab
+
+	@Override
+	public List<Seat> getAllResercedSeatsByScreeningID(int id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

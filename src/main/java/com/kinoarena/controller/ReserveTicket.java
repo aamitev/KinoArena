@@ -140,17 +140,17 @@ public class ReserveTicket {
 			model.addAttribute("ticketNumbers", ticketNumbers);
 			System.out.println(reservedTypes.toString());
 			List<Seat> reservedSeats = seatDao.getAllReservedSeatsByScreeningID(screeningId);
-			Map<Byte, List<Seat>> seats = seatDao.getAllSeadsByHall(hallId);
-			System.out.println(seats.toString());
-			System.out.println(reservedSeats.toString());
-			for (Entry<Byte, List<Seat>> row : seats.entrySet()) {
-				for (Seat seat : row.getValue()) {
-					if (reservedSeats.contains(seat)) {
-						seat.setTaken(true);
-					}
-				}
-			}
-			model.addAttribute("seats", seats);
+//			Map<Byte, List<Seat>> seats = seatDao.getAllSeadsByHall(hallId);
+//			System.out.println(seats.toString());
+//			System.out.println(reservedSeats.toString());
+//			for (Entry<Byte, List<Seat>> row : seats.entrySet()) {
+//				for (Seat seat : row.getValue()) {
+//					if (reservedSeats.contains(seat)) {
+//						seat.setTaken(true);
+//					}
+//				}
+//			}
+//			model.addAttribute("seats", seats);
 			return "seats";
 		} catch (Exception e) {
 			e.printStackTrace();
