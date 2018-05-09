@@ -23,7 +23,6 @@ import com.kinoarena.model.dao.MovieDao;
 import com.kinoarena.model.dao.ScreeningDao;
 import com.kinoarena.model.vo.Movie;
 import com.kinoarena.model.vo.Screening;
-import com.kinoarena.model.vo.User;
 
 @Controller
 public class MovieDetailsController {
@@ -49,7 +48,7 @@ public class MovieDetailsController {
 
 			if (session.getAttribute("loggedUser") != null) {
 				UserDTO user = (UserDTO) session.getAttribute("loggedUser");
-
+				model.addAttribute("user", user);
 				Movie favoriteMovie = favoriteMovieDao.getFavoriteMovie(user.getId(), id);
 				if (favoriteMovie != null) {
 					model.addAttribute("inFavorites", true);

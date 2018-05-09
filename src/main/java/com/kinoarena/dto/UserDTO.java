@@ -13,7 +13,6 @@ public class UserDTO {
 	private static final String INVALID_GSM = "Invalid GSM entered.";
 	private static final String INVALID_ADDRESS = "Invalid address.";
 	private static final String INVALID_INPUT = "Invalid input.";
-	private static final String INVALID_EMAIL_PATTERN = "Invalid email pattern.";
 	private static final String INVALID_FIRST_NAME = "Invalid first name of user.";
 	private static final String INVALID_SECOND_NAME = "Invalid second name of user.";
 	private static final String INVALID_LAST_NAME = "Invalid last name of user.";
@@ -35,7 +34,7 @@ public class UserDTO {
 
 	}
 
-	public UserDTO(int id,String email, String firstName, String secondName, String lastName, boolean sex,
+	public UserDTO(int id, String email, String firstName, String secondName, String lastName, boolean sex,
 			LocalDate birthday, boolean isAdmin) throws ModelException {
 		setId(id);
 		setFirstName(firstName);
@@ -108,12 +107,10 @@ public class UserDTO {
 
 	public void setEmail(String email) throws ModelException {
 		if (Utils.checkString(email)) {
-			if (Utils.emailValidator(email)) {
-				this.email = email;
-			} else
-				throw new ModelException(INVALID_EMAIL_PATTERN);
-		} else
+			this.email = email;
+		} else {
 			throw new ModelException(INVALID_INPUT);
+		}
 	}
 
 	public void setJob(String job) throws ModelException {

@@ -39,10 +39,7 @@ public class Cinema {
 
 	public void setEmail(String email) throws ModelException {
 		if (Utils.checkString(email)) {
-			if (Utils.emailValidator(email)) {
 				this.email = email;
-			} else
-				throw new ModelException(INVALID_EMAIL_PATTERN);
 		} else
 			throw new ModelException(ILLEGAL_EMAIL);
 	}

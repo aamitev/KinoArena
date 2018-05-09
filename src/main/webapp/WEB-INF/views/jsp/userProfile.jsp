@@ -155,13 +155,13 @@
 							<div class="formItem col2 left">
 								<input type="text" id="education" name="education"
 									required="required" placeholder="Образование *"
-									value="${sessionScope.loggedUser.getEducation()}">
+									value="${sessionScope.loggedUser.education}">
 							</div>
 							<div class="clear"></div>
 							<div class="formItem col2 left">
 								<input type="text" id="job" name="job" required="required"
 									placeholder="Работа *"
-									value="${sessionScope.loggedUser.getJob()}">
+									value="${sessionScope.loggedUser.job}">
 							</div>
 							<div class="clear"></div>
 							<button class="button big red fixWidth">Запиши</button>

@@ -29,7 +29,7 @@ public class UserDAO implements IUserDAO {
 	public static final String SQL_GET_USER_BY_EMAIL = "SELECT * FROM users u LEFT OUTER JOIN address a ON(u.address_id = a.address_id) WHERE u.email = ?;";
 	public static final String SQL_GET_ADDRESS = "SELECT * FROM address WHERE address = ?;";
 	public static final String SQL_INSERT_ADDRESS = "INSERT INTO address VALUES(null, ?, ?, ?);";
-	public static final String SQL_UPDATE_USER_INFO = "UPDATE users SET firstName = ?, secondName = ?, lastName = ?, isMale = ?, birthday = ?, gsm = ?, education = ?, job = ?,address_id = ?, isAdmin = ? WHERE email = ?;";
+	public static final String SQL_UPDATE_USER_INFO = "UPDATE users SET firstName = ?, secondName = ?, lastName = ?, isMale = ?, birthday = ?, gsm = ?, education = ?, job = ?,address_id = ?, isAdmin = ? WHERE user_id = ?;";
 	public static final String SQL_GET_ALL_USERS = "SELECT * FROM users u JOIN address a ON (u.address_id = a.address_id);";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -88,7 +88,7 @@ public class UserDAO implements IUserDAO {
 		
 		jdbcTemplate.update(SQL_UPDATE_USER_INFO, user.getFirstName(), user.getSecondName(), user.getLastName(),
 				user.isMale(), user.getBirthday(), user.getGsm(), user.getEducation(), user.getJob(), address.getId(),
-				user.isAdmin(), user.getEmail());
+				user.isAdmin(), user.getId());
 
 	}
 

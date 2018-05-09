@@ -1,4 +1,5 @@
 package com.kinoarena.utils;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,10 +17,7 @@ public abstract class Utils {
 	private static final int GSM_WITH_COUNTRY_CODE = 13;
 
 	public static boolean emailValidator(String emailStr) {
-		if (Pattern.compile(EMAIL_REGEX).matcher(emailStr).matches()) {
-			return true;
-		}
-		return false;
+		return EmailValidator.getInstance().isValid(emailStr);
 	}
 
 	public static boolean gsmValidator(String gsm) {
