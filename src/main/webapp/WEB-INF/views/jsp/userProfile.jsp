@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<main id="main">
-		
+
 		<div class="wrapper">
 			<div class="profilePanel">
 				<aside class="sidebar left">
@@ -44,16 +44,19 @@
 						<ul>
 
 							<li class="selected"><span class="icon"><i
-									class="profile"></i></span> <span class="txt">Персонална информация</span></li>
+									class="profile"></i></span> <span class="txt">Персонална
+									информация</span></li>
 
 							<li><a href="./changePassword"> <span class="icon"><i
-										class="password"></i></span> <span class="txt">Промяна на паролата</span>
+										class="password"></i></span> <span class="txt">Промяна на
+										паролата</span>
 							</a></li>
 							<li><a href="./favorites"> <span class="icon"><i
 										class="heart"></i></span> <span class="txt">Моите филми</span>
 							</a></li>
 							<li><a href="./orders"> <span class="icon"><i
-										class="clock"></i></span> <span class="txt">История на резервациите и закупени билети</span>
+										class="clock"></i></span> <span class="txt">История на
+										резервациите и закупени билети</span>
 							</a></li>
 							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
 								<li><a href="./addMovie"> <span class="icon"><i
@@ -91,9 +94,9 @@
 						<div class="formName">
 							<span class="groupLabel">Пол *</span>
 							<div>
-								<input type="radio" name="sex" id="sex" hidden = "hidden"> <br>
-								<input type="button" value="Мъж" id="selectMale"> <input
-									type="button" value="Жена" id="selectFemale">
+								<input type="radio" name="sex" id="sex" hidden="hidden">
+								<br> <input type="button" value="Мъж" id="selectMale">
+								<input type="button" value="Жена" id="selectFemale">
 							</div>
 							<div class="clear"></div>
 							<div class="formItem col2 left">
@@ -116,7 +119,7 @@
 							<div class="clear"></div>
 							<div class="formItem col2 left">
 								<input type="text" id="email" name="email" required="required"
-									placeholder="Имейл *"
+									placeholder="Имейл *" readonly
 									value="${sessionScope.loggedUser.getEmail()}">
 							</div>
 							<div class="clear"></div>
@@ -127,8 +130,8 @@
 							</div>
 							<div class="clear"></div>
 							<div class="formItem col2 left">
-								<input type="text" id="city" name="city"
-									required="required" placeholder="Град *"
+								<input type="text" id="city" name="city" required="required"
+									placeholder="Град *"
 									value="${sessionScope.loggedUser.address.city}">
 							</div>
 							<div class="formItem col2 left">
@@ -167,10 +170,17 @@
 					</form>
 					<form action="./makeAdmin" name="makeAdmin" method="post"
 						novalidate="novalidate" class="stdForm">
+
 						<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
 							<div>
-								<input type="text" name="makeAdmin" id="makeAdmin"
-									placeholder="Имейл на потребител"><br>
+								<select id="makeAdmin" name="makeAdmin">
+									<option value="" myTag="choseAdmin" selected disabled>Избери
+										имейл</option>
+									<c:forEach var="user" items="${allUsers}">
+										<option id="user" value="${user.email}" myTag="${user.email}""><c:out
+												value="${user.email}}" /></option>
+									</c:forEach>
+								</select>
 							</div>
 							<div>
 								<button class="button red fixedWidth">Направи Админ</button>
@@ -195,8 +205,7 @@
 
 	<noscript>
 
-		<div style="display: inline;">
-		</div>
+		<div style="display: inline;"></div>
 
 	</noscript>
 	<script>

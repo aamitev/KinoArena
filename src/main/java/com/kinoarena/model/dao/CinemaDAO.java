@@ -16,7 +16,7 @@ public class CinemaDAO implements ICinemaDAO {
 
 	private static final String GET_CINEMA_BY_ID = "SELECT * FROM cinema c JOIN address a ON(c.address_id = a.address_id) WHERE (c.cinema_id = ?)";
 
-	private static final String SQL_ADD_CINEMA = "INSERT INTO cinema VALUES(null, ?, ?, ?, ?, ?);";
+	private static final String SQL_ADD_CINEMA = "INSERT INTO cinema VALUES(null, ?, ?, ?, ?, ?, false);";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired

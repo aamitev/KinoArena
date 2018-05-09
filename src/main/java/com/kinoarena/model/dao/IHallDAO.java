@@ -9,7 +9,7 @@ public interface IHallDAO {
 	public static final String SQL_GET_HALL_BY_NAME = "SELECT * FROM halls h JOIN cinema c ON (h.cinema_id = c.cinema_id) JOIN address a ON (c.address_id = a.address_id) WHERE hallNumber = ? AND c.name = ?;";
 	public static final String SQL_GET_LAST_HALL = "SELECT * FROM halls h JOIN cinema c ON (h.cinema_id = c.cinema_id) JOIN address a ON (c.address_id = a.address_id) WHERE name = ? ORDER BY hallNumber DESC LIMIT 1;";
 	public static final String SQL_GET_LAST_HALL_BY_ID = "SELECT * FROM halls h JOIN cinema c ON(h.cinema_id = c.cinema_id) JOIN address a ON (c.address_id = a.address_id) ORDER BY h.hall_id DESC LIMIT 1;";
-	public static final String SQL_ADD_HALL = "INSERT INTO halls VALUES(null, ?, ?, ?);";
+	public static final String SQL_ADD_HALL = "INSERT INTO halls VALUES(null, ?, ?, ?, false);";
 	
 	public List<Hall> getAllHalls();
 	

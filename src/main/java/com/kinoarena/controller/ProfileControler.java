@@ -24,6 +24,7 @@ import com.kinoarena.dto.UserDTO;
 import com.kinoarena.model.dao.AddressDao;
 import com.kinoarena.model.dao.CinemaDAO;
 import com.kinoarena.model.dao.FavoriteMovieDAO;
+import com.kinoarena.model.dao.GenreDao;
 import com.kinoarena.model.dao.HallDAO;
 import com.kinoarena.model.dao.MovieDao;
 import com.kinoarena.model.dao.ScreeningDao;
@@ -56,14 +57,18 @@ public class ProfileControler {
 	private ScreeningDao screeningDao;
 	@Autowired
 	private SeatDAO seatDao;
+	@Autowired
+	private GenreDao genreDao;
 	
 
 	@RequestMapping(value = "/userProfile", method = RequestMethod.GET, produces = "text/html; charset=utf-8")
-	public String profile(Model model, HttpSession session) {
+	public String profile(Model model, HttpServletRequest request, HttpSession session) {
 		try {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
+			List<UserDTO> users = userDao.getAllUsers();
+			request.setAttribute("allUsers", users);
 			return "userProfile";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -166,11 +171,13 @@ public class ProfileControler {
 	}
 
 	@RequestMapping(value = "/addMovie", method = RequestMethod.GET)
-	public String addMovie(Model model, HttpSession session) {
+	public String addMovie(Model model, HttpServletRequest request, HttpSession session) {
 		try {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
+			request.setAttribute("allGenres", genreDao.getAllGenres());
+			
 			return "addMovie";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -193,7 +200,7 @@ public class ProfileControler {
 		LocalDate premiere = LocalDate.parse(request.getParameter("premiere").toString());
 		int ageLimitation = Integer.parseInt(request.getParameter("ageLimitation").toString());
 		String movieType = request.getParameter("projectionType").toString();
-		String genre = request.getParameter("genre").toString();
+		String genre = request.getParameter("chosenGenre").toString();
 
 		if (!file.isEmpty()) {
 			try {

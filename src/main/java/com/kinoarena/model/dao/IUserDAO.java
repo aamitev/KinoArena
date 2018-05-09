@@ -1,9 +1,11 @@
 package com.kinoarena.model.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.kinoarena.dto.UserDTO;
 import com.kinoarena.exceptions.WebProfileException;
+import com.kinoarena.model.vo.User;
 
 public interface IUserDAO {
 	
@@ -20,4 +22,6 @@ public interface IUserDAO {
 	public void editUser(UserDTO user);
 	
 	public int getUserId(String email);
+	
+	public List<UserDTO> getAllUsers();
 }

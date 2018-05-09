@@ -87,7 +87,6 @@ public class LoginController {
 			boolean gender = Boolean.parseBoolean(request.getParameter("sex"));
 
 			String birthdate = request.getParameter("dateOfBirth").toString();
-
 			if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
 					&& !Utils.emailValidator(email) && !Utils.comparePasswords(password, rePassword)
 					&& !Utils.dateValidator(birthdate)) {
