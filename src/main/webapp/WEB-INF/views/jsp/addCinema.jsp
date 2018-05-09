@@ -91,9 +91,7 @@
 				<div class="contentWrapper">
 					<span class="icon"> <i class="profile"></i>
 					</span>
-					<c:if test="${not empty succes} }">
-						<p style="color: green;">SUCCESS</p>
-					</c:if>
+
 					<!-- ADDING IMAGE -->
 					<!-- <input id = "image" name = "image" type="file" style="width:270px" > -->
 
@@ -130,6 +128,9 @@
 						<!-- ADD CINEMA-->
 						<input id="submit" type="submit" value="Добави"
 							style="background-color: red;">
+						<c:if test="${not empty success}">
+							<p style="color: green;">SUCCESS</p>
+						</c:if>
 					</form>
 					<!-- ADDING IMAGE -->
 				</div>

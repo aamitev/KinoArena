@@ -79,7 +79,7 @@ public class ScreeningProgramController {
 			HttpServletResponse response) {
 		try {
 			System.out.println(cinemaId + " " + date);
-			Map<String, Map<String, List<Screening>>> screenings = screeningDao.getScreeningsByCinemaIdAndDate(cinemaId,date);
+			Map<String, Map<Integer, List<Screening>>> screenings = screeningDao.getScreeningsByCinemaIdAndDate(cinemaId,date);
 			String json = gson.toJson(screenings);
 			System.out.println(screenings);
 			response.setContentType("application/json");

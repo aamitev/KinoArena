@@ -97,35 +97,56 @@
 						</ul>
 					</nav>
 				</aside>
+				<c:if test="${not empty success} ">
+					<p style="color: green;">SUCCESS</p>
+				</c:if>
 				<div class="contentWrapper">
+
 					<form action="./addProjection" method="POST">
 						<span class="icon"> <i class="profile"></i>
-						</span> <select id="movieTitle" name="movieTitle">
-							<option value="" myTag="Избери заглавие" selected disabled>Име
-								на прожекция</option>
-							<c:forEach var="movie" items="${allMovies}">
-								<option value="${movie.title}" myTag="${movie.title}"><c:out
-										value="${movie.title}" /></option>
-							</c:forEach>
-						</select> <input type="hidden" id="projectionVal" name="projectionVal" />
 
-						<input type="date" id="datePicker" name="datePicker" value=""
-							class="date" /> <input min='1' max='24' type="number"
-							id="hourPicker" name="hourPicker" class="time"> <input
-							min='0' max='59' type="number" id="minutesPicker"
-							name="minutesPicker" class="time"> <select id="hall"
-							name="hall">
-							<option value="" myTag="Избери зала" selected disabled>Номер
-								на зала</option>
-							<c:forEach var="hall" items="${allHalls}">
-								<option id="hall" value="${hall.getName()}" myTag="${hall.name}" otherTag = "${hall.cinema.name}"><c:out
-										value="Зала ${hall.getName()} ${hall.getCinema().getName()}" /></option>
-							</c:forEach>
-						</select> <input type="hidden" id="hallName" name="hallName" />
-						<input type="hidden" id="cinemaName" name="cinemaName" />
-						<button class="button red">Добави прожекция</button>
-
-
+						</span>
+						<div>
+							<label for="movieTitle">Филм</label> <select id="movieTitle"
+								name="movieTitle" style="margin: 3%;">
+								<option value="" myTag="Избери заглавие" selected disabled>Име
+									на прожекция</option>
+								<c:forEach var="movie" items="${allMovies}">
+									<option value="${movie.title}" myTag="${movie.title}"><c:out
+											value="${movie.title}" /></option>
+								</c:forEach>
+							</select> <input type="hidden" id="projectionVal" name="projectionVal" />
+						</div>
+						<div>
+							<label for="datePicker">Дата</label> <input type="date"
+								id="datePicker" name="datePicker" value="" class="date"
+								style="margin: 3%;" />
+						</div>
+						<div>
+							<label for="hourPicker">час</label> <input min='1' max='24'
+								type="number" id="hourPicker" name="hourPicker" class="time"
+								style="margin: 3%;">
+						</div>
+						<div>
+							<label for="minutesPicker">минута</label> <input min='0' max='59'
+								type="number" id="minutesPicker" name="minutesPicker"
+								class="time" style="margin: 3%;">
+						</div>
+						<div>
+							<label for="minutesPicker">Избери зала</label><select id="hall"
+								name="hall" style="margin: 3%;">
+								<option value="" myTag="Избери зала" selected disabled>Номер
+									на зала</option>
+								<c:forEach var="hall" items="${allHalls}">
+									<option id="hall" value="${hall.hallNumber}"
+										myTag="${hall.hallNumber}" otherTag="${hall.cinema.name}"><c:out
+											value="Зала ${hall.hallNumber} ${hall.hallType} ${hall.cinema.name}" /></option>
+								</c:forEach>
+							</select> <input type="hidden" id="hallName" name="hallName" /> <input
+								type="hidden" id="cinemaName" name="cinemaName" />
+						</div>
+						<button class="button red" style="float: right;">Добави
+							прожекция</button>
 					</form>
 				</div>
 			</div>
@@ -194,8 +215,8 @@
 			});
 		});
 	</script>
-	
-	
+
+
 	<script>
 		$(document).ready(function() {
 			var date = new Date();

@@ -8,8 +8,11 @@ import com.kinoarena.model.vo.Movie;
 import com.kinoarena.model.vo.Screening;
 
 public interface IScreeningDao {
-	
-	public List<Screening> getAllAvalibleScreenings();
-	public Map<String, Map<String, List<Screening>>> getScreeningsByMovieIdAndDate(int id, String date);
+
+
+	public Map<String, Map<Integer, List<Screening>>> getScreeningsByMovieIdAndDate(int id, String date);
+
 	public void addScreening(String startTime, Movie movie, Hall hall);
+
+	Map<String, Map<Integer, List<Screening>>> getScreeningsByCinemaIdAndDate(int id, String date);
 }

@@ -25,6 +25,7 @@ public class ReservationDAO implements IReservationDAO {
 			+ "JOIN seat s ON(rs.seat_id = s.seat_id) " + "JOIN halls h ON(s.halls_id = h.hall_id) "
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
 			+ "JOIN address a ON(a.address_id = c.address_id) WHERE(rs.screening_id = ?);";
+	private static final String GET_TICKETTYPE = "SELECT * FROM reservationtype;";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -33,6 +34,13 @@ public class ReservationDAO implements IReservationDAO {
 	@Autowired
 	ReservationTicketTypeRowMapper ticketTypeRowMapper;
 
+	@Override
+	public List<ReservationTicketType> getTicketTypes() {
+		List<ReservationTicketType> ticketTypes = jdbcTemplate.query(GET_TICKETTYPE, ticketTypeRowMapper);
+		return ticketTypes;
+	}
+
+	@Override
 	public List<ReservationTicketType> getTicketTypesByScreeningId(int id) {
 		List<ReservationTicketType> ticketTypes = jdbcTemplate.query(GET_TICKETTYPE_BY_SCREENING_ID,
 				new Object[] { id }, ticketTypeRowMapper);
@@ -58,6 +66,7 @@ public class ReservationDAO implements IReservationDAO {
 			}
 		});
 	}
+
 	@Override
 	public List<Seat> getAllReservedSeatsByScreeningID(int id) throws Exception {
 		List<Seat> movies = jdbcTemplate.query(GET_RESERVED_SEATS_BY_SCREENING, new Object[] { id }, seatRowMapper);

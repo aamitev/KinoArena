@@ -43,19 +43,6 @@ public class SeatDAO implements ISeatDAO {
 
 		return sortedSeats;
 	}
-
-	// @Override
-	// public int getLastSeatId() {
-	// try {
-	// Seat seat = jdbcTemplate.queryForObject(GET_LAST_SEAT, new Object[] {},
-	// seatRowMapper);
-	//
-	// return seat.getId();
-	// } catch (EmptyResultDataAccessException e) {
-	// return 0;
-	// }
-	// }
-
 	@Override
 	public void addSeats(final List<Seat> seats) {
 		System.out.println(seats.toString());

@@ -15,20 +15,20 @@ public class ScreeningDTO {
 		this.setHallId(hallId);
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
 
-	int getHallId() {
+	public int getHallId() {
 		return hallId;
 	}
 
-	void setHallId(int hallId) {
+	public void setHallId(int hallId) {
 		this.hallId = hallId;
 	}
 
