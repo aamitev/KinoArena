@@ -25,6 +25,9 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model, HttpServletRequest request, HttpSession session) {
 		session.setAttribute("referer", request.getHeader("Referer"));
+		if(session.getAttribute("loggedUser") != null) {
+			return "redirect:index";
+		}
 		return "login";
 	}
 
