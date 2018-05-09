@@ -1,6 +1,9 @@
 package com.kinoarena.model.dao;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -12,6 +15,8 @@ import com.kinoarena.exceptions.WebProfileException;
 import com.kinoarena.model.mappers.AddressRowMapper;
 import com.kinoarena.model.mappers.UserDtoRowMapper;
 import com.kinoarena.model.vo.Address;
+import com.kinoarena.model.vo.Movie;
+import com.kinoarena.model.vo.User;
 
 @Component
 public class UserDAO implements IUserDAO {
@@ -25,7 +30,7 @@ public class UserDAO implements IUserDAO {
 	public static final String SQL_GET_ADDRESS = "SELECT * FROM address WHERE address = ?;";
 	public static final String SQL_INSERT_ADDRESS = "INSERT INTO address VALUES(null, ?, ?, ?);";
 	public static final String SQL_UPDATE_USER_INFO = "UPDATE users SET firstName = ?, secondName = ?, lastName = ?, isMale = ?, birthday = ?, gsm = ?, education = ?, job = ?,address_id = ?, isAdmin = ? WHERE email = ?;";
-
+	public static final String SQL_GET_ALL_USERS = "SELECT * FROM users u JOIN address a ON (u.address_id = a.address_id);";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -87,7 +92,12 @@ public class UserDAO implements IUserDAO {
 
 	}
 
-
+	public List<UserDTO> getAllUsers(){
+		List<UserDTO> users = jdbcTemplate.query(SQL_GET_ALL_USERS,
+				new Object[] { }, userMapper);
+		
+		return users;
+	}
 
 	@Override
 	public int getUserId(String email) {

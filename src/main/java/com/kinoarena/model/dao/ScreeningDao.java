@@ -43,7 +43,7 @@ public class ScreeningDao implements IScreeningDao {
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
 			+ "JOIN address a ON(c.address_id= a.address_id)"
 			+ "WHERE(c.cinema_id = ?)AND(DATE(s.startTime)=(?));";
-	public static final String SQL_ADD_SCREENING = "INSERT into screening VALUES(null, ?, ?, ?);";
+	public static final String SQL_ADD_SCREENING = "INSERT into screening VALUES(null, ?, ?, ?, false);";
 
 
 	private static final String GET_SCREENING_BY_ID = "SELECT * FROM screening s " +

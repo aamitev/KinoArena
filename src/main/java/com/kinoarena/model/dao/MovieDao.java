@@ -9,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import com.kinoarena.dto.UserDTO;
 import com.kinoarena.exceptions.MovieException;
 import com.kinoarena.model.mappers.GenreRowMapper;
 import com.kinoarena.model.mappers.MovieRowMapper;
@@ -28,7 +29,7 @@ public class MovieDao implements IMovieDao {
 			+ "JOIN screening s ON(s.movie_id=m.movie_id) LEFT OUTER jOIN " + " genres g ON(m.genres_id=g.genre_id) "
 			+ " JOIN halls h ON(s.halls_id=h.hall_id) WHERE(h.hallType = ?) AND (s.startTime >= ?) GROUP BY (m.movie_id);";
 	private static final String GET_MOVIE_BY_ID = "SELECT m.*,g.* FROM movies m LEFT OUTER jOIN genres g ON(m.genres_id=g.genre_id) WHERE (m.movie_id = ? );";
-	private static final String SQL_INSERT_MOVIE = "INSERT INTO movies VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	private static final String SQL_INSERT_MOVIE = "INSERT INTO movies VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, false);";
 	private static final String SQL_GET_MOVIE_BY_TITLE = "SELECT * FROM movies m JOIN genres g ON (m.genres_id = g.genre_id) WHERE title = ?;";
 	
 	@Autowired
@@ -41,8 +42,6 @@ public class MovieDao implements IMovieDao {
 	@Override
 
 	public void addMovie(Movie movie) throws Exception {
-		// "INSERT INTO movies VALUES(null, 'testTitle', 'C://testCover',
-		// 'testDescription', 'testDirector', 90, '2018-12-12', 0, 'animation', 2);";
 		if (movie != null) {
 			jdbcTemplate.update(SQL_INSERT_MOVIE, movie.getTitle(), movie.getCoverURL(), movie.getDescription(),
 					movie.getDirector(), movie.getDuration(), movie.getPrimiere().toString(), movie.getAgeLimitation(),
@@ -118,4 +117,5 @@ public class MovieDao implements IMovieDao {
 		Movie movie = (Movie)(jdbcTemplate.queryForObject(SQL_GET_MOVIE_BY_TITLE, new Object[] {name}, movieRowMapper));
 		return movie;
 	}
+
 }

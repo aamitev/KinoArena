@@ -123,6 +123,7 @@ public class ReserveTicket {
 			reservationDAO.reserveSeats(reservedSeatsIDs, screeningId);
 			model.addAttribute("finalized", true);
 			return "finalizeReservation";
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";

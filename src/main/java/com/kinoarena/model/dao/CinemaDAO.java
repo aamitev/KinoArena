@@ -16,7 +16,7 @@ public class CinemaDAO implements ICinemaDAO {
 
 	private static final String GET_CINEMA_BY_ID = "SELECT * FROM cinema c JOIN address a ON(c.address_id = a.address_id) WHERE (c.cinema_id = ?)";
 
-	private static final String SQL_ADD_CINEMA = "INSERT INTO cinema VALUES(null, ?, ?, ?, ?, ?);";
+	private static final String SQL_ADD_CINEMA = "INSERT INTO cinema VALUES(null, ?, ?, ?, ?, ?, false);";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
@@ -47,5 +47,11 @@ public class CinemaDAO implements ICinemaDAO {
 			jdbcTemplate.update(SQL_ADD_CINEMA, cinema.getName(), cinema.getEmail(), cinema.getGsm(),
 					cinema.getCinemaCoverURL(), cinema.getAddress().getId());
 		}
+	}
+
+	@Override
+	public Cinema getCinemaByName(String name) {
+		Cinema cinema = jdbcTemplate.queryForObject(SQL_GET_CINEMA_BY_NAME, new Object[] {name}, cinemaRowMapper);
+		return cinema;
 	}
 }

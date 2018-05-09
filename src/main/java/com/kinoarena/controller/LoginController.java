@@ -85,12 +85,7 @@ public class LoginController {
 
 			boolean gender = (request.getParameter("gender").equals("male")) ? true : false;
 			String birthdate = request.getParameter("dateOfBirth").toString();
-
-			if (!Utils.emailValidator(email)) {
-				model.addAttribute("error", "Empty fields.");
-				return "register";
-			}
-
+			
 			if (!Utils.checkString(firstName) && !Utils.checkString(secondName) && !Utils.checkString(lastName)
 					&& !Utils.emailValidator(email) && !Utils.comparePasswords(password, rePassword)
 					&& !Utils.dateValidator(birthdate)) {
@@ -130,13 +125,7 @@ public class LoginController {
 		return "userProfile";
 	}
 
-	// @RequestMapping(value = "/submit", method = RequestMethod.POST)
-	// public String updateInfo(HttpServletRequest request, HttpSession session,
-	// Model model) {
-	//
-	//
-	// return "userProfile";
-	// }
+
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, Model model) {

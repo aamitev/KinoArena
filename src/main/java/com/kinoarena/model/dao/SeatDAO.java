@@ -18,6 +18,7 @@ import com.kinoarena.model.vo.Seat;
 @Component
 public class SeatDAO implements ISeatDAO {
 
+	private static final String GET_LAST_SEAT = "SELECT * FROM seat s JOIN halls h ON (s.halls_id = h.hall_id) JOIN cinema c ON (h.cinema_id = c.cinema_id) JOIN address a ON (c.address_id = a.address_id) ORDER BY seat_id DESC LIMIT 1;";
 
 	private static final String GET_SEATS_BY_HALL = "SELECT * FROM seat s " + "JOIN halls h ON(s.halls_id = h.hall_id) "
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
@@ -42,6 +43,29 @@ public class SeatDAO implements ISeatDAO {
 		return sortedSeats;
 	}
 
+	@Override
+	public int getLastSeatId() {
+		Seat seat = jdbcTemplate.queryForObject(GET_LAST_SEAT, new Object[] {}, seatRowMapper);
 
+		return seat.getId();
+	}
 
-}
+	@Override
+	public void addSeats(final List<Seat> seats) {
+		System.out.println(seats.toString());
+		jdbcTemplate.batchUpdate(SQL_ADD_SEAT, new BatchPreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException {
+				Seat seat = seats.get(i);
+				ps.setInt(1, seat.getRow());
+				ps.setInt(2, seat.getNumber());
+				ps.setInt(3, seat.getHall().getId());
+			}
+
+			@Override
+			public int getBatchSize() {
+				return seats.size();
+			}
+		});
+	}}

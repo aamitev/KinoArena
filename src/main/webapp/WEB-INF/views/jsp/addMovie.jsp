@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <link rel="stylesheet" type="text/css" href="./css/kinoarena.css">
 <link rel="stylesheet" type="text/css" href="./css/custom.css">
 <link class="jsbin"
@@ -121,9 +121,10 @@
 						<input type="text" name="length" id="length"
 							style="width: 60%; line-height: 100%;" placeholder="Времетраене">
 
-						<input type="text" name="premiere" id="premiere"
-							style="width: 60%; line-height: 100%;" placeholder="Премиера">
-
+						<!-- <input type="text" name="premiere" id="premiere"
+							style="width: 60%; line-height: 100%;" placeholder="Премиера"> -->
+						<input type="date" id="premiere" name="premiere" value=""
+							class="date" placeholder = "Премиера"/>
 						<input type="text" name="ageLimitation" id="ageLimitation"
 							style="width: 60%; line-height: 100%;"
 							placeholder="Възрастово ограничение">
@@ -136,10 +137,19 @@
 							<option value="2D" myTag="2D">2D</option>
 							<option value="3D" myTag="3D">3D</option>
 							<option value="4D" myTag="4D">4D</option>
-						</select> <input type="hidden" id="setMyTag" />
-						
-						<input type="text" name="genre" id="genre"
-							style="width: 60%; line-height: 100%;" placeholder="Жанр">
+						</select>
+						<!-- <input type="hidden" id="setMyTag" /> <input type="text"
+							name="genre" id="genre" style="width: 60%; line-height: 100%;"
+							placeholder="Жанр">  -->
+						<select id="genre"
+							name="genre">
+							<option value="" myTag="chooseGenre" selected disabled>Избери жанр</option>
+							<c:forEach var="genre" items="${allGenres}">
+								<option id="genre" value="${genre.genre}" myTag="${genre.genre}"><c:out
+										value="${genre.genre}" /></option>
+							</c:forEach>
+						</select>
+						<input type="hidden" id="chosenGenre" name="chosenGenre" />
 						<!-- ADD DESCRIPTION -->
 						<input id="submit" type="submit" value="Upload"
 							style="background-color: red;">
@@ -209,6 +219,35 @@
 
 				$('#setMyTag').val(myTag);
 			});
+		});
+	</script>
+	
+	<script>
+		$(function() {
+			$("#genre").change(function() {
+				var element = $(this).find('option:selected');
+				var myTag = element.attr("myTag");
+
+				$('#chosenGenre').val(myTag);
+			});
+		});
+	</script>
+	
+	<script>
+		$(document).ready(function() {
+			var date = new Date();
+
+			var day = date.getDate();
+			var month = date.getMonth() + 1;
+			var year = date.getFullYear();
+
+			if (month < 10)
+				month = "0" + month;
+			if (day < 10)
+				day = "0" + day;
+
+			var today = year + "-" + month + "-" + day;
+			$("#premiere").attr("value", today);
 		});
 	</script>
 	<!-- <script>
