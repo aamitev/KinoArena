@@ -55,7 +55,6 @@ public class SeatDAO implements ISeatDAO {
 		return movies;
 	}
 
-<<<<<<< HEAD
 	@Override
 	public int getLastSeatId() {
 		Seat seat = jdbcTemplate.queryForObject(GET_LAST_SEAT, new Object[] {}, seatRowMapper);
@@ -64,43 +63,35 @@ public class SeatDAO implements ISeatDAO {
 	}
 
 	@Override
-	public void addSeat(List<Seat> seats) {
-		for (Seat seat : seats) {
-			jdbcTemplate.update(SQL_ADD_SEAT, seat.getId(), seat.getRow(), seat.getNumber(), seat.getId());
-=======
-	// reserve number of seats
-	@Override
-	public void reserveSeats(final List<Seat> seats,int screeningId){
-							
-	  jdbcTemplate.batchUpdate(RESERVE_SEATS, new BatchPreparedStatementSetter() {
-				
-		@Override
-		public void setValues(PreparedStatement ps, int i) throws SQLException {
-			Seat seat = seats.get(i);
-			ps.setInt(1, seat.getId());
-			ps.setInt(2, screeningId);
-		}
-				
-		@Override
-		public int getBatchSize() {
-			return seats.size();
->>>>>>> bbd79064cf3a1f288b72fbd87779c19f2d7dd495
-		}
-	}
-
-	// insert batch example
-	public void insertSeats(final List<Seat> seats) {
-
-		String sql = "INSERT INTO CUSTOMER " + "(CUST_ID, NAME, AGE) VALUES (?, ?, ?)";
-
-		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+	public void addSeats(final List<Seat> seats) {
+		System.out.println(seats.toString());
+		jdbcTemplate.batchUpdate(SQL_ADD_SEAT, new BatchPreparedStatementSetter() {
 
 			@Override
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
-				Seat customer = seats.get(i);
-				// ps.setLong(1, customer.getCustId());
-				// ps.setString(2, customer.getName());
-				// ps.setInt(3, customer.getAge() );
+				Seat seat = seats.get(i);
+				ps.setInt(1, seat.getRow());
+				ps.setInt(2, seat.getNumber());
+				ps.setInt(3, seat.getHall().getId());
+			}
+
+			@Override
+			public int getBatchSize() {
+				return seats.size();
+			}
+		});
+	}// reserve number of seats
+
+	@Override
+	public void reserveSeats(final List<Seat> seats, int screeningId) {
+
+		jdbcTemplate.batchUpdate(RESERVE_SEATS, new BatchPreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException {
+				Seat seat = seats.get(i);
+				ps.setInt(1, seat.getId());
+				ps.setInt(2, screeningId);
 			}
 
 			@Override

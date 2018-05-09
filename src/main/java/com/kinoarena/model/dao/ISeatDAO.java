@@ -6,7 +6,7 @@ import java.util.Map;
 import com.kinoarena.model.vo.Seat;
 
 public interface ISeatDAO {
-	public static final String SQL_ADD_SEAT = "INSERT INTO seat VALUES(?, ?, ?, ?);";
+	public static final String SQL_ADD_SEAT = "INSERT INTO seat VALUES(null, ?, ?, ?);";
 	
 	List<Seat> getAllResercedSeatsByScreeningID(int id) throws Exception;
 
@@ -14,12 +14,9 @@ public interface ISeatDAO {
 
 	List<Seat> getAllReservedSeatsByScreeningID(int id) throws Exception;
 
-<<<<<<< HEAD
 	public int getLastSeatId();
 	
-	public void addSeat(List<Seat> seat);
-=======
+	public void addSeats(final List<Seat> seat);
 	void reserveSeats(List<Seat> seats, int screeningId);
 
->>>>>>> bbd79064cf3a1f288b72fbd87779c19f2d7dd495
 }

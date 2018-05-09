@@ -1,7 +1,7 @@
 package com.kinoarena.model.vo;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +32,7 @@ public class Hall {
 		setId(id);
 		setName(name);
 		setCinema(cinema);
-
 		this.seats = new ArrayList<Seat>();
-		int nextSeatID = seatDao.getLastSeatId() + 1;
-		for(int index = 1, row = 1; index <= MAX_SEATS; index++) {
-			seats.add(new Seat(nextSeatID++, row, index, this));
-			if(index % MAX_SEATS_PER_ROW == 0) {
-				row++;
-			}
-		}
-		
 	}
 
 	public Hall(int id, int hallNumber) throws ModelException {
@@ -49,6 +40,15 @@ public class Hall {
 		setHallNumber(hallNumber);
 	}
 
+	
+	public void initializeSeats(int startId) throws ModelException {
+		for(int index = 1, row = 1; index <= MAX_SEATS; index++) {
+			addSeat(new Seat(startId++, row, index, this));
+			if(index % MAX_SEATS_PER_ROW == 0) {
+				row++;
+			}
+		}
+	}
 	public void setHallNumber(int hallNumber) {
 		this.hallNumber = hallNumber;
 	}
@@ -99,7 +99,9 @@ public class Hall {
 	public HallType getHallType() {
 		return hallType;
 	}
-
+	public List<Seat> getSeats(){
+		return Collections.unmodifiableList(this.seats);
+	}
 	public void setHallType(HallType halltype) throws MovieException {
 		if (halltype == null) {
 			throw new MovieException("Invalid hallType");

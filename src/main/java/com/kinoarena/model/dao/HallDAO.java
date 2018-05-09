@@ -34,9 +34,9 @@ public class HallDAO implements IHallDAO {
 	}
 
 	@Override
-	public Hall getLastHallNumber(String hallName) {
+	public int getLastHallNumber(String hallName) {
 		Hall hall = jdbcTemplate.queryForObject(SQL_GET_LAST_HALL, new Object[] {hallName}, hallMapper);
-		return hall;
+		return Integer.parseInt(hall.getName());
 	}
 
 	@Override
@@ -47,8 +47,9 @@ public class HallDAO implements IHallDAO {
 
 	@Override
 	public void addHall(Hall hall) {
-		jdbcTemplate.update(SQL_ADD_HALL, hall.getId(), hall.getHallNumber(), hall.getCinema().getId(), hall.getHallType().getHallType());
-		SeatDAO
+		jdbcTemplate.update(SQL_ADD_HALL, hall.getHallNumber(), hall.getCinema().getId(), hall.getHallType().getHallType());
+		
+		seatDao.addSeats(hall.getSeats());
 	}
 
 	

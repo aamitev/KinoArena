@@ -21,6 +21,7 @@ public class HallRowMapper implements RowMapper<Hall> {
 			hall = new Hall(rs.getInt("hall_id"), rs.getString("hallNumber"), cinemaRowMapper.mapRow(rs, rowNum));
 
 			hall.setHallType(HallType.valueOf(rs.getString("hallType").toUpperCase()));
+			
 
 		} catch (Exception e) {
 			throw new SQLException(e);

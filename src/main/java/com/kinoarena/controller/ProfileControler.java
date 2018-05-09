@@ -27,11 +27,14 @@ import com.kinoarena.model.dao.FavoriteMovieDAO;
 import com.kinoarena.model.dao.HallDAO;
 import com.kinoarena.model.dao.MovieDao;
 import com.kinoarena.model.dao.ScreeningDao;
+import com.kinoarena.model.dao.SeatDAO;
 import com.kinoarena.model.dao.UserDAO;
+import com.kinoarena.model.enums.HallType;
 import com.kinoarena.model.vo.Address;
 import com.kinoarena.model.vo.Cinema;
 import com.kinoarena.model.vo.Hall;
 import com.kinoarena.model.vo.Movie;
+import com.kinoarena.model.vo.Seat;
 import com.kinoarena.utils.Utils;
 
 @Controller
@@ -51,6 +54,9 @@ public class ProfileControler {
 	private HallDAO hallDao;
 	@Autowired
 	private ScreeningDao screeningDao;
+	@Autowired
+	private SeatDAO seatDao;
+	
 
 	@RequestMapping(value = "/userProfile", method = RequestMethod.GET, produces = "text/html; charset=utf-8")
 	public String profile(Model model, HttpSession session) {
@@ -210,7 +216,7 @@ public class ProfileControler {
 				movie.setMovieType(movieType.toUpperCase());
 				movieDao.addMovie(movie);
 
-				return "addMovie";
+				return "success";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "error";
@@ -254,12 +260,12 @@ public class ProfileControler {
 			System.out.println(projectionDateTime);
 			System.out.println(hallName);
 			System.out.println(cinemaName);
-			
+
 			Movie movie = movieDao.getMovieByName(projectionName);
 			Hall hall = hallDao.getHallByName(hallName, cinemaName);
-			
+
 			screeningDao.addScreening(projectionDateTime, movie, hall);
-			
+
 			return "addProjection";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -331,9 +337,9 @@ public class ProfileControler {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
-			
+
 			Set<Hall> halls = new HashSet<Hall>(hallDao.getAllHalls());
-			
+
 			request.setAttribute("allCinemas", cinemaDao.getAllCinemas());
 			request.setAttribute("allHalls", halls);
 			return "addHall";
@@ -349,16 +355,30 @@ public class ProfileControler {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
-			
+
 			String cinema = request.getParameter("cinemaName");
 			String hall = request.getParameter("hallType");
-			
+
 			System.out.println(cinema);
 			System.out.println(hall);
-			
+
 			Cinema cinemaObj = cinemaDao.getCinemaByName(cinema);
-			Hall hallObj = new Hall(hallDao.getLastHallId(), hall, cinemaObj);
+			Hall hallObj = new Hall(hallDao.getLastHallId() + 1, hall, cinemaObj);
+			int nextHallNumber = hallDao.getLastHallNumber("Arena West") + 1;
+			hallObj.setHallNumber(nextHallNumber);
 			
+			for(HallType ht : HallType.values()) {
+				if(ht.getHallType().equals(hall)) {
+					hallObj.setHallType(ht);
+				}
+			}
+			int nextSeatId = seatDao.getLastSeatId();
+			hallObj.initializeSeats(nextSeatId);
+			System.out.println(hallObj.getSeats().size());
+			
+			hallDao.addHall(hallObj);
+			 
+
 			return "addHall";
 		} catch (Exception e) {
 			e.printStackTrace();

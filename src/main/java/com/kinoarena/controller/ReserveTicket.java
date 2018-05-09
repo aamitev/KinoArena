@@ -116,44 +116,7 @@ public class ReserveTicket {
 			}
 			int screeningId = ((Screening) session.getAttribute("screening")).getId();
 
-<<<<<<< HEAD
-			List<ReservationTicketType> ticketTypes = reservationDAO.getTicketTypesByScreeningId(screeningId);
-			Map<String, List<ReservationTicketType>> reservedTypes = new HashMap<String, List<ReservationTicketType>>();
-			int ticketNumbers = 0;
-			for (ReservationTicketType type : ticketTypes) {
-				int qty = Integer.parseInt(request.getParameter("qty" + type.getId()));
-				for (int index = qty; index > 0; index--) {
-					if (index == qty) {
-						reservedTypes.put(type.getType(), new ArrayList<ReservationTicketType>());
-					}
-					reservedTypes.get(type.getType()).add(type);
-					ticketNumbers++;
-				}
-				// here we validate the tickets
-				if ((ticketNumbers > Ticket.MAX_TICKET_NUMBER) || (ticketNumbers <= Ticket.MIN_TICKET_NUMBER)) {
-					model.addAttribute("ticketTypes", ticketTypes);
-					model.addAttribute("error", "Invalid number of tickets");
-					return "reserveTicket";
-				}
-			}
-			session.setAttribute("ticketNumbers", ticketNumbers);
-			model.addAttribute("reservedTicketTypes", reservedTypes);
-			model.addAttribute("ticketNumbers", ticketNumbers);
-			System.out.println(reservedTypes.toString());
-			List<Seat> reservedSeats = seatDao.getAllReservedSeatsByScreeningID(screeningId);
-//			Map<Byte, List<Seat>> seats = seatDao.getAllSeadsByHall(hallId);
-//			System.out.println(seats.toString());
-//			System.out.println(reservedSeats.toString());
-//			for (Entry<Byte, List<Seat>> row : seats.entrySet()) {
-//				for (Seat seat : row.getValue()) {
-//					if (reservedSeats.contains(seat)) {
-//						seat.setTaken(true);
-//					}
-//				}
-//			}
-//			model.addAttribute("seats", seats);
-=======
->>>>>>> bbd79064cf3a1f288b72fbd87779c19f2d7dd495
+
 			return "seats";
 		} catch (Exception e) {
 			e.printStackTrace();
