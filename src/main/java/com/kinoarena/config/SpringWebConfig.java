@@ -1,5 +1,6 @@
 package com.kinoarena.config;
 
+import java.nio.charset.Charset;
 import java.util.Locale;
 
 import org.springframework.context.MessageSource;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -22,28 +24,28 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @ComponentScan("com.kinoarena")
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
-	
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    	registry.addResourceHandler("/uploaded/movie/**").addResourceLocations("file:///C:\\kinoarena\\movies\\");
-    	registry.addResourceHandler("/uploaded/cinema/**").addResourceLocations("file:///C:\\kinoarena\\cinema\\");
 
-    	registry.addResourceHandler("/images/**").addResourceLocations("/static/images/frontend/");
-        registry.addResourceHandler("/css/**").addResourceLocations("/static/css/");
-        registry.addResourceHandler("/js/**").addResourceLocations("/static/js/");
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/uploaded/movie/**").addResourceLocations("file:///C:\\kinoarena\\movies\\");
+		registry.addResourceHandler("/uploaded/cinema/**").addResourceLocations("file:///C:\\kinoarena\\cinema\\");
 
-    }
-	
+		registry.addResourceHandler("/images/**").addResourceLocations("/static/images/frontend/");
+		registry.addResourceHandler("/css/**").addResourceLocations("/static/css/");
+		registry.addResourceHandler("/js/**").addResourceLocations("/static/js/");
+
+	}
+
 	@Bean
 	public InternalResourceViewResolver getInternalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setViewClass(JstlView.class);
 		resolver.setPrefix("/WEB-INF/views/jsp/");
 		resolver.setSuffix(".jsp");
-		
+
 		return resolver;
 	}
-	
+
 	// localization configuration
 	@Bean
 	public MessageSource messageSource() {
@@ -51,26 +53,30 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 		messageSource.setBasename("messages");
 		return messageSource;
 	}
-	
+
 	@Bean
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver resolver = new SessionLocaleResolver();
 		resolver.setDefaultLocale(Locale.ENGLISH);
 		return resolver;
 	}
-	
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor changeInterceptor = new LocaleChangeInterceptor();
 		changeInterceptor.setParamName("language");
 		registry.addInterceptor(changeInterceptor);
 	}
-	
+
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
-	    CommonsMultipartResolver resolver=new CommonsMultipartResolver();
-	    resolver.setDefaultEncoding("utf-8");
-	    return resolver;
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setDefaultEncoding("UTF-8");
+		return resolver;
 	}
-	
+
+	@Bean
+	public StringHttpMessageConverter stringHttpMessageConverter() {
+		return new StringHttpMessageConverter(Charset.forName("UTF-8"));
+	}
 }

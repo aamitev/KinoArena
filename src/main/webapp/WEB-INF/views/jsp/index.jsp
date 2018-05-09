@@ -6,9 +6,7 @@
 
 <html>
 <head>
-
-<link rel="stylesheet" type="text/css"
-	href="/KinoArena/css/kinoarena.css">
+<link rel="stylesheet" type="text/css" href="/KinoArena/css/kinoarena.css">
 </head>
 <body>
 	<div id="global_wrapper" class="globalWrapper">
@@ -50,7 +48,7 @@
 								</div>
 								<div class="owl-item active"
 									style="width: 140px; margin-right: 0px;">
-									<a onclick="getActiveByGenre('анимация')">
+									<a onclick="getActiveByGenre('animation')">
 										<div class="tabItem filter" data-filter-anchor="tab-3">
 											<div class="row">Детски</div>
 											<div class="row">филми</div>

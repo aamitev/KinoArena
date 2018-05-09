@@ -15,17 +15,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kinoarena.dto.UserDTO;
 import com.kinoarena.model.dao.AddressDao;
 import com.kinoarena.model.dao.CinemaDAO;
 import com.kinoarena.model.dao.FavoriteMovieDAO;
+import com.kinoarena.model.dao.HallDAO;
 import com.kinoarena.model.dao.MovieDao;
+import com.kinoarena.model.dao.ScreeningDao;
 import com.kinoarena.model.dao.UserDAO;
 import com.kinoarena.model.vo.Address;
 import com.kinoarena.model.vo.Cinema;
+import com.kinoarena.model.vo.Hall;
 import com.kinoarena.model.vo.Movie;
 import com.kinoarena.utils.Utils;
 
@@ -42,8 +44,12 @@ public class ProfileControler {
 	private FavoriteMovieDAO favoriteMovieDao;
 	@Autowired
 	private CinemaDAO cinemaDao;
+	@Autowired
+	private HallDAO hallDao;
+	@Autowired
+	private ScreeningDao screeningDao;
 
-	@RequestMapping(value = "/userProfile", method = RequestMethod.GET)
+	@RequestMapping(value = "/userProfile", method = RequestMethod.GET, produces = "text/html; charset=utf-8")
 	public String profile(Model model, HttpSession session) {
 		try {
 			if (session.getAttribute("loggedUser") == null) {
@@ -62,16 +68,20 @@ public class ProfileControler {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
+
+			request.setCharacterEncoding("UTF-8");
 			// Getting field values
-			Boolean gender = Boolean.parseBoolean(request.getParameter("sex"));
+			String gender = request.getParameter("sex");
+			boolean sex = gender.equalsIgnoreCase("true") ? true : false;
 			String firstName = request.getParameter("firstName").toString();
 			String secondName = request.getParameter("secondName").toString();
 			String lastName = request.getParameter("lastName").toString();
 			String email = ((UserDTO) session.getAttribute("loggedUser")).getEmail();
 			String gsm = request.getParameter("gsm").toString();
-			String city = request.getParameter("chosenCity").toString();
+			String city = request.getParameter("city").toString();
 			String postcode = request.getParameter("postcode").toString();
-			String streetAddress = request.getParameter("streetAddress").toString();
+			String streetAddress = new String(((String) request.getParameter("streetAddress")).getBytes(), "UTF-8");
+			System.out.println("Stree adress " + streetAddress);
 			LocalDate birthdate = LocalDate.parse(request.getParameter("dateOfBirth").toString());
 			String education = request.getParameter("education").toString();
 			String job = request.getParameter("job").toString();
@@ -80,8 +90,8 @@ public class ProfileControler {
 			// Getting field values
 			System.out.println(firstName);
 			// Creating DTO object to import in DB
-			UserDTO edittedUser = new UserDTO(id, email, firstName, secondName, lastName, gender, birthdate, isAdmin,
-					gsm, education, job);
+			UserDTO edittedUser = new UserDTO(id, email, firstName, secondName, lastName, sex, birthdate, isAdmin, gsm,
+					education, job);
 			// Creating DTO object to import in DB
 
 			// Getting the address and setting it to the userDTO object
@@ -164,6 +174,7 @@ public class ProfileControler {
 		if (!Utils.fileValidator(file, model)) {
 			return "addMovie";
 		}
+
 		String UPLOAD_FOLDER = "C:\\kinoarena\\movies\\";
 
 		String title = request.getParameter("title").toString();
@@ -183,6 +194,7 @@ public class ProfileControler {
 						new FileOutputStream(new File(UPLOAD_FOLDER + file.getOriginalFilename())));
 				stream.write(bytes);
 				stream.close();
+
 				Movie movie = new Movie();
 				movie.setTitle(title);
 				movie.setDescription(description);
@@ -206,11 +218,45 @@ public class ProfileControler {
 	}
 
 	@RequestMapping(value = "/addProjection", method = RequestMethod.GET)
-	public String addProjection(Model model, HttpSession session) {
+	public String addProjection(Model model, HttpServletRequest request, HttpSession session) {
 		try {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
+
+			request.setAttribute("allHalls", hallDao.getAllHalls());
+			request.setAttribute("allMovies", movieDao.getAllMovies());
+
+			return "addProjection";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+
+	@RequestMapping(value = "/addProjection", method = RequestMethod.POST)
+	public String executeAddProjection(Model model, HttpServletRequest request, HttpSession session) {
+		try {
+			if (session.getAttribute("loggedUser") == null) {
+				return "redirect:/login";
+			}
+
+			String projectionName = request.getParameter("projectionVal").trim();
+			String projectionDateTime = (request.getParameter("datePicker") + " " + request.getParameter("hourPicker")
+					+ ":" + request.getParameter("minutesPicker") + ":00").trim();
+			String hallName = request.getParameter("hallName").trim();
+			String cinemaName = request.getParameter("cinemaName").trim();
+
+			System.out.println(projectionName);
+			System.out.println(projectionDateTime);
+			System.out.println(hallName);
+			System.out.println(cinemaName);
+			
+			Movie movie = movieDao.getMovieByName(projectionName);
+			Hall hall = hallDao.getHallByName(hallName, cinemaName);
+			
+			screeningDao.addScreening(projectionDateTime, movie, hall);
+			
 			return "addProjection";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -277,11 +323,26 @@ public class ProfileControler {
 	}
 
 	@RequestMapping(value = "/addHall", method = RequestMethod.GET)
-	public String addHall(Model model, HttpSession session) {
+	public String addHall(Model model, HttpServletRequest request, HttpSession session) {
 		try {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
+
+			return "addHall";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+
+	@RequestMapping(value = "/addHall", method = RequestMethod.POST)
+	public String executedAddHall(Model model, HttpServletRequest request, HttpSession session) {
+		try {
+			if (session.getAttribute("loggedUser") == null) {
+				return "redirect:/login";
+			}
+
 			return "addHall";
 		} catch (Exception e) {
 			e.printStackTrace();

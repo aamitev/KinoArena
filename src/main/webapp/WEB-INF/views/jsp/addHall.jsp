@@ -95,11 +95,12 @@
 							</ul>
 						</nav>
 					</aside>
+					
 				</div>
 				<div id="scroll_to_top" class="scrollToTop">
 					<i class="circleUp"></i>
 				</div>
-
+				
 				<div id="fb-root"></div>
 				<noscript>
 
@@ -107,7 +108,7 @@
 
 						<img height="1" width="1" style="border-style: none;" alt=""
 							src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/855321203/?guid=ON&amp;script=0" />
-
+						
 					</div>
 
 				</noscript>

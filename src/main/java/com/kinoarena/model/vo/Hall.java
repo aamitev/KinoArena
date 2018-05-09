@@ -17,6 +17,7 @@ public class Hall {
 	private HallType hallType;
 	private Set<Seat> seats;
 	private Cinema cinema;
+	private int hallNumber;
 
 	public Hall(int id, String name, Cinema cinema) throws ModelException {
 		setId(id);
@@ -24,21 +25,33 @@ public class Hall {
 		setCinema(cinema);
 	}
 
-	private void setId(int id) throws ModelException {
+	public Hall(int id, int hallNumber) throws ModelException {
+		setId(id);
+		setHallNumber(hallNumber);
+	}
+
+	public void setHallNumber(int hallNumber) {
+		this.hallNumber = hallNumber;
+	}
+	public int getHallNumber() {
+		return this.hallNumber;
+	}
+
+	public void setId(int id) throws ModelException {
 		if (id > 0) {
 			this.id = id;
 		} else
 			throw new ModelException(INVALID_ID);
 	}
 
-	private void setName(String name) throws ModelException {
+	public void setName(String name) throws ModelException {
 		if (name != null) {
 			this.name = name;
 		} else
 			throw new ModelException(INVALID_NAME);
 	}
 
-	private void setCinema(Cinema cinema) throws ModelException {
+	public void setCinema(Cinema cinema) throws ModelException {
 		if (cinema != null) {
 			this.cinema = cinema;
 		} else
