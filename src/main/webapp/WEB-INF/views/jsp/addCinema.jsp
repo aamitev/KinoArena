@@ -91,6 +91,9 @@
 				<div class="contentWrapper">
 					<span class="icon"> <i class="profile"></i>
 					</span>
+					<c:if test="${not empty succes} }">
+						<p style="color: green;">SUCCESS</p>
+					</c:if>
 					<!-- ADDING IMAGE -->
 					<!-- <input id = "image" name = "image" type="file" style="width:270px" > -->
 
@@ -100,9 +103,9 @@
 
 						<!-- DISPLAY UPLOADED IMAGE -->
 						<input type="file" name="file" onchange="readURL(this);"
-							 style="width: 300px">
-						<img id="cinemaImg" src="#" alt="cinemaImg"
-							style="width: 500px; line-height: 400px" border="5" />
+							style="width: 300px"> <img id="cinemaImg" src="#"
+							alt="cinemaImg" style="width: 500px; line-height: 400px"
+							border="5" />
 						<!-- DISPLAY UPLOADED IMAGE -->
 
 						<div id="myModal" class="modal">
@@ -176,8 +179,8 @@
 				var reader = new FileReader();
 
 				reader.onload = function(e) {
-					$('#cinemaImg').attr('src', e.target.result).width(500).height(
-							400);
+					$('#cinemaImg').attr('src', e.target.result).width(500)
+							.height(400);
 				};
 
 				reader.readAsDataURL(input.files[0]);
@@ -185,6 +188,6 @@
 			}
 		}
 	</script>
-	
+
 </body>
 </html>

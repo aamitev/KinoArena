@@ -18,7 +18,6 @@
 
 
 </head>
-<body>
 <body class="loaded  scrolling menuLoaded afterLoaded">
 
 	<div class="page_bg"
@@ -97,27 +96,19 @@
 					</aside>
 
 					<form id="addHallForm" action="./addHall" method="POST">
-						<select id="cinema" name="cinema">
-						<option id = "cinema" selected disabled >Кино</option>
+						<select  id="cinema" name="cinema">
 							<c:forEach var="cinema" items="${allCinemas}">
 								<option id="cinema" value="${cinema.name}"
-									myTag="${cinema.name}"><c:out
-										value="${cinema.name}" /></option>
+									myTag="${cinema.name}"><c:out value="${cinema.name}" /></option>
 							</c:forEach>
+						</select> <select  id="hallType" name="hallType">
+							<option value="LUXE" myTag="LUXE">LUXE</option>
+							<option value="IMAX" myTag="IMAX">IMAX</option>
+							<option value="PREMIUM" myTag="IMAX">PREMIUM</option>
+							<option value="VIP" myTag="IMAX">VIP</option>
 						</select>
-					<input type="hidden" id="cinemaName" name="cinemaName" />
-						<select id="hall" name="hall">
-						<option id = "hall" selected disabled >Зала</option>
-							<c:forEach var="hall" items="${allHalls}">
-								<option id="hall" value="${hall.hallType}"
-									myTag="${hall.hallType}"><c:out
-										value="${hall.hallType}" /></option>
-							</c:forEach>
-						</select>
-					<input type="hidden" id="hallType" name="hallType" />
-						
-						<button class = "red button"> Добави зала</button>
-						
+						<button id="button_select" class="red button">Добави
+							зала</button>
 					</form>
 
 				</div>
@@ -163,30 +154,5 @@
 		</div>
 
 	</noscript>
-	<script>
-		$(function() {
-			$("#cinema").change(function() {
-				var element = $(this).find('option:selected');
-				var myTag = element.attr("myTag");
-
-				$('#cinemaName').val(myTag);
-			});
-		});
-	</script>
-	
-	<script>
-		$(function() {
-			$("#hall").change(function() {
-				var element = $(this).find('option:selected');
-				var myTag = element.attr("myTag");
-
-				$('#hallType').val(myTag);
-			});
-		});
-	</script>
-	<!--
-
-//-->
-</body>
 </body>
 </html>
