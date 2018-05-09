@@ -6,11 +6,9 @@ import java.util.Map;
 import com.kinoarena.model.vo.Seat;
 
 public interface ISeatDAO {
-	public static final String SQL_ADD_SEAT = "INSERT INTO seat VALUES(null, ?, ?, ?);";
-
 	Map<Byte, List<Seat>> getAllSeadsByHall(int id) throws Exception;
 
-	public int getLastSeatId();
+//	public int getLastSeatId();
 
 	public void addSeats(final List<Seat> seat);
 

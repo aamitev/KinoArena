@@ -18,37 +18,35 @@ public class Hall {
 	private SeatDAO seatDao;
 	private static final String INVALID_CINEMA = "Invalid cinema.";
 	private static final String INVALID_ID = "Invalid id.";
-	private static final String INVALID_NAME = "Invalid name.";
 	private static final int MAX_SEATS = 100;
 	private static final int MAX_SEATS_PER_ROW = 10;
 	private int id;
-	private String name;
 	private HallType hallType;
 	private List<Seat> seats;
 	private Cinema cinema;
 	private int hallNumber;
 
-	public Hall(int id, String name, Cinema cinema) throws ModelException {
-		setId(id);
-		setName(name);
+	public Hall(int hallNumber, Cinema cinema) throws ModelException {
+		setHallNumber(hallNumber);
 		setCinema(cinema);
 		this.seats = new ArrayList<Seat>();
+
 	}
 
-	public Hall(int id, int hallNumber) throws ModelException {
+	public Hall(int id, int hallNumber, Cinema cinema) throws ModelException {
+		this(hallNumber, cinema);
 		setId(id);
-		setHallNumber(hallNumber);
 	}
 
-	
-	public void initializeSeats(int startId) throws ModelException {
-		for(int index = 1, row = 1; index <= MAX_SEATS; index++) {
-			addSeat(new Seat(startId++, row, index, this));
-			if(index % MAX_SEATS_PER_ROW == 0) {
+	public void initializeSeats() throws ModelException {
+		for (int index = 1, row = 1; index <= MAX_SEATS; index++) {
+			addSeat(new Seat(0, row, index, this));
+			if (index % MAX_SEATS_PER_ROW == 0) {
 				row++;
 			}
 		}
 	}
+
 	public void setHallNumber(int hallNumber) {
 		this.hallNumber = hallNumber;
 	}
@@ -70,13 +68,6 @@ public class Hall {
 		}
 	}
 
-	public void setName(String name) throws ModelException {
-		if (name != null) {
-			this.name = name;
-		} else
-			throw new ModelException(INVALID_NAME);
-	}
-
 	public void setCinema(Cinema cinema) throws ModelException {
 		if (cinema != null) {
 			this.cinema = cinema;
@@ -88,10 +79,6 @@ public class Hall {
 		return this.id;
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
 	public Cinema getCinema() {
 		return this.cinema;
 	}
@@ -99,9 +86,11 @@ public class Hall {
 	public HallType getHallType() {
 		return hallType;
 	}
-	public List<Seat> getSeats(){
+
+	public List<Seat> getSeats() {
 		return Collections.unmodifiableList(this.seats);
 	}
+
 	public void setHallType(HallType halltype) throws MovieException {
 		if (halltype == null) {
 			throw new MovieException("Invalid hallType");
@@ -129,12 +118,6 @@ public class Hall {
 		if (hallType != other.hallType)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Hall [id=" + id + ", name=" + name + ", hallType=" + hallType + ", seats=" + seats + ", cinema="
-				+ cinema + "]";
 	}
 
 }

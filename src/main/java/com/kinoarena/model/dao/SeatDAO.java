@@ -17,8 +17,9 @@ import com.kinoarena.model.vo.Seat;
 
 @Component
 public class SeatDAO implements ISeatDAO {
+	public static final String SQL_ADD_SEAT = "INSERT INTO seat VALUES(null, ?, ?, ?,0);";
 
-	private static final String GET_LAST_SEAT = "SELECT * FROM seat s JOIN halls h ON (s.halls_id = h.hall_id) JOIN cinema c ON (h.cinema_id = c.cinema_id) JOIN address a ON (c.address_id = a.address_id) ORDER BY seat_id DESC LIMIT 1;";
+	private static final String GET_LAST_SEAT = "SELECT * FROM seat s JOIN halls h ON (s.halls_id = h.hall_id) JOIN cinema c ON (h.cinema_id = c.cinema_id) JOIN address a ON (c.address_id = a.address_id) WHERE(s.seatDeleted=false) ORDER BY seat_id DESC LIMIT 1;";
 
 	private static final String GET_SEATS_BY_HALL = "SELECT * FROM seat s " + "JOIN halls h ON(s.halls_id = h.hall_id) "
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
@@ -43,12 +44,17 @@ public class SeatDAO implements ISeatDAO {
 		return sortedSeats;
 	}
 
-	@Override
-	public int getLastSeatId() {
-		Seat seat = jdbcTemplate.queryForObject(GET_LAST_SEAT, new Object[] {}, seatRowMapper);
-
-		return seat.getId();
-	}
+	// @Override
+	// public int getLastSeatId() {
+	// try {
+	// Seat seat = jdbcTemplate.queryForObject(GET_LAST_SEAT, new Object[] {},
+	// seatRowMapper);
+	//
+	// return seat.getId();
+	// } catch (EmptyResultDataAccessException e) {
+	// return 0;
+	// }
+	// }
 
 	@Override
 	public void addSeats(final List<Seat> seats) {
@@ -68,4 +74,5 @@ public class SeatDAO implements ISeatDAO {
 				return seats.size();
 			}
 		});
-	}}
+	}
+}
