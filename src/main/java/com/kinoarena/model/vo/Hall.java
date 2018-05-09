@@ -7,7 +7,8 @@ import com.kinoarena.exceptions.MovieException;
 import com.kinoarena.model.enums.HallType;
 
 public class Hall {
-	//private static final String INVALID_NUMBER_OF_SEATS = "Invalid number of seats.";
+	// private static final String INVALID_NUMBER_OF_SEATS = "Invalid number of
+	// seats.";
 	private static final String INVALID_CINEMA = "Invalid cinema.";
 	private static final String INVALID_ID = "Invalid id.";
 	private static final String INVALID_NAME = "Invalid name.";
@@ -100,5 +101,11 @@ public class Hall {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Hall [id=" + id + ", name=" + name + ", hallType=" + hallType + ", seats=" + seats + ", cinema="
+				+ cinema + "]";
+	}
+
 }

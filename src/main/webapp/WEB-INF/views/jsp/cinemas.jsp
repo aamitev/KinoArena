@@ -19,12 +19,12 @@
 					<c:forEach items="${cinemas}" var="cinema">
 						<c:if test="${not empty toProgram}">
 							<a href="/KinoArena/program?cinemaId=${cinema.id}"
-								title="${cinema.name}" class="cinemaBox"></a>
+								title="${cinema.name}" class="cinemaBox">
 						</c:if>
 						<c:if test="${empty toProgram}">
 
 							<a href="/KinoArena/cinema/${cinema.id}" title="${cinema.name}"
-								class="cinemaBox"></a>
+								class="cinemaBox">
 						</c:if>
 						<figure class="featured">
 							<svg class="svgMask" width="250" height="188" baseProfile="full"

@@ -18,7 +18,7 @@ public class SeatRowMapper implements RowMapper<Seat> {
 	public Seat mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Seat seat = null;
 		try {
-			seat = new Seat(rs.getInt("seat_id"), rs.getInt("row"), rs.getInt("number"), rs.getBoolean("isTaken"),
+			seat = new Seat(rs.getInt("seat_id"), rs.getInt("row"), rs.getInt("number"),
 					hallRowMapper.mapRow(rs, rowNum));
 			return seat;
 		} catch (Exception e) {

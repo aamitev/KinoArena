@@ -4,6 +4,10 @@ import com.kinoarena.dto.UserDTO;
 import com.kinoarena.exceptions.ModelException;
 
 public class Ticket {
+	public static final int MAX_TICKET_NUMBER = 6;
+	public static final int MIN_TICKET_NUMBER = 0;
+
+
 	private static final String CANNOT_SET_RESERVATION = "Cannot set reservation to user.";
 	private static final String INVALID_MOVIE = "Invalid movie entered.";
 	private static final String INVALID_SEAT = "Invalid seat entered.";
@@ -24,10 +28,7 @@ public class Ticket {
 
 	public void setSeat(Seat seat) throws ModelException {
 		if (seat != null) {
-			if (seat.getOccupation() != false) {
-				this.seat = seat;
-			} else
-				throw new ModelException(SEAT_IS_TAKEN);
+			this.seat = seat;
 		} else
 			throw new ModelException(INVALID_SEAT);
 	}

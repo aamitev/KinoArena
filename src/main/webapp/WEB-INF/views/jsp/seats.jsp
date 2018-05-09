@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -94,53 +95,41 @@
 					<div id="hall_zoom_wrapper" class="hallZoomWrapper">
 						<div class="hall" data-rows="10" data-cols="16">
 							<span class="rowLabel">Ред</span>
-							<%-- 							<c:forEach items="${ticketTypes}" var="ticketType">
- --%>
-							<div class="row">
-								<span class="number"
-									style="width: 46.4984px; height: 35.3813px; margin-top: -17.6906px;"><span
-									class="txt"
-									style="width: 43.498390197753906px; height: 32.38129806518555px;">1</span></span>
-								<div class="cellsWrapper" style="width: 830px;">
-									<div class="cell">
-										<div data-content="4" data-real-row="1" data-real-seat="4"
-											class="seat          " data-category="0000000001"
-											data-row="9" data-seat="6" data-area="1" data-id="222">
-											<svg class="seatSVG"
-												style="width: 48.8235px; height: 48.8235px;"
-												xmlns="http://www.w3.org/2000/svg"
-												xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-												id="Layer_1" x="0px" y="0px" width="25px" height="19px"
-												viewBox="0 0 25 19" enable-background="new 0 0 25 19"
-												xml:space="preserve">
-												<path
-													d="M17.316 0H7.987C5.806 0 4 1.8 4 3.969v9.797c0 0.2 0 0.4 0 0.6 c0.28-1.914 1.935-2.697 3.923-2.697h9.329c1.989 0 3.6 0.8 3.9 2.697c0.027-0.188 0.047-0.377 0.047-0.57V3.969 C21.286 1.8 19.5 0 17.3 0z M1.658 6.668C0.747 6.7 0 7.4 0 8.327v9.076c0 0.9 0.7 1.7 1.7 1.7 c0.913 0 1.659-0.746 1.659-1.659V8.327C3.317 7.4 2.6 6.7 1.7 6.668z M17.316 13.054H8.034 c-2.184 0-3.97 1.334-3.97 2.964v0.432c0 1.6 1.8 3 4 2.963h9.282c2.183 0 3.97-1.333 3.97-2.963v-0.432 C21.286 14.4 19.5 13.1 17.3 13.054z M23.645 6.668c-0.913 0-1.659 0.747-1.659 1.659v9.076 c0 0.9 0.7 1.7 1.7 1.659s1.66-0.746 1.66-1.659V8.327C25 7.4 24.6 6.7 23.6 6.668z"></path></svg>
-										</div>
-									</div>
-									<div class="cell">
-										<div data-content="1" data-real-row="1" data-real-seat="1"
-											class="seat             forDisabled
-         "
-											data-category="0000000001" data-row="9" data-seat="3"
-											data-area="1" data-id="216">
-											<svg class="seatSVG"
-												style="width: 48.8235px; height: 48.8235px;"
-												xmlns="http://www.w3.org/2000/svg"
-												xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-												id="Layer_1" x="0px" y="0px" width="25px" height="19px"
-												viewBox="0 0 25 19" enable-background="new 0 0 25 19"
-												xml:space="preserve">
-												<path
-													d="M17.316 0H7.987C5.806 0 4 1.8 4 3.969v9.797c0 0.2 0 0.4 0 0.6 c0.28-1.914 1.935-2.697 3.923-2.697h9.329c1.989 0 3.6 0.8 3.9 2.697c0.027-0.188 0.047-0.377 0.047-0.57V3.969 C21.286 1.8 19.5 0 17.3 0z M1.658 6.668C0.747 6.7 0 7.4 0 8.327v9.076c0 0.9 0.7 1.7 1.7 1.7 c0.913 0 1.659-0.746 1.659-1.659V8.327C3.317 7.4 2.6 6.7 1.7 6.668z M17.316 13.054H8.034 c-2.184 0-3.97 1.334-3.97 2.964v0.432c0 1.6 1.8 3 4 2.963h9.282c2.183 0 3.97-1.333 3.97-2.963v-0.432 C21.286 14.4 19.5 13.1 17.3 13.054z M23.645 6.668c-0.913 0-1.659 0.747-1.659 1.659v9.076 c0 0.9 0.7 1.7 1.7 1.659s1.66-0.746 1.66-1.659V8.327C25 7.4 24.6 6.7 23.6 6.668z"></path></svg>
-										</div>
-									</div>
-									<div class="cell"></div>
-								</div>
-							</div>
 
-							<div class="row"></div>
-							<%-- 							</c:forEach>
- --%>
+							<c:forEach var="entry" items="${seats}">
+
+								<div class="row">
+									<span class="number"
+										style="width: 46.4984px; height: 35.3813px; margin-top: -17.6906px;"><span
+										class="txt"
+										style="width: 43.498390197753906px; height: 32.38129806518555px;">${entry.key}</span></span>
+									<div class="cellsWrapper" style="width: 830px;">
+										<c:forEach items="${entry.value}" var="seat">
+											<div class="cell">
+												<div onclick="selectSeat(this)"
+													data-content="${seat.number}" data-real-row="${seat.row}"
+													data-real-seat="${seat.number}"
+													<c:if test="${seat.taken}">class="seat busy"</c:if>
+													<c:if test="${not seat.taken}">class="seat"</c:if>
+													data-category="0000000001" data-row="${seat.row}"
+													data-seat="${seat.number}" data-area="1" data-id="222"
+													disable>
+													<svg class="seatSVG"
+														style="width: 48.8235px; height: 48.8235px;"
+														xmlns="http://www.w3.org/2000/svg"
+														xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+														id="Layer_1" x="0px" y="0px" width="25px" height="19px"
+														viewBox="0 0 25 19" enable-background="new 0 0 25 19"
+														xml:space="preserve">
+												<path
+															d="M17.316 0H7.987C5.806 0 4 1.8 4 3.969v9.797c0 0.2 0 0.4 0 0.6 c0.28-1.914 1.935-2.697 3.923-2.697h9.329c1.989 0 3.6 0.8 3.9 2.697c0.027-0.188 0.047-0.377 0.047-0.57V3.969 C21.286 1.8 19.5 0 17.3 0z M1.658 6.668C0.747 6.7 0 7.4 0 8.327v9.076c0 0.9 0.7 1.7 1.7 1.7 c0.913 0 1.659-0.746 1.659-1.659V8.327C3.317 7.4 2.6 6.7 1.7 6.668z M17.316 13.054H8.034 c-2.184 0-3.97 1.334-3.97 2.964v0.432c0 1.6 1.8 3 4 2.963h9.282c2.183 0 3.97-1.333 3.97-2.963v-0.432 C21.286 14.4 19.5 13.1 17.3 13.054z M23.645 6.668c-0.913 0-1.659 0.747-1.659 1.659v9.076 c0 0.9 0.7 1.7 1.7 1.659s1.66-0.746 1.66-1.659V8.327C25 7.4 24.6 6.7 23.6 6.668z"></path></svg>
+												</div>
+											</div>
+										</c:forEach>
+
+									</div>
+								</div>
+							</c:forEach>
 						</div>
 					</div>
 					<div class="selectedSeatsWrapper hideOnDesktop">
@@ -162,67 +151,63 @@
 					<div class="hidden">
 						<input type="text" name="selectedItems" id="selected_seats_field">
 					</div>
-					<button id="booking_proceed_button" class="button red big disabled">
+					<button id="booking_proceed_button" class="button red big disabled"
+						disabled>
 						<span class="txt">Продължи</span><span class="buttonBg"></span>
 					</button>
 					<div class="clearH"></div>
-					<a href="/bg/booking/122772_2">Промени билетите</a>
+					<a onclick="history.back()">Промени билетите</a>
 				</div>
 			</form>
 			<div class="clearH5"></div>
 			<div class="bookingWrapper">
 				<article class="info">
 					<p>
-						Изберете броя и типа билети, които искате да закупите
-						(резервирате).<br>Максимално допустимо - 6 билета.
+						Изберете броя и типа билети, които искате да резервирате.<br>Максимално
+						допустимо - 6 билета.
 					</p>
 				</article>
 				<div class="content">
-					<form class="stdForm" action="/bg/booking/seats/431466"
-						method="post">
+					<form class="stdForm" action="/KinoArena/index" method="post">
 
 						<aside class="moviePlot">
 							<div class="row">
 								<div class="title">Прожекция</div>
-								<div class="attr">Сръчковците: Строго секретно</div>
+								<div class="attr">${sessionScope.screening.movie.title}</div>
 							</div>
 							<div class="row">
 								<div class="title">Кино</div>
-								<div class="attr">Кино Арена Мол Варна</div>
+								<div class="attr">${sessionScope.screening.hall.cinema.name}</div>
 							</div>
 							<div class="row">
+								<fmt:parseDate value="${screening.startTime}"
+									pattern="yyyy-MM-dd" var="parsedDate" />
+								<fmt:formatDate value="${parsedDate}" type="date"
+									pattern="yyy-MM-dd" var="formatedDate" />
 								<div class="title">Дата</div>
-								<div class="attr">8 май 2018 г., 18:15:00</div>
+								<div class="attr">${formatedDate}г.</div>
 							</div>
 							<div class="row">
+								<fmt:parseDate value="${screening.startTime}"
+									pattern="yyyy-MM-dd'T'HH:mm" type="both" var="parsedTime" />
 								<div class="title">Час</div>
-								<div class="attr">18:15</div>
+								<div class="attr">
+									<fmt:formatDate pattern="HH:mm" value="${ parsedTime }" />
+								</div>
 							</div>
 							<div class="row">
 								<div class="title">Зала</div>
-								<div class="attr">5</div>
-							</div>
-							<div class="row">
-								<div class="title">Виза</div>
-								<div class="attr">
-									<div class="item tooltip_0"
-										data-tooltip="<p>Дублиран на български език</p>">
-
-										<img title="dub.png"
-											src="/uploads/media/stenik_attributes/0001/02/39a939bbe7828a27bfa4fe1aabd2fd6298929fc5.png">
-									</div>
-									<div class="item tooltip_1"
-										data-tooltip="<p>Без ограничения в показа</p>">
-
-										<img title="cat-b.png"
-											src="/uploads/media/stenik_attributes/0001/01/9db6e27089dd4e0f193eb6da0fd1a1114d2af76b.png">
-									</div>
-								</div>
+								<div class="attr">${screening.hall.name}</div>
 							</div>
 						</aside>
 						<!-- end of .moviePlot -->
 						<div class="contentWrap">
-							<table id="booking_table" class="bookingTable booked">
+							<c:if test="${not empty error}">
+								<p style="color: red;">${error}</p>
+							</c:if>
+							<table id="booking_table"
+								ticket-number="${sessionScope.ticketNumbers}" current-number="0"
+								class="bookingTable booked">
 								<thead>
 									<tr class="first">
 										<th class="type first">Тип на билета</th>
@@ -234,16 +219,30 @@
 										<th colspan="4" class="spacer first last"></th>
 									</tr>
 								</thead>
+
 								<tbody>
-									<tr class="calcRow first last">
-										<td class="type first">2D Студентски 8 лв/2018</td>
-										<td class="quantity">1</td>
-										<td class="unitPrice"><span class="price">8</span> лв.</td>
-										<td class="totalPrice last"><div class="animationWrapper">
-												<span class="price">8</span> лв.
-											</div></td>
-									</tr>
+									<c:set var="total" value="${0}" />
+
+									<c:forEach var="ticketTypes"
+										items="${reservedTicketTypes.values()}">
+
+										<tr class="calcRow first last">
+											<td class="type first">${ticketTypes[0].type}</td>
+											<td class="quantity">${fn:length(ticketTypes)}</td>
+											<td class="unitPrice"><span class="price">${ticketTypes[0].price}</span>
+												лв.</td>
+											<td class="totalPrice last"><div
+													class="animationWrapper">
+													<c:set var="total"
+														value="${total + ticketTypes[0].price * fn:length(ticketTypes)}" />
+
+													<span class="price">${ticketTypes[0].price * fn:length(ticketTypes)}</span>
+													лв.
+												</div></td>
+										</tr>
+									</c:forEach>
 								</tbody>
+
 							</table>
 							<!-- end of .bookingTable -->
 						</div>
@@ -258,7 +257,7 @@
 								<div class="row">
 									<div class="name">Тотал:</div>
 									<div class="value">
-										<span id="total_price">8</span> лв.
+										<span id="total_price">${total}</span> лв.
 									</div>
 								</div>
 							</div>
@@ -269,5 +268,7 @@
 			<!-- end of .bookingWrapper -->
 		</div>
 	</div>
+	<script src="/KinoArena/js/reserveSeats.js"></script>
+
 </body>
 </html>

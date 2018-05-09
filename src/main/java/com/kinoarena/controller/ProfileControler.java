@@ -160,8 +160,7 @@ public class ProfileControler {
 	}
 
 	@RequestMapping(value = "/addMovie", method = RequestMethod.POST)
-	public String movieUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request,
-			Model model) {
+	public String movieUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request, Model model) {
 		if (!Utils.fileValidator(file, model)) {
 			return "addMovie";
 		}
@@ -194,9 +193,9 @@ public class ProfileControler {
 				movie.setCoverURL("/uploaded/movie/" + file.getOriginalFilename());
 				movie.setGenre(movieDao.getGenre(genre));
 				movie.setMovieType(movieType.toUpperCase());
-				// movieDao.addMovie(movie);
+				movieDao.addMovie(movie);
 
-				return "success";
+				return "addMovie";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "error";
@@ -233,8 +232,7 @@ public class ProfileControler {
 	}
 
 	@RequestMapping(value = "/addCinema", method = RequestMethod.POST)
-	public String executeAddCinema(@RequestParam("file") MultipartFile file, HttpServletRequest request,
-			Model model) {
+	public String executeAddCinema(@RequestParam("file") MultipartFile file, HttpServletRequest request, Model model) {
 		if (!Utils.fileValidator(file, model)) {
 			return "addCinema";
 		}

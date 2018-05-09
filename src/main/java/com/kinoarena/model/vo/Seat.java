@@ -8,19 +8,14 @@ public class Seat {
 	private int id;
 	private short number;
 	private byte row;
-	private boolean isTaken;
 	private Hall hall;
+	private boolean isTaken;
 
-	public Seat(int id, int row, int number, boolean isTaken, Hall hall) throws ModelException {
+	public Seat(int id, int row, int number, Hall hall) throws ModelException {
 		setId(id);
 		setNumber(number);
 		setRow(row);
-		setTaken(isTaken);
 		setHall(hall);
-	}
-
-	private void setTaken(boolean isTaken) {
-		this.isTaken = isTaken;
 	}
 
 	private void setRow(int row) throws ModelException {
@@ -37,16 +32,20 @@ public class Seat {
 			throw new ModelException(INVALID_SEAT_NUMBER);
 	}
 
+	public boolean isTaken() {
+		return isTaken;
+	}
+
+	public void setTaken(boolean isTaken) {
+		this.isTaken = isTaken;
+	}
+
 	public short getNumber() {
 		return this.number;
 	}
 
 	public byte getRow() {
 		return this.row;
-	}
-
-	public boolean getOccupation() {
-		return this.isTaken;
 	}
 
 	public int getId() {
@@ -69,8 +68,25 @@ public class Seat {
 
 	@Override
 	public String toString() {
-		return "Seat [id=" + id + ", number=" + number + ", row=" + row + ", isTaken=" + isTaken + ", hall=" + hall
-				+ "]";
+		return "Seat [id=" + id + ", number=" + number + ", row=" + row + ", hall=" + hall + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Seat other = (Seat) obj;
+		if (id != other.id)
+			return false;
+		if (number != other.number)
+			return false;
+		if (row != other.row)
+			return false;
+		return true;
 	}
 
 }

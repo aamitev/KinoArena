@@ -4,11 +4,12 @@ function plus(id) {
 			.getElementById("quantitySpinner" + id).value);
 	var max = Number(document.getElementById("quantitySpinner" + id)
 			.getAttribute("data-max"));
-	if(totalTickets >= max){
-		document.getElementById("limit").innerHTML = "Лимитът е : " + max + " билета.";
+	if (totalTickets >= max) {
+		document.getElementById("limit").innerHTML = "Лимитът е : " + max
+				+ " билета.";
 		return;
 	}
-	
+
 	if (quantitySpinner < max) {
 		totalTickets += 1;
 		document.getElementById("quantitySpinner" + id).value = (quantitySpinner + 1);
@@ -35,7 +36,6 @@ function minus(id) {
 		var totalUnitPrice = document.getElementById("totalUnitPrice" + id).innerHTML;
 		document.getElementById("totalUnitPrice" + id).innerHTML = (Number(totalUnitPrice) - Number(price));
 		document.getElementById("limit").innerHTML = "";
-		var totalPrice = document.getElementById("total_price").innerHTML;
-		document.getElementById("total_price").innerHTML = (Number(totalPrice) - Number(price));
+
 	}
 }
