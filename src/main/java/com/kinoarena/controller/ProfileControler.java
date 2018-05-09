@@ -210,7 +210,7 @@ public class ProfileControler {
 				movie.setMovieType(movieType.toUpperCase());
 				movieDao.addMovie(movie);
 
-				return "success";
+				return "addMovie";
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "error";

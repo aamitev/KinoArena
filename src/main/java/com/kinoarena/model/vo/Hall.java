@@ -14,8 +14,11 @@ import com.kinoarena.model.enums.HallType;
 public class Hall {
 	// private static final String INVALID_NUMBER_OF_SEATS = "Invalid number of
 	// seats.";
+<<<<<<< HEAD
 	@Autowired
 	private SeatDAO seatDao;
+=======
+>>>>>>> 0732713bd14ea4f36a0fe9dd5758efd17737fdab
 	private static final String INVALID_CINEMA = "Invalid cinema.";
 	private static final String INVALID_ID = "Invalid id.";
 	private static final String INVALID_NAME = "Invalid name.";
@@ -129,4 +132,13 @@ public class Hall {
 		return true;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public String toString() {
+		return "Hall [id=" + id + ", name=" + name + ", hallType=" + hallType + ", seats=" + seats + ", cinema="
+				+ cinema + "]";
+	}
+
+>>>>>>> 0732713bd14ea4f36a0fe9dd5758efd17737fdab
 }

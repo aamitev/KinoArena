@@ -37,14 +37,18 @@ public class MovieDao implements IMovieDao {
 	private MovieRowMapper movieRowMapper;
 	@Autowired
 	private GenreRowMapper genreRowMapper;
+
 	@Override
+
 	public void addMovie(Movie movie) throws Exception {
-		//	"INSERT INTO movies VALUES(null, 'testTitle', 'C://testCover', 'testDescription', 'testDirector', 90, '2018-12-12', 0, 'animation', 2);";
-		if(movie != null) {
+		// "INSERT INTO movies VALUES(null, 'testTitle', 'C://testCover',
+		// 'testDescription', 'testDirector', 90, '2018-12-12', 0, 'animation', 2);";
+		if (movie != null) {
 			jdbcTemplate.update(SQL_INSERT_MOVIE, movie.getTitle(), movie.getCoverURL(), movie.getDescription(),
 					movie.getDirector(), movie.getDuration(), movie.getPrimiere().toString(), movie.getAgeLimitation(),
 					movie.getMovieType().toString(), movie.getGenre().getId());
-		}else throw new MovieException("Null movie.");
+		} else
+			throw new MovieException("Null movie.");
 	}
 
 	@Override
@@ -103,9 +107,9 @@ public class MovieDao implements IMovieDao {
 
 	@Override
 	public Genre getGenre(String genre) {
-		
+
 		Genre genreObj = (Genre) jdbcTemplate.queryForObject("SELECT * FROM genres WHERE genre = ?;",
-	            new Object[] { genre }, genreRowMapper);
+				new Object[] { genre }, genreRowMapper);
 		return genreObj;
 	}
 

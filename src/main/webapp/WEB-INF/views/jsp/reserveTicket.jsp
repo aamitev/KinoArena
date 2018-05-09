@@ -57,7 +57,9 @@
 					</p>
 				</article>
 				<div class="content" style="width: auto; padding-left: 25%;">
-					<form class="stdForm" action="/KinoArena/reserve/${screening.id}" method="post">
+					<form class="stdForm"
+						action="/KinoArena/reserve?hallId=${screening.hall.id}"
+						method="post">
 
 						<aside class="moviePlot">
 							<div class="row">
@@ -106,34 +108,40 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:if test="${not empty ticketTypes}">
-										<c:forEach items="${ticketTypes}" var="ticketType">
-											<tr class="calcRow">
-												<td name="type${ticketType.id}" class="type first">${ticketType.type}</td>
-												<td class="quantity"><div class="stenikSpinner">
-														<span id="spinnerHandle minus${ticketType.id}"
-															class="spinnerHandle minus"
-															onclick="minus('${ticketType.id}')">-</span><input
-															type="text" id="quantitySpinner${ticketType.id}"
-															class="quantitySpinner" data-min="0" data-max="6"
-															name="qty${ticketType.id}" readonly="readonly" value="0"><span
-															class="spinnerHandle plus${ticketType.id}"
-															class="spinnerHandle plus"
-															onclick="plus('${ticketType.id}')">+</span>
-													</div></td>
-												<td class="unitPrice"><span id="price${ticketType.id}"
-													class="price">${ticketType.price}</span> лв.</td>
-												<td class="totalPrice"><div class="animationWrapper">
-														<span id="totalUnitPrice${ticketType.id}" class="price">0.00</span>
-														лв.
-													</div></td>
-											</tr>
-										</c:forEach>
-									</c:if>
+									<c:set var="total" value="${0}" />
+
+									<c:forEach items="${ticketTypes}" var="ticketType">
+										<tr class="calcRow">
+											<td name="type${ticketType.id}" class="type first">${ticketType.type}</td>
+											<td class="quantity"><div class="stenikSpinner">
+													<span id="spinnerHandle minus${ticketType.id}"
+														class="spinnerHandle minus"
+														onclick="minus('${ticketType.id}')">-</span><input
+														type="text" id="quantitySpinner${ticketType.id}"
+														class="quantitySpinner" data-min="0" data-max="6"
+														name="qty${ticketType.id}" readonly="readonly" value="0" var="units"><span
+														class="spinnerHandle plus${ticketType.id}"
+														class="spinnerHandle plus"
+														onclick="plus('${ticketType.id}')">+</span>
+												</div></td>
+											<td class="unitPrice"><span id="price${ticketType.id}"
+												class="price">${ticketType.price}</span> лв.</td>
+											<c:set var="total" value="${(units * ticketType.price) + total}" />
+
+											<td class="totalPrice"><div class="animationWrapper">
+													<span id="totalUnitPrice${ticketType.id}" class="price">0.00</span>
+													лв.
+												</div></td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
 						<p id="limit" style="color: red;"></p>
+						<c:if test="${not empty error}">
+							<p style="color: red;">${error}</p>
+						</c:if>
+
 						<hr class="red">
 						<div class="bookingTotal">
 							<article class="note">
@@ -145,7 +153,7 @@
 								<div class="row">
 									<div class="name">Тотал:</div>
 									<div class="value">
-										<span id="total_price">00.00</span> лв.
+										<span id="total_price">${total}</span> лв.
 									</div>
 								</div>
 								<button id="proceed_button"
