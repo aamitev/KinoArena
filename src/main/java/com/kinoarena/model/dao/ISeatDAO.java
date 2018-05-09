@@ -14,7 +14,12 @@ public interface ISeatDAO {
 
 	List<Seat> getAllReservedSeatsByScreeningID(int id) throws Exception;
 
+<<<<<<< HEAD
 	public int getLastSeatId();
 	
 	public void addSeat(List<Seat> seat);
+=======
+	void reserveSeats(List<Seat> seats, int screeningId);
+
+>>>>>>> bbd79064cf3a1f288b72fbd87779c19f2d7dd495
 }

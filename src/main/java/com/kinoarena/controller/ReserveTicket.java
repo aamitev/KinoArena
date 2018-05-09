@@ -109,13 +109,14 @@ public class ReserveTicket {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/finalize")
-	public String procesTicketTypes(Model model, HttpSession session, HttpServletRequest request) {
+	public String finalizeReservation(Model model, HttpSession session, HttpServletRequest request) {
 		try {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
 			int screeningId = ((Screening) session.getAttribute("screening")).getId();
 
+<<<<<<< HEAD
 			List<ReservationTicketType> ticketTypes = reservationDAO.getTicketTypesByScreeningId(screeningId);
 			Map<String, List<ReservationTicketType>> reservedTypes = new HashMap<String, List<ReservationTicketType>>();
 			int ticketNumbers = 0;
@@ -151,6 +152,8 @@ public class ReserveTicket {
 //				}
 //			}
 //			model.addAttribute("seats", seats);
+=======
+>>>>>>> bbd79064cf3a1f288b72fbd87779c19f2d7dd495
 			return "seats";
 		} catch (Exception e) {
 			e.printStackTrace();
