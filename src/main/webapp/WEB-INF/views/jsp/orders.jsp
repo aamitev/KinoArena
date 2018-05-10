@@ -57,7 +57,7 @@
 							</a></li>
 							<li class="selected"><span class="icon"><i
 									class="clock"></i></span> <span class="txt">История на
-									резервациите и закупените билети</span></li>
+									резервациите</span></li>
 							<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
 								<li><a href="./addMovie"> <span class="icon"><i
 											class="clock"></i></span> <span class="txt">Добави филм</span>
@@ -78,8 +78,7 @@
 						</ul>
 					</nav>
 				</aside>
-				<div class="contentWrapper">
-					<h5 class="title">История на резервациите и закупените билети</h5>
+				<div class="contentWrapper" style="height: auto;">
 					<img src="/KinoArena/images/profile-history.png" alt="bg image"
 						class="bgImage">
 					<div class="stenikFilter bookingHistory">
@@ -87,21 +86,48 @@
 							<div class="sliderWrapper">
 								<div class="tabItem filter selected" data-filter-anchor="tab-0">Направени
 									резервации</div>
-								<div class="tabItem filter" data-filter-anchor="tab-1">Закупени
-									билети</div>
-								<div class="tabItem filter" data-filter-anchor="tab-2">Отказани
-									резервации</div>
 							</div>
 						</header>
 						<div class="filterContent small">
-							<div class="filterItem" data-filter="tab-0">
-								<p>Нямате направени резервации.</p>
-							</div>
-							<div class="filterItem" data-filter="tab-1">
-								<p>Нямате закупени билети.</p>
-							</div>
-							<div class="filterItem" data-filter="tab-2">
-								<p>Нямате отказани резервации.</p>
+							<div class="filterItem filterSelected" data-filter="tab-0">
+								<table class="bookingHistoryTable">
+
+									<tbody>
+										<c:forEach items="${tickets.values()}" var="tickets">
+											<c:set var="ticket" value="${tickets[0]}" />
+											<tr class="first">
+												<td class="featured first"><a href="#" title=""> <img
+														src="/KinoArena${ticket.screening.movie.coverURL }"
+														alt="${ticket.screening.movie.title}" width="85"
+														height="125">
+												</a></td>
+												<td class="info last">
+													<h6 class="title">
+														<a href="/KinoArena/movies/${ticket.screening.movie.id}">${ticket.screening.movie.title}</a>
+													</h6>
+													<div class="prop">
+														<span class="txt"> ${ticket.seat.hall.cinema.name}
+															${ticket.seat.hall.cinema.address.city},
+															${ticket.seat.hall.cinema.address.address}.,
+															Hall${ticket.seat.hall.hallNumber}</span>
+													</div>
+													<div class="prop">
+														<span class="txt"> <c:forEach
+																items="${tickets.seat}" var="seat">
+															
+																Seat:${seat.row}/${seat.number} ,
+																</c:forEach></span>
+													</div>
+										</c:forEach>
+
+										<div class="prop">
+											<span class="txt">ticket.startTime</span> <span class="txt"></span>
+										</div>
+										</td>
+										
+										
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>

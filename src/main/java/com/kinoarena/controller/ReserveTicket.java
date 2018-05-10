@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kinoarena.dto.UserDTO;
 import com.kinoarena.model.dao.ReservationDAO;
 import com.kinoarena.model.dao.ScreeningDao;
 import com.kinoarena.model.dao.SeatDAO;
@@ -86,6 +87,7 @@ public class ReserveTicket {
 				}
 			}
 			session.setAttribute("ticketNumbers", ticketNumbers);
+			session.setAttribute("reservedTicketTypes", reservedTypes);
 			model.addAttribute("reservedTicketTypes", reservedTypes);
 			model.addAttribute("ticketNumbers", ticketNumbers);
 			List<Seat> reservedSeats = reservationDAO.getAllReservedSeatsByScreeningID(screeningId);
@@ -113,18 +115,47 @@ public class ReserveTicket {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
-			int screeningId = ((Screening) session.getAttribute("screening")).getId();
+			Screening screening = (Screening) session.getAttribute("screening");
+			int screeningId = screening.getId();
 			List<Integer> reservedSeatsIDs = new ArrayList<Integer>();
 			for (Entry<String, String> entry : allRequestParams.entrySet()) {
-				if (entry.getValue().length() > 0 ){
+				if (entry.getValue().length() > 0) {
 					reservedSeatsIDs.add(Integer.parseInt(entry.getValue()));
 				}
 			}
+			if (reservedSeatsIDs.size() == 0) {
+				return "redirect:/reserve" + screening.getHall().getId();
+			}
 			System.out.println(reservedSeatsIDs);
 			reservationDAO.reserveSeats(reservedSeatsIDs, screeningId);
-			model.addAttribute("finalized", true);
-			return "finalizeReservation";
+			int firstSeatId = reservedSeatsIDs.get(0);
+			int lastSeatId = reservedSeatsIDs.get(reservedSeatsIDs.size() - 1);
 
+			List<Seat> seats = reservationDAO.getReservedSeatsBySeatIdAndScreeningId(firstSeatId, lastSeatId,
+					screeningId);
+			List<Ticket> tickets = new ArrayList<Ticket>();
+			UserDTO user = (UserDTO) session.getAttribute("loggedUser");
+			for (Seat seat : seats) {
+				tickets.add(new Ticket(user, screening, seat, true, false));
+			}
+			Map<String, List<ReservationTicketType>> reservedTypes = (Map<String, List<ReservationTicketType>>) session
+					.getAttribute("reservedTicketTypes");
+			int index = 0;
+			System.out.println(reservedTypes.toString());
+			for (Entry<String, List<ReservationTicketType>> entry : reservedTypes.entrySet()) {
+				for (ReservationTicketType type : entry.getValue()) {
+					System.out.println(type);
+					Ticket ticket = tickets.get(index);
+					ticket.setTicketType(type);
+					index++;
+				}
+			}
+			System.out.println(seats.toString());
+
+			System.out.println(tickets);
+			reservationDAO.addTickets(tickets);
+
+			return "finalizeReservation";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";

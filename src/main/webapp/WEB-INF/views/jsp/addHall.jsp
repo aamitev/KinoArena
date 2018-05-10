@@ -73,7 +73,7 @@
 								</a></li>
 								<li><a href="./orders"> <span class="icon"><i
 											class="clock"></i></span> <span class="txt">История на
-											резервациите и закупените билети</span>
+											резервациите</span>
 								</a></li>
 								<c:if test="${sessionScope.loggedUser.isAdmin() eq true}">
 									<li><a href="./addMovie"> <span class="icon"><i

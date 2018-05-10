@@ -1,6 +1,5 @@
 function getActiveByGenre(sufix){
 	var link = "./movies?genre=" + sufix;
-	console.log(link);
 	homeMovieBoxRequest(link)
 
 }
@@ -23,8 +22,6 @@ function homeMovieBoxRequest(link) {
 	xhr.onreadystatechange = function() {
 		 if (this.readyState == 4 && this.status == 200) {
 			 movieBoxGenerator(this.responseText);
-				console.log(this.responseText);
-
 	    }
 	}
 

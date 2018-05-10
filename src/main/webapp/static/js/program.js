@@ -78,7 +78,7 @@ function getScreenings(cinemaId,date){
 						
 							html+=`			<div class="owl-item active"
 												style="width: auto; margin-right: 0px;">
-												<a href="#"
+												<a href="/KinoArena/reserve/`+screening.id+`"
 													class="item booking tooltip_1"
 													 data-tooltip-class="wide">
 													<span class="time">`+screening.startTime.time.hour+`:`+screening.startTime.time.minute+`</span>

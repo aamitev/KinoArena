@@ -17,13 +17,15 @@ public class TicketRowMapper implements RowMapper<Ticket> {
 	ScreeningRowMapper screeningRowMapper;
 	@Autowired
 	SeatRowMapper seatRowMapper;
-
+@Autowired
+ReservationTicketTypeRowMapper ticketTypeRowMapper;
 	@Override
 	public Ticket mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Ticket ticket = null;
 		try {
-			ticket = new Ticket(userDtoRowMapper.mapRow(rs, rowNum), screeningRowMapper.mapRow(rs, rowNum),
-					seatRowMapper.mapRow(rs, rowNum), rs.getBoolean("active"), rs.getBoolean("paid"));
+			ticket = new Ticket( rs.getInt("ticket_id"),userDtoRowMapper.mapRow(rs, rowNum), screeningRowMapper.mapRow(rs, rowNum),
+					seatRowMapper.mapRow(rs, rowNum), rs.getBoolean("active"), rs.getBoolean("paid"),
+					ticketTypeRowMapper.mapRow(rs, rowNum));
 
 			return ticket;
 		} catch (Exception e) {

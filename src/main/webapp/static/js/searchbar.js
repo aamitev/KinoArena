@@ -1,7 +1,6 @@
 document.getElementById("search_input").addEventListener("keyup", function() {
 	var prefix = this.value;
 	if(prefix.length >= 3){
-		console.log(prefix);
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "./movies?title="+prefix, true);

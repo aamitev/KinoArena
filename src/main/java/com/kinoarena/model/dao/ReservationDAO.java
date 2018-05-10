@@ -10,9 +10,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.kinoarena.model.mappers.ReservationTicketTypeRowMapper;
+import com.kinoarena.model.mappers.ReserveSeatRowMapper;
 import com.kinoarena.model.mappers.SeatRowMapper;
+import com.kinoarena.model.mappers.TicketRowMapper;
 import com.kinoarena.model.vo.ReservationTicketType;
 import com.kinoarena.model.vo.Seat;
+import com.kinoarena.model.vo.Ticket;
 
 @Component
 public class ReservationDAO implements IReservationDAO {
@@ -26,6 +29,17 @@ public class ReservationDAO implements IReservationDAO {
 			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
 			+ "JOIN address a ON(a.address_id = c.address_id) WHERE(rs.screening_id = ?);";
 	private static final String GET_TICKETTYPE = "SELECT * FROM reservationtype;";
+	private static final String GET_RESERVED_SEATS_BY_SCREENING_AND_SEAT_IDS = "SELECT * FROM reservedseat rs "
+			+ "JOIN seat s ON(rs.seat_id = s.seat_id) " + "JOIN halls h ON(s.halls_id = h.hall_id) "
+			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
+			+ "JOIN address a ON(a.address_id = c.address_id) WHERE((rs.seat_id BETWEEN ? AND ?)AND(rs.screening_id = ?));";
+	private static final String ADD_TICKETS = "INSERT INTO tickets VALUES(null,true,false,?,?,?,?);";
+	private static final String GET_TICKETS_BY_USER_ID = "SELECT * FROM tickets t JOIN reservedseat rs ON (t.reservedSeat_id = rs.reservedSeat_id)"
+			+ "JOIN seat s ON(rs.seat_id = s.seat_id) " + "JOIN halls h ON(s.halls_id = h.hall_id) "
+			+ "JOIN cinema c ON(h.cinema_id=c.cinema_id) "
+			+ "JOIN address a ON(a.address_id = c.address_id) JOIN screening sc ON(sc.screening_id = t.screening_id) JOIN movies m ON(sc.movie_id = m.movie_id) "
+			+ "JOIN genres g ON(m.genres_id = g.genre_id) JOIN users u ON(t.user_id = u.user_id) JOIN screening_has_reservationtype srh ON(sc.screening_id = srh.screening_id) "
+			+ " JOIN reservationtype re ON(re.reservationType_id = srh.reservationType_id) WHERE(t.user_id = ? );";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -33,6 +47,10 @@ public class ReservationDAO implements IReservationDAO {
 	SeatRowMapper seatRowMapper;
 	@Autowired
 	ReservationTicketTypeRowMapper ticketTypeRowMapper;
+	@Autowired
+	ReserveSeatRowMapper reservedSeatRowMapper;
+	@Autowired
+	TicketRowMapper ticketRowMapper;
 
 	@Override
 	public List<ReservationTicketType> getTicketTypes() {
@@ -69,8 +87,45 @@ public class ReservationDAO implements IReservationDAO {
 
 	@Override
 	public List<Seat> getAllReservedSeatsByScreeningID(int id) throws Exception {
-		List<Seat> movies = jdbcTemplate.query(GET_RESERVED_SEATS_BY_SCREENING, new Object[] { id }, seatRowMapper);
-		return movies;
+		List<Seat> seats = jdbcTemplate.query(GET_RESERVED_SEATS_BY_SCREENING, new Object[] { id }, seatRowMapper);
+		return seats;
+	}
+
+	@Override
+	public List<Seat> getReservedSeatsBySeatIdAndScreeningId(int firstSeatId, int lastSeatId, int screeningId)
+			throws Exception {
+		List<Seat> seats = jdbcTemplate.query(GET_RESERVED_SEATS_BY_SCREENING_AND_SEAT_IDS,
+				new Object[] { firstSeatId, lastSeatId, screeningId }, reservedSeatRowMapper);
+		return seats;
+	}
+
+	@Override
+	public List<Ticket> getTickets(int userId) {
+		List<Ticket> tickets = jdbcTemplate.query(GET_TICKETS_BY_USER_ID, new Object[] { userId }, ticketRowMapper);
+		return tickets;
+	}
+
+	// reserve number of seats
+	@Override
+	public void addTickets(final List<Ticket> tickets) {
+
+		jdbcTemplate.batchUpdate(ADD_TICKETS, new BatchPreparedStatementSetter() {
+
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException {
+				Ticket ticket = tickets.get(i);
+				ps.setInt(1, ticket.getUser().getId());
+				ps.setInt(2, ticket.getSeat().getId());
+				ps.setInt(3, ticket.getTicketType().getId());
+				ps.setInt(4, ticket.getScreening().getId());
+
+			}
+
+			@Override
+			public int getBatchSize() {
+				return tickets.size();
+			}
+		});
 	}
 
 }

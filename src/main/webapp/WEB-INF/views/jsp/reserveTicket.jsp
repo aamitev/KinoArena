@@ -108,8 +108,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:set var="total" value="${0}" />
-
 									<c:forEach items="${ticketTypes}" var="ticketType">
 										<tr class="calcRow">
 											<td name="type${ticketType.id}" class="type first">${ticketType.type}</td>
@@ -126,7 +124,6 @@
 												</div></td>
 											<td class="unitPrice"><span id="price${ticketType.id}"
 												class="price">${ticketType.price}</span> лв.</td>
-											<c:set var="total" value="${(units * ticketType.price) + total}" />
 
 											<td class="totalPrice"><div class="animationWrapper">
 													<span id="totalUnitPrice${ticketType.id}" class="price">0.00</span>
@@ -153,7 +150,7 @@
 								<div class="row">
 									<div class="name">Тотал:</div>
 									<div class="value">
-										<span id="total_price">${total}</span> лв.
+										<span id="total_price">00.0</span> лв.
 									</div>
 								</div>
 								<button id="proceed_button"
@@ -169,7 +166,7 @@
 		</div>
 	</div>
 	<!-- end of #main -->
-	<script src="/KinoArena/js/reserveTicket.js"></script>
+	<script onload="intalizeTotal()" src="/KinoArena/js/reserveTicket.js"></script>
 
 </body>
 </html>

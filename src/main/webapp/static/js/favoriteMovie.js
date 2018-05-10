@@ -5,7 +5,6 @@ function favoritesControler(movieID) {
 	}else{
 		link = "/KinoArena/addToFavorites?movieID="+movieID;
 	}
-	console.log(link);
 	sendFavoriteRequest(link);
 }
 	

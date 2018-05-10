@@ -28,7 +28,6 @@ function minus(id) {
 			.getElementById("quantitySpinner" + id).value);
 	var min = Number(document.getElementById("quantitySpinner" + id)
 			.getAttribute("data-min"));
-	console.log(quantitySpinner);
 	if (quantitySpinner > min) {
 		totalTickets -= 1;
 		document.getElementById("quantitySpinner" + id).value = (quantitySpinner - 1);
@@ -36,6 +35,13 @@ function minus(id) {
 		var totalUnitPrice = document.getElementById("totalUnitPrice" + id).innerHTML;
 		document.getElementById("totalUnitPrice" + id).innerHTML = (Number(totalUnitPrice) - Number(price));
 		document.getElementById("limit").innerHTML = "";
+		var totalPrice = document.getElementById("total_price").innerHTML;
+		document.getElementById("total_price").innerHTML = (Number(totalPrice) - Number(price));
+	}
+}
 
+function intalizeTotal(){
+	for(var elem in document.getElementsByClassName("quantitySpinner")){
+		document.getElementsByClassName("quantitySpinner")[elem].value = 0.0;
 	}
 }

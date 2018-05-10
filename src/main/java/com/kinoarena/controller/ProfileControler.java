@@ -4,8 +4,11 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +40,8 @@ import com.kinoarena.model.vo.Cinema;
 import com.kinoarena.model.vo.Hall;
 import com.kinoarena.model.vo.Movie;
 import com.kinoarena.model.vo.ReservationTicketType;
+import com.kinoarena.model.vo.Screening;
+import com.kinoarena.model.vo.Ticket;
 import com.kinoarena.utils.Utils;
 
 @Controller
@@ -408,6 +413,19 @@ public class ProfileControler {
 			if (session.getAttribute("loggedUser") == null) {
 				return "redirect:/login";
 			}
+			UserDTO user = (UserDTO) session.getAttribute("loggedUser");
+			List<Ticket> tickets = reservationDAO.getTickets(user.getId());
+			Map<String, List<Ticket>> sorted = new HashMap<String, List<Ticket>>();
+			for (Ticket ticket : tickets) {
+				Screening screening = ticket.getScreening();
+				String startTime = screening.getStartTime().toString();
+				if (!sorted.containsKey(startTime)) {
+					sorted.put(startTime, new ArrayList<Ticket>());
+				}
+				sorted.get(startTime).add(ticket);
+			}
+			model.addAttribute("tickets", sorted);
+
 			return "orders";
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,5 +1,4 @@
 function getAllCinemaProgram(id,date){
-    console.log(date);
 var link = "/KinoArena/screenings?movieId="+id + "&date=" + date;
     console.log(link);
 	var xhr = new XMLHttpRequest();
@@ -10,7 +9,6 @@ var link = "/KinoArena/screenings?movieId="+id + "&date=" + date;
 		 if (this.readyState == 4 && this.status == 200) {
 			 var screenings = JSON.parse(this.responseText);
 			 
-				console.log(screenings);
 				var html = "" ;
 				var firsttime = true;
 				for (var cinema in screenings){

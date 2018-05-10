@@ -48,9 +48,9 @@
 										<input type="password" id="password" name="password"
 											required="required" placeholder="Парола">
 									</div>
-									<a href="/KinoArena/forgottenPassword"
+<!-- 									<a href="/KinoArena/forgottenPassword"
 										class="forgottenPassword forgottenPasswordPopupLink"><i
-										class="questionMark"></i>Забравена парола</a>
+										class="questionMark"></i>Забравена парола</a> -->
 									<div class="clear hideOnDesktop hideOnTablet hideOnPhablet"></div>
 									<div class="formItem checkbox rememberMe">
 										<div class="stenik-checkbox">
