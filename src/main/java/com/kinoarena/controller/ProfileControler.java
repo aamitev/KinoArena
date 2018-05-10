@@ -108,7 +108,7 @@ public class ProfileControler {
 			int id = userDao.getUserId(email);
 			boolean isAdmin = ((UserDTO) session.getAttribute("loggedUser")).isAdmin();
 			// Getting field values
-			System.out.println(firstName);
+			System.out.println(email);
 			// Creating DTO object to import in DB
 			UserDTO edittedUser = new UserDTO(id, email, firstName, secondName, lastName, sex, birthdate, isAdmin, gsm,
 					education, job);
@@ -119,7 +119,7 @@ public class ProfileControler {
 			Address address = new Address(addressId, streetAddress, postcode, city);
 			edittedUser.setAddress(address);
 			// Getting the address and setting it to the userDTO object
-
+			
 			// UPDATING the database
 			userDao.editUser(edittedUser);
 

@@ -17,7 +17,6 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-
 	<div class="wrapper">
 		<section class="movieDesc sliderStick ">
 			<header class="descHeader">
@@ -87,6 +86,16 @@
 						</div>
 					</c:if> --%>
 				</div>
+				<c:if test="${user.isAdmin() eq true}">
+					<div>
+						<div class="remove from screenings">
+							<form action="/KinoArena/program" method="POST">
+								<button class="red button fixedWidt">Премахни от
+									прожекции</button>
+							</form>
+						</div>
+					</div>
+				</c:if>
 				<div class="meta fixedBottom">
 					<div class="attr">
 						<div class="item ratingWrapper">
@@ -133,10 +142,11 @@
 										<fmt:parseDate value="${date.startTime}" pattern="yyyy-MM-dd"
 											var="parsedDate" />
 										<fmt:formatDate value="${parsedDate}" type="date"
-											pattern="yyy-MM-dd" var="formatedDate"/>
+											pattern="yyy-MM-dd" var="formatedDate" />
 										<div class="owl-item active"
-											style="width: 122.5px;  margin-right: 0px;">
-											<a onclick="getAllCinemaProgram(${movie.id},'${formatedDate}')"
+											style="width: 122.5px; margin-right: 0px;">
+											<a
+												onclick="getAllCinemaProgram(${movie.id},'${formatedDate}')"
 												class="tabItem ">
 												<div class="row">
 													<fmt:formatDate value="${parsedDate}" type="date"
