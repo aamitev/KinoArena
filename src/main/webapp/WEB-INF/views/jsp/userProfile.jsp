@@ -177,8 +177,8 @@
 									<option value="" myTag="choseAdmin" selected disabled>Избери
 										имейл</option>
 									<c:forEach var="user" items="${allUsers}">
-										<option id="user" value="${user.email}" myTag="${user.email}""><c:out
-												value="${user.email}}" /></option>
+										<option id="user" value="${user.email}" myTag="${user.email}"><c:out
+												value="${user.email}" /></option>
 									</c:forEach>
 								</select>
 							</div>

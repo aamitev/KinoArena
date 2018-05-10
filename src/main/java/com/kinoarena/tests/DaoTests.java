@@ -47,15 +47,15 @@ public class DaoTests {
 
 	@Test
 	public void testUserId() {
-		int testId = 1;
-		int realId = userDao.getUserId("admin@admin.bg");
+		int testId = 17;
+		int realId = userDao.getUserId("admin@kinoarena.com");
 		assertEquals(testId, realId);
 	}
 
 	@Test
 	public void testAddressId() {
 		int testAddressId = 8;
-		int realAddressId = addressDao.getAddress("admin address", "1255", "adminCity").getId();
+		int realAddressId = addressDao.getAddress("Zapaden Park Distr., 64 Todor Aleksandrov Blvd.", "1222", "Sofia").getId();
 		assertEquals(testAddressId, realAddressId);
 	}
 
@@ -68,28 +68,28 @@ public class DaoTests {
 
 	@Test
 	public void testCinemaId() {
-		int testCinemaId = 5;
-		int realCinemaId = cinemaDao.getCinemaByName("Arena West").getId();
+		int testCinemaId = 1;
+		int realCinemaId = cinemaDao.getCinemaByName("Kino Arena Zapad").getId();
 		assertEquals(testCinemaId, realCinemaId);
 	}
 
 	@Test
 	public void testCinemaGSM() {
-		String testGsm = "0891254723";
-		String realGsm = cinemaDao.getCinemaById(5).getGsm();
+		String testGsm = "0882748341";
+		String realGsm = cinemaDao.getCinemaById(6).getGsm();
 		assertEquals(testGsm, realGsm);
 	}
 
 	@Test
 	public void testMovie() {
-		String testMovieName = "Maze runner : The Death cure";
+		String testMovieName = "AVENGERS: INFINITY WAR";
 		String realMovieName = movieDao.getMovieById(12).getTitle();
 		assertEquals(testMovieName, realMovieName);
 	}
 
 	@Test
 	public void testScreening() {
-		String testStartTime = "2018-05-09T10:30";
+		String testStartTime = "2018-05-09T21:02:11";
 		String realStartTime = screeningDao.getScreeningById(20).getStartTime().toString();
 		assertEquals(testStartTime, realStartTime);
 	}
