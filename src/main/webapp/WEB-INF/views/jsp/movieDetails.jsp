@@ -86,16 +86,6 @@
 						</div>
 					</c:if> --%>
 				</div>
-				<c:if test="${user.isAdmin() eq true}">
-					<div>
-						<div class="remove from screenings">
-							<form action="/KinoArena/program" method="POST">
-								<button class="red button fixedWidt">Премахни от
-									прожекции</button>
-							</form>
-						</div>
-					</div>
-				</c:if>
 				<div class="meta fixedBottom">
 					<div class="attr">
 						<div class="item ratingWrapper">

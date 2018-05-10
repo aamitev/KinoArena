@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,20 +113,24 @@
 															Hall${ticket.seat.hall.hallNumber}</span>
 													</div>
 													<div class="prop">
-														<span class="txt"> <c:forEach
-																items="${tickets.seat}" var="seat">
+														<span class="txt"> <c:forEach items="${tickets}"
+																var="tickett">
 															
-																Seat:${seat.row}/${seat.number} ,
+																Seat:${tickett.seat.row}/${tickett.seat.number} ,
 																</c:forEach></span>
 													</div>
+
+													<div class="prop">
+														<fmt:parseDate value="${ticket.screening.startTime}"
+															pattern="yyyy-MM-dd" var="parsedDate" />
+														<fmt:formatDate value="${parsedDate}" type="date"
+															pattern="yyy-MM-dd" var="formatedDate" />
+														<span class="txt">${formatedDate}</span> <span
+															class="txt"></span>
+													</div>
+												</td>
 										</c:forEach>
 
-										<div class="prop">
-											<span class="txt">ticket.startTime</span> <span class="txt"></span>
-										</div>
-										</td>
-										
-										
 									</tbody>
 								</table>
 							</div>

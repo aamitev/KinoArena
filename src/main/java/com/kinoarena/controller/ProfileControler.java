@@ -424,6 +424,7 @@ public class ProfileControler {
 				}
 				sorted.get(startTime).add(ticket);
 			}
+			System.out.println(sorted);
 			model.addAttribute("tickets", sorted);
 
 			return "orders";
