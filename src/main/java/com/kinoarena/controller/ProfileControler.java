@@ -123,7 +123,7 @@ public class ProfileControler {
 			// UPDATING the database
 			userDao.editUser(edittedUser);
 
-			return "userProfile";
+			return "redirect:/userProfile";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "userProfile";
@@ -139,7 +139,6 @@ public class ProfileControler {
 			String userForAdminEmail = request.getParameter("makeAdmin").toString();
 			userDao.makeUserAdmin(userForAdminEmail);
 
-			// TODO: finish it!!
 			return "userProfile";
 		} catch (Exception e) {
 			e.printStackTrace();

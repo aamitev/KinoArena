@@ -125,7 +125,7 @@ public class LoginController {
 
 		userDao.changePassword(loggedUser, reenterNewPass);
 
-		return "userProfile";
+		return "redirect:/userProfile";
 	}
 
 

@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div id="colorbox" class="" role="dialog" tabindex="-1"
-		style="display: block; visibility: visible; top: 150px; left: 750px; position: fixed; width: 455px; height: 643px; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+		style="display: block; visibility: visible; top: 150px; left: 38%; position: fixed; width: 455px; height: 643px; opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
 		<div id="cboxWrapper" style="height: 643px; width: 455px;">
 			<div>
 				<div id="cboxTopLeft" style="float: left;"></div>
@@ -32,7 +32,7 @@
 							<div class="loginForm">
 								<div id="login_message"></div>
 								<%-- <p th:if="${error}" th:text="${error}" style = "color: red">Invalid username or password</p> --%>
-								
+
 								<c:if test="${not empty error}">
 									<p style="color: red">Invalid username or password</p>
 								</c:if>
@@ -48,7 +48,7 @@
 										<input type="password" id="password" name="password"
 											required="required" placeholder="Парола">
 									</div>
-<!-- 									<a href="/KinoArena/forgottenPassword"
+									<!-- 									<a href="/KinoArena/forgottenPassword"
 										class="forgottenPassword forgottenPasswordPopupLink"><i
 										class="questionMark"></i>Забравена парола</a> -->
 									<div class="clear hideOnDesktop hideOnTablet hideOnPhablet"></div>

@@ -38,10 +38,10 @@ public class DaoTests {
 
 	@Autowired
 	private ScreeningDao screeningDao;
-	
+
 	@Autowired
 	private HallDAO hallDao;
-	
+
 	@Autowired
 	private SeatDAO seatDao;
 
@@ -50,20 +50,6 @@ public class DaoTests {
 		int testId = 17;
 		int realId = userDao.getUserId("admin@kinoarena.com");
 		assertEquals(testId, realId);
-	}
-
-	@Test
-	public void testAddressId() {
-		int testAddressId = 8;
-		int realAddressId = addressDao.getAddress("Zapaden Park Distr., 64 Todor Aleksandrov Blvd.", "1222", "Sofia").getId();
-		assertEquals(testAddressId, realAddressId);
-	}
-
-	@Test
-	public void testStreetAddress() {
-		String testStreetAddress = "admin address";
-		String realStreetAddress = addressDao.getAddress("admin address", "1255", "adminCity").getAddress();
-		assertEquals(testStreetAddress, realStreetAddress);
 	}
 
 	@Test
@@ -94,10 +80,26 @@ public class DaoTests {
 		assertEquals(testStartTime, realStartTime);
 	}
 
+	@Test
+	public void testAddressId() {
+		int testAddressId = 8;
+		int realAddressId = addressDao.getAddress("Zapaden Park Distr., 64 Todor Aleksandrov Blvd.", "1222", "Sofia")
+				.getId();
+		assertEquals(testAddressId, realAddressId);
+	}
+
+	@Test
+	public void testStreetAddress() {
+		String testStreetAddress = "admin address";
+		String realStreetAddress = addressDao.getAddress("admin address", "1255", "adminCity").getAddress();
+		assertEquals(testStreetAddress, realStreetAddress);
+	}
+
 	@Test(expected = Test.None.class)
 	public void testGetGenre() {
 		movieDao.getGenre("Action");
 	}
+
 	@Test(expected = Test.None.class)
 	public void testGetLastHallId() {
 		hallDao.getLastHallId();
@@ -108,20 +110,20 @@ public class DaoTests {
 		userDao.login("asflkjwehaf", "al;skdgzhbkaf;kg");
 
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testNullValuesForRegister() {
 		userDao.register(null, null, null, null, null, false, null);
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testNullValuesForChangingPassword() {
 		userDao.changePassword(null, null);
 	}
-	
+
 	@Test(expected = Exception.class)
 	public void testGetSeatsByInvalidHallId() throws Exception {
 		seatDao.getAllSeadsByHall(new Integer(null));
-		
+
 	}
 }
